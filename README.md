@@ -1,8 +1,21 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
+
 # Heat Pump card
 
 Home Assistant dashboard card displaying heat pump parameters
 
 ![Example picture of the heat pump card.](https://raw.githubusercontent.com/ManfredTremmel/home-assistant-heat-pump-card/refs/heads/main/dist/heat-pump-card/heat-pump.svg)
+
+#### Installation
+The easiest way to install it is through [HACS (Home Assistant Community Store)](https://github.com/hacs/frontend),
+search for <i>heat-pump-card</i> and install the Plugins.
+
+If you are not using HACS, you may download all from dist folder (heat-pump-card.js and heat-pump-card directory with the translations and heat-pump.svg) and put them into
+homeassistant_config_dir/www/community/heat-pump-card/ directory.
+
+The card does not support configuration flow, therefore you'll have to add the resources via UI->Configuration
+->Lovelace Dashboards->Resources then add the card manually editing the card configuration yaml on the dashboard at
+Add Card->Manual.
 
 **Options**
 
