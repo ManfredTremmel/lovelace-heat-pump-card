@@ -6,42 +6,42 @@ Home Assistant dashboard card displaying heat pump parameters
 
 **Options**
 
-| Name | Type | Requirement | Default | Description
-| ---- | ---- | ----------- | ------- | -----------
-| heatingPumpStatusOnOff | object | **Required** | binary_sensor.heating_pump_status_on_off | if heating pump is off, power symbol is displayed
-| heatingPumpHotWaterMode | object | **Required** | binary_sensor.heating_pump_hot_water_mode | Hot Water Mode, when on, faucet symbol is displayed
-| heatingPumpHeatingMode | object | **Required** | binary_sensor.heating_pump_heating_mode | if Heating Mode is on, radiator symbol is displayed
-| heatingPumpCoolingMode | object | **Required** | binary_sensor.heating_pump_cooling_mode | in Cooling Mode, the cooling symbol is displayed
-| heatingPumpPartyMode | object | **Required** | binary_sensor.heating_pump_party_mode | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
-| heatingPumpEnergySaveMode | object | **Required** | binary_sensor.heating_pump_energy_save_mode | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
-| heatingPumpNightMode | object | **Required** | binary_sensor.heating_pump_night_mode | Night Mode switches between sun and moon symbol
-| outdoorTemperature | object | **Required** | sensor.mosquitto_mqtt_broker_aussentemperatur | Outdoor Temperature
-| ambientTemperatureNormal | object | **Required** | number.mosquitto_mqtt_broker_raumsolltemperatur_normal | Ambient Temperature normal
-| ambientTemperatureReduced | object | optional | number.mosquitto_mqtt_broker_raumsolltemperatur_reduziert | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
-| ambientTemperatureParty | object | optional | number.mosquitto_mqtt_broker_raumsolltemperatur_party | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
-| supplyTemperature | object | optional | sensor.mosquitto_mqtt_broker_information_allgemein_anlagenvorlauftemperatur_0_95 | Supply Temperature
-| hpRunning | object | **Required** | binary_sensor.mosquitto_mqtt_broker_status_primaerquelle | When Primary Source is active, the fan animation is running
-| compressorRunning | object | **Required** | binary_sensor.mosquitto_mqtt_broker_status_verdichter | Binary sensor which detects if Compressor is running
-| heatingCircuitPumpRunning | object | **Required** | binary_sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_heizkreispumpe_0_1 | Binary sensor which detects if Heating Circuit Pump is running
-| circulatingPumpRunning | object | **Required** | binary_sensor.mosquitto_mqtt_broker_status_zirklulationspumpe_2 | Binary sensor which detects if Circulating Pump is running
-| tankTempHPUp | object | **Required** | sensor.mosquitto_mqtt_broker_information_allgemein_pufferspeichertemperatur_0_95 | Buffer Temperature up
-| tankTempHPMiddle | object | optional |  | Buffer Temperature middle
-| tankTempHPDown | object | optional |  | Buffer Temperature down
-| tankTempWWUp | object | **Required** | sensor.mosquitto_mqtt_broker_warmwassertemperatur_ist_oben | Hot Water Buffer Temperature up
-| tankTempWWMiddle | object | optional |  | Hot Water Buffer Temperature middle
-| tankTempWWDown | object | optional |  | Hot Water Buffer Temperature down
-| supplyTemperatureHeating | object | **Required** | sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_vorlauftemperatur_sekundaer_2_0_95 | Supply Temperature Heating
+| Name | Type | Requirement | Description
+| ---- | ---- | ----------- | -----------
+| heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
+| heatingPumpHotWaterMode | object | **Required** | Hot Water Mode, when on, faucet symbol is displayed
+| heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
+| heatingPumpCoolingMode | object | **Required** | in Cooling Mode, the cooling symbol is displayed
+| heatingPumpPartyMode | object | **Required** | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
+| heatingPumpEnergySaveMode | object | **Required** | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
+| heatingPumpNightMode | object | **Required** | Night Mode switches between sun and moon symbol
+| outdoorTemperature | object | **Required** | Outdoor Temperature
+| ambientTemperatureNormal | object | **Required** | Ambient Temperature normal
+| ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
+| ambientTemperatureParty | object | optional | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
+| supplyTemperature | object | optional | Supply Temperature
+| hpRunning | object | **Required** | when Primary Source is active, the fan animation is running
+| compressorRunning | object | **Required** | Binary sensor which detects if Compressor is running
+| heatingCircuitPumpRunning | object | **Required** | Binary sensor which detects if Heating Circuit Pump is running
+| circulatingPumpRunning | object | **Required** | Binary sensor which detects if Circulating Pump is running
+| tankTempHPUp | object | **Required** | Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃)
+| tankTempHPMiddle | object | optional | Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
+| tankTempHPDown | object | optional | Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
+| tankTempWWUp | object | **Required** | Hot Water Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃)
+| tankTempWWMiddle | object | optional | Hot Water Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
+| tankTempWWDown | object | optional | Hot Water Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
+| supplyTemperatureHeating | object | **Required**  | Supply Temperature Heating
 | refluxTemperatureHeating | object | optional |  | Reflux Temperature Heating
-| evaporatorPressure | object | optional | sensor.mosquitto_mqtt_broker_druck_im_verdampfer | Evaporator Pressure
-| evaporatorTemperature | object | optional | sensor.mosquitto_mqtt_broker_temperatur_verdampfer | Evaporator Temperature
-| condenserPressure | object | optional | sensor.mosquitto_mqtt_broker_druck_im_kondensator | Condenser Pressure
-| wwHeatingValve | object | **Required** | binary_sensor.mosquitto_mqtt_broker_diagnose_waermepumpe_3_w_ventil_heizen_ww1_0_heizen_1_ww | Heating/Hot Water Valve
-| heaterRodWW | object | optional | switch.mosquitto_mqtt_broker_freigabe_elektroheizung_fuer_ww_bereitung | Heater Rod Hot Water is active
-| heaterRodHP | object | optional | switch.mosquitto_mqtt_broker_freigabe_heizen_mit_elektro | Heater Rod Heating is active
-| heaterRodLevel1 | object | optional | binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_1 | Heater Rod is using Level 1
-| heaterRodLevel2 | object | optional | binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_2 | Heater Rod is using Level 2
-| linkDetails | string | **Required** | ./hp-details | Link to details page
-| linkSettings | string | **Required** | ./hp-settings | Link to settings page
+| evaporatorPressure | object | optional | Evaporator Pressure
+| evaporatorTemperature | object | optional  | Evaporator Temperature
+| condenserPressure | object | optional | Condenser Pressure
+| wwHeatingValve | object | **Required**  | Heating/Hot Water Valve
+| heaterRodWW | object | optional | Heater Rod Hot Water is active and displayed in the buffer tank
+| heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
+| heaterRodLevel1 | object | optional | Heater Rod is using Level 1, color is set to orange
+| heaterRodLevel2 | object | optional | Heater Rod is using Level 2, color is set to red
+| linkDetails | string | **Required** | Link to details page
+| linkSettings | string | **Required** | Link to settings page
 
 
 **Example**
