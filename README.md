@@ -2,7 +2,7 @@
 
 Home Assistant dashboard card displaying heat pump parameters
 
-![Example picture of the heat pump card.](https://github.com/ManfredTremmel/home-assistant-heat-pump-card/raw/master/dist/heat-pump-card/heat-pump.svg?raw=true)
+![Example picture of the heat pump card.](https://raw.githubusercontent.com/ManfredTremmel/home-assistant-heat-pump-card/refs/heads/main/dist/heat-pump-card/heat-pump.svg)
 
 **Options**
 
