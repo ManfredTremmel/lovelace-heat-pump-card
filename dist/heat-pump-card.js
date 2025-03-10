@@ -128,7 +128,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   readLocalizationLang(lang) {
-    var translationLocal = "/hacsfiles/heat-pump-card/" + lang + ".json";
+    var translationLocal = "/hacsfiles/heat-pump-card/heat-pump-card/" + lang + ".json";
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", translationLocal, false);
@@ -140,7 +140,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   readSvg() {
-    var svgImage = "/hacsfiles/heat-pump-card/heat-pump.svg";
+    var svgImage = "/hacsfiles/heat-pump-card/heat-pump-card/heat-pump.svg";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", svgImage, false);
     rawFile.send(null);
@@ -808,7 +808,7 @@ class HeatPumpCardEditor extends HTMLElement {
   }
 
   readLocalizationLang(lang) {
-    var translationLocal = "/hacsfiles/heat-pump-card/" + lang + ".json";
+    var translationLocal = "/hacsfiles/heat-pump-card/heat-pump-card/" + lang + ".json";
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", translationLocal, false);
