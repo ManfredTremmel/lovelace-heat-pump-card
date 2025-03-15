@@ -4,8 +4,8 @@ class HeatPumpCard extends HTMLElement {
   set hass(hass) {
     // Initialize the content if it's not there yet.
     if (!this.content) {
-      const localization = this.readLocalization(hass);
-      this.innerHTML = '<ha-card header="' + localization['header'] + '">\n' + this.readSvg() + '</ha-card>';
+      const localization = HeatPumpCard.readLocalization(hass);
+      this.innerHTML = '<ha-card header="' + localization['header'] + '">\n' + HeatPumpCard.readSvg() + '</ha-card>';
       this.content = this.querySelector("svg");
       this.content.querySelector("#textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
       this.content.querySelector("#textTankHPName").innerHTML = localization.svgTexts['tankHPName'];
@@ -36,22 +36,20 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#gTimeSymbolDay").style.display = heatingPumpNightModeBoolean ? "none" : "inline";
 
 
-    const outdoorTemperatureState = hass.states[this.config.outdoorTemperature];
-    this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatTemp(outdoorTemperatureState);
+    this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass.states[this.config.outdoorTemperature]);
 
     const ambientTemperatureNormalState = hass.states[this.config.ambientTemperatureNormal];
     const ambientTemperatureReducedState = hass.states[this.config.ambientTemperatureReduced];
     const ambientTemperaturePartyState = hass.states[this.config.ambientTemperatureParty];
     if (heatingPumpPartyModeBoolean && ambientTemperaturePartyState) {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatTemp(ambientTemperaturePartyState);
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperaturePartyState);
     } else if (heatingPumpNightModeBoolean && ambientTemperatureReducedState) {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatTemp(ambientTemperatureReducedState);
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperatureReducedState);
     } else {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatTemp(ambientTemperatureNormalState);
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperatureNormalState);
     }
 
-    const supplyTemperatureState = hass.states[this.config.supplyTemperature];
-    this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatTemp(supplyTemperatureState);
+    this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass.states[this.config.supplyTemperature]);
 
 
     this.content.querySelector("#animationHPFan").setAttribute(
@@ -68,44 +66,35 @@ class HeatPumpCard extends HTMLElement {
 
 
     const tankTempHPUpState = hass.states[this.config.tankTempHPUp];
-    this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatTemp(tankTempHPUpState);
+    this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNum(tankTempHPUpState);
 
     const tankTempHPMiddleState = hass.states[this.config.tankTempHPMiddle];
-    this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatTemp(tankTempHPMiddleState);
+    this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNum(tankTempHPMiddleState);
 
     const tankTempHPDownState = hass.states[this.config.tankTempHPDown];
-    this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatTemp(tankTempHPDownState);
+    this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNum(tankTempHPDownState);
 
     this.tankColors(this.content, tankTempHPUpState, tankTempHPMiddleState, tankTempHPDownState, "#stop3020", "#stop3040", "#stop3030");
 
 
     const tankTempWWUpState = hass.states[this.config.tankTempWWUp];
-    this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatTemp(tankTempWWUpState);
+    this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNum(tankTempWWUpState);
 
     const tankTempWWMiddleState = hass.states[this.config.tankTempWWMiddle];
-    this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatTemp(tankTempWWMiddleState);
+    this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatNum(tankTempWWMiddleState);
 
     const tankTempWWDownState = hass.states[this.config.tankTempWWDown];
-    this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatTemp(tankTempWWDownState);
+    this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNum(tankTempWWDownState);
 
     this.tankColors(this.content, tankTempWWUpState, tankTempWWMiddleState, tankTempWWDownState, "#stop3050", "#stop3070", "#stop3060");
 
 
-    const supplyTemperatureHeatingState = hass.states[this.config.supplyTemperatureHeating];
-    this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatTemp(supplyTemperatureHeatingState);
+    this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass.states[this.config.supplyTemperatureHeating]);
+    this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass.states[this.config.refluxTemperatureHeating]);
 
-    const refluxTemperatureHeatingState = hass.states[this.config.refluxTemperatureHeating];
-    this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatTemp(refluxTemperatureHeatingState);
-
-
-    const evaporatorPressureState = hass.states[this.config.evaporatorPressure];
-    this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatPressure(evaporatorPressureState);
-
-    const evaporatorTemperatureState = hass.states[this.config.evaporatorTemperature];
-    this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatTemp(evaporatorTemperatureState);
-
-    const condenserPressureState = hass.states[this.config.condenserPressure];
-    this.content.querySelector("#textCondenserPressure").innerHTML = this.formatPressure(condenserPressureState);
+    this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass.states[this.config.evaporatorPressure]);
+    this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass.states[this.config.evaporatorTemperature]);
+    this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass.states[this.config.condenserPressure]);
 
     this.content.querySelector("#gWWHeatingValve").setAttribute('transform',
       'rotate(' + (this.formatBinary(hass.states[this.config.wwHeatingValve]) ? '90' : '0') + ', 750, 357)');
@@ -119,16 +108,25 @@ class HeatPumpCard extends HTMLElement {
                        this.formatBinary(hass.states[this.config.heaterRodLevel2]));
   }
 
-  readLocalization(hass) {
-    var translationJSONobj = this.readLocalizationLang(hass.language.substring(0,2));
+  static cardFolder = "/hacsfiles/heat-pump-card/heat-pump-card/";
+  static cardFolderAlternate = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
+
+  static readLocalization(hass) {
+    var translationJSONobj = HeatPumpCard.readLocalizationLang(hass.language.substring(0,2), HeatPumpCard.cardFolder);
     if (!translationJSONobj) {
-      translationJSONobj = this.readLocalizationLang("en");
+      translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolder);
+    }
+    if (!translationJSONobj) {
+      translationJSONobj = HeatPumpCard.readLocalizationLang(hass.language.substring(0,2), HeatPumpCard.cardFolderAlternate);
+    }
+    if (!translationJSONobj) {
+      translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolderAlternate);
     }
     return translationJSONobj;
   }
 
-  readLocalizationLang(lang) {
-    var translationLocal = "/hacsfiles/heat-pump-card/heat-pump-card/" + lang + ".json";
+  static readLocalizationLang(lang, folder) {
+    var translationLocal = folder + lang + ".json";
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", translationLocal, false);
@@ -139,8 +137,16 @@ class HeatPumpCard extends HTMLElement {
     return null;
   }
 
-  readSvg() {
-    var svgImage = "/hacsfiles/heat-pump-card/heat-pump-card/heat-pump.svg";
+  static readSvg() {
+    var svgObj = HeatPumpCard.readSvgFolder(HeatPumpCard.cardFolder);
+    if (!svgObj) {
+      svgObj = HeatPumpCard.readSvgFolder(HeatPumpCard.cardFolderAlternate);
+    }
+    return svgObj;
+  }
+
+  static readSvgFolder(folder) {
+    var svgImage = folder + "heat-pump.svg";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", svgImage, false);
     rawFile.send(null);
@@ -161,34 +167,27 @@ class HeatPumpCard extends HTMLElement {
     return state && state.state  === "on";
   }
 
-  formatTemp(state) {
+  formatNum(state) {
     if (state) {
-      return new Intl.NumberFormat(undefined, {style: "unit", unit: "celsius", minimumFractionDigits: 1}).format(state.state);
-    }
-    return null;
-  }
-
-  formatPressure(state) {
-    if (state) {
-      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(state.state) + " bar";
+      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(state.state) + " " + state.attributes.unit_of_measurement;
     }
     return null;
   }
 
   heaterRodColor(content, heaterRodWW, heaterRodLevel1, heaterRodLevel2) {
-      var colorHS = "#ffffff";
-      if (heaterRodLevel1) {
-        colorHS = this.tempColor(40);
-      } else if (heaterRodLevel2) {
-        colorHS = this.tempColor(60);
-      }
-      if (heaterRodWW) {
-        content.querySelector("#pathHeaterRodWW").style.stroke = colorHS;
-        content.querySelector("#pathHeaterRodHP").style.stroke = "#ffffff";
-      } else {
-        content.querySelector("#pathHeaterRodHP").style.stroke = colorHS;
-        content.querySelector("#pathHeaterRodWW").style.stroke = "#ffffff";
-      }
+    var colorHS = "#ffffff";
+    if (heaterRodLevel1) {
+      colorHS = this.tempColor(40);
+    } else if (heaterRodLevel2) {
+      colorHS = this.tempColor(60);
+    }
+    if (heaterRodWW) {
+      content.querySelector("#pathHeaterRodWW").style.stroke = colorHS;
+      content.querySelector("#pathHeaterRodHP").style.stroke = "#ffffff";
+    } else {
+      content.querySelector("#pathHeaterRodHP").style.stroke = colorHS;
+      content.querySelector("#pathHeaterRodWW").style.stroke = "#ffffff";
+    }
   }
 
   tempColor(temp) {
@@ -202,9 +201,9 @@ class HeatPumpCard extends HTMLElement {
     var tempUp = tankTempUp ? tankTempUp.state : 0;
     var tempMiddle = Math.max(0, tankTempMiddle ? tankTempMiddle.state : tempUp - 5);
     var tempDown = Math.max(0, tankTempDown ? tankTempDown.state : tempMiddle - 5);
-    content.querySelector(idUp).setAttribute('style', "stop-color:" + this.tempColor(tempUp) + ";stop-opacity:0.5;");
-    content.querySelector(idMiddle).setAttribute('style', "stop-color:" + this.tempColor(tempMiddle) + ";stop-opacity:0.5;");
-    content.querySelector(idDown).setAttribute('style', "stop-color:" + this.tempColor(tempDown) + ";stop-opacity:0.5;");
+    content.querySelector(idUp).setAttribute('style', "stop-color:" + this.tempColor(tempUp));
+    content.querySelector(idMiddle).setAttribute('style', "stop-color:" + this.tempColor(tempMiddle));
+    content.querySelector(idDown).setAttribute('style', "stop-color:" + this.tempColor(tempDown));
   }
 
   linkHandling(event) {
@@ -217,68 +216,56 @@ class HeatPumpCard extends HTMLElement {
   // will render an error card.
   setConfig(config) {
     if (!config.heatingPumpStatusOnOff) {
-      throw new Error("You need to define an heatingPumpStatusOnOff");
+      throw new Error("You need to define heatingPumpStatusOnOff");
     }
     if (!config.heatingPumpHotWaterMode) {
-      throw new Error("You need to define an heatingPumpHotWaterMode");
+      throw new Error("You need to define heatingPumpHotWaterMode");
     }
     if (!config.heatingPumpHeatingMode) {
-      throw new Error("You need to define an heatingPumpHeatingMode");
-    }
-    if (!config.heatingPumpCoolingMode) {
-      throw new Error("You need to define an heatingPumpCoolingMode");
-    }
-    if (!config.heatingPumpPartyMode) {
-      throw new Error("You need to define an heatingPumpPartyMode");
-    }
-    if (!config.heatingPumpEnergySaveMode) {
-      throw new Error("You need to define an heatingPumpEnergySaveMode");
-    }
-    if (!config.heatingPumpNightMode) {
-      throw new Error("You need to define an heatingPumpNightMode");
+      throw new Error("You need to define heatingPumpHeatingMode");
     }
 
     if (!config.outdoorTemperature) {
-      throw new Error("You need to define an outdoorTemperature");
+      throw new Error("You need to define outdoorTemperature");
     }
     if (!config.ambientTemperatureNormal) {
-      throw new Error("You need to define an ambientTemperatureNormal");
+      throw new Error("You need to define ambientTemperatureNormal");
     }
 
     if (!config.hpRunning) {
-      throw new Error("You need to define an hpRunning");
+      throw new Error("You need to define hpRunning");
     }
     if (!config.compressorRunning) {
-      throw new Error("You need to define an compressorRunning");
+      throw new Error("You need to define compressorRunning");
     }
     if (!config.heatingCircuitPumpRunning) {
-      throw new Error("You need to define an heatingCircuitPumpRunning");
+      throw new Error("You need to define heatingCircuitPumpRunning");
     }
     if (!config.circulatingPumpRunning) {
-      throw new Error("You need to define an circulatingPumpRunning");
+      throw new Error("You need to define circulatingPumpRunning");
     }
 
     if (!config.tankTempHPUp) {
-      throw new Error("You need to define an tankTempHPUp");
+      throw new Error("You need to define tankTempHPUp");
     }
     if (!config.tankTempWWUp) {
-      throw new Error("You need to define an tankTempWWUp");
+      throw new Error("You need to define tankTempWWUp");
     }
 
     if (!config.supplyTemperatureHeating) {
-      throw new Error("You need to define an supplyTemperatureHeating");
+      throw new Error("You need to define supplyTemperatureHeating");
     }
 
     if (!config.wwHeatingValve) {
-      throw new Error("You need to define an wwHeatingValve");
+      throw new Error("You need to define wwHeatingValve");
     }
 
     if (!config.linkDetails) {
-      throw new Error("You need to define an linkDetails");
+      throw new Error("You need to define linkDetails");
     }
 
     if (!config.linkSettings) {
-      throw new Error("You need to define an linkSettings");
+      throw new Error("You need to define linkSettings");
     }
 
     this.config = config;
@@ -527,17 +514,17 @@ class HeatPumpCardEditor extends HTMLElement {
   doStyle() {
     this._elements.style = document.createElement("style");
     this._elements.style.textContent = `
-        form {
-            display: table;
-        }
-        .row {
-            display: table-row;
-        }
-        .label, .value {
-            display: table-cell;
-            padding: 0.5em;
-        }
-    `;
+      form {
+        display: table;
+      }
+      .row {
+        display: table-row;
+      }
+      .label, .value {
+        display: table-cell;
+        padding: 0.5em;
+      }
+  `;
   }
 
   doAttach() {
@@ -760,7 +747,7 @@ class HeatPumpCardEditor extends HTMLElement {
 
   doUpdateHass() {
     if (!this._localization) {
-      this._localization = this.readLocalization(this._hass);
+      this._localization = HeatPumpCard.readLocalization(this._hass);
       this._elements.editor.querySelector("#heatingPumpStatusOnOffLabel").innerHTML = this._localization.editor['heatingPumpStatusOnOff'];
       this._elements.editor.querySelector("#heatingPumpHotWaterModeLabel").innerHTML = this._localization.editor['heatingPumpHotWaterMode'];
       this._elements.editor.querySelector("#heatingPumpHeatingModeLabel").innerHTML = this._localization.editor['heatingPumpHeatingMode'];
@@ -796,27 +783,6 @@ class HeatPumpCardEditor extends HTMLElement {
       this._elements.editor.querySelector("#linkDetailsLabel").innerHTML = this._localization.editor['linkDetails'];
       this._elements.editor.querySelector("#linkSettingsLabel").innerHTML = this._localization.editor['linkSettings'];
     }
-  }
-
-
-  readLocalization(hass) {
-    var translationJSONobj = this.readLocalizationLang(hass.language.substring(0,2));
-    if (!translationJSONobj) {
-      translationJSONobj = this.readLocalizationLang("en");
-    }
-    return translationJSONobj;
-  }
-
-  readLocalizationLang(lang) {
-    var translationLocal = "/hacsfiles/heat-pump-card/heat-pump-card/" + lang + ".json";
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", translationLocal, false);
-    rawFile.send(null);
-    if (rawFile.status == 200) {
-      return JSON.parse(rawFile.responseText);
-    }
-    return null;
   }
 
   doMessageForUpdate(changedEvent) {

@@ -24,10 +24,10 @@ Add Card->Manual.
 | heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
 | heatingPumpHotWaterMode | object | **Required** | Hot Water Mode, when on, faucet symbol is displayed
 | heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
-| heatingPumpCoolingMode | object | **Required** | in Cooling Mode, the cooling symbol is displayed
-| heatingPumpPartyMode | object | **Required** | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
-| heatingPumpEnergySaveMode | object | **Required** | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
-| heatingPumpNightMode | object | **Required** | Night Mode switches between sun and moon symbol
+| heatingPumpCoolingMode | object | optional | in Cooling Mode, the cooling symbol is displayed
+| heatingPumpPartyMode | object | optional | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
+| heatingPumpEnergySaveMode | object | optional | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
+| heatingPumpNightMode | object | optional | Night Mode switches between sun and moon symbol
 | outdoorTemperature | object | **Required** | Outdoor Temperature
 | ambientTemperatureNormal | object | **Required** | Ambient Temperature normal
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
