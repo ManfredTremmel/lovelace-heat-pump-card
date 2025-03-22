@@ -1,10 +1,12 @@
 class HeatPumpCard extends HTMLElement {
+
   // Whenever the state changes, a new `hass` object is set. Use this to
   // update your content.
   set hass(hass) {
+
     // Initialize the content if it's not there yet.
     if (!this.content) {
-      const localization = HeatPumpCard.readLocalization(hass);
+      const localization = HeatPumpCard.readLocalization(hass.language.substring(0,2));
       this.innerHTML = '<ha-card header="' + localization['header'] + '">\n' + HeatPumpCard.readSvg() + '</ha-card>';
       this.content = this.querySelector("svg");
       this.content.querySelector("#textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
@@ -111,13 +113,13 @@ class HeatPumpCard extends HTMLElement {
   static cardFolder = "/hacsfiles/heat-pump-card/heat-pump-card/";
   static cardFolderAlternate = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
 
-  static readLocalization(hass) {
-    var translationJSONobj = HeatPumpCard.readLocalizationLang(hass.language.substring(0,2), HeatPumpCard.cardFolder);
+  static readLocalization(lang) {
+    var translationJSONobj = HeatPumpCard.readLocalizationLang(lang, HeatPumpCard.cardFolder);
     if (!translationJSONobj) {
       translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolder);
     }
     if (!translationJSONobj) {
-      translationJSONobj = HeatPumpCard.readLocalizationLang(hass.language.substring(0,2), HeatPumpCard.cardFolderAlternate);
+      translationJSONobj = HeatPumpCard.readLocalizationLang(lang, HeatPumpCard.cardFolderAlternate);
     }
     if (!translationJSONobj) {
       translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolderAlternate);
@@ -272,8 +274,107 @@ class HeatPumpCard extends HTMLElement {
     this.setLinks();
   }
 
-  static getConfigElement() {
-    return document.createElement("heat-pump-card-editor");
+  static getConfigForm() {
+    const language = window.navigator.userLanguage || window.navigator.language;
+    const localization = HeatPumpCard.readLocalization(language.substring(0,2));
+    // Define the form schema.
+    const SCHEMA = [
+      { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingPumpHotWaterMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingPumpCoolingMode", selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heatingPumpNightMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "outdoorTemperature", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
+      { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
+      { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
+      { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } },
+      { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingCircuitPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "circulatingPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "tankTempHPUp", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempWWUp", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
+      { name: "supplyTemperatureHeating", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
+      { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
+      { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
+      { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
+      { name: "wwHeatingValve", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heaterRodWW", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heaterRodLevel1", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "heaterRodLevel2", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "linkDetails", required: true, selector: { navigation: {} } },
+      { name: "linkSettings", required: true, selector: { navigation: {} } },
+    ];
+
+    // A simple assertion function to validate the configuration.
+    const assertConfig = (config) => {
+      if (!config.heatingPumpStatusOnOff || typeof config.heatingPumpStatusOnOff !== "string") {
+        throw new Error('Configuration error: "heatingPumpStatusOnOff" must be a non-empty string.');
+      }
+      if (!config.heatingPumpHotWaterMode || typeof config.heatingPumpHotWaterMode !== "string") {
+        throw new Error('Configuration error: "heatingPumpHotWaterMode" must be a non-empty string.');
+      }
+      if (!config.heatingPumpHeatingMode || typeof config.heatingPumpHeatingMode !== "string") {
+        throw new Error('Configuration error: "heatingPumpHeatingMode" must be a non-empty string.');
+      }
+      if (!config.outdoorTemperature || typeof config.outdoorTemperature !== "string") {
+        throw new Error('Configuration error: "outdoorTemperature" must be a non-empty string.');
+      }
+      if (!config.ambientTemperatureNormal || typeof config.ambientTemperatureNormal !== "string") {
+        throw new Error('Configuration error: "ambientTemperatureNormal" must be a non-empty string.');
+      }
+      if (!config.hpRunning || typeof config.hpRunning !== "string") {
+        throw new Error('Configuration error: "hpRunning" must be a non-empty string.');
+      }
+      if (!config.compressorRunning || typeof config.compressorRunning !== "string") {
+        throw new Error('Configuration error: "compressorRunning" must be a non-empty string.');
+      }
+      if (!config.heatingCircuitPumpRunning || typeof config.heatingCircuitPumpRunning !== "string") {
+        throw new Error('Configuration error: "heatingCircuitPumpRunning" must be a non-empty string.');
+      }
+      if (!config.circulatingPumpRunning || typeof config.circulatingPumpRunning !== "string") {
+        throw new Error('Configuration error: "circulatingPumpRunning" must be a non-empty string.');
+      }
+      if (!config.tankTempHPUp || typeof config.tankTempHPUp !== "string") {
+        throw new Error('Configuration error: "tankTempHPUp" must be a non-empty string.');
+      }
+      if (!config.tankTempWWUp || typeof config.tankTempWWUp !== "string") {
+        throw new Error('Configuration error: "tankTempWWUp" must be a non-empty string.');
+      }
+      if (!config.supplyTemperatureHeating || typeof config.supplyTemperatureHeating !== "string") {
+        throw new Error('Configuration error: "supplyTemperatureHeating" must be a non-empty string.');
+      }
+      if (!config.wwHeatingValve || typeof config.wwHeatingValve !== "string") {
+        throw new Error('Configuration error: "wwHeatingValve" must be a non-empty string.');
+      }
+      if (!config.linkDetails || typeof config.linkDetails !== "string") {
+        throw new Error('Configuration error: "linkDetails" must be a non-empty string.');
+      }
+      if (!config.linkSettings || typeof config.linkSettings !== "string") {
+        throw new Error('Configuration error: "linkSettings" must be a non-empty string.');
+      }
+    };
+
+    // computeLabel returns a localized label for a schema item.
+    const computeLabel = (schema, localize) => {
+      return localization.editor[schema.name];
+      // return schema.name;
+    };
+
+    return {
+      schema: SCHEMA,
+      assertConfig: assertConfig,
+      computeLabel: computeLabel,
+    };
   }
 
   static getStubConfig() {
@@ -333,534 +434,6 @@ class HeatPumpCard extends HTMLElement {
 }
 
 customElements.define("heat-pump-card", HeatPumpCard);
-
-class HeatPumpCardEditor extends HTMLElement {
-  // private properties
-  _config;
-  _hass;
-  _elements = {};
-  _localization;
-
-  // lifecycle
-  constructor() {
-    super();
-    console.log("editor:constructor()");
-    this.doEditor();
-    this.doStyle();
-    this.doAttach();
-    this.doQueryElements();
-    this.doListen();
-  }
-
-  setConfig(config) {
-    console.log("editor:setConfig()");
-    this._config = config;
-    this.doUpdateConfig();
-  }
-
-  set hass(hass) {
-    console.log("editor.hass()");
-    this._hass = hass;
-    this.doUpdateHass();
-  }
-  
-  onChanged(event) {
-    console.log("editor.onChanged()");
-    this.doMessageForUpdate(event);
-  }
-
-  // jobs
-  doEditor() {
-    this._elements.editor = document.createElement("form");
-    this._elements.editor.innerHTML = `
-        <div class="row">
-          <label class="label" id="heatingPumpStatusOnOffLabel" for="heatingPumpStatusOnOff">Heating Pump On/Off:</label>
-          <input class="value" id="heatingPumpStatusOnOff"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpHotWaterModeLabel" for="heatingPumpHotWaterMode">Hot Water Mode On/Off:</label>
-          <input class="value" id="heatingPumpHotWaterMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpHeatingModeLabel" for="heatingPumpHeatingMode">Heating Mode On/Off:</label>
-          <input class="value" id="heatingPumpHeatingMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpCoolingModeLabel" for="heatingPumpCoolingMode">Cooling Mode On/Off:</label>
-          <input class="value" id="heatingPumpCoolingMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpPartyModeLabel" for="heatingPumpPartyMode">Party Mode On/Off:</label>
-          <input class="value" id="heatingPumpPartyMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpEnergySaveModeLabel" for="heatingPumpEnergySaveMode">Energy Save Mode On/Off:</label>
-          <input class="value" id="heatingPumpEnergySaveMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingPumpNightModeLabel" for="heatingPumpNightMode">Night Mode On/Off:</label>
-          <input class="value" id="heatingPumpNightMode"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="outdoorTemperatureLabel" for="outdoorTemperature">Outdoor Temperature:</label>
-          <input class="value" id="outdoorTemperature"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="ambientTemperatureNormalLabel" for="ambientTemperatureNormal">Ambient Temperature normal:</label>
-          <input class="value" id="ambientTemperatureNormal"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="ambientTemperatureReducedLabel" for="ambientTemperatureReduced">Ambient Temperature reduced:</label>
-          <input class="value" id="ambientTemperatureReduced"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="ambientTemperaturePartyLabel" for="ambientTemperatureParty">Ambient Temperature Party:</label>
-          <input class="value" id="ambientTemperatureParty"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="supplyTemperatureLabel" for="supplyTemperature">Supply Temperature:</label>
-          <input class="value" id="supplyTemperature"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="hpRunningLabel" for="hpRunning">Primary Source On/Off:</label>
-          <input class="value" id="hpRunning"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="compressorRunningLabel" for="compressorRunning">Compressor running On/Off:</label>
-          <input class="value" id="compressorRunning"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heatingCircuitPumpRunningLabel" for="heatingCircuitPumpRunning">Heating Circuit Pump On/Off:</label>
-          <input class="value" id="heatingCircuitPumpRunning"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="circulatingPumpRunningLabel" for="circulatingPumpRunning">Circulating Pump On/Off:</label>
-          <input class="value" id="circulatingPumpRunning"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempHPUpLabel" for="tankTempHPUp">Buffer Temperature up:</label>
-          <input class="value" id="tankTempHPUp"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempHPMiddleLabel" for="tankTempHPMiddle">Buffer Temperature middle:</label>
-          <input class="value" id="tankTempHPMiddle"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempHPDownLabel" for="tankTempHPDown">Buffer Temperature down:</label>
-          <input class="value" id="tankTempHPDown"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempWWUpLabel" for="tankTempWWUp">Hot Water Buffer Temperature up:</label>
-          <input class="value" id="tankTempWWUp"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempWWMiddleLabel" for="tankTempWWMiddle">Hot Water Buffer Temperature middle:</label>
-          <input class="value" id="tankTempWWMiddle"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="tankTempWWDownLabel" for="tankTempWWDown">Hot Water Buffer Temperature down:</label>
-          <input class="value" id="tankTempWWDown"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="supplyTemperatureHeatingLabel" for="supplyTemperatureHeating">Supply Temperature Heating:</label>
-          <input class="value" id="supplyTemperatureHeating"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="refluxTemperatureHeatingLabel" for="refluxTemperatureHeating">Reflux Temperature Heating:</label>
-          <input class="value" id="refluxTemperatureHeating"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="evaporatorPressureLabel" for="evaporatorPressure">Evaporator Pressure:</label>
-          <input class="value" id="evaporatorPressure"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="evaporatorTemperatureLabel" for="evaporatorTemperature">Evaporator Temperature:</label>
-          <input class="value" id="evaporatorTemperature"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="condenserPressureLabel" for="condenserPressure">Condenser Pressure:</label>
-          <input class="value" id="condenserPressure"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="wwHeatingValveLabel" for="wwHeatingValve">Heating/Hot Water Valve:</label>
-          <input class="value" id="wwHeatingValve"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heaterRodWWLabel" for="heaterRodWW">Heater Rod Hot Water On/Off:</label>
-          <input class="value" id="heaterRodWW"></input></div>
-        <div class="row">
-          <label class="label" id="heaterRodHPLabel" for="heaterRodHP">Heater Rod Heating On/Off:</label>
-          <input class="value" id="heaterRodHP"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heaterRodLevel1Label" for="heaterRodLevel1">Heater Rod Level 1 On/Off:</label>
-          <input class="value" id="heaterRodLevel1"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="heaterRodLevel2Label" for="heaterRodLevel2">Heater Rod Level 2 On/Off:</label>
-          <input class="value" id="heaterRodLevel2"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="linkDetailsLabel" for="linkDetails">Link Details:</label>
-          <input class="value" id="linkDetails"></input>
-        </div>
-        <div class="row">
-          <label class="label" id="linkSettingsLabel" for="linkSettings">Link Settings:</label>
-          <input class="value" id="linkSettings"></input>
-        </div>
-    `;
-  }
-
-  doStyle() {
-    this._elements.style = document.createElement("style");
-    this._elements.style.textContent = `
-      form {
-        display: table;
-      }
-      .row {
-        display: table-row;
-      }
-      .label, .value {
-        display: table-cell;
-        padding: 0.5em;
-      }
-  `;
-  }
-
-  doAttach() {
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.append(this._elements.style, this._elements.editor);
-  }
-
-  doQueryElements() {
-    this._elements.heatingPumpStatusOnOff = this._elements.editor.querySelector("#heatingPumpStatusOnOff");
-    this._elements.heatingPumpHotWaterMode = this._elements.editor.querySelector("#heatingPumpHotWaterMode");
-    this._elements.heatingPumpHeatingMode = this._elements.editor.querySelector("#heatingPumpHeatingMode");
-    this._elements.heatingPumpCoolingMode = this._elements.editor.querySelector("#heatingPumpCoolingMode");
-    this._elements.heatingPumpPartyMode = this._elements.editor.querySelector("#heatingPumpPartyMode");
-    this._elements.heatingPumpEnergySaveMode = this._elements.editor.querySelector("#heatingPumpEnergySaveMode");
-    this._elements.heatingPumpNightMode = this._elements.editor.querySelector("#heatingPumpNightMode");
-    this._elements.outdoorTemperature = this._elements.editor.querySelector("#outdoorTemperature");
-    this._elements.ambientTemperatureNormal = this._elements.editor.querySelector("#ambientTemperatureNormal");
-    this._elements.ambientTemperatureReduced = this._elements.editor.querySelector("#ambientTemperatureReduced");
-    this._elements.ambientTemperatureParty = this._elements.editor.querySelector("#ambientTemperatureParty");
-    this._elements.supplyTemperature = this._elements.editor.querySelector("#supplyTemperature");
-    this._elements.hpRunning = this._elements.editor.querySelector("#hpRunning");
-    this._elements.compressorRunning = this._elements.editor.querySelector("#compressorRunning");
-    this._elements.heatingCircuitPumpRunning = this._elements.editor.querySelector("#heatingCircuitPumpRunning");
-    this._elements.circulatingPumpRunning = this._elements.editor.querySelector("#circulatingPumpRunning");
-    this._elements.tankTempHPUp = this._elements.editor.querySelector("#tankTempHPUp");
-    this._elements.tankTempHPMiddle = this._elements.editor.querySelector("#tankTempHPMiddle");
-    this._elements.tankTempHPDown = this._elements.editor.querySelector("#tankTempHPDown");
-    this._elements.tankTempWWUp = this._elements.editor.querySelector("#tankTempWWUp");
-    this._elements.tankTempWWMiddle = this._elements.editor.querySelector("#tankTempWWMiddle");
-    this._elements.tankTempWWDown = this._elements.editor.querySelector("#tankTempWWDown");
-    this._elements.supplyTemperatureHeating = this._elements.editor.querySelector("#supplyTemperatureHeating");
-    this._elements.refluxTemperatureHeating = this._elements.editor.querySelector("#refluxTemperatureHeating");
-    this._elements.evaporatorPressure = this._elements.editor.querySelector("#evaporatorPressure");
-    this._elements.evaporatorTemperature = this._elements.editor.querySelector("#evaporatorTemperature");
-    this._elements.condenserPressure = this._elements.editor.querySelector("#condenserPressure");
-    this._elements.wwHeatingValve = this._elements.editor.querySelector("#wwHeatingValve");
-    this._elements.heaterRodWW = this._elements.editor.querySelector("#heaterRodWW");
-    this._elements.heaterRodHP = this._elements.editor.querySelector("#heaterRodHP");
-    this._elements.heaterRodLevel1 = this._elements.editor.querySelector("#heaterRodLevel1");
-    this._elements.heaterRodLevel2 = this._elements.editor.querySelector("#heaterRodLevel2");
-    this._elements.linkDetails = this._elements.editor.querySelector("#linkDetails");
-    this._elements.linkSettings = this._elements.editor.querySelector("#linkSettings");
-  }
-
-  doListen() {
-    this._elements.heatingPumpStatusOnOff.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpHotWaterMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpHeatingMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpCoolingMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpPartyMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpEnergySaveMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingPumpNightMode.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.outdoorTemperature.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.ambientTemperatureNormal.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.ambientTemperatureReduced.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.ambientTemperatureParty.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.supplyTemperature.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.hpRunning.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.compressorRunning.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heatingCircuitPumpRunning.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.circulatingPumpRunning.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempHPUp.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempHPMiddle.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempHPDown.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempWWUp.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempWWMiddle.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.tankTempWWDown.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.supplyTemperatureHeating.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.refluxTemperatureHeating.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.evaporatorPressure.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.evaporatorTemperature.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.condenserPressure.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.wwHeatingValve.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heaterRodWW.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heaterRodHP.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heaterRodLevel1.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.heaterRodLevel2.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.linkDetails.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-    this._elements.linkSettings.addEventListener(
-      "focusout",
-      this.onChanged.bind(this)
-    );
-  }
-
-  doUpdateConfig() {
-    this._elements.heatingPumpStatusOnOff.value = this._config.heatingPumpStatusOnOff;
-    this._elements.heatingPumpHotWaterMode.value = this._config.heatingPumpHotWaterMode;
-    this._elements.heatingPumpHeatingMode.value = this._config.heatingPumpHeatingMode;
-    this._elements.heatingPumpCoolingMode.value = this._config.heatingPumpCoolingMode;
-    this._elements.heatingPumpPartyMode.value = this._config.heatingPumpPartyMode;
-    this._elements.heatingPumpEnergySaveMode.value = this._config.heatingPumpEnergySaveMode;
-    this._elements.heatingPumpNightMode.value = this._config.heatingPumpNightMode;
-    this._elements.outdoorTemperature.value = this._config.outdoorTemperature;
-    this._elements.ambientTemperatureNormal.value = this._config.ambientTemperatureNormal;
-    this._elements.ambientTemperatureReduced.value = this._config.ambientTemperatureReduced;
-    this._elements.ambientTemperatureParty.value = this._config.ambientTemperatureParty;
-    this._elements.supplyTemperature.value = this._config.supplyTemperature;
-    this._elements.hpRunning.value = this._config.hpRunning;
-    this._elements.compressorRunning.value = this._config.compressorRunning;
-    this._elements.heatingCircuitPumpRunning.value = this._config.heatingCircuitPumpRunning;
-    this._elements.circulatingPumpRunning.value = this._config.circulatingPumpRunning;
-    this._elements.tankTempHPUp.value = this._config.tankTempHPUp;
-    this._elements.tankTempHPMiddle.value = this._config.tankTempHPMiddle;
-    this._elements.tankTempHPDown.value = this._config.tankTempHPDown;
-    this._elements.tankTempWWUp.value = this._config.tankTempWWUp;
-    this._elements.tankTempWWMiddle.value = this._config.tankTempWWMiddle;
-    this._elements.tankTempWWDown.value = this._config.tankTempWWDown;
-    this._elements.supplyTemperatureHeating.value = this._config.supplyTemperatureHeating;
-    this._elements.refluxTemperatureHeating.value = this._config.refluxTemperatureHeating;
-    this._elements.evaporatorPressure.value = this._config.evaporatorPressure;
-    this._elements.evaporatorTemperature.value = this._config.evaporatorTemperature;
-    this._elements.condenserPressure.value = this._config.condenserPressure;
-    this._elements.wwHeatingValve.value = this._config.wwHeatingValve;
-    this._elements.heaterRodWW.value = this._config.heaterRodWW;
-    this._elements.heaterRodHP.value = this._config.heaterRodHP;
-    this._elements.heaterRodLevel1.value = this._config.heaterRodLevel1;
-    this._elements.heaterRodLevel2.value = this._config.heaterRodLevel2;
-    this._elements.linkDetails.value = this._config.linkDetails;
-    this._elements.linkSettings.value = this._config.linkSettings;
-  }
-
-  doUpdateHass() {
-    if (!this._localization) {
-      this._localization = HeatPumpCard.readLocalization(this._hass);
-      this._elements.editor.querySelector("#heatingPumpStatusOnOffLabel").innerHTML = this._localization.editor['heatingPumpStatusOnOff'];
-      this._elements.editor.querySelector("#heatingPumpHotWaterModeLabel").innerHTML = this._localization.editor['heatingPumpHotWaterMode'];
-      this._elements.editor.querySelector("#heatingPumpHeatingModeLabel").innerHTML = this._localization.editor['heatingPumpHeatingMode'];
-      this._elements.editor.querySelector("#heatingPumpCoolingModeLabel").innerHTML = this._localization.editor['heatingPumpCoolingMode'];
-      this._elements.editor.querySelector("#heatingPumpPartyModeLabel").innerHTML = this._localization.editor['heatingPumpPartyMode'];
-      this._elements.editor.querySelector("#heatingPumpEnergySaveModeLabel").innerHTML = this._localization.editor['heatingPumpEnergySaveMode'];
-      this._elements.editor.querySelector("#heatingPumpNightModeLabel").innerHTML = this._localization.editor['heatingPumpNightMode'];
-      this._elements.editor.querySelector("#outdoorTemperatureLabel").innerHTML = this._localization.editor['outdoorTemperature'];
-      this._elements.editor.querySelector("#ambientTemperatureNormalLabel").innerHTML = this._localization.editor['ambientTemperatureNormal'];
-      this._elements.editor.querySelector("#ambientTemperatureReducedLabel").innerHTML = this._localization.editor['ambientTemperatureReduced'];
-      this._elements.editor.querySelector("#ambientTemperaturePartyLabel").innerHTML = this._localization.editor['ambientTemperatureParty'];
-      this._elements.editor.querySelector("#supplyTemperatureLabel").innerHTML = this._localization.editor['supplyTemperature'];
-      this._elements.editor.querySelector("#hpRunningLabel").innerHTML = this._localization.editor['hpRunning'];
-      this._elements.editor.querySelector("#compressorRunningLabel").innerHTML = this._localization.editor['compressorRunning'];
-      this._elements.editor.querySelector("#heatingCircuitPumpRunningLabel").innerHTML = this._localization.editor['heatingCircuitPumpRunning'];
-      this._elements.editor.querySelector("#circulatingPumpRunningLabel").innerHTML = this._localization.editor['circulatingPumpRunning'];
-      this._elements.editor.querySelector("#tankTempHPUpLabel").innerHTML = this._localization.editor['tankTempHPUp'];
-      this._elements.editor.querySelector("#tankTempHPMiddleLabel").innerHTML = this._localization.editor['tankTempHPMiddle'];
-      this._elements.editor.querySelector("#tankTempHPDownLabel").innerHTML = this._localization.editor['tankTempHPDown'];
-      this._elements.editor.querySelector("#tankTempWWUpLabel").innerHTML = this._localization.editor['tankTempWWUp'];
-      this._elements.editor.querySelector("#tankTempWWMiddleLabel").innerHTML = this._localization.editor['tankTempWWMiddle'];
-      this._elements.editor.querySelector("#tankTempWWDownLabel").innerHTML = this._localization.editor['tankTempWWDown'];
-      this._elements.editor.querySelector("#supplyTemperatureHeatingLabel").innerHTML = this._localization.editor['supplyTemperatureHeating'];
-      this._elements.editor.querySelector("#refluxTemperatureHeatingLabel").innerHTML = this._localization.editor['refluxTemperatureHeating'];
-      this._elements.editor.querySelector("#evaporatorPressureLabel").innerHTML = this._localization.editor['evaporatorPressure'];
-      this._elements.editor.querySelector("#evaporatorTemperatureLabel").innerHTML = this._localization.editor['evaporatorTemperature'];
-      this._elements.editor.querySelector("#condenserPressureLabel").innerHTML = this._localization.editor['condenserPressure'];
-      this._elements.editor.querySelector("#wwHeatingValveLabel").innerHTML = this._localization.editor['wwHeatingValve'];
-      this._elements.editor.querySelector("#heaterRodWWLabel").innerHTML = this._localization.editor['heaterRodWW'];
-      this._elements.editor.querySelector("#heaterRodHPLabel").innerHTML = this._localization.editor['heaterRodHP'];
-      this._elements.editor.querySelector("#heaterRodLevel1Label").innerHTML = this._localization.editor['heaterRodLevel1'];
-      this._elements.editor.querySelector("#heaterRodLevel2Label").innerHTML = this._localization.editor['heaterRodLevel2'];
-      this._elements.editor.querySelector("#linkDetailsLabel").innerHTML = this._localization.editor['linkDetails'];
-      this._elements.editor.querySelector("#linkSettingsLabel").innerHTML = this._localization.editor['linkSettings'];
-    }
-  }
-
-  doMessageForUpdate(changedEvent) {
-    // this._config is readonly, copy needed
-    const newConfig = Object.assign({}, this._config);
-    if (changedEvent.target.id == "heatingPumpStatusOnOff") {
-      newConfig.heatingPumpStatusOnOff = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpHotWaterMode") {
-      newConfig.heatingPumpHotWaterMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpHeatingMode") {
-      newConfig.heatingPumpHeatingMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpCoolingMode") {
-      newConfig.heatingPumpCoolingMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpPartyMode") {
-      newConfig.heatingPumpPartyMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpEnergySaveMode") {
-      newConfig.heatingPumpEnergySaveMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingPumpNightMode") {
-      newConfig.heatingPumpNightMode = changedEvent.target.value;
-    } else if (changedEvent.target.id == "outdoorTemperature") {
-      newConfig.outdoorTemperature = changedEvent.target.value;
-    } else if (changedEvent.target.id == "ambientTemperatureNormal") {
-      newConfig.ambientTemperatureNormal = changedEvent.target.value;
-    } else if (changedEvent.target.id == "ambientTemperatureReduced") {
-      newConfig.ambientTemperatureReduced = changedEvent.target.value;
-    } else if (changedEvent.target.id == "ambientTemperatureParty") {
-      newConfig.ambientTemperatureParty = changedEvent.target.value;
-    } else if (changedEvent.target.id == "supplyTemperature") {
-      newConfig.supplyTemperature = changedEvent.target.value;
-    } else if (changedEvent.target.id == "hpRunning") {
-      newConfig.hpRunning = changedEvent.target.value;
-    } else if (changedEvent.target.id == "compressorRunning") {
-      newConfig.compressorRunning = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heatingCircuitPumpRunning") {
-      newConfig.heatingCircuitPumpRunning = changedEvent.target.value;
-    } else if (changedEvent.target.id == "circulatingPumpRunning") {
-      newConfig.circulatingPumpRunning = changedEvent.target.value;
-    } else if (changedEvent.target.id == "tankTempHPUp") {
-      newConfig.tankTempHPUp = changedEvent.target.value;
-    } else if (changedEvent.target.id == "tankTempHPMiddle") {
-      newConfig.tankTempHPMiddle = changedEvent.target.value;
-    } else if (changedEvent.target.id == "tankTempWWDown") {
-      newConfig.tankTempWWDown = changedEvent.target.value;
-    } else if (changedEvent.target.id == "supplyTemperatureHeating") {
-      newConfig.supplyTemperatureHeating = changedEvent.target.value;
-    } else if (changedEvent.target.id == "refluxTemperatureHeating") {
-      newConfig.refluxTemperatureHeating = changedEvent.target.value;
-    } else if (changedEvent.target.id == "evaporatorPressure") {
-      newConfig.evaporatorPressure = changedEvent.target.value;
-    } else if (changedEvent.target.id == "evaporatorTemperature") {
-      newConfig.evaporatorTemperature = changedEvent.target.value;
-    } else if (changedEvent.target.id == "condenserPressure") {
-      newConfig.condenserPressure = changedEvent.target.value;
-    } else if (changedEvent.target.id == "wwHeatingValve") {
-      newConfig.wwHeatingValve = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heaterRodWW") {
-      newConfig.heaterRodWW = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heaterRodHP") {
-      newConfig.heaterRodHP = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heaterRodLevel1") {
-      newConfig.heaterRodLevel1 = changedEvent.target.value;
-    } else if (changedEvent.target.id == "heaterRodLevel2") {
-      newConfig.heaterRodLevel2 = changedEvent.target.value;
-    } else if (changedEvent.target.id == "linkDetails") {
-      newConfig.linkDetails = changedEvent.target.value;
-    } else if (changedEvent.target.id == "linkSettings") {
-      newConfig.linkSettings = changedEvent.target.value;
-    }
-    const messageEvent = new CustomEvent("config-changed", {
-      detail: { config: newConfig },
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(messageEvent);
-  }
-}
-
-customElements.define("heat-pump-card-editor", HeatPumpCardEditor);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
