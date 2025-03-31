@@ -110,8 +110,8 @@ class HeatPumpCard extends HTMLElement {
                        this.formatBinary(hass.states[this.config.heaterRodLevel2]));
   }
 
-  static cardFolder = "/hacsfiles/heat-pump-card/heat-pump-card/";
-  static cardFolderAlternate = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
+  static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
+  static cardFolderAlternate = "/hacsfiles/heat-pump-card/heat-pump-card/";
 
   static readLocalization(lang) {
     var translationJSONobj = HeatPumpCard.readLocalizationLang(lang, HeatPumpCard.cardFolder);
@@ -367,52 +367,12 @@ class HeatPumpCard extends HTMLElement {
     // computeLabel returns a localized label for a schema item.
     const computeLabel = (schema, localize) => {
       return localization.editor[schema.name];
-      // return schema.name;
     };
 
     return {
       schema: SCHEMA,
       assertConfig: assertConfig,
       computeLabel: computeLabel,
-    };
-  }
-
-  static getStubConfig() {
-    return {
-      heatingPumpStatusOnOff: "binary_sensor.heating_pump_status_on_off",
-      heatingPumpHotWaterMode: "binary_sensor.heating_pump_hot_water_mode",
-      heatingPumpHeatingMode: "binary_sensor.heating_pump_heating_mode",
-      heatingPumpCoolingMode: "binary_sensor.heating_pump_cooling_mode",
-      heatingPumpPartyMode: "binary_sensor.heating_pump_party_mode",
-      heatingPumpEnergySaveMode: "binary_sensor.heating_pump_energy_save_mode",
-      heatingPumpNightMode: "binary_sensor.heating_pump_night_mode",
-      outdoorTemperature: "sensor.mosquitto_mqtt_broker_aussentemperatur",
-      ambientTemperatureNormal: "number.mosquitto_mqtt_broker_raumsolltemperatur_normal",
-      ambientTemperatureReduced: "number.mosquitto_mqtt_broker_raumsolltemperatur_reduziert",
-      ambientTemperatureParty: "number.mosquitto_mqtt_broker_raumsolltemperatur_party",
-      supplyTemperature: "sensor.mosquitto_mqtt_broker_information_allgemein_anlagenvorlauftemperatur_0_95",
-      hpRunning: "binary_sensor.mosquitto_mqtt_broker_status_primaerquelle",
-      compressorRunning: "binary_sensor.mosquitto_mqtt_broker_status_verdichter",
-      heatingCircuitPumpRunning: "binary_sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_heizkreispumpe_0_1",
-      circulatingPumpRunning: "binary_sensor.mosquitto_mqtt_broker_status_zirklulationspumpe_2",
-      tankTempHPUp: "sensor.mosquitto_mqtt_broker_information_allgemein_pufferspeichertemperatur_0_95",
-      tankTempHPMiddle: "",
-      tankTempHPDown: "",
-      tankTempWWUp: "sensor.mosquitto_mqtt_broker_warmwassertemperatur_ist_oben",
-      tankTempWWMiddle: "",
-      tankTempWWDown: "",
-      supplyTemperatureHeating: "sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_vorlauftemperatur_sekundaer_2_0_95",
-      refluxTemperatureHeating: "",
-      evaporatorPressure: "sensor.mosquitto_mqtt_broker_druck_im_verdampfer",
-      evaporatorTemperature: "sensor.mosquitto_mqtt_broker_temperatur_verdampfer",
-      condenserPressure: "sensor.mosquitto_mqtt_broker_druck_im_kondensator",
-      wwHeatingValve: "binary_sensor.mosquitto_mqtt_broker_diagnose_waermepumpe_3_w_ventil_heizen_ww1_0_heizen_1_ww",
-      heaterRodWW: "switch.mosquitto_mqtt_broker_freigabe_elektroheizung_fuer_ww_bereitung",
-      heaterRodHP: "switch.mosquitto_mqtt_broker_freigabe_heizen_mit_elektro",
-      heaterRodLevel1: "binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_1",
-      heaterRodLevel2: "binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_2",
-      linkDetails: "./hp-details",
-      linkSettings: "./hp-settings"
     };
   }
 

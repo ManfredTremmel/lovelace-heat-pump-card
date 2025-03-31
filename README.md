@@ -1,3 +1,5 @@
+[![GitHub Release][releases-shield]][releases]
+[![License][license-shield]](LICENSE)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 
 # Heat Pump card
@@ -6,18 +8,24 @@ Home Assistant dashboard card displaying heat pump parameters
 
 ![Example picture of the heat pump card.](https://raw.githubusercontent.com/ManfredTremmel/lovelace-heat-pump-card/refs/heads/main/dist/heat-pump-card/heat-pump.svg)
 
-#### Installation
-The easiest way to install it is through [HACS (Home Assistant Community Store)](https://github.com/hacs/frontend),
-search for <i>heat-pump-card</i> and install the Plugins.
+## Installation
 
-If you are not using HACS, you may download all from dist folder (heat-pump-card.js and heat-pump-card directory with the translations and heat-pump.svg) and put them into
-homeassistant_config_dir/www/community/heat-pump-card/ directory.
+### Easiest method:
 
-The card does not support configuration flow, therefore you'll have to add the resources via UI->Configuration
-->Lovelace Dashboards->Resources then add the card manually editing the card configuration yaml on the dashboard at
-Add Card->Manual.
+✨ Install via HACS (when it's included there, what isn't the case at the moment!)
 
-**Options**
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ManfredTremmel&lovelace-heat-pump-card)
+
+### Alternative method:
+
+1. Download `lovelace-heat-pump-card.zip` file from the [Releases][releases] page
+2. Unzip and upload all stuff to `/www/community/lovelace-heat-pump-card` (via Samba, File Editor, SSH, etc.)
+3. Visit the Resources page in your Home Assistant install and add `/hacsfiles/lovelace-heat-pump-card/heat-pump-card.js` as a
+   JavaScript Module.
+   [![Open your Home Assistant instance and show your dashboard resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_resources/)
+4. Refresh your browser
+
+## Options
 
 | Name | Type | Requirement | Description
 | ---- | ---- | ----------- | -----------
@@ -57,7 +65,7 @@ Add Card->Manual.
 | linkSettings | string | **Required** | Link to settings page
 
 
-**Example**
+### Example
 
 This are my settings for Viessmann Vitocal 350 with Vitotronic 200 heating pump, most stuff is provided by Vcontrol add-on (everything with `mosquitto_mqtt_broker` in the name),
 additional binary_sensors I've created as helper to translate the heat pump modes to universal values. Otherwise a translation for each different heat pump needed to be integrated.
@@ -75,22 +83,28 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   ambientTemperatureNormal: number.mosquitto_mqtt_broker_raumsolltemperatur_normal
   ambientTemperatureReduced: number.mosquitto_mqtt_broker_raumsolltemperatur_reduziert
   ambientTemperatureParty: number.mosquitto_mqtt_broker_raumsolltemperatur_party
-  supplyTemperature: sensor.mosquitto_mqtt_broker_information_allgemein_anlagenvorlauftemperatur_0_95
+  supplyTemperature: sensor.mosquitto_mqtt_broker_anlagenvorlauftemperatur
   hpRunning: binary_sensor.mosquitto_mqtt_broker_status_primaerquelle
   compressorRunning: binary_sensor.mosquitto_mqtt_broker_status_verdichter
-  heatingCircuitPumpRunning: binary_sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_heizkreispumpe_0_1
-  circulatingPumpRunning: binary_sensor.mosquitto_mqtt_broker_status_zirklulationspumpe_2
-  tankTempHPUp: sensor.mosquitto_mqtt_broker_information_allgemein_pufferspeichertemperatur_0_95
-  tankTempWWUp: sensor.mosquitto_mqtt_broker_warmwassertemperatur_ist_oben
-  supplyTemperatureHeating: sensor.mosquitto_mqtt_broker_information_heizkreis_hk2_vorlauftemperatur_sekundaer_2_0_95
+  heatingCircuitPumpRunning: binary_sensor.mosquitto_mqtt_broker_heizkreispumpe
+  circulatingPumpRunning: binary_sensor.mosquitto_mqtt_broker_warmwasser_zirkulationspumpe
+  tankTempHPUp: sensor.mosquitto_mqtt_broker_pufferspeichertemperatur
+  tankTempHPMiddle: ""
+  tankTempHPDown: ""
+  tankTempWWUp: sensor.mosquitto_mqtt_broker_warmwassertemperatur_oben
+  tankTempWWMiddle: ""
+  tankTempWWDown: ""
+  supplyTemperatureHeating: sensor.mosquitto_mqtt_broker_vorlauftemperatur_heizkreis
+  refluxTemperatureHeating: ""
   evaporatorPressure: sensor.mosquitto_mqtt_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_mqtt_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_mqtt_broker_druck_im_kondensator
-  wwHeatingValve: binary_sensor.mosquitto_mqtt_broker_diagnose_waermepumpe_3_w_ventil_heizen_ww1_0_heizen_1_ww
+  wwHeatingValve: binary_sensor.mosquitto_mqtt_broker_status_warmwasserventil
   heaterRodWW: switch.mosquitto_mqtt_broker_freigabe_elektroheizung_fuer_ww_bereitung
   heaterRodHP: switch.mosquitto_mqtt_broker_freigabe_heizen_mit_elektro
   heaterRodLevel1: binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_1
   heaterRodLevel2: binary_sensor.mosquitto_mqtt_broker_status_heizstab_stufe_2
-  linkDetails: ./hp-details
-  linkSettings: ./hp-settings
+  linkDetails: /lovelace/hp-details
+  linkSettings: /lovelace/hp-settings
+
 ```
