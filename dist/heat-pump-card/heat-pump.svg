@@ -12,6 +12,7 @@
         font-family: sans-serif;
         fill-opacity: 1;
         stroke: none;
+        fill: #000000;
       }
       #textTankTempWWDown,
       #textTankTempWWMiddle,
@@ -118,6 +119,9 @@
         stop-opacity: 0.5;
       }
       @media (prefers-color-scheme: dark) {
+        text {
+          fill: #ffffff;
+        }
         #layer1 {
           fill: #ffffff;
           stroke: #ffffff;
