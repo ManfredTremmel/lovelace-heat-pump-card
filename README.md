@@ -1,5 +1,4 @@
-[![GitHub Release][releases-shield]][releases]
-[![License][license-shield]](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 
 # Heat Pump card
