@@ -11,7 +11,7 @@ Home Assistant dashboard card displaying heat pump parameters
 
 ### Easiest method:
 
-✨ Install via HACS (when it's included there, what isn't the case at the moment!)
+✨ Install via HACS
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ManfredTremmel&lovelace-heat-pump-card)
 

@@ -1,3 +1,5 @@
 {
-  "name": "Heat Pump Card"
+  "name": "Heat Pump Card",
+  "render_readme": true,
+  "filename": "heat-pump-card.js"
 }
