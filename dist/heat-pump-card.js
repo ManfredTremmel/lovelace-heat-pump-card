@@ -111,24 +111,17 @@ class HeatPumpCard extends HTMLElement {
   }
 
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
-  static cardFolderAlternate = "/hacsfiles/heat-pump-card/heat-pump-card/";
 
   static readLocalization(lang) {
-    var translationJSONobj = HeatPumpCard.readLocalizationLang(lang, HeatPumpCard.cardFolder);
+    var translationJSONobj = HeatPumpCard.readLocalizationLang(lang);
     if (!translationJSONobj) {
-      translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolder);
-    }
-    if (!translationJSONobj) {
-      translationJSONobj = HeatPumpCard.readLocalizationLang(lang, HeatPumpCard.cardFolderAlternate);
-    }
-    if (!translationJSONobj) {
-      translationJSONobj = HeatPumpCard.readLocalizationLang("en", HeatPumpCard.cardFolderAlternate);
+      translationJSONobj = HeatPumpCard.readLocalizationLang("en");
     }
     return translationJSONobj;
   }
 
-  static readLocalizationLang(lang, folder) {
-    var translationLocal = folder + lang + ".json";
+  static readLocalizationLang(lang) {
+    var translationLocal = HeatPumpCard.cardFolder + lang + ".json";
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", translationLocal, false);
@@ -140,15 +133,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   static readSvg() {
-    var svgObj = HeatPumpCard.readSvgFolder(HeatPumpCard.cardFolder);
-    if (!svgObj) {
-      svgObj = HeatPumpCard.readSvgFolder(HeatPumpCard.cardFolderAlternate);
-    }
-    return svgObj;
-  }
-
-  static readSvgFolder(folder) {
-    var svgImage = folder + "heat-pump.svg";
+    var svgImage = HeatPumpCard.cardFolder + "heat-pump.svg";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", svgImage, false);
     rawFile.send(null);
