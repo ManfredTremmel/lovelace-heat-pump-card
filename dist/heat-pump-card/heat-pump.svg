@@ -118,6 +118,11 @@
       stop {
         stop-opacity: 0.5;
       }
+      #rectSettings,
+      #rectHPChassis {
+        fill: #000000;
+        fill-opacity: 0;
+      }
       @media (prefers-color-scheme: dark) {
         text {
           fill: #ffffff;
