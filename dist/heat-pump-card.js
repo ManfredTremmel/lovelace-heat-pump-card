@@ -4,25 +4,15 @@ class HeatPumpCard extends HTMLElement {
   // update your content.
   set hass(hass) {
 
-    // Initialize the content if it's not there yet.
-    if (!this.content) {
-      const localization = HeatPumpCard.readLocalization(hass.language.substring(0,2));
-      this.innerHTML = '<ha-card header="' + localization['header'] + '">\n' + HeatPumpCard.readSvg() + '</ha-card>';
-      this.content = this.querySelector("svg");
-      this.content.querySelector("#textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
-      this.content.querySelector("#textTankHPName").innerHTML = localization.svgTexts['tankHPName'];
-      this.content.querySelector("#textEvaporator").innerHTML = localization.svgTexts['evaporator'];
-      this.content.querySelector("#textCondenser").innerHTML = localization.svgTexts['condenser'];
-      this.content.querySelector("#textCompressor").innerHTML = localization.svgTexts['compressor'];
-      this.content.querySelector("#textExpansionValve").innerHTML = localization.svgTexts['expansionValve'];
-      this.content.querySelector("#textCirculatingPump").innerHTML = localization.svgTexts['circulatingPump'];
-      this.content.querySelector("#textHeatingCircuitPump").innerHTML = localization.svgTexts['heatingCircuitPump'];
-      this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = localization.svgTexts['supplyTemperatureLabel'];
-      this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
-      this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);
-      this.setLinks();
+    if (this.content) {
+      this.setValues(hass);
+    } else {
+      // Load resources and Initialize the content if it's not there yet.
+      this.readSvg(hass.language.substring(0,2), this.handleSvg, hass);
     }
+  }
 
+  setValues(hass) {
     this.content.querySelector("#gHPStatusOff").style.display = this.formatBinary(hass.states[this.config.heatingPumpStatusOnOff]) ? "none" : "inline";
     this.content.querySelector("#gHPStatusWW").style.display = this.formatBinary(hass.states[this.config.heatingPumpHotWaterMode]) ? "inline" : "none";
     this.content.querySelector("#gHPStatusHeating").style.display = this.formatBinary(hass.states[this.config.heatingPumpHeatingMode]) ? "inline" : "none";
@@ -55,7 +45,7 @@ class HeatPumpCard extends HTMLElement {
 
 
     this.content.querySelector("#animationHPFan").setAttribute(
-      'to', (this.formatBinary(hass.states[this.config.hpRunning]) ? '360' : '0') + ' 225 485');
+      'to', (this.formatBinary(hass.states[this.config.hpRunning]) ? '360' : '0') + ' 190 485');
 
     this.content.querySelector("#animationCompressor").setAttribute(
       'to', (this.formatBinary(hass.states[this.config.compressorRunning]) ? '360' : '0') + ' 389 378');
@@ -112,30 +102,58 @@ class HeatPumpCard extends HTMLElement {
 
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
 
-  static readLocalization(lang) {
-    var translationJSONobj = HeatPumpCard.readLocalizationLang(lang);
-    if (!translationJSONobj) {
-      translationJSONobj = HeatPumpCard.readLocalizationLang("en");
-    }
-    return translationJSONobj;
-  }
-
-  static readLocalizationLang(lang) {
-    var translationLocal = HeatPumpCard.cardFolder + lang + ".json";
+  readLocalization(lang, hass) {
+    const translationLocal = HeatPumpCard.cardFolder + lang + ".json";
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", translationLocal, false);
+    rawFile.open("GET", translationLocal, true);
+    rawFile.onload = (e) => {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status == 200) {
+          HeatPumpCard.localization = JSON.parse(rawFile.responseText);
+          this.content.querySelector("#textTankWWName").innerHTML = HeatPumpCard.localization.svgTexts['tankWWName'];
+          this.content.querySelector("#textTankHPName").innerHTML = HeatPumpCard.localization.svgTexts['tankHPName'];
+          this.content.querySelector("#textEvaporator").innerHTML = HeatPumpCard.localization.svgTexts['evaporator'];
+          this.content.querySelector("#textCondenser").innerHTML = HeatPumpCard.localization.svgTexts['condenser'];
+          this.content.querySelector("#textCompressor").innerHTML = HeatPumpCard.localization.svgTexts['compressor'];
+          this.content.querySelector("#textExpansionValve").innerHTML = HeatPumpCard.localization.svgTexts['expansionValve'];
+          this.content.querySelector("#textCirculatingPump").innerHTML = HeatPumpCard.localization.svgTexts['circulatingPump'];
+          this.content.querySelector("#textHeatingCircuitPump").innerHTML = HeatPumpCard.localization.svgTexts['heatingCircuitPump'];
+          this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
+          this.querySelector("ha-card").setAttribute("header", HeatPumpCard.localization.header);
+          this.setLinks();
+        } else {
+          console.error("No localization for " + lang);
+        }
+        this.setValues(hass);
+      }
+    };
+    rawFile.onerror = (e) => {
+      console.error(rawFile.statusText);
+    };
     rawFile.send(null);
-    if (rawFile.status == 200) {
-      return JSON.parse(rawFile.responseText);
-    }
-    return null;
   }
 
-  static readSvg() {
-    var svgImage = HeatPumpCard.cardFolder + "heat-pump.svg";
+  readSvg(lang, handleSvg, hass) {
+    const svgImage = HeatPumpCard.cardFolder + "heat-pump.svg";
     var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", svgImage, false);
+    rawFile.open("GET", svgImage, true);
+    rawFile.onload = (e) => {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status == 200) {
+          this.innerHTML = '<ha-card header="Heating Pump">\n' + rawFile.responseText + '</ha-card>';
+          this.content = this.querySelector("svg");
+          this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
+          this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);
+          this.readLocalization(lang, hass);
+        } else {
+          alert("Can't read svg image " + rawFile.statusText);
+        }
+      }
+    };
+    rawFile.onerror = (e) => {
+      console.error(rawFile.statusText);
+    };
     rawFile.send(null);
     if (rawFile.status == 200) {
       return rawFile.responseText;
@@ -260,8 +278,6 @@ class HeatPumpCard extends HTMLElement {
   }
 
   static getConfigForm() {
-    const language = window.navigator.userLanguage || window.navigator.language;
-    const localization = HeatPumpCard.readLocalization(language.substring(0,2));
     // Define the form schema.
     const SCHEMA = [
       { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
@@ -351,7 +367,7 @@ class HeatPumpCard extends HTMLElement {
 
     // computeLabel returns a localized label for a schema item.
     const computeLabel = (schema, localize) => {
-      return localization.editor[schema.name];
+      return HeatPumpCard.localization.editor[schema.name];
     };
 
     return {
