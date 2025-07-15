@@ -17,8 +17,8 @@ Home Assistant dashboard card displaying heat pump parameters
 
 ### Alternative method:
 
-1. Download `lovelace-heat-pump-card.zip` file from the [Releases][releases] page
-2. Unzip and upload all stuff to `/www/community/lovelace-heat-pump-card` (via Samba, File Editor, SSH, etc.)
+1. Download `Source code` file from the [Releases][releases] page
+2. Unzip and upload all stuff out of dist folder to `/www/community/lovelace-heat-pump-card` (via Samba, File Editor, SSH, etc.)
 3. Visit the Resources page in your Home Assistant install and add `/hacsfiles/lovelace-heat-pump-card/heat-pump-card.js` as a
    JavaScript Module.
    [![Open your Home Assistant instance and show your dashboard resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_resources/)
@@ -66,7 +66,7 @@ Home Assistant dashboard card displaying heat pump parameters
 
 ### Example
 
-This are my settings for Viessmann Vitocal 350 with Vitotronic 200 heating pump, most stuff is provided by Vcontrol add-on (everything with `mosquitto_mqtt_broker` in the name),
+This are my settings for Viessmann Vitocal 350 heating pump with Vitotronic 200 controller, most stuff is provided by Vcontrol add-on (everything with `mosquitto_mqtt_broker` in the name),
 additional binary_sensors I've created as helper to translate the heat pump modes to universal values. Otherwise a translation for each different heat pump needed to be integrated.
 
 ```yaml
@@ -107,3 +107,8 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   linkSettings: /lovelace/hp-settings
 
 ```
+
+## Contribution
+
+Contributions are welcome! Submit pull requests or open issues for bugs, enhancements, or feature requests.
+For translations to unsupported languages, you can use [en.json](./blob/main/dist/heat-pump-card/en.json) as template.
