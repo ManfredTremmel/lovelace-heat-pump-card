@@ -43,19 +43,10 @@ class HeatPumpCard extends HTMLElement {
 
     this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass.states[this.config.supplyTemperature]);
 
-
-    this.content.querySelector("#animationHPFan").setAttribute(
-      'to', (this.formatBinary(hass.states[this.config.hpRunning]) ? '360' : '0') + ' 190 485');
-
-    this.content.querySelector("#animationCompressor").setAttribute(
-      'to', (this.formatBinary(hass.states[this.config.compressorRunning]) ? '360' : '0') + ' 389 378');
-
-    this.content.querySelector("#animationHeatingCircuitPumpBladeWheel").setAttribute(
-      'to', (this.formatBinary(hass.states[this.config.heatingCircuitPumpRunning]) ? '360' : '0') + ' 935 204');
-
-    this.content.querySelector("#animationCirculatingPumpBladeWheel").setAttribute(
-      'to', (this.formatBinary(hass.states[this.config.circulatingPumpRunning]) ? '360' : '0') + ' 935 504');
-
+    this.switchRotateAttribute("#animationHPFan", hass.states[this.config.hpRunning]);
+    this.switchRotateAttribute("#animationCompressor", hass.states[this.config.compressorRunning]);
+    this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass.states[this.config.heatingCircuitPumpRunning]);
+    this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass.states[this.config.circulatingPumpRunning]);
 
     const tankTempHPUpState = hass.states[this.config.tankTempHPUp];
     this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNum(tankTempHPUpState);
@@ -165,6 +156,14 @@ class HeatPumpCard extends HTMLElement {
     if (this.content && this.config) {
       this.content.querySelector("#linkDetails").setAttribute('href', this.config.linkDetails);
       this.content.querySelector("#linkSettings").setAttribute('href', this.config.linkSettings);
+    }
+  }
+
+  switchRotateAttribute(attributeName, state) {
+    if (this.formatBinary(state)) {
+      this.content.querySelector(attributeName).setAttribute('type', 'rotate');
+    } else {
+      this.content.querySelector(attributeName).removeAttribute('type');
     }
   }
 
