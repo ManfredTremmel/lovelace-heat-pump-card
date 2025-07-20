@@ -212,8 +212,10 @@
      <text id="textEvaporatorTemperature" x="290" y="515" xml:space="preserve">30,0 ℃</text>
      <text id="textCondenser" x="485" y="475" text-anchor="end" xml:space="preserve">Condenser</text>
      <text id="textCondenserPressure" x="480" y="495" text-anchor="end" xml:space="preserve">30,0 bar</text>
+     <text id="textCondenserTemperature" x="485" y="515" text-anchor="end" xml:space="preserve">30,0 ℃</text>
      <text id="textCompressor" x="390" y="423" text-anchor="middle" xml:space="preserve">Compressor</text>
-     <text id="textExpansionValve" x="390" y="570" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
+     <text id="textExpansionValve" x="390" y="555" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
+     <text id="textExpansionValveOpening" x="390" y="575" text-anchor="middle" xml:space="preserve">80 %</text>
     </g>
     <g id="gHPFan">
      <path id="pathHPFan" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z">

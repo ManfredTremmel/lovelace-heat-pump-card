@@ -39,6 +39,8 @@
     "evaporatorPressure": "Evaporator Pressure",
     "evaporatorTemperature": "Evaporator Temperature",
     "condenserPressure": "Condenser Pressure",
+    "condenserTemperature": "Condenser Temperature",
+    "expansionValveOpening": "Opening Expansion Valve",
     "wwHeatingValve": "Heating/Hot Water Valve",
     "heaterRodWW": "Heater Rod Hot Water On/Off",
     "heaterRodHP": "Heater Rod Heating On/Off",

@@ -78,6 +78,8 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass.states[this.config.evaporatorPressure]);
     this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass.states[this.config.evaporatorTemperature]);
     this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass.states[this.config.condenserPressure]);
+    this.content.querySelector("#textCondenserTemperature").innerHTML = this.formatNum(hass.states[this.config.condenserTemperature]);
+    this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass.states[this.config.expansionValveOpening]);
 
     this.content.querySelector("#gWWHeatingValve").setAttribute('transform',
       'rotate(' + (this.formatBinary(hass.states[this.config.wwHeatingValve]) ? '90' : '0') + ', 750, 357)');
@@ -306,6 +308,8 @@ class HeatPumpCard extends HTMLElement {
       { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
       { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
+      { name: "condenserTemperature", selector: { entity: {domain: ["sensor"]} } },
+      { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } },
       { name: "wwHeatingValve", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heaterRodWW", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },

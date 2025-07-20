@@ -39,6 +39,8 @@
     "evaporatorPressure": "Verdampingsdruk",
     "evaporatorTemperature": "Verdampingstemperatuur",
     "condenserPressure": "Condensatiedruk",
+    "condenserTemperature": "Condensatietemperatuur",
+    "expansionValveOpening": "Openen Expansieventiel",
     "wwHeatingValve": "Klep verwarming/warmwater",
     "heaterRodWW": "Verwarmingsselement warmwater Aan/Uit",
     "heaterRodHP": "Verwarmingsselement verwarming Aan/Uit",

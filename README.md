@@ -55,6 +55,8 @@ Home Assistant dashboard card displaying heat pump parameters
 | evaporatorPressure | object | optional | Evaporator Pressure
 | evaporatorTemperature | object | optional  | Evaporator Temperature
 | condenserPressure | object | optional | Condenser Pressure
+| condenserTemperature | object | optional | Condenser Temperature
+| expansionValveOpening | object | optional | Opening Expansion Valve
 | wwHeatingValve | object | **Required**  | Heating/Hot Water Valve
 | heaterRodWW | object | optional | Heater Rod Hot Water is active and displayed in the buffer tank
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
@@ -98,6 +100,8 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   evaporatorPressure: sensor.mosquitto_mqtt_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_mqtt_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_mqtt_broker_druck_im_kondensator
+  condenserTemperature: ""
+  expansionValveOpening: ""
   wwHeatingValve: binary_sensor.mosquitto_mqtt_broker_status_warmwasserventil
   heaterRodWW: switch.mosquitto_mqtt_broker_freigabe_elektroheizung_fuer_ww_bereitung
   heaterRodHP: switch.mosquitto_mqtt_broker_freigabe_heizen_mit_elektro

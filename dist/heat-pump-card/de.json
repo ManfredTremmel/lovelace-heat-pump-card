@@ -39,6 +39,8 @@
     "evaporatorPressure": "Druck im Verdampfer",
     "evaporatorTemperature": "Temperatur Verdampfer",
     "condenserPressure": "Druck im Kondensator/Verflüssiger",
+    "condenserTemperature": "Temperatur im Kondensator/Verflüssiger",
+    "expansionValveOpening": "Öffnung Entspannungsventil",
     "wwHeatingValve": "Ventil Heizen/Warmwasser",
     "heaterRodWW": "Heizstab Warmwasser An/Aus",
     "heaterRodHP": "Heizstab heizen An/Aus",
