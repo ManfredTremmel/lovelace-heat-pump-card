@@ -115,10 +115,12 @@ class HeatPumpCard extends HTMLElement {
           this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
           this.querySelector("ha-card").setAttribute("header", HeatPumpCard.localization.header);
           this.setLinks();
+          this.setValues(hass);
+        } else if (lang != "en") {
+          this.readLocalization("en", hass);
         } else {
           console.error("No localization for " + lang);
         }
-        this.setValues(hass);
       }
     };
     rawFile.onerror = (e) => {
