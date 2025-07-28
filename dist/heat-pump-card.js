@@ -13,84 +13,71 @@ class HeatPumpCard extends HTMLElement {
   }
 
   setValues(hass) {
-    this.content.querySelector("#gHPStatusOff").style.display = this.formatBinary(hass.states[this.config.heatingPumpStatusOnOff]) ? "none" : "inline";
-    this.content.querySelector("#gHPStatusWW").style.display = this.formatBinary(hass.states[this.config.heatingPumpHotWaterMode]) ? "inline" : "none";
-    this.content.querySelector("#gHPStatusHeating").style.display = this.formatBinary(hass.states[this.config.heatingPumpHeatingMode]) ? "inline" : "none";
-    this.content.querySelector("#gHPStatusCooling").style.display = this.formatBinary(hass.states[this.config.heatingPumpCoolingMode]) ? "inline" : "none";
+    this.content.querySelector("#gHPStatusOff").style.display = this.formatBinary(hass, this.config.heatingPumpStatusOnOff) ? "none" : "inline";
+    this.content.querySelector("#gHPStatusWW").style.display = this.formatBinary(hass, this.config.heatingPumpHotWaterMode) ? "inline" : "none";
+    this.content.querySelector("#gHPStatusHeating").style.display = this.formatBinary(hass, this.config.heatingPumpHeatingMode) ? "inline" : "none";
+    this.content.querySelector("#gHPStatusCooling").style.display = this.formatBinary(hass, this.config.heatingPumpCoolingMode) ? "inline" : "none";
 
-    const heatingPumpPartyModeBoolean = this.formatBinary(hass.states[this.config.heatingPumpPartyMode]);
-    this.content.querySelector("#gHPStatusParty").style.display = heatingPumpPartyModeBoolean ? "inline" : "none";
+    const heatingPumpPartyMode = this.formatBinary(hass, this.config.heatingPumpPartyMode);
+    this.content.querySelector("#gHPStatusParty").style.display = heatingPumpPartyMode ? "inline" : "none";
 
-    this.content.querySelector("#gHPStatusSave").style.display = this.formatBinary(hass.states[this.config.heatingPumpEnergySaveMode]) ? "inline" : "none";
+    this.content.querySelector("#gHPStatusSave").style.display = this.formatBinary(hass, this.config.heatingPumpEnergySaveMode) ? "inline" : "none";
 
-    const heatingPumpNightModeBoolean = this.formatBinary(hass.states[this.config.heatingPumpNightMode]);
-    this.content.querySelector("#gTimeSymbolNight").style.display = heatingPumpNightModeBoolean ? "inline" : "none";
-    this.content.querySelector("#gTimeSymbolDay").style.display = heatingPumpNightModeBoolean ? "none" : "inline";
+    const heatingPumpNightMode = this.formatBinary(hass, this.config.heatingPumpNightMode);
+    this.content.querySelector("#gTimeSymbolNight").style.display = heatingPumpNightMode ? "inline" : "none";
+    this.content.querySelector("#gTimeSymbolDay").style.display = heatingPumpNightMode ? "none" : "inline";
 
+    this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.outdoorTemperature);
 
-    this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass.states[this.config.outdoorTemperature]);
-
-    const ambientTemperatureNormalState = hass.states[this.config.ambientTemperatureNormal];
-    const ambientTemperatureReducedState = hass.states[this.config.ambientTemperatureReduced];
-    const ambientTemperaturePartyState = hass.states[this.config.ambientTemperatureParty];
-    if (heatingPumpPartyModeBoolean && ambientTemperaturePartyState) {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperaturePartyState);
-    } else if (heatingPumpNightModeBoolean && ambientTemperatureReducedState) {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperatureReducedState);
+    const ambientTemperatureReduced = this.formatNum(hass, this.config.ambientTemperatureReduced);
+    const ambientTemperatureParty = this.formatNum(hass, this.config.ambientTemperatureParty);
+    if (heatingPumpPartyMode && ambientTemperatureParty) {
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = ambientTemperatureParty;
+    } else if (heatingPumpNightMode && ambientTemperatureReduced) {
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = ambientTemperatureReduced;
     } else {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(ambientTemperatureNormalState);
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.ambientTemperatureNormal);
     }
 
-    this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass.states[this.config.supplyTemperature]);
+    this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass, this.config.supplyTemperature);
 
-    this.switchRotateAttribute("#animationHPFan", hass.states[this.config.hpRunning]);
-    this.switchRotateAttribute("#animationCompressor", hass.states[this.config.compressorRunning]);
-    this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass.states[this.config.heatingCircuitPumpRunning]);
-    this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass.states[this.config.circulatingPumpRunning]);
+    this.switchRotateAttribute("#animationHPFan", hass, this.config.hpRunning);
+    this.switchRotateAttribute("#animationCompressor", hass, this.config.compressorRunning);
+    this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass, this.config.heatingCircuitPumpRunning);
+    this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
 
-    const tankTempHPUpState = hass.states[this.config.tankTempHPUp];
-    this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNum(tankTempHPUpState);
+    const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
+    this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
+    const tankTempHPMiddle = this.readState(hass, this.config.tankTempHPMiddle);
+    this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNumValue(tankTempHPMiddle);
+    const tankTempHPDown = this.readState(hass, this.config.tankTempHPDown);
+    this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNumValue(tankTempHPDown);
+    this.tankColors(this.content, tankTempHPUp, tankTempHPMiddle, tankTempHPDown, "#stop3020", "#stop3040", "#stop3030");
 
-    const tankTempHPMiddleState = hass.states[this.config.tankTempHPMiddle];
-    this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNum(tankTempHPMiddleState);
+    const tankTempWWUp = this.readState(hass, this.config.tankTempWWUp);
+    this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNumValue(tankTempWWUp);
+    const tankTempWWMiddle = this.readState(hass, this.config.tankTempWWMiddle);
+    this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatNumValue(tankTempWWMiddle);
+    const tankTempWWDown = this.readState(hass, this.config.tankTempWWDown);
+    this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
+    this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
 
-    const tankTempHPDownState = hass.states[this.config.tankTempHPDown];
-    this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNum(tankTempHPDownState);
+    this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass, this.config.supplyTemperatureHeating);
+    this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass, this.config.refluxTemperatureHeating);
 
-    this.tankColors(this.content, tankTempHPUpState, tankTempHPMiddleState, tankTempHPDownState, "#stop3020", "#stop3040", "#stop3030");
+    this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass, this.config.evaporatorPressure);
+    this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass, this.config.evaporatorTemperature);
+    this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass, this.config.condenserPressure);
+    this.content.querySelector("#textCondenserTemperature").innerHTML = this.formatNum(hass, this.config.condenserTemperature);
+    this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass, this.config.expansionValveOpening);
 
+    this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 750, 357)');
 
-    const tankTempWWUpState = hass.states[this.config.tankTempWWUp];
-    this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNum(tankTempWWUpState);
+    const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
+    this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
+    this.content.querySelector("#pathHeaterRodHP").style.display =  this.formatBinary(hass, this.config.heaterRodHP) ? 'block' : 'none';
 
-    const tankTempWWMiddleState = hass.states[this.config.tankTempWWMiddle];
-    this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatNum(tankTempWWMiddleState);
-
-    const tankTempWWDownState = hass.states[this.config.tankTempWWDown];
-    this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNum(tankTempWWDownState);
-
-    this.tankColors(this.content, tankTempWWUpState, tankTempWWMiddleState, tankTempWWDownState, "#stop3050", "#stop3070", "#stop3060");
-
-
-    this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass.states[this.config.supplyTemperatureHeating]);
-    this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass.states[this.config.refluxTemperatureHeating]);
-
-    this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass.states[this.config.evaporatorPressure]);
-    this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass.states[this.config.evaporatorTemperature]);
-    this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass.states[this.config.condenserPressure]);
-    this.content.querySelector("#textCondenserTemperature").innerHTML = this.formatNum(hass.states[this.config.condenserTemperature]);
-    this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass.states[this.config.expansionValveOpening]);
-
-    this.content.querySelector("#gWWHeatingValve").setAttribute('transform',
-      'rotate(' + (this.formatBinary(hass.states[this.config.wwHeatingValve]) ? '90' : '0') + ', 750, 357)');
-
-
-    const heaterRodWWBoolean = this.formatBinary(hass.states[this.config.heaterRodWW]);
-    this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWWBoolean ? 'block' : 'none';
-    this.content.querySelector("#pathHeaterRodHP").style.display = this.formatBinary(hass.states[this.config.heaterRodHP]) ? 'block' : 'none';
-
-    this.heaterRodColor(this.content, heaterRodWWBoolean, this.formatBinary(hass.states[this.config.heaterRodLevel1]),
-                       this.formatBinary(hass.states[this.config.heaterRodLevel2]));
+    this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
   }
 
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
@@ -163,21 +150,34 @@ class HeatPumpCard extends HTMLElement {
     }
   }
 
-  switchRotateAttribute(attributeName, state) {
-    if (this.formatBinary(state)) {
+  switchRotateAttribute(attributeName, hass, state) {
+    if (this.formatBinary(hass, state)) {
       this.content.querySelector(attributeName).setAttribute('type', 'rotate');
     } else {
       this.content.querySelector(attributeName).removeAttribute('type');
     }
   }
 
-  formatBinary(state) {
-    return state && state.state  === "on";
+  readState(hass, config) {
+    if (config) {
+      return hass.states[config];
+    }
+    return null;
   }
 
-  formatNum(state) {
-    if (state) {
-      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(state.state) + " " + state.attributes.unit_of_measurement;
+  formatBinary(hass, state) {
+    const stateValue = this.readState(hass, state);
+    return stateValue && stateValue.state  === "on";
+  }
+
+  formatNum(hass, state) {
+    const stateValue = this.readState(hass, state);
+    return this.formatNumValue(stateValue);
+  }
+
+  formatNumValue(stateValue) {
+    if (stateValue) {
+      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(stateValue.state) + " " + stateValue.attributes.unit_of_measurement;
     }
     return null;
   }
