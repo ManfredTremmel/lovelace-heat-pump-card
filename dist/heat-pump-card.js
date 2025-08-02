@@ -123,7 +123,7 @@ class HeatPumpCard extends HTMLElement {
     rawFile.onload = (e) => {
       if (rawFile.readyState === 4) {
         if (rawFile.status == 200) {
-          this.innerHTML = '<ha-card header="Heating Pump">\n' + rawFile.responseText + '</ha-card>';
+          this.innerHTML = '<ha-card header="Heating Pump">\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "") + '</ha-card>';
           this.content = this.querySelector("svg");
           this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
           this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);

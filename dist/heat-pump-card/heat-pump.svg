@@ -1,8 +1,10 @@
 <svg id="svg802" version="1.1" viewBox="20 0 1000 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <style type="text/css"><![CDATA[
+     svg { --primary-text-color: #000000; background: #ffffff; }
+     @media (prefers-color-scheme: dark) { svg { --primary-text-color: #ffffff ; background: #000000;} }
       #layer1 {
-        fill: #000000;
-        stroke: #000000;
+        fill: var(--primary-text-color);
+        stroke: var(--primary-text-color);
       }
       text {
         font-style: normal;
@@ -12,7 +14,7 @@
         font-family: sans-serif;
         fill-opacity: 1;
         stroke: none;
-        fill: #000000;
+        fill: var(--primary-text-color);
       }
       #textTankTempWWDown,
       #textTankTempWWMiddle,
@@ -93,13 +95,13 @@
       #path1700,
       #path11096,
       #path11098 {
-        fill: #000000;
+        fill: var(--primary-text-color);
         fill-opacity: 1;
         fill-rule: evenodd;
         stroke: none;
       }
       #pathHPFan {
-        fill: #000000;
+        fill: var(--primary-text-color);
         fill-opacity: 0.3;
         stroke: none;
       }
@@ -120,44 +122,8 @@
       }
       #rectSettings,
       #rectHPChassis {
-        fill: #000000;
+        fill: var(--primary-text-color);
         fill-opacity: 0;
-      }
-      @media (prefers-color-scheme: dark) {
-        text {
-          fill: #ffffff;
-        }
-        #layer1 {
-          fill: #ffffff;
-          stroke: #ffffff;
-        }
-        #pathArrowCircleWWHeatingValve,
-        #pathHPModelCondenserSymbol,
-        #path11230,
-        #path11234,
-        #path11236,
-        #path11186,
-        #path11188,
-        #path11916,
-        #path11908,
-        #path11912,
-        #path10298,
-        #path10302,
-        #path10306,
-        #path10250,
-        #path10254,
-        #path10156,
-        #path10160,
-        #path1692,
-        #path1694,
-        #path1696,
-        #path1698,
-        #path1700,
-        #path11096,
-        #path11098,
-        #pathHPFan {
-          fill: #ffffff;
-        }
       }
     ]]></style>
  <defs id="defs799">
