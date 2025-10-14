@@ -220,13 +220,13 @@
    </g>
   </g>
   <g id="gPipe">
-   <path id="pathPipeToHP" d="m770 333v-40h36"/>
+   <path id="pathPipeToHP" d="m770 333v-38h36"/>
    <path id="pathTipeToWW" d="m770 380v215h36"/>
    <path id="pathPipeToWWHeatingValve" d="m540 487h85v-129h95"/>
    <path id="pathPipeSupplyWW" d="m935 528v25h57"/>
    <path id="pathPipeRefluxWW" d="m895 595h95"/>
    <path id="pathPipeToCirculatingPump" d="m895 440h40v40"/>
-   <path id="pathPipeToHeatingCircuitPump" d="m895 140h40v40"/>
+   <path id="pathPipeToHeatingCircuitPump" d="m895.5 295v-155h39.5v40"/>
    <path id="pathPipeSupplyHeating" d="m935 228v25h57"/>
    <path id="pathPipeRefluxHeating" d="m895 295h95"/>
    <text id="textSupplyTemperatureHeating" x="930" y="272" xml:space="preserve">30,0 ℃</text>

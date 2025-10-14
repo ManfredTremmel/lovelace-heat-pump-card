@@ -47,6 +47,8 @@ class HeatPumpCard extends HTMLElement {
     this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
 
     const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
+    this.content.querySelector("#gTankHP").style.display = tankTempHPUp ? 'inline' : 'none';
+    this.content.querySelector("#pathPipeToHP").setAttribute('d', tankTempHPUp ? 'm770 333v-38h36' : 'm770 333v-38h125');
     this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
     const tankTempHPMiddle = this.readState(hass, this.config.tankTempHPMiddle);
     this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNumValue(tankTempHPMiddle);
@@ -253,9 +255,6 @@ class HeatPumpCard extends HTMLElement {
       throw new Error("You need to define circulatingPumpRunning");
     }
 
-    if (!config.tankTempHPUp) {
-      throw new Error("You need to define tankTempHPUp");
-    }
     if (!config.tankTempWWUp) {
       throw new Error("You need to define tankTempWWUp");
     }
@@ -299,7 +298,7 @@ class HeatPumpCard extends HTMLElement {
       { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingCircuitPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "circulatingPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "tankTempHPUp", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWUp", required: true, selector: { entity: {domain: ["sensor"]} } },
@@ -349,9 +348,6 @@ class HeatPumpCard extends HTMLElement {
       }
       if (!config.circulatingPumpRunning || typeof config.circulatingPumpRunning !== "string") {
         throw new Error('Configuration error: "circulatingPumpRunning" must be a non-empty string.');
-      }
-      if (!config.tankTempHPUp || typeof config.tankTempHPUp !== "string") {
-        throw new Error('Configuration error: "tankTempHPUp" must be a non-empty string.');
       }
       if (!config.tankTempWWUp || typeof config.tankTempWWUp !== "string") {
         throw new Error('Configuration error: "tankTempWWUp" must be a non-empty string.');
