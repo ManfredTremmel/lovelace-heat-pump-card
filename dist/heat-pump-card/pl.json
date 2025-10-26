@@ -8,7 +8,7 @@
     "compressor": "Sprężarka",
     "expansionValve": "Zawór rozprężny",
     "circulatingPump": "P C",
-    "heatingCircuitPump": "P O",
+    "heatingCircuitPump": "HK P",
     "supplyTemperatureLabel": "Temperatura przepływu"
   },
   "editor": {
@@ -46,7 +46,7 @@
     "heaterRodHP": "Grzałka ogrzewania Wł./wył.",
     "heaterRodLevel1": "Grzałka 1 stopień Wł./wył.",
     "heaterRodLevel2": "Grzałka 2 stopień Wł./wył.",
-    "linkDetails": "Link Details",
-    "linkSettings": "Link Einstellungen"
+    "linkDetails": "łącze do szczegółów",
+    "linkSettings": "łącze do ustawień"
   }
 }
