@@ -43,26 +43,51 @@ class HeatPumpCard extends HTMLElement {
 
     this.switchRotateAttribute("#animationHPFan", hass, this.config.hpRunning);
     this.switchRotateAttribute("#animationCompressor", hass, this.config.compressorRunning);
-    this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass, this.config.heatingCircuitPumpRunning);
-    this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
+    if (this.config.heatingCircuitPumpRunning) {
+      this.content.querySelector("#gHeatingCircuitPump").style.display = 'inline';
+      this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass, this.config.heatingCircuitPumpRunning);
+    } else {
+      this.content.querySelector("#gHeatingCircuitPump").style.display = 'none';
+    }
+    if (this.config.circulatingPumpRunning) {
+      this.content.querySelector("#gCirculatingPump").style.display = 'inline';
+      this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
+    } else {
+      this.content.querySelector("#gCirculatingPump").style.display = 'none';
+    }
 
-    const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
-    this.content.querySelector("#gTankHP").style.display = tankTempHPUp ? 'inline' : 'none';
-    this.content.querySelector("#pathPipeToHP").setAttribute('d', tankTempHPUp ? 'm770 333v-38h36' : 'm770 333v-38h125');
-    this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
-    const tankTempHPMiddle = this.readState(hass, this.config.tankTempHPMiddle);
-    this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNumValue(tankTempHPMiddle);
-    const tankTempHPDown = this.readState(hass, this.config.tankTempHPDown);
-    this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNumValue(tankTempHPDown);
-    this.tankColors(this.content, tankTempHPUp, tankTempHPMiddle, tankTempHPDown, "#stop3020", "#stop3040", "#stop3030");
+    const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
 
-    const tankTempWWUp = this.readState(hass, this.config.tankTempWWUp);
-    this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNumValue(tankTempWWUp);
-    const tankTempWWMiddle = this.readState(hass, this.config.tankTempWWMiddle);
-    this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatNumValue(tankTempWWMiddle);
-    const tankTempWWDown = this.readState(hass, this.config.tankTempWWDown);
-    this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
-    this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
+    if (this.config.tankTempHPUp) {
+      const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
+      this.content.querySelector("#gTankHP").style.display = 'inline';
+      this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
+      const tankTempHPMiddle = this.readState(hass, this.config.tankTempHPMiddle);
+      this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNumValue(tankTempHPMiddle);
+      const tankTempHPDown = this.readState(hass, this.config.tankTempHPDown);
+      this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNumValue(tankTempHPDown);
+      this.tankColors(this.content, tankTempHPUp, tankTempHPMiddle, tankTempHPDown, "#stop3020", "#stop3040", "#stop3030");
+
+        this.content.querySelector("#pathHeaterRodHP").style.display =  this.formatBinary(hass, this.config.heaterRodHP) ? 'block' : 'none';
+    } else {
+      this.content.querySelector("#gTankHP").style.display = 'none';
+    }
+
+    if (this.config.tankTempWWUp) {
+      this.content.querySelector("#gWW").style.display = 'inline';
+      const tankTempWWUp = this.readState(hass, this.config.tankTempWWUp);
+      this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNumValue(tankTempWWUp);
+      const tankTempWWMiddle = this.readState(hass, this.config.tankTempWWMiddle);
+      this.content.querySelector("#textTankTempWWMiddle").innerHTML = this.formatNumValue(tankTempWWMiddle);
+      const tankTempWWDown = this.readState(hass, this.config.tankTempWWDown);
+      this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
+      this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
+
+      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 750, 357)');
+      this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
+    } else {
+      this.content.querySelector("#gWW").style.display = 'none';
+    }
 
     this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass, this.config.supplyTemperatureHeating);
     this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass, this.config.refluxTemperatureHeating);
@@ -72,12 +97,6 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass, this.config.condenserPressure);
     this.content.querySelector("#textCondenserTemperature").innerHTML = this.formatNum(hass, this.config.condenserTemperature);
     this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass, this.config.expansionValveOpening);
-
-    this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 750, 357)');
-
-    const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
-    this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
-    this.content.querySelector("#pathHeaterRodHP").style.display =  this.formatBinary(hass, this.config.heaterRodHP) ? 'block' : 'none';
 
     this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
   }
@@ -228,16 +247,10 @@ class HeatPumpCard extends HTMLElement {
     if (!config.heatingPumpStatusOnOff) {
       throw new Error("You need to define heatingPumpStatusOnOff");
     }
-    if (!config.heatingPumpHotWaterMode) {
-      throw new Error("You need to define heatingPumpHotWaterMode");
-    }
     if (!config.heatingPumpHeatingMode) {
       throw new Error("You need to define heatingPumpHeatingMode");
     }
 
-    if (!config.outdoorTemperature) {
-      throw new Error("You need to define outdoorTemperature");
-    }
     if (!config.ambientTemperatureNormal) {
       throw new Error("You need to define ambientTemperatureNormal");
     }
@@ -248,23 +261,9 @@ class HeatPumpCard extends HTMLElement {
     if (!config.compressorRunning) {
       throw new Error("You need to define compressorRunning");
     }
-    if (!config.heatingCircuitPumpRunning) {
-      throw new Error("You need to define heatingCircuitPumpRunning");
-    }
-    if (!config.circulatingPumpRunning) {
-      throw new Error("You need to define circulatingPumpRunning");
-    }
-
-    if (!config.tankTempWWUp) {
-      throw new Error("You need to define tankTempWWUp");
-    }
 
     if (!config.supplyTemperatureHeating) {
       throw new Error("You need to define supplyTemperatureHeating");
-    }
-
-    if (!config.wwHeatingValve) {
-      throw new Error("You need to define wwHeatingValve");
     }
 
     if (!config.linkDetails) {
@@ -283,25 +282,25 @@ class HeatPumpCard extends HTMLElement {
     // Define the form schema.
     const SCHEMA = [
       { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingPumpHotWaterMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpCoolingMode", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heatingPumpNightMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "outdoorTemperature", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "outdoorTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
       { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
       { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
       { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingCircuitPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "circulatingPumpRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempWWUp", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
       { name: "supplyTemperatureHeating", required: true, selector: { entity: {domain: ["sensor"]} } },
@@ -311,7 +310,7 @@ class HeatPumpCard extends HTMLElement {
       { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
       { name: "condenserTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } },
-      { name: "wwHeatingValve", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heaterRodWW", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heaterRodLevel1", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
@@ -325,14 +324,8 @@ class HeatPumpCard extends HTMLElement {
       if (!config.heatingPumpStatusOnOff || typeof config.heatingPumpStatusOnOff !== "string") {
         throw new Error('Configuration error: "heatingPumpStatusOnOff" must be a non-empty string.');
       }
-      if (!config.heatingPumpHotWaterMode || typeof config.heatingPumpHotWaterMode !== "string") {
-        throw new Error('Configuration error: "heatingPumpHotWaterMode" must be a non-empty string.');
-      }
       if (!config.heatingPumpHeatingMode || typeof config.heatingPumpHeatingMode !== "string") {
         throw new Error('Configuration error: "heatingPumpHeatingMode" must be a non-empty string.');
-      }
-      if (!config.outdoorTemperature || typeof config.outdoorTemperature !== "string") {
-        throw new Error('Configuration error: "outdoorTemperature" must be a non-empty string.');
       }
       if (!config.ambientTemperatureNormal || typeof config.ambientTemperatureNormal !== "string") {
         throw new Error('Configuration error: "ambientTemperatureNormal" must be a non-empty string.');
@@ -343,20 +336,8 @@ class HeatPumpCard extends HTMLElement {
       if (!config.compressorRunning || typeof config.compressorRunning !== "string") {
         throw new Error('Configuration error: "compressorRunning" must be a non-empty string.');
       }
-      if (!config.heatingCircuitPumpRunning || typeof config.heatingCircuitPumpRunning !== "string") {
-        throw new Error('Configuration error: "heatingCircuitPumpRunning" must be a non-empty string.');
-      }
-      if (!config.circulatingPumpRunning || typeof config.circulatingPumpRunning !== "string") {
-        throw new Error('Configuration error: "circulatingPumpRunning" must be a non-empty string.');
-      }
-      if (!config.tankTempWWUp || typeof config.tankTempWWUp !== "string") {
-        throw new Error('Configuration error: "tankTempWWUp" must be a non-empty string.');
-      }
       if (!config.supplyTemperatureHeating || typeof config.supplyTemperatureHeating !== "string") {
         throw new Error('Configuration error: "supplyTemperatureHeating" must be a non-empty string.');
-      }
-      if (!config.wwHeatingValve || typeof config.wwHeatingValve !== "string") {
-        throw new Error('Configuration error: "wwHeatingValve" must be a non-empty string.');
       }
       if (!config.linkDetails || typeof config.linkDetails !== "string") {
         throw new Error('Configuration error: "linkDetails" must be a non-empty string.');

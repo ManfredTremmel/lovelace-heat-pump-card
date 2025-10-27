@@ -29,25 +29,25 @@ Home Assistant dashboard card displaying heat pump parameters
 | Name | Type | Requirement | Description
 | ---- | ---- | ----------- | -----------
 | heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
-| heatingPumpHotWaterMode | object | **Required** | Hot Water Mode, when on, faucet symbol is displayed
+| heatingPumpHotWaterMode | object | optional | Hot Water Mode, when on, faucet symbol is displayed
 | heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
 | heatingPumpCoolingMode | object | optional | in Cooling Mode, the cooling symbol is displayed
 | heatingPumpPartyMode | object | optional | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
 | heatingPumpEnergySaveMode | object | optional | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
 | heatingPumpNightMode | object | optional | Night Mode switches between sun and moon symbol
-| outdoorTemperature | object | **Required** | Outdoor Temperature
+| outdoorTemperature | object | optional | Outdoor Temperature
 | ambientTemperatureNormal | object | **Required** | Ambient Temperature normal
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
 | ambientTemperatureParty | object | optional | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
 | supplyTemperature | object | optional | Supply Temperature
 | hpRunning | object | **Required** | when Primary Source is active, the fan animation is running
 | compressorRunning | object | **Required** | Binary sensor which detects if Compressor is running
-| heatingCircuitPumpRunning | object | **Required** | Binary sensor which detects if Heating Circuit Pump is running
-| circulatingPumpRunning | object | **Required** | Binary sensor which detects if Circulating Pump is running
+| heatingCircuitPumpRunning | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
+| circulatingPumpRunning | object | optional | Binary sensor which detects if Circulating Pump is running, if not defined, circulating pump is not displayed
 | tankTempHPUp | object | optional | Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, buffer tank is not displayed!
 | tankTempHPMiddle | object | optional | Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | tankTempHPDown | object | optional | Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
-| tankTempWWUp | object | **Required** | Hot Water Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃)
+| tankTempWWUp | object | optional | Hot Water Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, hot water path and tank is not displayed!
 | tankTempWWMiddle | object | optional | Hot Water Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | tankTempWWDown | object | optional | Hot Water Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | supplyTemperatureHeating | object | **Required**  | Supply Temperature Heating
@@ -57,7 +57,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | condenserPressure | object | optional | Condenser Pressure
 | condenserTemperature | object | optional | Condenser Temperature
 | expansionValveOpening | object | optional | Opening Expansion Valve
-| wwHeatingValve | object | **Required**  | Heating/Hot Water Valve
+| wwHeatingValve | object | optional  | Heating/Hot Water Valve
 | heaterRodWW | object | optional | Heater Rod Hot Water is active and displayed in the buffer tank
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
 | heaterRodLevel1 | object | optional | Heater Rod is using Level 1, color is set to orange

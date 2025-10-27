@@ -1,7 +1,7 @@
 <svg id="svg802" version="1.1" viewBox="20 0 1000 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <style type="text/css"><![CDATA[
-     svg { --primary-text-color: #000000; background: #ffffff; }
-     @media (prefers-color-scheme: dark) { svg { --primary-text-color: #ffffff ; background: #000000;} }
+     svg { --primary-text-color: #000000; --card-background-color: #ffffff; background: #ffffff; }
+     @media (prefers-color-scheme: dark) { svg { --primary-text-color: #ffffff; --card-background-color: #000000; background: #000000;} }
       #layer1 {
         fill: var(--primary-text-color);
         stroke: var(--primary-text-color);
@@ -48,16 +48,17 @@
       path,
       circle,
       rect {
-        fill: none;
         stroke-width: 1.88976;
         stroke-opacity: 1;
       }
       path,
       rect {
+        fill: none;
         stroke-linecap: butt;
         stroke-linejoin: miter;
       }
       circle {
+        fill: var(--card-background-color);
         stroke-linejoin: round;
         stroke-dasharray: none;
       }
@@ -125,6 +126,10 @@
         fill: var(--primary-text-color);
         fill-opacity: 0;
       }
+      #rectBlackBack {
+        stroke: none;
+        fill: var(--card-background-color);
+      }
     ]]></style>
  <defs id="defs799">
   <linearGradient id="linearGradient3028" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
@@ -139,30 +144,9 @@
   </linearGradient>
  </defs>
  <g id="layer1">
-  <g id="gTankWW">
-   <text id="textTankWWName" x="850" y="417" text-anchor="middle" xml:space="preserve">Hot Water</text>
-   <path id="pathTankWWHat" d="m805 424h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
-   <path id="pathTankWWChassis" d="m805.49 424v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
-   <text id="textTankTempWWDown" x="885" y="599" text-anchor="end" xml:space="preserve"/>
-   <text id="textTankTempWWMiddle" x="885" y="524" text-anchor="end" xml:space="preserve"/>
-   <text id="textTankTempWWUp" x="885" y="459" text-anchor="end" xml:space="preserve">31,5 ℃</text>
-   <path id="pathHeaterRodWW" d="m895 569h-40c-4.7507 0-5.0111-10 0-10h40"/>
-  </g>
-  <g id="gTankHP">
-   <text id="textTankHPName" x="850" y="113" text-anchor="middle" xml:space="preserve">Buffer</text>
-   <path id="pathTankHPHat" d="m805 120h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
-   <path id="pathTankHPChassis" d="m805.49 120v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
-   <text id="textTankTempHPDown" x="885" y="295" text-anchor="end" xml:space="preserve">21,5 ℃</text>
-   <text id="textTankTempHPMiddle" x="885" y="220" text-anchor="end" xml:space="preserve">26,5 ℃</text>
-   <text id="textTankTempHPUp" x="885" y="155" text-anchor="end" xml:space="preserve">31,5 ℃</text>
-   <path id="pathHeaterRodHP" d="m895 265h-40c-4.7507 0-5.0111-10 0-10h40"/>
-  </g>
-  <g id="gWWHeatingValve">
-   <circle id="pathCircleWWHeatingValve" cx="750" cy="357" r="30"/>
-   <path id="pathArrowCircleWWHeatingValve" d="m733 340h34v34"/>
-  </g>
   <a id="linkDetails" href="./hp-details">
    <g id="gHP">
+    <circle id="pathHPChassisFanHole" cx="191.1" cy="485" r="100"/>
     <g id="gHPModel">
      <g id="gCompressor">
       <path id="pathCompressor" d="m389 378c0.80221 0.80221-0.68559 1.4772-1.3333 1.3333-1.7554-0.38974-2.0376-2.6381-1.3333-4 1.2597-2.436 4.5308-2.7214 6.6667-1.3333 3.1346 2.0371 3.4256 6.449 1.3333 9.3333-2.7886 3.8443-8.3764 4.1384-12 1.3333-4.5599-3.5299-4.8556-10.308-1.3333-14.667 4.266-5.2787 12.242-5.5755 17.333-1.3333 5.9995 4.9992 6.297 14.178 1.3333 20-5.7307 6.7216-16.115 7.0195-22.667 1.3333-7.4446-6.461-7.7428-18.052-1.3333-25.333 7.1905-8.1683 19.99-8.4667 28-1.3333 8.8924 7.9194 9.191 21.929 1.3333 30.667"/>
@@ -188,28 +172,62 @@
       <animateTransform id="animationHPFan" attributeName="transform" attributeType="XML" dur="1s" from="0 190 485" repeatCount="indefinite" to="360 190 485" type="rotate"/>
      </path>
     </g>
-    <circle id="pathHPChassisFanHole" cx="191.1" cy="485" r="100"/>
     <rect id="rectHPChassis" x="65.353" y="350.35" width="474.29" height="274.29"/>
    </g>
   </a>
-  <g id="gCirculatingPump">
-   <text id="textCirculatingPump" x="935" y="475" text-anchor="middle" xml:space="preserve">C P</text>
-   <circle id="pathCirculatingPumpChassis" cx="935" cy="504" r="24"/>
-   <g id="gCirculatingPumpBladeWheel">
-    <g id="gCirculatingPumpBladeWheelInner">
-     <circle id="pathCirculatingPumpBladeWheelAxis" cx="935" cy="504" r="4"/>
-     <path id="pathCirculatingPumpBladeWheel" d="m935 500c-0.91667-7.5 3.6667-15.5 7-15"/>
-     <use transform="rotate(40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(120,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(160,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(200 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(240 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(-80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     <use transform="rotate(-40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-    </g>
-    <animateTransform id="animationCirculatingPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 935 504" repeatCount="indefinite" to="360 935 504" type="rotate"/>
+  <g id="gPipe">
+   <path id="pathPipeToWWHeatingValve" d="m540 487h85v-129h145"/>
+   <path id="pathPipeToHP" d="m770 358v-63h220"/>
+   <path id="pathPipeToHeatingCircuitPump" d="m895.5 295v-155h39.5v113h57"/>
+   <text id="textSupplyTemperatureHeating" x="930" y="272" xml:space="preserve">30,0 ℃</text>
+   <text id="textRefluxTemperatureHeating" x="930" y="315" xml:space="preserve">20,0 ℃</text>
+  </g>
+  <g id="gWW">
+   <path id="pathTipeToWW" d="m770 358v237h36"/>
+   <path id="pathPipeRefluxWW" d="m895 595h95"/>
+   <path id="pathPipeToCirculatingPump" d="m895 440h40v113h57"/>
+   <g id="gTankWW">
+    <text id="textTankWWName" x="850" y="417" text-anchor="middle" xml:space="preserve">Hot Water</text>
+    <path id="pathTankWWHat" d="m805 424h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
+    <path id="pathTankWWChassis" d="m805.49 424v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
+    <text id="textTankTempWWDown" x="885" y="599" text-anchor="end" xml:space="preserve"/>
+    <text id="textTankTempWWMiddle" x="885" y="524" text-anchor="end" xml:space="preserve"/>
+    <text id="textTankTempWWUp" x="885" y="459" text-anchor="end" xml:space="preserve">31,5 ℃</text>
+    <path id="pathHeaterRodWW" d="m895 569h-40c-4.7507 0-5.0111-10 0-10h40"/>
    </g>
+   <g id="gWWHeatingValve">
+    <circle id="pathCircleWWHeatingValve" cx="750" cy="357" r="30"/>
+    <path id="pathArrowCircleWWHeatingValve" d="m733 340h34v34"/>
+   </g>
+   <g id="gCirculatingPump">
+    <text id="textCirculatingPump" x="935" y="475" text-anchor="middle" xml:space="preserve">C P</text>
+    <circle id="pathCirculatingPumpChassis" cx="935" cy="504" r="24"/>
+    <g id="gCirculatingPumpBladeWheel">
+     <g id="gCirculatingPumpBladeWheelInner">
+      <circle id="pathCirculatingPumpBladeWheelAxis" cx="935" cy="504" r="4"/>
+      <path id="pathCirculatingPumpBladeWheel" d="m935 500c-0.91667-7.5 3.6667-15.5 7-15"/>
+      <use transform="rotate(40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(120,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(160,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(200 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(240 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(-80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+      <use transform="rotate(-40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
+     </g>
+     <animateTransform id="animationCirculatingPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 935 504" repeatCount="indefinite" to="360 935 504" type="rotate"/>
+    </g>
+   </g>
+  </g>
+  <g id="gTankHP">
+   <text id="textTankHPName" x="850" y="113" text-anchor="middle" xml:space="preserve">Buffer</text>
+   <path id="pathTankHPHat" d="m805 120h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
+   <rect id="rectBlackBack" x="805" y="290" width="90" height="10"/>
+   <path id="pathTankHPChassis" d="m805.49 120v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
+   <text id="textTankTempHPDown" x="885" y="295" text-anchor="end" xml:space="preserve">21,5 ℃</text>
+   <text id="textTankTempHPMiddle" x="885" y="220" text-anchor="end" xml:space="preserve">26,5 ℃</text>
+   <text id="textTankTempHPUp" x="885" y="155" text-anchor="end" xml:space="preserve">31,5 ℃</text>
+   <path id="pathHeaterRodHP" d="m895 265h-40c-4.7507 0-5.0111-10 0-10h40"/>
   </g>
   <g id="gHeatingCircuitPump">
    <text id="textHeatingCircuitPump" x="907" y="175" xml:space="preserve">HC P</text>
@@ -218,19 +236,6 @@
     <use transform="translate(0,-300)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
     <animateTransform id="animationHeatingCircuitPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 935 204" repeatCount="indefinite" to="360 935 204" type="rotate"/>
    </g>
-  </g>
-  <g id="gPipe">
-   <path id="pathPipeToHP" d="m770 333v-38h36"/>
-   <path id="pathTipeToWW" d="m770 380v215h36"/>
-   <path id="pathPipeToWWHeatingValve" d="m540 487h85v-129h95"/>
-   <path id="pathPipeSupplyWW" d="m935 528v25h57"/>
-   <path id="pathPipeRefluxWW" d="m895 595h95"/>
-   <path id="pathPipeToCirculatingPump" d="m895 440h40v40"/>
-   <path id="pathPipeToHeatingCircuitPump" d="m895.5 295v-155h39.5v40"/>
-   <path id="pathPipeSupplyHeating" d="m935 228v25h57"/>
-   <path id="pathPipeRefluxHeating" d="m895 295h95"/>
-   <text id="textSupplyTemperatureHeating" x="930" y="272" xml:space="preserve">30,0 ℃</text>
-   <text id="textRefluxTemperatureHeating" x="930" y="315" xml:space="preserve">20,0 ℃</text>
   </g>
   <a id="linkSettings" href="./hp-settings">
    <g id="gSettings">
