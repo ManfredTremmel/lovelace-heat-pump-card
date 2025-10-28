@@ -89,8 +89,17 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gWW").style.display = 'none';
     }
 
-    this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass, this.config.supplyTemperatureHeating);
-    this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass, this.config.refluxTemperatureHeating);
+    if (!this.config.supplyTemperatureHeating && !this.config.refluxTemperatureHeating) {
+      this.content.querySelector("#gPipe").style.display = 'none';
+      this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
+      this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
+    } else {
+      this.content.querySelector("#gPipe").style.display = 'inline';
+      this.content.querySelector("#gHP").removeAttribute("transform");
+      this.content.querySelector("#gSettings").removeAttribute("transform");
+      this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass, this.config.supplyTemperatureHeating);
+      this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass, this.config.refluxTemperatureHeating);
+    }
 
     this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass, this.config.evaporatorPressure);
     this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass, this.config.evaporatorTemperature);
@@ -262,10 +271,6 @@ class HeatPumpCard extends HTMLElement {
       throw new Error("You need to define compressorRunning");
     }
 
-    if (!config.supplyTemperatureHeating) {
-      throw new Error("You need to define supplyTemperatureHeating");
-    }
-
     if (!config.linkDetails) {
       throw new Error("You need to define linkDetails");
     }
@@ -303,7 +308,7 @@ class HeatPumpCard extends HTMLElement {
       { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
-      { name: "supplyTemperatureHeating", required: true, selector: { entity: {domain: ["sensor"]} } },
+      { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
       { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
       { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
       { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
@@ -335,9 +340,6 @@ class HeatPumpCard extends HTMLElement {
       }
       if (!config.compressorRunning || typeof config.compressorRunning !== "string") {
         throw new Error('Configuration error: "compressorRunning" must be a non-empty string.');
-      }
-      if (!config.supplyTemperatureHeating || typeof config.supplyTemperatureHeating !== "string") {
-        throw new Error('Configuration error: "supplyTemperatureHeating" must be a non-empty string.');
       }
       if (!config.linkDetails || typeof config.linkDetails !== "string") {
         throw new Error('Configuration error: "linkDetails" must be a non-empty string.');

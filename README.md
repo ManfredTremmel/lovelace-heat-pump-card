@@ -50,7 +50,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | tankTempWWUp | object | optional | Hot Water Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, hot water path and tank is not displayed!
 | tankTempWWMiddle | object | optional | Hot Water Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | tankTempWWDown | object | optional | Hot Water Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
-| supplyTemperatureHeating | object | **Required**  | Supply Temperature Heating
+| supplyTemperatureHeating | object | optional  | Supply Temperature Heating, when not defined heating pipe is not displayed
 | refluxTemperatureHeating | object | optional |  | Reflux Temperature Heating
 | evaporatorPressure | object | optional | Evaporator Pressure
 | evaporatorTemperature | object | optional  | Evaporator Temperature
