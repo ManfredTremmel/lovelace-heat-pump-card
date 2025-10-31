@@ -9,7 +9,7 @@
     "expansionValve": "Expansieventiel",
     "circulatingPump": "C P",
     "heatingCircuitPump": "HC P",
-    "supplyTemperatureLabel": "Berekende aanvoertemperatuur"
+    "supplyTemperatureLabel": "Aanvoertemperatuur"
   },
   "editor": {
     "heatingPumpStatusOnOff": "Warmtepomp Aan/Uit",
