@@ -113,7 +113,7 @@ class HeatPumpCard extends HTMLElement {
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
 
   readLocalization(lang, hass) {
-    const translationLocal = HeatPumpCard.cardFolder + lang + ".json";
+    const translationLocal = HeatPumpCard.cardFolder + lang + ".json?" + new Date().getTime();
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
     rawFile.open("GET", translationLocal, true);
@@ -147,7 +147,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   readSvg(lang, handleSvg, hass) {
-    const svgImage = HeatPumpCard.cardFolder + "heat-pump.svg";
+    const svgImage = HeatPumpCard.cardFolder + "heat-pump.svg?" + new Date().getTime();
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", svgImage, true);
     rawFile.onload = (e) => {
