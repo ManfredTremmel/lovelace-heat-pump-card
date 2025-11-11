@@ -89,7 +89,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gWW").style.display = 'none';
     }
 
-    if (!this.config.supplyTemperatureHeating && !this.config.refluxTemperatureHeating) {
+    if (!this.config.supplyTemperatureHeating && !this.config.refluxTemperatureHeating && !this.config.tankTempHPUp && !this.config.tankTempWWUp && !this.config.heatingCircuitPumpRunning && this.config.circulatingPumpRunning) {
       this.content.querySelector("#gPipe").style.display = 'none';
       this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
       this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
