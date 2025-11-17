@@ -27,6 +27,10 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#gTimeSymbolNight").style.display = heatingPumpNightMode ? "inline" : "none";
     this.content.querySelector("#gTimeSymbolDay").style.display = heatingPumpNightMode ? "none" : "inline";
 
+    this.content.querySelector("#gWarning").style.display = this.formatBinary(hass, this.config.warning) ? "inline" : "none";
+    this.content.querySelector("#gError").style.display = (this.formatBinary(hass, this.config.error) || this.formatBinary(hass, this.config.warning)) ? "inline" : "none";
+    this.content.querySelector("#gDefrost").style.display = this.formatBinary(hass, this.config.defrostMode) ? "inline" : "none";
+
     this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.outdoorTemperature);
 
     const ambientTemperatureReduced = this.formatNum(hass, this.config.ambientTemperatureReduced);
@@ -293,6 +297,9 @@ class HeatPumpCard extends HTMLElement {
       { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "heatingPumpNightMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "warning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+      { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "outdoorTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
       { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },

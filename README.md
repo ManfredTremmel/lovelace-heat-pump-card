@@ -35,6 +35,9 @@ Home Assistant dashboard card displaying heat pump parameters
 | heatingPumpPartyMode | object | optional | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
 | heatingPumpEnergySaveMode | object | optional | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
 | heatingPumpNightMode | object | optional | Night Mode switches between sun and moon symbol
+| warning | object | optional | A warning symbol is displayed, when result is on
+| error | object | optional | A error symbol is displayed, when result is on
+| defrostMode | object | optional | A defrost mode symbol is displayed, when result is on
 | outdoorTemperature | object | optional | Outdoor Temperature
 | ambientTemperatureNormal | object | **Required** | Ambient Temperature normal
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
