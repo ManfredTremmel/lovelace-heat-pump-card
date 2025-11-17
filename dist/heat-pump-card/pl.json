@@ -12,6 +12,7 @@
     "supplyTemperatureLabel": "Temperatura przepływu"
   },
   "editor": {
+    "title": "Tytuł",
     "heatingPumpStatusOnOff": "Wł./wył. pompy ciepła",
     "heatingPumpHotWaterMode": "Wł./wył. CWU",
     "heatingPumpHeatingMode": "Wł./wył. trybu ogrzewania",

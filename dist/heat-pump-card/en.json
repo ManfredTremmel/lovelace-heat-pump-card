@@ -12,6 +12,7 @@
     "supplyTemperatureLabel": "Supply Temperature"
   },
   "editor": {
+    "title": "Title",
     "heatingPumpStatusOnOff": "Heating Pump On/Off",
     "heatingPumpHotWaterMode": "Hot Water Mode On/Off",
     "heatingPumpHeatingMode": "Heating Mode On/Off",

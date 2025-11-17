@@ -134,7 +134,7 @@ class HeatPumpCard extends HTMLElement {
           this.content.querySelector("#textCirculatingPump").innerHTML = HeatPumpCard.localization.svgTexts['circulatingPump'];
           this.content.querySelector("#textHeatingCircuitPump").innerHTML = HeatPumpCard.localization.svgTexts['heatingCircuitPump'];
           this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
-          this.querySelector("ha-card").setAttribute("header", HeatPumpCard.localization.header);
+          this.querySelector("ha-card").setAttribute("header", this.config.title);
           this.setLinks();
           this.setValues(hass);
         } else if (lang != "en") {
@@ -157,7 +157,7 @@ class HeatPumpCard extends HTMLElement {
     rawFile.onload = (e) => {
       if (rawFile.readyState === 4) {
         if (rawFile.status == 200) {
-          this.innerHTML = '<ha-card header="Heating Pump">\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "") + '</ha-card>';
+          this.innerHTML = '<ha-card>\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "") + '</ha-card>';
           this.content = this.querySelector("svg");
           this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
           this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);
@@ -284,12 +284,16 @@ class HeatPumpCard extends HTMLElement {
     }
 
     this.config = config;
+    if (this.content) {
+      this.querySelector("ha-card").setAttribute("header", this.config.title);
+    }
     this.setLinks();
   }
 
   static getConfigForm() {
     // Define the form schema.
     const SCHEMA = [
+      { name: "title", selector: { text: {} } },
       { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },

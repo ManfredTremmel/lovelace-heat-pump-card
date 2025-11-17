@@ -12,6 +12,7 @@
     "supplyTemperatureLabel": "Vorlauftemperatur"
   },
   "editor": {
+    "title": "Titel",
     "heatingPumpStatusOnOff": "Wärmepumpe An/Aus",
     "heatingPumpHotWaterMode": "Warmwassermodus An/Aus",
     "heatingPumpHeatingMode": "Heizmodus An/Aus",

@@ -12,6 +12,7 @@
     "supplyTemperatureLabel": "Aanvoertemperatuur"
   },
   "editor": {
+    "title": "Titel",
     "heatingPumpStatusOnOff": "Warmtepomp Aan/Uit",
     "heatingPumpHotWaterMode": "Warmwatermodus Aan/Uit",
     "heatingPumpHeatingMode": "Verwarmingsmodus Aan/Uit",
