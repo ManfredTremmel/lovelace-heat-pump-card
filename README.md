@@ -28,6 +28,7 @@ Home Assistant dashboard card displaying heat pump parameters
 
 | Name | Type | Requirement | Description
 | ---- | ---- | ----------- | -----------
+| title | string | optional | Title of the card, if empty no title is displayed
 | heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
 | heatingPumpHotWaterMode | object | optional | Hot Water Mode, when on, faucet symbol is displayed
 | heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
@@ -76,6 +77,7 @@ additional binary_sensors I've created as helper to translate the heat pump mode
 
 ```yaml
 - type: custom:heat-pump-card
+  title: Wärmepumpe
   heatingPumpStatusOnOff: binary_sensor.heating_pump_status_on_off
   heatingPumpHotWaterMode: binary_sensor.heating_pump_hot_water_mode
   heatingPumpHeatingMode: binary_sensor.heating_pump_heating_mode
@@ -83,6 +85,9 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heatingPumpPartyMode: binary_sensor.heating_pump_party_mode
   heatingPumpEnergySaveMode: binary_sensor.heating_pump_energy_save_mode
   heatingPumpNightMode: binary_sensor.heating_pump_night_mode
+  warning: ""
+  error: ""
+  defrostMode: ""
   outdoorTemperature: sensor.mosquitto_broker_aussentemperatur
   ambientTemperatureNormal: number.mosquitto_broker_raumsolltemperatur_normal
   ambientTemperatureReduced: number.mosquitto_broker_raumsolltemperatur_reduziert
@@ -103,9 +108,9 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   evaporatorPressure: sensor.mosquitto_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_broker_druck_im_kondensator
-  wwHeatingValve: binary_sensor.mosquitto_broker_status_warmwasserventil
   condenserTemperature: ""
   expansionValveOpening: ""
+  wwHeatingValve: binary_sensor.mosquitto_broker_status_warmwasserventil
   heaterRodWW: switch.mosquitto_broker_freigabe_elektroheizung_fuer_ww_bereitung
   heaterRodHP: switch.mosquitto_broker_freigabe_heizen_mit_elektro
   heaterRodLevel1: binary_sensor.mosquitto_broker_status_heizstab_stufe_1
