@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg id="svg802" version="1.1" viewBox="20 0 1000 700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <style type="text/css"><![CDATA[
      svg { --primary-text-color: #000000; --card-background-color: #ffffff; background: #ffffff; }
@@ -25,9 +26,7 @@
         font-size: 21.3333px;
       }
       #textCirculatingPump,
-      #textHeatingCircuitPump,
-      #textSupplyTemperatureHeating,
-      #textRefluxTemperatureHeating {
+      #textHeatingCircuitPump {
         font-size: 18.6667px;
       }
       #textOutdoorTemperatureValue {
@@ -63,12 +62,12 @@
         stroke-dasharray: none;
       }
       #pathTankWWChassis {
-        fill: url(#linearGradient3032);
+        fill: url(#linearGradientTankWW);
         fill-opacity: 1;
         fill-rule: nonzero;
       }
       #pathTankHPChassis {
-        fill: url(#linearGradient3028);
+        fill: url(#linearGradientTankHP);
         fill-opacity: 1;
         fill-rule: nonzero;
       }
@@ -147,179 +146,303 @@
       #gDefrost {
         display: none;
       }
+      #pathUnderfloorHeating1,
+      #pathRadiatorPipeIn1,
+      #pathRadiatorPipeOut1 {
+        fill: none;
+        stroke: url(#linearGradientCircuit1);
+      }
+      #rectRadiator1 {
+        fill: url(#linearGradientCircuit1);
+        stroke: url(#linearGradientCircuit1);
+      }
+      #pathUnderfloorHeating2,
+      #pathRadiatorPipeIn2,
+      #pathRadiatorPipeOut2 {
+        fill: none;
+        stroke: url(#linearGradientCircuit2);
+      }
+      #rectRadiator2 {
+        fill: url(#linearGradientCircuit2);
+        stroke: url(#linearGradientCircuit2);
+      }
+      #pathUnderfloorHeating3,
+      #pathRadiatorPipeIn3,
+      #pathRadiatorPipeOut3 {
+        fill: none;
+        stroke: url(#linearGradientCircuit3);
+      }
+      #rectRadiator3 {
+        fill: url(#linearGradientCircuit3);
+        stroke: url(#linearGradientCircuit3);
+      }
     ]]></style>
- <defs id="defs799">
-  <linearGradient id="linearGradient3028" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
-   <stop id="stop3020" style="stop-color:#860079" offset="0"/>
-   <stop id="stop3040" style="stop-color:#71008e" offset=".5"/>
-   <stop id="stop3030" style="stop-color:#5b00a4" offset="1"/>
-  </linearGradient>
-  <linearGradient id="linearGradient3032" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
-   <stop id="stop3050" style="stop-color:#860079" offset="0"/>
-   <stop id="stop3070" style="stop-color:#71008e" offset=".5"/>
-   <stop id="stop3060" style="stop-color:#5b00a4" offset="1"/>
-  </linearGradient>
- </defs>
- <g id="layer1">
-  <a id="linkDetails" href="./hp-details">
-   <g id="gHP">
-    <circle id="pathHPChassisFanHole" cx="191.1" cy="485" r="100"/>
-    <g id="gHPModel">
-     <g id="gCompressor">
-      <path id="pathCompressor" d="m389 378c0.80221 0.80221-0.68559 1.4772-1.3333 1.3333-1.7554-0.38974-2.0376-2.6381-1.3333-4 1.2597-2.436 4.5308-2.7214 6.6667-1.3333 3.1346 2.0371 3.4256 6.449 1.3333 9.3333-2.7886 3.8443-8.3764 4.1384-12 1.3333-4.5599-3.5299-4.8556-10.308-1.3333-14.667 4.266-5.2787 12.242-5.5755 17.333-1.3333 5.9995 4.9992 6.297 14.178 1.3333 20-5.7307 6.7216-16.115 7.0195-22.667 1.3333-7.4446-6.461-7.7428-18.052-1.3333-25.333 7.1905-8.1683 19.99-8.4667 28-1.3333 8.8924 7.9194 9.191 21.929 1.3333 30.667"/>
-      <animateTransform id="animationCompressor" attributeName="transform" attributeType="XML" dur="1s" from="0 389 378" repeatCount="indefinite" to="360 389 378" type="rotate"/>
-     </g>
-     <path id="pathHPModelOuterCircle" d="m388.78 352.44a25 25 0 0 0-24.789 22.047 128 114.5 0 0 0-99.705 87.564 25 25 0 0 0-0.23047-6e-3 25 25 0 0 0-25 25 25 25 0 0 0 25 25 25 25 0 0 0 0.49023-0.0352 128 114.5 0 0 0 104.9 87.562v20.975l19.549-19.549a128 114.5 0 0 0 2e-3 0 128 114.5 0 0 0 0.8457-0.0547l19.602 19.604v-21.148a128 114.5 0 0 0 104.03-87.486 25 25 0 0 0 23.135-24.867 25 25 0 0 0-22.574-24.881 128 114.5 0 0 0-100.49-88.033 25 25 0 0 0-24.773-21.691z"/>
-     <path id="pathHPModelInnerCircle" d="m413.76 377.72a25 25 0 0 1-0.23438 3.2793 25 25 0 0 1-0.75977 3.4863 25 25 0 0 1-1.2461 3.3418 25 25 0 0 1-1.709 3.1309 25 25 0 0 1-2.1387 2.8555 25 25 0 0 1-2.5215 2.5215 25 25 0 0 1-2.8555 2.1387 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.2461 25 25 0 0 1-3.4844 0.75782 25 25 0 0 1-3.5586 0.25586 25 25 0 0 1-3.5586-0.25586 25 25 0 0 1-3.4844-0.75782 25 25 0 0 1-3.3418-1.2461 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1387 25 25 0 0 1-2.5234-2.5215 25 25 0 0 1-2.1367-2.8555 25 25 0 0 1-1.709-3.1309 25 25 0 0 1-1.2461-3.3418 25 25 0 0 1-0.75977-3.4863 25 25 0 0 1-0.20703-2.9062 125 111 0 0 0-96.488 84.18 25 25 0 0 1 0.38477 0.0469 25 25 0 0 1 1.209 0.20898 25 25 0 0 1 1.1973 0.26954 25 25 0 0 1 1.1836 0.32617 25 25 0 0 1 1.1641 0.38476 25 25 0 0 1 1.1445 0.44336 25 25 0 0 1 1.123 0.4961 25 25 0 0 1 1.0957 0.55273 25 25 0 0 1 1.0664 0.60352 25 25 0 0 1 1.0371 0.65625 25 25 0 0 1 1.0039 0.70703 25 25 0 0 1 0.96679 0.75586 25 25 0 0 1 0.92969 0.80078 25 25 0 0 1 0.88867 0.8457 25 25 0 0 1 0.8457 0.88867 25 25 0 0 1 0.80079 0.92969 25 25 0 0 1 0.75586 0.9668 25 25 0 0 1 0.70703 1.0039 25 25 0 0 1 0.65625 1.0371 25 25 0 0 1 0.60547 1.0664 25 25 0 0 1 0.55078 1.0957 25 25 0 0 1 0.49804 1.123 25 25 0 0 1 0.44141 1.1445 25 25 0 0 1 0.38477 1.166 25 25 0 0 1 0.32617 1.1816 25 25 0 0 1 0.26953 1.1973 25 25 0 0 1 0.20898 1.209 25 25 0 0 1 0.15039 1.2188 25 25 0 0 1 0.0899 1.2226 25 25 0 0 1 0.0312 1.2266 25 25 0 0 1-0.25391 3.5586 25 25 0 0 1-0.75976 3.4844 25 25 0 0 1-1.2461 3.3438 25 25 0 0 1-1.709 3.1289 25 25 0 0 1-2.1367 2.8555 25 25 0 0 1-2.5234 2.5234 25 25 0 0 1-2.8555 2.1367 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.248 25 25 0 0 1-3.4844 0.75781 25 25 0 0 1-0.0156 2e-3 125 111 0 0 0 101.85 84.15v-15.396l16.779 16.779a125 111 0 0 0 2.7715 0.17181 125 111 0 0 0 3.7285-0.23047l16.719-16.721v15.232a125 111 0 0 0 100.91-83.824 25 25 0 0 1-2.3047-0.16406 25 25 0 0 1-3.4863-0.75781 25 25 0 0 1-3.3418-1.248 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1367 25 25 0 0 1-2.5215-2.5234 25 25 0 0 1-2.1387-2.8555 25 25 0 0 1-1.709-3.1289 25 25 0 0 1-1.2461-3.3438 25 25 0 0 1-0.75781-3.4844 25 25 0 0 1-0.25586-3.5586 25 25 0 0 1 0.25586-3.5566 25 25 0 0 1 0.75781-3.4863 25 25 0 0 1 1.2461-3.3418 25 25 0 0 1 1.709-3.1309 25 25 0 0 1 2.1387-2.8555 25 25 0 0 1 2.5215-2.5215 25 25 0 0 1 2.8555-2.1387 25 25 0 0 1 3.1309-1.709 25 25 0 0 1 3.3418-1.2461 25 25 0 0 1 3.4863-0.75977 25 25 0 0 1 2.6016-0.18555 125 111 0 0 0-96.898-84.396z"/>
-     <path id="pathHPModelEvaporatorSymbol001" d="m256 510c14-15-15-30 0-45"/>
-     <path id="pathHPModelEvaporatorSymbol002" d="m269.95 510c14-15-15-30 0-45"/>
-     <path id="pathHPModelCondenserSymbol" d="m512 469c-1.6667 13.333-7.3333 12.667-10 24-2.6667 13 22.667 11.333 20 0-2-10.333-7.3333-10.667-10-24z"/>
-     <text id="textEvaporator" x="290" y="475" xml:space="preserve">Evaporator</text>
-     <text id="textEvaporatorPressure" x="295" y="495" xml:space="preserve">20,0 bar</text>
-     <text id="textEvaporatorTemperature" x="290" y="515" xml:space="preserve">30,0 ℃</text>
-     <text id="textCondenser" x="485" y="475" text-anchor="end" xml:space="preserve">Condenser</text>
-     <text id="textCondenserPressure" x="480" y="495" text-anchor="end" xml:space="preserve">30,0 bar</text>
-     <text id="textCondenserTemperature" x="485" y="515" text-anchor="end" xml:space="preserve">30,0 ℃</text>
-     <text id="textCompressor" x="390" y="423" text-anchor="middle" xml:space="preserve">Compressor</text>
-     <text id="textExpansionValve" x="390" y="555" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
-     <text id="textExpansionValveOpening" x="390" y="575" text-anchor="middle" xml:space="preserve">80 %</text>
+  <defs id="defs799">
+    <marker style="overflow:visible" id="Triangle" refX="0" refY="0" orient="auto-start-reverse" markerWidth="1" markerHeight="1" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid">
+      <path transform="scale(0.5)" style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt" d="M 5.77,0 -2.88,5 V -5 Z" id="path135" />
+    </marker>
+    <linearGradient id="linearGradientTankHP" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
+      <stop id="stop3020" style="stop-color:#860079" offset="0" />
+      <stop id="stop3040" style="stop-color:#71008e" offset=".5" />
+      <stop id="stop3030" style="stop-color:#5b00a4" offset="1" />
+    </linearGradient>
+    <linearGradient id="linearGradientTankWW" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
+      <stop id="stop3050" style="stop-color:#860079" offset="0" />
+      <stop id="stop3070" style="stop-color:#71008e" offset=".5" />
+      <stop id="stop3060" style="stop-color:#5b00a4" offset="1" />
+    </linearGradient>
+    <linearGradient id="linearGradientCircuit1" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit1" style="stop-color:#800080" offset="0" />
+      <stop id="stopCircuit2" style="stop-color:#5500aa" offset="1" />
+    </linearGradient>
+    <linearGradient id="linearGradientCircuit2" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit3" style="stop-color:#800080" offset="0" />
+      <stop id="stopCircuit4" style="stop-color:#5500aa" offset="1" />
+    </linearGradient>
+    <linearGradient id="linearGradientCircuit3" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit5" style="stop-color:#800080" offset="0" />
+      <stop id="stopCircuit6" style="stop-color:#5500aa" offset="1" />
+    </linearGradient>
+  </defs>
+  <g id="layer1">
+    <a id="linkDetails" href="hp-details">
+      <g id="gHP">
+        <g id="gHPFan">
+          <circle id="pathHPChassisFanHole" cx="190" cy="485" r="100" />
+          <path id="pathHPFan" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z">
+            <animateTransform id="animationHPFan" attributeName="transform" attributeType="XML" dur="1s" from="0 190 485" repeatCount="indefinite" to="360 190 485" type="rotate" />
+          </path>
+        </g>
+        <g id="gHPW2W" style="display: none;">
+          <text id="textW2WWaterTempIn" x="100" y="480" xml:space="preserve">14,0 ℃</text>
+          <text id="textW2WWaterTempOut" x="225" y="480" xml:space="preserve" text-anchor="end">10,0 ℃</text>
+          <path id="pathW2WFlow" style="marker-end:url(#Triangle)" d="m 100,510 v -75 h 130 v 75" />
+          <path id="pathWater1" d="m 74,560 c 0,0 23,-12 35,-12 12,0 23,12 35,12 12,0 23,-12 35,-12 12,0 23,12 35,12 12,0 35,-13 35,-13" />
+          <use id="useWater2" transform="translate(0,20)" xlink:href="#pathWater1" />
+          <rect id="rectSuckWell" width="20" height="90" x="90" y="510" />
+          <rect id="rectInjectionWell" width="20" height="90" x="220" y="510" />
+          <use transform="translate(-620,-69)" xlink:href="#pathCirculatingPumpChassis" id="useHPW2WPumpChassis" />
+          <g id="gHPW2WPumpBladeWheel">
+            <use id="useHPW2WPumpBladeWheelInner" transform="translate(-620,-69)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+            <animateTransform id="animationHPW2WPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 165 435" repeatCount="indefinite" to="360 165 435" type="rotate" />
+          </g>
+        </g>
+        <g id="gHPG2W" style="display: none;">
+          <text id="textG2WWaterTempIn" x="150" y="480" xml:space="preserve" text-anchor="end">14,0 ℃</text>
+          <text id="textG2WWaterTempOut" x="172" y="480" xml:space="preserve">10,0 ℃</text>
+          <path id="pathG2WFlow" style="marker-end:url(#Triangle)" d="m 160,610 v -175 h 10 v 175" />
+          <path id="pathGround" d="m 74,560 h 200" />
+          <use id="useHPG2WPumpChassis" transform="translate(-620,-69)" xlink:href="#pathCirculatingPumpChassis" />
+          <g id="gHPG2WPumpBladeWheel">
+            <use id="useHPG2WPumpBladeWheelInner" transform="translate(-620,-69)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+            <animateTransform id="animationHPG2WPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 165 435" repeatCount="indefinite" to="360 165 435" type="rotate" />
+          </g>
+        </g>
+        <g id="gHPModel">
+          <g id="gCompressor">
+            <path id="pathCompressor" d="m389 378c0.80221 0.80221-0.68559 1.4772-1.3333 1.3333-1.7554-0.38974-2.0376-2.6381-1.3333-4 1.2597-2.436 4.5308-2.7214 6.6667-1.3333 3.1346 2.0371 3.4256 6.449 1.3333 9.3333-2.7886 3.8443-8.3764 4.1384-12 1.3333-4.5599-3.5299-4.8556-10.308-1.3333-14.667 4.266-5.2787 12.242-5.5755 17.333-1.3333 5.9995 4.9992 6.297 14.178 1.3333 20-5.7307 6.7216-16.115 7.0195-22.667 1.3333-7.4446-6.461-7.7428-18.052-1.3333-25.333 7.1905-8.1683 19.99-8.4667 28-1.3333 8.8924 7.9194 9.191 21.929 1.3333 30.667" />
+            <animateTransform id="animationCompressor" attributeName="transform" attributeType="XML" dur="1s" from="0 389 378" repeatCount="indefinite" to="360 389 378" type="rotate" />
+          </g>
+          <path id="pathHPModelOuterCircle" d="m388.78 352.44a25 25 0 0 0-24.789 22.047 128 114.5 0 0 0-99.705 87.564 25 25 0 0 0-0.23047-6e-3 25 25 0 0 0-25 25 25 25 0 0 0 25 25 25 25 0 0 0 0.49023-0.0352 128 114.5 0 0 0 104.9 87.562v20.975l19.549-19.549a128 114.5 0 0 0 2e-3 0 128 114.5 0 0 0 0.8457-0.0547l19.602 19.604v-21.148a128 114.5 0 0 0 104.03-87.486 25 25 0 0 0 23.135-24.867 25 25 0 0 0-22.574-24.881 128 114.5 0 0 0-100.49-88.033 25 25 0 0 0-24.773-21.691z" />
+          <path id="pathHPModelInnerCircle" d="m413.76 377.72a25 25 0 0 1-0.23438 3.2793 25 25 0 0 1-0.75977 3.4863 25 25 0 0 1-1.2461 3.3418 25 25 0 0 1-1.709 3.1309 25 25 0 0 1-2.1387 2.8555 25 25 0 0 1-2.5215 2.5215 25 25 0 0 1-2.8555 2.1387 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.2461 25 25 0 0 1-3.4844 0.75782 25 25 0 0 1-3.5586 0.25586 25 25 0 0 1-3.5586-0.25586 25 25 0 0 1-3.4844-0.75782 25 25 0 0 1-3.3418-1.2461 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1387 25 25 0 0 1-2.5234-2.5215 25 25 0 0 1-2.1367-2.8555 25 25 0 0 1-1.709-3.1309 25 25 0 0 1-1.2461-3.3418 25 25 0 0 1-0.75977-3.4863 25 25 0 0 1-0.20703-2.9062 125 111 0 0 0-96.488 84.18 25 25 0 0 1 0.38477 0.0469 25 25 0 0 1 1.209 0.20898 25 25 0 0 1 1.1973 0.26954 25 25 0 0 1 1.1836 0.32617 25 25 0 0 1 1.1641 0.38476 25 25 0 0 1 1.1445 0.44336 25 25 0 0 1 1.123 0.4961 25 25 0 0 1 1.0957 0.55273 25 25 0 0 1 1.0664 0.60352 25 25 0 0 1 1.0371 0.65625 25 25 0 0 1 1.0039 0.70703 25 25 0 0 1 0.96679 0.75586 25 25 0 0 1 0.92969 0.80078 25 25 0 0 1 0.88867 0.8457 25 25 0 0 1 0.8457 0.88867 25 25 0 0 1 0.80079 0.92969 25 25 0 0 1 0.75586 0.9668 25 25 0 0 1 0.70703 1.0039 25 25 0 0 1 0.65625 1.0371 25 25 0 0 1 0.60547 1.0664 25 25 0 0 1 0.55078 1.0957 25 25 0 0 1 0.49804 1.123 25 25 0 0 1 0.44141 1.1445 25 25 0 0 1 0.38477 1.166 25 25 0 0 1 0.32617 1.1816 25 25 0 0 1 0.26953 1.1973 25 25 0 0 1 0.20898 1.209 25 25 0 0 1 0.15039 1.2188 25 25 0 0 1 0.0899 1.2226 25 25 0 0 1 0.0312 1.2266 25 25 0 0 1-0.25391 3.5586 25 25 0 0 1-0.75976 3.4844 25 25 0 0 1-1.2461 3.3438 25 25 0 0 1-1.709 3.1289 25 25 0 0 1-2.1367 2.8555 25 25 0 0 1-2.5234 2.5234 25 25 0 0 1-2.8555 2.1367 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.248 25 25 0 0 1-3.4844 0.75781 25 25 0 0 1-0.0156 2e-3 125 111 0 0 0 101.85 84.15v-15.396l16.779 16.779a125 111 0 0 0 2.7715 0.17181 125 111 0 0 0 3.7285-0.23047l16.719-16.721v15.232a125 111 0 0 0 100.91-83.824 25 25 0 0 1-2.3047-0.16406 25 25 0 0 1-3.4863-0.75781 25 25 0 0 1-3.3418-1.248 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1367 25 25 0 0 1-2.5215-2.5234 25 25 0 0 1-2.1387-2.8555 25 25 0 0 1-1.709-3.1289 25 25 0 0 1-1.2461-3.3438 25 25 0 0 1-0.75781-3.4844 25 25 0 0 1-0.25586-3.5586 25 25 0 0 1 0.25586-3.5566 25 25 0 0 1 0.75781-3.4863 25 25 0 0 1 1.2461-3.3418 25 25 0 0 1 1.709-3.1309 25 25 0 0 1 2.1387-2.8555 25 25 0 0 1 2.5215-2.5215 25 25 0 0 1 2.8555-2.1387 25 25 0 0 1 3.1309-1.709 25 25 0 0 1 3.3418-1.2461 25 25 0 0 1 3.4863-0.75977 25 25 0 0 1 2.6016-0.18555 125 111 0 0 0-96.898-84.396z" />
+          <path id="pathHPModelEvaporatorSymbol001" d="m256 510c14-15-15-30 0-45" />
+          <path id="pathHPModelEvaporatorSymbol002" d="m269.95 510c14-15-15-30 0-45" />
+          <path id="pathHPModelCondenserSymbol" d="m512 469c-1.6667 13.333-7.3333 12.667-10 24-2.6667 13 22.667 11.333 20 0-2-10.333-7.3333-10.667-10-24z" />
+          <text id="textEvaporator" x="290" y="475" xml:space="preserve">Evaporator</text>
+          <text id="textEvaporatorPressure" x="295" y="495" xml:space="preserve">20,0 bar</text>
+          <text id="textEvaporatorTemperature" x="290" y="515" xml:space="preserve">30,0 ℃</text>
+          <text id="textCondenser" x="485" y="475" text-anchor="end" xml:space="preserve">Condenser</text>
+          <text id="textCondenserPressure" x="480" y="495" text-anchor="end" xml:space="preserve">30,0 bar</text>
+          <text id="textCondenserTemperature" x="485" y="515" text-anchor="end" xml:space="preserve">30,0 ℃</text>
+          <text id="textCompressor" x="390" y="423" text-anchor="middle" xml:space="preserve">Compressor</text>
+          <text id="textExpansionValve" x="390" y="555" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
+          <text id="textExpansionValveOpening" x="390" y="575" text-anchor="middle" xml:space="preserve">80 %</text>
+        </g>
+        <rect id="rectHPChassis" x="65.353" y="350.35" width="474.29" height="274.29" />
+      </g>
+    </a>
+    <g id="gPipe">
+      <path id="pathPipeToWWHeatingValve" d="m 540 487 h 30" />
     </g>
-    <g id="gHPFan">
-     <path id="pathHPFan" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z">
-      <animateTransform id="animationHPFan" attributeName="transform" attributeType="XML" dur="1s" from="0 190 485" repeatCount="indefinite" to="360 190 485" type="rotate"/>
-     </path>
+    <g id="gHeaterCircuit1">
+      <path id="pathPipeToHP" d="m 620 488 v -193 h 377 v -179" />
+      <g id="gHeaterCircuitFloor1" style="display: none;">
+        <path id="pathFloor1" d="m 850,75 75,0 15,50 -105,0 z" />
+        <path id="pathUnderfloorHeating1" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+      </g>
+      <g id="radiator1">
+        <path id="pathRadiatorPipeIn1" d="m 795,82 h 43" />
+        <path id="rectRadiator1" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
+        <path id="pathRadiatorPipeOut1" d="m 937,115 h 61" />
+      </g>
+      <path id="pathPipeToHeatingCircuitPump" d="m 745.5 295 v -155 h 39.5 v -20" />
+      <text id="textSupplyTemperatureHeating" x="800" y="73" xml:space="preserve">30,0 ℃</text>
+      <text id="textRefluxTemperatureHeating" x="940" y="110" xml:space="preserve">20,0 ℃</text>
+      <g id="gHeatingCircuitPump">
+        <use id="useHeatingPumpChassis" transform="translate(0,-400)" xlink:href="#pathCirculatingPumpChassis" />
+        <g id="gHeatingCircuitPumpBladeWheel">
+          <use id="useHeatingPumpBladeWheelInner" transform="translate(0,-400)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+          <animateTransform id="animationHeatingCircuitPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 785 104" repeatCount="indefinite" to="360 785 104" type="rotate" />
+        </g>
+      </g>
     </g>
-    <rect id="rectHPChassis" x="65.353" y="350.35" width="474.29" height="274.29"/>
-   </g>
-  </a>
-  <g id="gPipe">
-   <path id="pathPipeToWWHeatingValve" d="m540 487h85v-129h145"/>
-   <path id="pathPipeToHP" d="m770 358v-63h220"/>
-   <path id="pathPipeToHeatingCircuitPump" d="m895.5 295v-155h39.5v113h57"/>
-   <text id="textSupplyTemperatureHeating" x="930" y="272" xml:space="preserve">30,0 ℃</text>
-   <text id="textRefluxTemperatureHeating" x="930" y="315" xml:space="preserve">20,0 ℃</text>
+    <g id="gHeaterCircuit3">
+      <g id="gHeaterCircuitFloor3" style="display: none;">
+        <path id="pathFloor3" d="m 850,225 75,0 15,50 -105,0 z" />
+        <path id="pathUnderfloorHeating1" transform="translate(0,150)" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+      </g>
+      <g id="radiator3">
+        <path id="pathRadiatorPipeIn3" d="m 795,232 h 43" />
+        <path id="rectRadiator3" transform="translate(0,150)" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
+        <path id="pathRadiatorPipeOut3" d="m 937,265 h 61" />
+      </g>
+      <path id="pathPipeToHeatingCircuitPump3" d="m 785 140 v 95" />
+      <text id="textSupplyTemperatureHeating3" x="800" y="223" xml:space="preserve">30,0 ℃</text>
+      <text id="textRefluxTemperatureHeating3" x="940" y="260" xml:space="preserve">20,0 ℃</text>
+      <g id="gHeatingCircuitPump3">
+        <use id="useHeatingPumpChassis3" transform="translate(0,-250)" xlink:href="#pathCirculatingPumpChassis" />
+        <g id="gHeatingCircuitPumpBladeWheel3">
+          <use id="useHeatingPumpBladeWheelInner3" transform="translate(0,-250)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
+          <animateTransform id="animationHeatingCircuitPumpBladeWheel3" attributeName="transform" attributeType="XML" dur="1s" from="0 785 254" repeatCount="indefinite" to="360 785 254" type="rotate" />
+        </g>
+      </g>
+    </g>
+    <g id="gHeaterCircuit2">
+      <g id="gHeaterCircuitFloor2" style="display: none;">
+        <path id="pathFloor2" d="m 850,150 75,0 15,50 -105,0 z" />
+        <path id="pathUnderfloorHeating2" transform="translate(0,75)" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+      </g>
+      <g id="radiator2">
+        <path id="pathRadiatorPipeIn2" d="m 795,157 h 43" />
+        <path id="rectRadiator2" transform="translate(0,75)" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
+        <path id="pathRadiatorPipeOut2" d="m 937,190 h 61" />
+      </g>
+      <path id="pathPipeToHeatingCircuitPump2" d="m 785 140 v 20" />
+      <text id="textSupplyTemperatureHeating2" x="800" y="148" xml:space="preserve">30,0 ℃</text>
+      <text id="textRefluxTemperatureHeating2" x="940" y="185" xml:space="preserve">20,0 ℃</text>
+      <g id="gHeatingCircuitPump2">
+        <use id="useHeatingPumpChassis2" transform="translate(0,-325)" xlink:href="#pathCirculatingPumpChassis" />
+        <g id="gHeatingCircuitPumpBladeWheel2">
+          <use id="useHeatingPumpBladeWheelInner2" transform="translate(0,-325)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+          <animateTransform id="animationHeatingCircuitPumpBladeWheel2" attributeName="transform" attributeType="XML" dur="1s" from="0 785 179" repeatCount="indefinite" to="360 785 179" type="rotate" />
+        </g>
+      </g>
+    </g>
+    <g id="gTankHP">
+      <text id="textTankHPName" x="700" y="113" text-anchor="middle" xml:space="preserve">Buffer</text>
+      <path id="pathTankHPHat" d="m 655 120 h -5 v -20 c 4.8894-4.1274 97.176-5.3285 100 0 v 20 h -5 c -4.2274-3.9461-87.404-2.7745-90 0 z" />
+      <rect id="rectBlackBack" x="655" y="290" width="90" height="10" />
+      <path id="pathTankHPChassis" d="m 655.5 120 v 196.5 c 9.824 3.5258 80.194 4.4873 90.018 0 v -196.5" />
+      <text id="textTankTempHPDown" x="735" y="295" text-anchor="end" xml:space="preserve">21,5 ℃</text>
+      <text id="textTankTempHPMiddle" x="735" y="220" text-anchor="end" xml:space="preserve">26,5 ℃</text>
+      <text id="textTankTempHPUp" x="735" y="155" text-anchor="end" xml:space="preserve">31,5 ℃</text>
+      <path id="pathHeaterRodHP" d="m 745 265 h -40 c -4.7507 0-5.0111-10 0-10 h 40" />
+    </g>
+    <g id="gWW">
+      <path id="pathTipeToWW" d="m 620 488 v 107 h 36" />
+      <path id="pathPipeRefluxWW" d="m 745 595 h 40 v -155" />
+      <path id="pathPipeToCirculatingPump" d="m 745 440 h 145" />
+      <g id="gWaterTap" transform="matrix(4 0 0 4 654.563 -1356.5)">
+        <path id="path10250" d="m61.078 452.73h2.0859v0.58985h-2.0859z" />
+        <path id="path10254" d="m63.164 452.38h-2.0859v-1.6172l-0.10547-0.26562-0.10938-0.21094-0.15625-0.0976-0.21094-0.10547h-6.6367v-2.1406h2.1953v-0.9414h-1.3047v-0.89063h4.082v0.89063h-1.2656v0.9414h3.1406l0.46875 0.0899 0.375 0.16796 0.41016 0.26172 0.36719 0.31641 0.26562 0.30469 0.26172 0.36718 0.20703 0.42188 0.10156 0.41406z" />
+      </g>
+      
+      <g id="gTankWW">
+        <text id="textTankWWName" x="700" y="417" text-anchor="middle" xml:space="preserve">Hot Water</text>
+        <path id="pathTankWWHat" d="m 655 424 h -5 v -20 c 4.8894-4.1274 97.176-5.3285 100 0 v 20 h -5 c -4.2274-3.9461-87.404-2.7745-90 0 z" />
+        <path id="pathTankWWChassis" d="m 655.5 424 v 196.5 c 9.824 3.5258 80.194 4.4873 90.018 0 v -196.5" />
+        <text id="textTankTempWWDown" x="735" y="599" text-anchor="end" xml:space="preserve" />
+        <text id="textTankTempWWMiddle" x="735" y="524" text-anchor="end" xml:space="preserve" />
+        <text id="textTankTempWWUp" x="735" y="459" text-anchor="end" xml:space="preserve">31,5 ℃</text>
+        <path id="pathHeaterRodWW" d="m 745 569 h -40 c -4.7507 0-5.0111-10 0-10 h 40" />
+      </g>
+      <g id="gWWHeatingValve">
+        <circle id="pathCircleWWHeatingValve" cx="600" cy="487" r="30" />
+        <path id="pathArrowCircleWWHeatingValve" d="m 583 470 h 34 v 34" />
+      </g>
+      <g id="gCirculatingPump">
+        <text id="textCirculatingPump" x="785" y="475" text-anchor="middle" xml:space="preserve">C P</text>
+        <circle id="pathCirculatingPumpChassis" cx="785" cy="504" r="24" />
+        <g id="gCirculatingPumpBladeWheel">
+          <g id="gCirculatingPumpBladeWheelInner">
+            <circle id="pathCirculatingPumpBladeWheelAxis" cx="785" cy="504" r="4" />
+            <path id="pathCirculatingPumpBladeWheel" d="m 785 500 c -0.91667-7.5 3.6667-15.5 7-15" />
+            <use id="use1" transform="rotate(40,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use2" transform="rotate(80,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use3" transform="rotate(120,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use4" transform="rotate(160,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use5" transform="rotate(200 785 504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use6" transform="rotate(240 785 504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use7" transform="rotate(-80,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+            <use id="use8" transform="rotate(-40,785,504)" xlink:href="#pathCirculatingPumpBladeWheel" />
+          </g>
+          <animateTransform id="animationCirculatingPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 785 504" repeatCount="indefinite" to="360 785 504" type="rotate" />
+        </g>
+      </g>
+    </g>
+    <a id="linkSettings" href="hp-settings">
+      <g id="gSettings">
+        <rect id="rectSettings" x="65.353" y="50" width="474.29" height="274.29" />
+        <g id="gHPStatusSave" transform="matrix(4 0 0 4 -777.26 -1088)">
+          <path id="path11230" d="m316.58 288.71-0.39453 0.39453c0.20703 0.20703 0.30859 0.45313 0.30859 0.73828 0 0.28907-0.10156 0.53516-0.30859 0.73047-0.21094 0.20703-0.45313 0.30469-0.73828 0.30469-0.28906 0-0.53125-0.0977-0.74219-0.30469-0.20312-0.19531-0.30469-0.4414-0.30469-0.73047 0-0.28515 0.10157-0.53125 0.30469-0.73828 0.21094-0.19531 0.45313-0.30469 0.74219-0.30469 0.28515 0 0.52734 0.10938 0.73828 0.30469l0.39453-0.39453c-0.31641-0.30469-0.69141-0.46484-1.1328-0.46484-0.44531 0-0.82031 0.16015-1.125 0.47656-0.31641 0.3125-0.47266 0.6875-0.47266 1.1211 0 0.44141 0.15625 0.82032 0.47266 1.125 0.30469 0.31641 0.67969 0.46094 1.125 0.46094 0.4414 0 0.8164-0.14453 1.1328-0.46094 0.30469-0.30468 0.46484-0.68359 0.46484-1.125 0-0.43359-0.16015-0.8164-0.46484-1.1328z" />
+          <path id="path11234" transform="matrix(.75 0 0 .75 -151.29 29.951)" d="m621.64 345.85h1.0052v1.3386h-0.67187v-1.0104h-0.33333z" />
+          <path id="path11236" d="m317.59 296.5c0.46484-0.14844 0.78906-0.36329 0.98828-0.66407 0.1875-0.29297 0.28125-0.6875 0.28125-1.1992h0.5v-0.51171l-0.50781 8e-3c8e-3 -0.46094-0.17969-0.86719-0.5586-1.2109-0.42578-0.375-0.98437-0.56641-1.6836-0.55469l-0.0234-0.2539h-1.0039v0.51953h1.0039v0.24609h-2.0273v-0.24609h1.0234v-0.51953h-1.0234v0.26562h-0.73828c0-0.1289-0.0508-0.24609-0.15235-0.35547-0.0976-0.10156-0.21484-0.15625-0.34375-0.15625v1.0117c-0.11718 0-0.23437 0.043-0.34375 0.11328l0.58985 0.61719h0.25l-0.0195 0.51563-0.50782 0.0351v-0.28125h0.27735v-0.26953l-0.58203-0.61719c-0.26563 0.16407-0.40235 0.375-0.42188 0.61719h-0.75781v1.5312h0.75781c-0.0195 0.29297 0.0586 0.55859 0.22656 0.80859 0.1875 0.29297 0.45313 0.44922 0.77735 0.48047v0.97657h1.2539v-0.75782h1.5078v0.75782h1.2578z" />
+        </g>
+        <g id="gHPStatusParty" transform="matrix(4 0 0 4 -825 -1042.5)">
+          <path id="path11186" d="m317.14 279.52-0.75391 0.72656h0.63282l0.74218-0.72656-0.10156-0.50391 0.94922-0.90625h-0.87891l-0.94531 0.90625-0.52734 0.50391h-2.8125l0.74609 0.72656h1.3125l0.75391-0.72656 0.52734-0.50391h-4.9766l3.4297 3.3047v2.2734h-1.1953v0.72656h3.1055v-0.72656h-1.1953v-2.2734l3.4297-3.3047h-1.7227l0.10156 0.50391z" />
+          <path id="path11188" d="m317.14 279.52-0.75391 0.72656h0.63282l0.74218-0.72656-0.10156-0.50391 0.94922-0.90625h-0.87891l-0.94531 0.90625-0.52734 0.50391h-2.8125l0.74609 0.72656h1.3125l0.75391-0.72656 0.52734-0.50391h-4.9766l3.4297 3.3047v2.2734h-1.1953v0.72656h3.1055v-0.72656h-1.1953v-2.2734l3.4297-3.3047h-1.7227l0.10156 0.50391z" />
+        </g>
+        <g id="gHPStatusCooling" transform="matrix(4 0 0 4 -1007.2 -1619.1)">
+          <path id="path11916" transform="matrix(.75 0 0 .75 -150.51 162.74)" d="m622.78 350.8 1.8958 0.3229 0.8698-1.0104 0.10413-0.0416c0.0989 0 0.15104 0.0469 0.15104 0.13027l-0.0364 0.0989-0.76563 0.88541 0.86459 0.15626c0.0885 0.0107 0.11973 0.0573 0.11973 0.13013 0 0.0989-0.0468 0.14063-0.14062 0.14063h-0.026c-0.10414-0.0156-0.40104-0.0677-0.88542-0.16146l0.40104 1.1146 0.0107 0.0521c0 0.0989-0.0468 0.13541-0.13541 0.13541-0.0625 0-0.11454-0.026-0.13542-0.0885l-0.45833-1.2656-1.8646-0.32812 0.63542 1.7448 1.3125 0.20313 0.10414 0.0625-5e-3 0.14062s-0.0833 0.0781-0.14062 0.0625l-1.1563-0.15626 0.29167 0.8073c0.026 0.0729 5e-3 0.13013-0.0573 0.17186-0.0885 0.0521-0.15104 0.0365-0.19271-0.0521l-0.0208-0.0312c-0.0625-0.13013-0.16147-0.40104-0.28647-0.80208l-0.74478 0.88541-0.0416 0.0365c-0.0833 0.0468-0.15104 0.0312-0.18751-0.0573-0.0312-0.0521-0.0208-0.0989 0.0208-0.16145l0.84896-1.0104-0.64063-1.7448-1.2135 1.4375 0.48437 1.2136v0.12493c-0.0521 0.0885-0.10933 0.0989-0.19791 0.0469l-0.0573-0.0677-0.44271-1.0729-0.54688 0.65104c-0.0521 0.0677-0.10933 0.0677-0.18229 0.0312-0.0781-0.0416-0.0885-0.10933-0.0469-0.19271l0.0107-0.0156c0.13014-0.17188 0.3073-0.39062 0.54687-0.66146l-1.1302-0.19791c-0.0781-0.0156-0.11987-0.0573-0.11987-0.13027 0-0.11453 0.0573-0.16666 0.17188-0.14584l1.2969 0.22396 1.2083-1.4323-1.8594-0.32812-0.81249 1.0417-0.11454 0.0573c-0.0885 0-0.14062-0.0416-0.14062-0.14063l0.0312-0.0885 0.71874-0.92187-0.84896-0.15104c-0.0677-0.0107-0.11453-0.0521-0.11453-0.14062 0-0.0937 0.0468-0.14063 0.14583-0.14063l0.0208 5e-3 0.84896 0.16146-0.39584-1.099-0.0156-0.0521c0-0.0885 0.0521-0.13026 0.14062-0.13026 0.0729 0 0.11974 0.0312 0.14063 0.0885l0.44792 1.2344 1.849 0.32812-0.66147-1.8125-1.3021-0.26041-0.0937-0.0573c-0.0416-0.0781-0.0312-0.14062 0.0521-0.1927l0.0989-0.0156 1.1354 0.21874-0.30208-0.82292c-0.026-0.0729 0-0.12493 0.0573-0.17186 0.0833-0.0416 0.14583-0.0208 0.19271 0.0468l0.0156 0.0208c0.0416 0.10933 0.14583 0.39062 0.30729 0.84896l0.76562-0.91147 0.0365-0.026c0.0833-0.0416 0.14583-0.0312 0.19271 0.0469 0.0364 0.0625-0.0156 0.16667-0.0156 0.16667l-0.875 1.026 0.66145 1.8021 1.2292-1.4688-0.42708-1.2656 0.0208-0.11974 0.10414-0.0677c0.0677 0 0.11973 0.0365 0.13541 0.0989l0.38541 1.0938 0.56251-0.67188c0.0468-0.0573 0.10933-0.0625 0.17187-0.026 0.0885 0.0416 0.10413 0.10414 0.0521 0.19271l-0.0107 0.0107-0.57812 0.6927 1.1719 0.20834 0.0989 0.0729 0.0208 0.0677-0.0625 0.0989-0.10933 0.0364-1.3281-0.23958c-0.39584 0.48958-0.81251 0.97396-1.2344 1.474z" />
+          <path id="path11908" d="m316.41 421.04c0.17578 0 0.33203 0.0625 0.44921 0.1875 0.11719 0.11718 0.17969 0.26562 0.17969 0.4414 0 0.16797-0.0625 0.3125-0.1875 0.44141-0.12109 0.1289-0.26562 0.18359-0.4414 0.18359-0.17969 0-0.32422-0.0547-0.44532-0.17187-0.11718-0.12891-0.18359-0.27735-0.18359-0.45313s0.0664-0.32422 0.18359-0.4414c0.1211-0.125 0.26563-0.1875 0.44532-0.1875z" />
+          <path id="path11912" d="m319 421.95c0.60547 0.4336 1.0742 0.97656 1.4102 1.6289 0.33593 0.64844 0.5 1.3438 0.5 2.0781 0 1.2852-0.42969 2.375-1.3047 3.25-0.8711 0.8711-1.9492 1.3008-3.2461 1.3008-1.2852 0-2.3633-0.42968-3.2344-1.3008-0.875-0.875-1.3125-1.9648-1.3125-3.25 0-0.74218 0.17578-1.4492 0.51953-2.1055 0.35156-0.66796 0.83203-1.2148 1.4414-1.6367l-1.0625-0.26563 0.90625-0.46875 1.8594 0.46875-0.48047 1.5391-0.85156 0.48047 0.35547-1.1367c-0.55469 0.33203-0.98438 0.77344-1.3086 1.3359-0.3125 0.55469-0.48047 1.1562-0.48047 1.7891 0 1.0312 0.35547 1.9062 1.0508 2.6016 0.69531 0.6914 1.5703 1.0391 2.5976 1.0391 1.0391 0 1.8984-0.34766 2.6055-1.0391 0.69922-0.69532 1.043-1.5703 1.043-2.6016 0-0.63281-0.14844-1.2226-0.44922-1.7617-0.30468-0.53906-0.73047-0.98046-1.2695-1.3125l0.3125 1.0859-0.85156-0.48047-0.41797-1.4805 1.8047-0.52734 0.89844 0.46875z" />
+        </g>
+        <g id="gHPStatusHeating" transform="matrix(4 0 0 4 -62.656 -1762.5)">
+          <path id="path10298" d="m63.164 464.13v1.1953h0.60547v-1.1953z" />
+          <path id="path10302" d="m73.684 458.11v1.1992h0.59766v-1.1992z" />
+          <path id="path10306" d="m64.07 458.11v3.6055h1.1992v3.0039h0.59375v-3.0039h1.5117v3.0039h0.60156v-3.0039h1.5v3.0039h0.60156v-3.0039h1.5078v3.0039h0.59766v-3.0039h1.2031v3.6055h-9.3164v-3.6055h1.1992v-3.0039h0.59375v3.0039h1.5117v-3.0039h0.60156v3.0039h1.5v-3.0039h0.60156v3.0039h1.5078v-3.0039h0.59766v3.0039h1.2031v-3.6055z" />
+        </g>
+        <use id="gHPStatusWW" transform="translate(-730,-358)" xlink:href="#gWaterTap" />
+        <g id="gHPStatusOff" transform="matrix(3 0 0 3 -3321.7 -1583.6)">
+          <path id="path10156" transform="matrix(1.3333 0 0 1.3333 1065.2 -27.625)" d="m55.996 435.44c-0.67969 0.20703-1.207 0.55859-1.5742 1.0586-0.37891 0.5-0.5625 1.1133-0.5625 1.8125 0 0.81641 0.29297 1.5274 0.89453 2.1172 0.58984 0.59766 1.3008 0.89844 2.1211 0.89844 0.85547 0 1.5742-0.28516 2.1445-0.86328 0.57031-0.57813 0.85938-1.2969 0.85938-2.1524 0-0.67578-0.19141-1.2656-0.57812-1.7891-0.38281-0.51953-0.89453-0.87891-1.5234-1.082v0.80469c0.40625 0.17578 0.73828 0.45703 0.98438 0.83203 0.24609 0.375 0.37109 0.78125 0.37109 1.2344 0 0.64453-0.21484 1.1875-0.64844 1.6172-0.42969 0.43359-0.96094 0.64844-1.6094 0.64844s-1.1914-0.21485-1.6211-0.64844c-0.43359-0.42969-0.64062-0.97266-0.64062-1.6172 0-0.45703 0.125-0.87109 0.37891-1.25 0.24609-0.375 0.58594-0.65625 1.0039-0.83203z" />
+          <path id="path10160" transform="matrix(1.3333 0 0 1.3333 1065.2 -27.625)" d="m56.371 434.11h1.0039v3.168h-1.0039z" />
+        </g>
+        <g id="gDefrost" transform="matrix(4 0 0 4 70 -2387)">
+          <path id="path160-0" d="M 58.191406 618.492188 L 58.332031 618.414062 L 58.332031 617.378906 L 57.421875 616.792969 L 56.46875 617.378906 L 56.46875 618.414062 L 57.421875 618.960938 L 58.191406 618.492188 L 58.546875 619.195312 L 57.792969 619.65625 L 57.792969 620.257812 L 58.84375 620.832031 L 58.585938 621.289062 L 57.792969 620.832031 L 57.792969 621.496094 L 57.039062 621.496094 L 57.039062 620.832031 L 56.210938 621.289062 L 55.96875 620.832031 L 57.039062 620.257812 L 57.039062 619.65625 L 56.054688 619.082031 L 55.597656 619.335938 L 55.597656 620.613281 L 55.0625 620.625 L 55.0625 619.65625 L 54.460938 620 L 54.078125 619.347656 L 54.664062 619.011719 L 53.859375 618.570312 L 54.140625 618.117188 L 55.191406 618.699219 L 55.714844 618.402344 L 55.714844 617.328125 L 55.226562 617.046875 L 54.140625 617.671875 L 53.859375 617.226562 L 54.675781 616.726562 L 54.101562 616.410156 L 54.472656 615.757812 L 55.0625 616.085938 L 55.0625 615.167969 L 55.597656 615.179688 L 55.597656 616.394531 L 56.109375 616.6875 L 57.039062 616.164062 L 57.039062 615.578125 L 55.96875 614.960938 L 56.210938 614.503906 L 57.039062 614.960938 L 57.039062 614.285156 L 57.792969 614.285156 L 57.792969 614.960938 L 58.585938 614.503906 L 58.84375 614.960938 L 57.792969 615.578125 L 57.792969 616.179688 L 58.691406 616.6875 L 59.238281 616.355469 L 59.238281 615.179688 L 59.738281 615.167969 L 59.738281 616.085938 L 60.328125 615.742188 L 60.695312 616.410156 L 60.121094 616.726562 L 60.941406 617.226562 L 60.660156 617.671875 L 59.609375 617.023438 L 59.085938 617.328125 L 59.085938 618.414062 L 59.640625 618.734375 L 60.660156 618.117188 L 60.941406 618.570312 L 60.136719 619.011719 L 60.722656 619.363281 L 60.328125 620 L 59.738281 619.667969 L 59.738281 620.625 L 59.238281 620.613281 L 59.238281 619.386719 L 58.746094 619.082031 L 58.546875 619.195312 Z M 58.191406 618.492188 " />
+          <path id="path160-1" d="M 58.191406 618.492188 L 58.332031 618.414062 L 58.332031 617.378906 L 57.421875 616.792969 L 56.46875 617.378906 L 56.46875 618.414062 L 57.421875 618.960938 L 58.191406 618.492188 L 58.546875 619.195312 L 57.792969 619.65625 L 57.792969 620.257812 L 58.84375 620.832031 L 58.585938 621.289062 L 57.792969 620.832031 L 57.792969 621.496094 L 57.039062 621.496094 L 57.039062 620.832031 L 56.210938 621.289062 L 55.96875 620.832031 L 57.039062 620.257812 L 57.039062 619.65625 L 56.054688 619.082031 L 55.597656 619.335938 L 55.597656 620.613281 L 55.0625 620.625 L 55.0625 619.65625 L 54.460938 620 L 54.078125 619.347656 L 54.664062 619.011719 L 53.859375 618.570312 L 54.140625 618.117188 L 55.191406 618.699219 L 55.714844 618.402344 L 55.714844 617.328125 L 55.226562 617.046875 L 54.140625 617.671875 L 53.859375 617.226562 L 54.675781 616.726562 L 54.101562 616.410156 L 54.472656 615.757812 L 55.0625 616.085938 L 55.0625 615.167969 L 55.597656 615.179688 L 55.597656 616.394531 L 56.109375 616.6875 L 57.039062 616.164062 L 57.039062 615.578125 L 55.96875 614.960938 L 56.210938 614.503906 L 57.039062 614.960938 L 57.039062 614.285156 L 57.792969 614.285156 L 57.792969 614.960938 L 58.585938 614.503906 L 58.84375 614.960938 L 57.792969 615.578125 L 57.792969 616.179688 L 58.691406 616.6875 L 59.238281 616.355469 L 59.238281 615.179688 L 59.738281 615.167969 L 59.738281 616.085938 L 60.328125 615.742188 L 60.695312 616.410156 L 60.121094 616.726562 L 60.941406 617.226562 L 60.660156 617.671875 L 59.609375 617.023438 L 59.085938 617.328125 L 59.085938 618.414062 L 59.640625 618.734375 L 60.660156 618.117188 L 60.941406 618.570312 L 60.136719 619.011719 L 60.722656 619.363281 L 60.328125 620 L 59.738281 619.667969 L 59.738281 620.625 L 59.238281 620.613281 L 59.238281 619.386719 L 58.746094 619.082031 L 58.546875 619.195312 Z M 58.191406 618.492188 " />
+        </g>
+        <g id="gWarning" transform="matrix(0.03 0 0 0.03 375 70)">
+          <g id="gError">
+            <path id="path159-6" d="M 515.625,583.5 h 80.25" />
+            <path id="path157-0" d="M 515.625,395.99997 V 583.5" />
+            <path id="path155-6" d="M 595.875,583.5 V 771.37488" />
+          </g>
+          <path id="path153-3" d="M 1057.1249,914.25 546.375,46.875" />
+          <path id="path151-9" d="M 46.875,914.25 H 1057.1249" />
+          <path id="path149-0" d="M 546.375,46.875 46.875,914.25" />
+        </g>
+        <path id="pathSettingsSeperator" d="m65 110h474" />
+        <g id="gTimeSymbolDay" transform="matrix(3 0 0 3 -204.7 -332)">
+          <path id="path1692" d="m103.54 154.04c0.35547 0.0195 0.65625 0.0977 0.92969 0.24218l-0.54688 2.0547c-0.29297-0.14062-0.59375-0.21875-0.92969-0.23828z" />
+          <path id="path1694" d="m102.06 163.16c-0.34375-0.0195-0.65625-0.11328-0.92969-0.24609l0.54688-2.0586c0.29687 0.13672 0.60156 0.22657 0.92969 0.2461z" />
+          <path id="path1696" d="m107.13 156.95c0.14063 0.30469 0.22266 0.62109 0.24219 0.9375l-2.0469 0.55469c-0.0273-0.33204-0.1211-0.63282-0.25391-0.92969z" />
+          <path id="path1698" d="m98.48 160.25c-0.15234-0.3125-0.23828-0.625-0.25-0.9375l2.0469-0.55468c0.0195 0.32421 0.10938 0.63671 0.25782 0.92968z" />
+          <path id="path1700" d="m98.242 157.86c0.01953-0.34375 0.10547-0.66016 0.24609-0.9336l2.0586 0.55079 0.1875-0.29688-1.5078-1.4961c0.19141-0.29297 0.41797-0.53125 0.67578-0.6875l1.5039 1.5 0.3125-0.16797-0.55469-2.0469c0.30078-0.15234 0.61328-0.24218 0.92578-0.25l0.56641 2.0469 0.15234 0.48437c0.58204 0 1.0586 0.1875 1.4492 0.57813l-0.0273-0.61328 1.5-1.5117c0.28125 0.19531 0.50781 0.42187 0.67187 0.67578l-1.4961 1.5078c-0.17969-0.27344-0.40234-0.49609-0.67578-0.67187l0.0273 0.61328c0.37891 0.39453 0.57813 0.87109 0.57813 1.4609 0 0.57421-0.19922 1.0625-0.57813 1.4492-0.39062 0.39454-0.86718 0.58594-1.4492 0.58594l0.16016 0.48438c0.3125-0.0195 0.625-0.11328 0.91797-0.2461l0.3125-0.16797c0.26172-0.17578 0.48828-0.41406 0.67578-0.6875l0.1875-0.29296c0.13672-0.29297 0.22656-0.59375 0.25781-0.92969l2.0547 0.55078c-0.0273 0.33203-0.12109 0.64453-0.25391 0.92969l-2.0586-0.55078-0.1875 0.29296 1.5078 1.4961c-0.19531 0.28906-0.41797 0.51172-0.67187 0.6914l-1.5117-1.5-0.3125 0.16797 0.55469 2.0469c-0.3125 0.15234-0.61719 0.23437-0.92969 0.2539l-0.54297-2.0547-0.16016-0.48438c-0.58593 0-1.0703-0.1914-1.457-0.58594l0.0273 0.625-1.4961 1.5117c-0.28516-0.19531-0.51172-0.42187-0.67578-0.6875l1.5-1.5c0.17188 0.26953 0.39844 0.49219 0.67188 0.67578l-0.0273-0.625c-0.39062-0.38671-0.58203-0.875-0.58203-1.4492 0-0.58985 0.19141-1.0664 0.58203-1.4609 0.38672-0.39063 0.8711-0.57813 1.457-0.57813l-0.15234-0.48437c-0.33984 0.0195-0.64453 0.10547-0.9375 0.25l-0.3125 0.16797c-0.27344 0.1875-0.49609 0.41015-0.67187 0.68359l-0.1875 0.29688c-0.14844 0.29296-0.23829 0.59375-0.25782 0.92968z" />
+        </g>
+        <g id="gTimeSymbolNight" transform="matrix(4 0 0 4 -1157.3 -934.45)" style="display:none">
+          <path id="path11096" d="m311.81 266.72c0.54687-0.40625 1.1641-0.60547 1.8398-0.60547 0.9961 0 1.8398 0.34375 2.5469 1.0391 0.70312 0.69532 1.0547 1.5469 1.0547 2.543 0 1.082-0.27735 1.9492-0.83985 2.5977-0.59375 0.68359-1.418 1.0312-2.4844 1.0312-0.77735 0-1.4844-0.20703-2.1172-0.60938 0.82422-0.1289 1.457-0.47656 1.9141-1.0352 0.4375-0.55078 0.66016-1.2422 0.66016-2.0859 0-0.70313-0.25391-1.3359-0.76953-1.8867-0.48828-0.53125-1.0898-0.86328-1.8047-0.98828z" />
+          <path id="path11098" d="m311.81 266.72c0.54687-0.40625 1.1641-0.60547 1.8398-0.60547 0.9961 0 1.8398 0.34375 2.5469 1.0391 0.70312 0.69532 1.0547 1.5469 1.0547 2.543 0 1.082-0.27735 1.9492-0.83985 2.5977-0.59375 0.68359-1.418 1.0312-2.4844 1.0312-0.77735 0-1.4844-0.20703-2.1172-0.60938 0.82422-0.1289 1.457-0.47656 1.9141-1.0352 0.4375-0.55078 0.66016-1.2422 0.66016-2.0859 0-0.70313-0.25391-1.3359-0.76953-1.8867-0.48828-0.53125-1.0898-0.86328-1.8047-0.98828z" />
+        </g>
+        <g id="gDisplayHouse" transform="matrix(3.3 0 0 3.2 -175.66 -363.39)">
+          <path id="pathDisplayHouseWall" d="m143.5 196.88v-25.324" />
+          <path id="pathDisplayHouseRoofLeft" d="m143.5 171.56 28.676-16.555" />
+          <path id="pathDisplayHouseRoofRight" d="m200.85 171.56-28.672-16.555" />
+        </g>
+        <text id="textOutdoorTemperatureValue" x="260" y="235" text-anchor="end" xml:space="preserve">-1,3 ℃</text>
+        <text id="textIndoorTemperatureValue" x="490" y="235" text-anchor="end" xml:space="preserve">21,0 ℃</text>
+        <text id="textSupplyTemperatureLabel" x="90" y="311" xml:space="preserve">Supply Temperature</text>
+        <text id="textSupplyTemperatureValue" x="490" y="311" text-anchor="end" xml:space="preserve">32,0 ℃</text>
+      </g>
+    </a>
   </g>
-  <g id="gWW">
-   <path id="pathTipeToWW" d="m770 358v237h36"/>
-   <path id="pathPipeRefluxWW" d="m895 595h95"/>
-   <path id="pathPipeToCirculatingPump" d="m895 440h40v113h57"/>
-   <g id="gTankWW">
-    <text id="textTankWWName" x="850" y="417" text-anchor="middle" xml:space="preserve">Hot Water</text>
-    <path id="pathTankWWHat" d="m805 424h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
-    <path id="pathTankWWChassis" d="m805.49 424v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
-    <text id="textTankTempWWDown" x="885" y="599" text-anchor="end" xml:space="preserve"/>
-    <text id="textTankTempWWMiddle" x="885" y="524" text-anchor="end" xml:space="preserve"/>
-    <text id="textTankTempWWUp" x="885" y="459" text-anchor="end" xml:space="preserve">31,5 ℃</text>
-    <path id="pathHeaterRodWW" d="m895 569h-40c-4.7507 0-5.0111-10 0-10h40"/>
-   </g>
-   <g id="gWWHeatingValve">
-    <circle id="pathCircleWWHeatingValve" cx="750" cy="357" r="30"/>
-    <path id="pathArrowCircleWWHeatingValve" d="m733 340h34v34"/>
-   </g>
-   <g id="gCirculatingPump">
-    <text id="textCirculatingPump" x="935" y="475" text-anchor="middle" xml:space="preserve">C P</text>
-    <circle id="pathCirculatingPumpChassis" cx="935" cy="504" r="24"/>
-    <g id="gCirculatingPumpBladeWheel">
-     <g id="gCirculatingPumpBladeWheelInner">
-      <circle id="pathCirculatingPumpBladeWheelAxis" cx="935" cy="504" r="4"/>
-      <path id="pathCirculatingPumpBladeWheel" d="m935 500c-0.91667-7.5 3.6667-15.5 7-15"/>
-      <use transform="rotate(40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(120,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(160,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(200 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(240 935 504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(-80,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-      <use transform="rotate(-40,935,504)" xlink:href="#pathCirculatingPumpBladeWheel"/>
-     </g>
-     <animateTransform id="animationCirculatingPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 935 504" repeatCount="indefinite" to="360 935 504" type="rotate"/>
-    </g>
-   </g>
-  </g>
-  <g id="gTankHP">
-   <text id="textTankHPName" x="850" y="113" text-anchor="middle" xml:space="preserve">Buffer</text>
-   <path id="pathTankHPHat" d="m805 120h-5v-20c4.8894-4.1274 97.176-5.3285 100 0v20h-5c-4.2274-3.9461-87.404-2.7745-90 0z"/>
-   <rect id="rectBlackBack" x="805" y="290" width="90" height="10"/>
-   <path id="pathTankHPChassis" d="m805.49 120v196.5c9.824 3.5258 80.194 4.4873 90.018 0v-196.5"/>
-   <text id="textTankTempHPDown" x="885" y="295" text-anchor="end" xml:space="preserve">21,5 ℃</text>
-   <text id="textTankTempHPMiddle" x="885" y="220" text-anchor="end" xml:space="preserve">26,5 ℃</text>
-   <text id="textTankTempHPUp" x="885" y="155" text-anchor="end" xml:space="preserve">31,5 ℃</text>
-   <path id="pathHeaterRodHP" d="m895 265h-40c-4.7507 0-5.0111-10 0-10h40"/>
-  </g>
-  <g id="gHeatingCircuitPump">
-   <text id="textHeatingCircuitPump" x="907" y="175" xml:space="preserve">HC P</text>
-   <use transform="translate(0,-300)" xlink:href="#pathCirculatingPumpChassis"/>
-   <g id="gHeatingCircuitPumpBladeWheel">
-    <use transform="translate(0,-300)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
-    <animateTransform id="animationHeatingCircuitPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 935 204" repeatCount="indefinite" to="360 935 204" type="rotate"/>
-   </g>
-  </g>
-  <a id="linkSettings" href="./hp-settings">
-   <g id="gSettings">
-    <rect id="rectSettings" x="65.353" y="50" width="474.29" height="274.29"/>
-    <g id="gHPStatusSave" transform="matrix(4 0 0 4 -777.26 -1088)">
-     <path id="path11230" d="m316.58 288.71-0.39453 0.39453c0.20703 0.20703 0.30859 0.45313 0.30859 0.73828 0 0.28907-0.10156 0.53516-0.30859 0.73047-0.21094 0.20703-0.45313 0.30469-0.73828 0.30469-0.28906 0-0.53125-0.0977-0.74219-0.30469-0.20312-0.19531-0.30469-0.4414-0.30469-0.73047 0-0.28515 0.10157-0.53125 0.30469-0.73828 0.21094-0.19531 0.45313-0.30469 0.74219-0.30469 0.28515 0 0.52734 0.10938 0.73828 0.30469l0.39453-0.39453c-0.31641-0.30469-0.69141-0.46484-1.1328-0.46484-0.44531 0-0.82031 0.16015-1.125 0.47656-0.31641 0.3125-0.47266 0.6875-0.47266 1.1211 0 0.44141 0.15625 0.82032 0.47266 1.125 0.30469 0.31641 0.67969 0.46094 1.125 0.46094 0.4414 0 0.8164-0.14453 1.1328-0.46094 0.30469-0.30468 0.46484-0.68359 0.46484-1.125 0-0.43359-0.16015-0.8164-0.46484-1.1328z"/>
-     <path id="path11234" transform="matrix(.75 0 0 .75 -151.29 29.951)" d="m621.64 345.85h1.0052v1.3386h-0.67187v-1.0104h-0.33333z"/>
-     <path id="path11236" d="m317.59 296.5c0.46484-0.14844 0.78906-0.36329 0.98828-0.66407 0.1875-0.29297 0.28125-0.6875 0.28125-1.1992h0.5v-0.51171l-0.50781 8e-3c8e-3 -0.46094-0.17969-0.86719-0.5586-1.2109-0.42578-0.375-0.98437-0.56641-1.6836-0.55469l-0.0234-0.2539h-1.0039v0.51953h1.0039v0.24609h-2.0273v-0.24609h1.0234v-0.51953h-1.0234v0.26562h-0.73828c0-0.1289-0.0508-0.24609-0.15235-0.35547-0.0976-0.10156-0.21484-0.15625-0.34375-0.15625v1.0117c-0.11718 0-0.23437 0.043-0.34375 0.11328l0.58985 0.61719h0.25l-0.0195 0.51563-0.50782 0.0351v-0.28125h0.27735v-0.26953l-0.58203-0.61719c-0.26563 0.16407-0.40235 0.375-0.42188 0.61719h-0.75781v1.5312h0.75781c-0.0195 0.29297 0.0586 0.55859 0.22656 0.80859 0.1875 0.29297 0.45313 0.44922 0.77735 0.48047v0.97657h1.2539v-0.75782h1.5078v0.75782h1.2578z"/>
-    </g>
-    <g id="gHPStatusParty" transform="matrix(4 0 0 4 -825 -1042.5)">
-     <path id="path11186" d="m317.14 279.52-0.75391 0.72656h0.63282l0.74218-0.72656-0.10156-0.50391 0.94922-0.90625h-0.87891l-0.94531 0.90625-0.52734 0.50391h-2.8125l0.74609 0.72656h1.3125l0.75391-0.72656 0.52734-0.50391h-4.9766l3.4297 3.3047v2.2734h-1.1953v0.72656h3.1055v-0.72656h-1.1953v-2.2734l3.4297-3.3047h-1.7227l0.10156 0.50391z"/>
-     <path id="path11188" d="m317.14 279.52-0.75391 0.72656h0.63282l0.74218-0.72656-0.10156-0.50391 0.94922-0.90625h-0.87891l-0.94531 0.90625-0.52734 0.50391h-2.8125l0.74609 0.72656h1.3125l0.75391-0.72656 0.52734-0.50391h-4.9766l3.4297 3.3047v2.2734h-1.1953v0.72656h3.1055v-0.72656h-1.1953v-2.2734l3.4297-3.3047h-1.7227l0.10156 0.50391z"/>
-    </g>
-    <g id="gHPStatusCooling" transform="matrix(4 0 0 4 -1007.2 -1619.1)">
-     <path id="path11916" transform="matrix(.75 0 0 .75 -150.51 162.74)" d="m622.78 350.8 1.8958 0.3229 0.8698-1.0104 0.10413-0.0416c0.0989 0 0.15104 0.0469 0.15104 0.13027l-0.0364 0.0989-0.76563 0.88541 0.86459 0.15626c0.0885 0.0107 0.11973 0.0573 0.11973 0.13013 0 0.0989-0.0468 0.14063-0.14062 0.14063h-0.026c-0.10414-0.0156-0.40104-0.0677-0.88542-0.16146l0.40104 1.1146 0.0107 0.0521c0 0.0989-0.0468 0.13541-0.13541 0.13541-0.0625 0-0.11454-0.026-0.13542-0.0885l-0.45833-1.2656-1.8646-0.32812 0.63542 1.7448 1.3125 0.20313 0.10414 0.0625-5e-3 0.14062s-0.0833 0.0781-0.14062 0.0625l-1.1563-0.15626 0.29167 0.8073c0.026 0.0729 5e-3 0.13013-0.0573 0.17186-0.0885 0.0521-0.15104 0.0365-0.19271-0.0521l-0.0208-0.0312c-0.0625-0.13013-0.16147-0.40104-0.28647-0.80208l-0.74478 0.88541-0.0416 0.0365c-0.0833 0.0468-0.15104 0.0312-0.18751-0.0573-0.0312-0.0521-0.0208-0.0989 0.0208-0.16145l0.84896-1.0104-0.64063-1.7448-1.2135 1.4375 0.48437 1.2136v0.12493c-0.0521 0.0885-0.10933 0.0989-0.19791 0.0469l-0.0573-0.0677-0.44271-1.0729-0.54688 0.65104c-0.0521 0.0677-0.10933 0.0677-0.18229 0.0312-0.0781-0.0416-0.0885-0.10933-0.0469-0.19271l0.0107-0.0156c0.13014-0.17188 0.3073-0.39062 0.54687-0.66146l-1.1302-0.19791c-0.0781-0.0156-0.11987-0.0573-0.11987-0.13027 0-0.11453 0.0573-0.16666 0.17188-0.14584l1.2969 0.22396 1.2083-1.4323-1.8594-0.32812-0.81249 1.0417-0.11454 0.0573c-0.0885 0-0.14062-0.0416-0.14062-0.14063l0.0312-0.0885 0.71874-0.92187-0.84896-0.15104c-0.0677-0.0107-0.11453-0.0521-0.11453-0.14062 0-0.0937 0.0468-0.14063 0.14583-0.14063l0.0208 5e-3 0.84896 0.16146-0.39584-1.099-0.0156-0.0521c0-0.0885 0.0521-0.13026 0.14062-0.13026 0.0729 0 0.11974 0.0312 0.14063 0.0885l0.44792 1.2344 1.849 0.32812-0.66147-1.8125-1.3021-0.26041-0.0937-0.0573c-0.0416-0.0781-0.0312-0.14062 0.0521-0.1927l0.0989-0.0156 1.1354 0.21874-0.30208-0.82292c-0.026-0.0729 0-0.12493 0.0573-0.17186 0.0833-0.0416 0.14583-0.0208 0.19271 0.0468l0.0156 0.0208c0.0416 0.10933 0.14583 0.39062 0.30729 0.84896l0.76562-0.91147 0.0365-0.026c0.0833-0.0416 0.14583-0.0312 0.19271 0.0469 0.0364 0.0625-0.0156 0.16667-0.0156 0.16667l-0.875 1.026 0.66145 1.8021 1.2292-1.4688-0.42708-1.2656 0.0208-0.11974 0.10414-0.0677c0.0677 0 0.11973 0.0365 0.13541 0.0989l0.38541 1.0938 0.56251-0.67188c0.0468-0.0573 0.10933-0.0625 0.17187-0.026 0.0885 0.0416 0.10413 0.10414 0.0521 0.19271l-0.0107 0.0107-0.57812 0.6927 1.1719 0.20834 0.0989 0.0729 0.0208 0.0677-0.0625 0.0989-0.10933 0.0364-1.3281-0.23958c-0.39584 0.48958-0.81251 0.97396-1.2344 1.474z"/>
-     <path id="path11908" d="m316.41 421.04c0.17578 0 0.33203 0.0625 0.44921 0.1875 0.11719 0.11718 0.17969 0.26562 0.17969 0.4414 0 0.16797-0.0625 0.3125-0.1875 0.44141-0.12109 0.1289-0.26562 0.18359-0.4414 0.18359-0.17969 0-0.32422-0.0547-0.44532-0.17187-0.11718-0.12891-0.18359-0.27735-0.18359-0.45313s0.0664-0.32422 0.18359-0.4414c0.1211-0.125 0.26563-0.1875 0.44532-0.1875z"/>
-     <path id="path11912" d="m319 421.95c0.60547 0.4336 1.0742 0.97656 1.4102 1.6289 0.33593 0.64844 0.5 1.3438 0.5 2.0781 0 1.2852-0.42969 2.375-1.3047 3.25-0.8711 0.8711-1.9492 1.3008-3.2461 1.3008-1.2852 0-2.3633-0.42968-3.2344-1.3008-0.875-0.875-1.3125-1.9648-1.3125-3.25 0-0.74218 0.17578-1.4492 0.51953-2.1055 0.35156-0.66796 0.83203-1.2148 1.4414-1.6367l-1.0625-0.26563 0.90625-0.46875 1.8594 0.46875-0.48047 1.5391-0.85156 0.48047 0.35547-1.1367c-0.55469 0.33203-0.98438 0.77344-1.3086 1.3359-0.3125 0.55469-0.48047 1.1562-0.48047 1.7891 0 1.0312 0.35547 1.9062 1.0508 2.6016 0.69531 0.6914 1.5703 1.0391 2.5976 1.0391 1.0391 0 1.8984-0.34766 2.6055-1.0391 0.69922-0.69532 1.043-1.5703 1.043-2.6016 0-0.63281-0.14844-1.2226-0.44922-1.7617-0.30468-0.53906-0.73047-0.98046-1.2695-1.3125l0.3125 1.0859-0.85156-0.48047-0.41797-1.4805 1.8047-0.52734 0.89844 0.46875z"/>
-    </g>
-    <g id="gHPStatusHeating" transform="matrix(4 0 0 4 -62.656 -1762.5)">
-     <path id="path10298" d="m63.164 464.13v1.1953h0.60547v-1.1953z"/>
-     <path id="path10302" d="m73.684 458.11v1.1992h0.59766v-1.1992z"/>
-     <path id="path10306" d="m64.07 458.11v3.6055h1.1992v3.0039h0.59375v-3.0039h1.5117v3.0039h0.60156v-3.0039h1.5v3.0039h0.60156v-3.0039h1.5078v3.0039h0.59766v-3.0039h1.2031v3.6055h-9.3164v-3.6055h1.1992v-3.0039h0.59375v3.0039h1.5117v-3.0039h0.60156v3.0039h1.5v-3.0039h0.60156v3.0039h1.5078v-3.0039h0.59766v3.0039h1.2031v-3.6055z"/>
-    </g>
-    <g id="gHPStatusWW" transform="matrix(4 0 0 4 -75.437 -1714.5)">
-     <path id="path10250" d="m61.078 452.73h2.0859v0.58985h-2.0859z"/>
-     <path id="path10254" d="m63.164 452.38h-2.0859v-1.6172l-0.10547-0.26562-0.10938-0.21094-0.15625-0.0976-0.21094-0.10547h-6.6367v-2.1406h2.1953v-0.9414h-1.3047v-0.89063h4.082v0.89063h-1.2656v0.9414h3.1406l0.46875 0.0899 0.375 0.16796 0.41016 0.26172 0.36719 0.31641 0.26562 0.30469 0.26172 0.36718 0.20703 0.42188 0.10156 0.41406z"/>
-    </g>
-    <g id="gHPStatusOff" transform="matrix(3 0 0 3 -3321.7 -1583.6)">
-     <path id="path10156" transform="matrix(1.3333 0 0 1.3333 1065.2 -27.625)" d="m55.996 435.44c-0.67969 0.20703-1.207 0.55859-1.5742 1.0586-0.37891 0.5-0.5625 1.1133-0.5625 1.8125 0 0.81641 0.29297 1.5274 0.89453 2.1172 0.58984 0.59766 1.3008 0.89844 2.1211 0.89844 0.85547 0 1.5742-0.28516 2.1445-0.86328 0.57031-0.57813 0.85938-1.2969 0.85938-2.1524 0-0.67578-0.19141-1.2656-0.57812-1.7891-0.38281-0.51953-0.89453-0.87891-1.5234-1.082v0.80469c0.40625 0.17578 0.73828 0.45703 0.98438 0.83203 0.24609 0.375 0.37109 0.78125 0.37109 1.2344 0 0.64453-0.21484 1.1875-0.64844 1.6172-0.42969 0.43359-0.96094 0.64844-1.6094 0.64844s-1.1914-0.21485-1.6211-0.64844c-0.43359-0.42969-0.64062-0.97266-0.64062-1.6172 0-0.45703 0.125-0.87109 0.37891-1.25 0.24609-0.375 0.58594-0.65625 1.0039-0.83203z"/>
-     <path id="path10160" transform="matrix(1.3333 0 0 1.3333 1065.2 -27.625)" d="m56.371 434.11h1.0039v3.168h-1.0039z"/>
-    </g>
-    <g id="gDefrost" transform="matrix(4 0 0 4 70 -2387)">
-     <path id="path160-0" d="M 58.191406 618.492188 L 58.332031 618.414062 L 58.332031 617.378906 L 57.421875 616.792969 L 56.46875 617.378906 L 56.46875 618.414062 L 57.421875 618.960938 L 58.191406 618.492188 L 58.546875 619.195312 L 57.792969 619.65625 L 57.792969 620.257812 L 58.84375 620.832031 L 58.585938 621.289062 L 57.792969 620.832031 L 57.792969 621.496094 L 57.039062 621.496094 L 57.039062 620.832031 L 56.210938 621.289062 L 55.96875 620.832031 L 57.039062 620.257812 L 57.039062 619.65625 L 56.054688 619.082031 L 55.597656 619.335938 L 55.597656 620.613281 L 55.0625 620.625 L 55.0625 619.65625 L 54.460938 620 L 54.078125 619.347656 L 54.664062 619.011719 L 53.859375 618.570312 L 54.140625 618.117188 L 55.191406 618.699219 L 55.714844 618.402344 L 55.714844 617.328125 L 55.226562 617.046875 L 54.140625 617.671875 L 53.859375 617.226562 L 54.675781 616.726562 L 54.101562 616.410156 L 54.472656 615.757812 L 55.0625 616.085938 L 55.0625 615.167969 L 55.597656 615.179688 L 55.597656 616.394531 L 56.109375 616.6875 L 57.039062 616.164062 L 57.039062 615.578125 L 55.96875 614.960938 L 56.210938 614.503906 L 57.039062 614.960938 L 57.039062 614.285156 L 57.792969 614.285156 L 57.792969 614.960938 L 58.585938 614.503906 L 58.84375 614.960938 L 57.792969 615.578125 L 57.792969 616.179688 L 58.691406 616.6875 L 59.238281 616.355469 L 59.238281 615.179688 L 59.738281 615.167969 L 59.738281 616.085938 L 60.328125 615.742188 L 60.695312 616.410156 L 60.121094 616.726562 L 60.941406 617.226562 L 60.660156 617.671875 L 59.609375 617.023438 L 59.085938 617.328125 L 59.085938 618.414062 L 59.640625 618.734375 L 60.660156 618.117188 L 60.941406 618.570312 L 60.136719 619.011719 L 60.722656 619.363281 L 60.328125 620 L 59.738281 619.667969 L 59.738281 620.625 L 59.238281 620.613281 L 59.238281 619.386719 L 58.746094 619.082031 L 58.546875 619.195312 Z M 58.191406 618.492188 "/>
-     <path id="path160-1" d="M 58.191406 618.492188 L 58.332031 618.414062 L 58.332031 617.378906 L 57.421875 616.792969 L 56.46875 617.378906 L 56.46875 618.414062 L 57.421875 618.960938 L 58.191406 618.492188 L 58.546875 619.195312 L 57.792969 619.65625 L 57.792969 620.257812 L 58.84375 620.832031 L 58.585938 621.289062 L 57.792969 620.832031 L 57.792969 621.496094 L 57.039062 621.496094 L 57.039062 620.832031 L 56.210938 621.289062 L 55.96875 620.832031 L 57.039062 620.257812 L 57.039062 619.65625 L 56.054688 619.082031 L 55.597656 619.335938 L 55.597656 620.613281 L 55.0625 620.625 L 55.0625 619.65625 L 54.460938 620 L 54.078125 619.347656 L 54.664062 619.011719 L 53.859375 618.570312 L 54.140625 618.117188 L 55.191406 618.699219 L 55.714844 618.402344 L 55.714844 617.328125 L 55.226562 617.046875 L 54.140625 617.671875 L 53.859375 617.226562 L 54.675781 616.726562 L 54.101562 616.410156 L 54.472656 615.757812 L 55.0625 616.085938 L 55.0625 615.167969 L 55.597656 615.179688 L 55.597656 616.394531 L 56.109375 616.6875 L 57.039062 616.164062 L 57.039062 615.578125 L 55.96875 614.960938 L 56.210938 614.503906 L 57.039062 614.960938 L 57.039062 614.285156 L 57.792969 614.285156 L 57.792969 614.960938 L 58.585938 614.503906 L 58.84375 614.960938 L 57.792969 615.578125 L 57.792969 616.179688 L 58.691406 616.6875 L 59.238281 616.355469 L 59.238281 615.179688 L 59.738281 615.167969 L 59.738281 616.085938 L 60.328125 615.742188 L 60.695312 616.410156 L 60.121094 616.726562 L 60.941406 617.226562 L 60.660156 617.671875 L 59.609375 617.023438 L 59.085938 617.328125 L 59.085938 618.414062 L 59.640625 618.734375 L 60.660156 618.117188 L 60.941406 618.570312 L 60.136719 619.011719 L 60.722656 619.363281 L 60.328125 620 L 59.738281 619.667969 L 59.738281 620.625 L 59.238281 620.613281 L 59.238281 619.386719 L 58.746094 619.082031 L 58.546875 619.195312 Z M 58.191406 618.492188 "/>
-    </g>
-    <g id="gWarning" transform="matrix(0.03 0 0 0.03 375 70)">
-     <g id="gError">
-      <path id="path159-6" d="M 515.625,583.5 h 80.25"/>
-      <path id="path157-0" d="M 515.625,395.99997 V 583.5"/>
-      <path id="path155-6" d="M 595.875,583.5 V 771.37488"/>
-     </g>
-     <path id="path153-3" d="M 1057.1249,914.25 546.375,46.875"/>
-     <path id="path151-9" d="M 46.875,914.25 H 1057.1249"/>
-     <path id="path149-0" d="M 546.375,46.875 46.875,914.25"/>
-    </g>
-    <path id="pathSettingsSeperator" d="m65 110h474"/>
-    <g id="gTimeSymbolDay" transform="matrix(3 0 0 3 -204.7 -332)">
-     <path id="path1692" d="m103.54 154.04c0.35547 0.0195 0.65625 0.0977 0.92969 0.24218l-0.54688 2.0547c-0.29297-0.14062-0.59375-0.21875-0.92969-0.23828z"/>
-     <path id="path1694" d="m102.06 163.16c-0.34375-0.0195-0.65625-0.11328-0.92969-0.24609l0.54688-2.0586c0.29687 0.13672 0.60156 0.22657 0.92969 0.2461z"/>
-     <path id="path1696" d="m107.13 156.95c0.14063 0.30469 0.22266 0.62109 0.24219 0.9375l-2.0469 0.55469c-0.0273-0.33204-0.1211-0.63282-0.25391-0.92969z"/>
-     <path id="path1698" d="m98.48 160.25c-0.15234-0.3125-0.23828-0.625-0.25-0.9375l2.0469-0.55468c0.0195 0.32421 0.10938 0.63671 0.25782 0.92968z"/>
-     <path id="path1700" d="m98.242 157.86c0.01953-0.34375 0.10547-0.66016 0.24609-0.9336l2.0586 0.55079 0.1875-0.29688-1.5078-1.4961c0.19141-0.29297 0.41797-0.53125 0.67578-0.6875l1.5039 1.5 0.3125-0.16797-0.55469-2.0469c0.30078-0.15234 0.61328-0.24218 0.92578-0.25l0.56641 2.0469 0.15234 0.48437c0.58204 0 1.0586 0.1875 1.4492 0.57813l-0.0273-0.61328 1.5-1.5117c0.28125 0.19531 0.50781 0.42187 0.67187 0.67578l-1.4961 1.5078c-0.17969-0.27344-0.40234-0.49609-0.67578-0.67187l0.0273 0.61328c0.37891 0.39453 0.57813 0.87109 0.57813 1.4609 0 0.57421-0.19922 1.0625-0.57813 1.4492-0.39062 0.39454-0.86718 0.58594-1.4492 0.58594l0.16016 0.48438c0.3125-0.0195 0.625-0.11328 0.91797-0.2461l0.3125-0.16797c0.26172-0.17578 0.48828-0.41406 0.67578-0.6875l0.1875-0.29296c0.13672-0.29297 0.22656-0.59375 0.25781-0.92969l2.0547 0.55078c-0.0273 0.33203-0.12109 0.64453-0.25391 0.92969l-2.0586-0.55078-0.1875 0.29296 1.5078 1.4961c-0.19531 0.28906-0.41797 0.51172-0.67187 0.6914l-1.5117-1.5-0.3125 0.16797 0.55469 2.0469c-0.3125 0.15234-0.61719 0.23437-0.92969 0.2539l-0.54297-2.0547-0.16016-0.48438c-0.58593 0-1.0703-0.1914-1.457-0.58594l0.0273 0.625-1.4961 1.5117c-0.28516-0.19531-0.51172-0.42187-0.67578-0.6875l1.5-1.5c0.17188 0.26953 0.39844 0.49219 0.67188 0.67578l-0.0273-0.625c-0.39062-0.38671-0.58203-0.875-0.58203-1.4492 0-0.58985 0.19141-1.0664 0.58203-1.4609 0.38672-0.39063 0.8711-0.57813 1.457-0.57813l-0.15234-0.48437c-0.33984 0.0195-0.64453 0.10547-0.9375 0.25l-0.3125 0.16797c-0.27344 0.1875-0.49609 0.41015-0.67187 0.68359l-0.1875 0.29688c-0.14844 0.29296-0.23829 0.59375-0.25782 0.92968z"/>
-    </g>
-    <g id="gTimeSymbolNight" transform="matrix(4 0 0 4 -1157.3 -934.45)" style="display:none">
-     <path id="path11096" d="m311.81 266.72c0.54687-0.40625 1.1641-0.60547 1.8398-0.60547 0.9961 0 1.8398 0.34375 2.5469 1.0391 0.70312 0.69532 1.0547 1.5469 1.0547 2.543 0 1.082-0.27735 1.9492-0.83985 2.5977-0.59375 0.68359-1.418 1.0312-2.4844 1.0312-0.77735 0-1.4844-0.20703-2.1172-0.60938 0.82422-0.1289 1.457-0.47656 1.9141-1.0352 0.4375-0.55078 0.66016-1.2422 0.66016-2.0859 0-0.70313-0.25391-1.3359-0.76953-1.8867-0.48828-0.53125-1.0898-0.86328-1.8047-0.98828z"/>
-     <path id="path11098" d="m311.81 266.72c0.54687-0.40625 1.1641-0.60547 1.8398-0.60547 0.9961 0 1.8398 0.34375 2.5469 1.0391 0.70312 0.69532 1.0547 1.5469 1.0547 2.543 0 1.082-0.27735 1.9492-0.83985 2.5977-0.59375 0.68359-1.418 1.0312-2.4844 1.0312-0.77735 0-1.4844-0.20703-2.1172-0.60938 0.82422-0.1289 1.457-0.47656 1.9141-1.0352 0.4375-0.55078 0.66016-1.2422 0.66016-2.0859 0-0.70313-0.25391-1.3359-0.76953-1.8867-0.48828-0.53125-1.0898-0.86328-1.8047-0.98828z"/>
-    </g>
-    <g id="gDisplayHouse" transform="matrix(3.3 0 0 3.2 -175.66 -363.39)">
-     <path id="pathDisplayHouseWall" d="m143.5 196.88v-25.324"/>
-     <path id="pathDisplayHouseRoofLeft" d="m143.5 171.56 28.676-16.555"/>
-     <path id="pathDisplayHouseRoofRight" d="m200.85 171.56-28.672-16.555"/>
-    </g>
-    <text id="textOutdoorTemperatureValue" x="260" y="235" text-anchor="end" xml:space="preserve">-1,3 ℃</text>
-    <text id="textIndoorTemperatureValue" x="490" y="235" text-anchor="end" xml:space="preserve">21,0 ℃</text>
-    <text id="textSupplyTemperatureLabel" x="90" y="311" xml:space="preserve">Supply Temperature</text>
-    <text id="textSupplyTemperatureValue" x="490" y="311" text-anchor="end" xml:space="preserve">32,0 ℃</text>
-   </g>
-  </a>
- </g>
 </svg>

@@ -29,6 +29,9 @@ Home Assistant dashboard card displaying heat pump parameters
 | Name | Type | Requirement | Description
 | ---- | ---- | ----------- | -----------
 | title | string | optional | Title of the card, if empty no title is displayed
+| heatingPumpType | string | optional | Chose between three types of heat pump: "A2W" (Air to Water), "W2W" (Water to Water) and "G2W" (Ground to Water), if not set, A2W is used as default
+| temperatureGroundWaterIn | object | optional | Used for "W2W" and "G2W" heat pumps for input temerature
+| temperatureGroundWaterOut | object | optional | Used for "W2W" and "G2W" heat pumps for output temerature
 | heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
 | heatingPumpHotWaterMode | object | optional | Hot Water Mode, when on, faucet symbol is displayed
 | heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
@@ -46,7 +49,6 @@ Home Assistant dashboard card displaying heat pump parameters
 | supplyTemperature | object | optional | Supply Temperature
 | hpRunning | object | **Required** | when Primary Source is active, the fan animation is running
 | compressorRunning | object | **Required** | Binary sensor which detects if Compressor is running
-| heatingCircuitPumpRunning | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
 | circulatingPumpRunning | object | optional | Binary sensor which detects if Circulating Pump is running, if not defined, circulating pump is not displayed
 | tankTempHPUp | object | optional | Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, buffer tank is not displayed!
 | tankTempHPMiddle | object | optional | Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
@@ -54,8 +56,18 @@ Home Assistant dashboard card displaying heat pump parameters
 | tankTempWWUp | object | optional | Hot Water Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, hot water path and tank is not displayed!
 | tankTempWWMiddle | object | optional | Hot Water Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | tankTempWWDown | object | optional | Hot Water Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
+| heatingCircuitType1 | string | optional | Type of first Heating Circuit, "off", "underfloor" or "radiator" default is "off" the circuit is hidden in this case
+| heatingCircuitPumpRunning | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
 | supplyTemperatureHeating | object | optional  | Supply Temperature Heating, when not defined heating pipe is not displayed
-| refluxTemperatureHeating | object | optional |  | Reflux Temperature Heating
+| refluxTemperatureHeating | object | optional | Reflux Temperature Heating
+| heatingCircuitType2 | string | optional | Type of second Heating Circuit, "off", "underfloor" or "radiator" default is "off" the circuit is hidden in this case
+| heatingCircuitPumpRunning2 | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
+| supplyTemperatureHeating2 | object | optional  | Supply Temperature Heating, when not defined heating pipe is not displayed
+| refluxTemperatureHeating2 | object | optional | Reflux Temperature Heating
+| heatingCircuitType3 | string | optional | Type of third Heating Circuit, "off", "underfloor" or "radiator" default is "off" the circuit is hidden in this case
+| heatingCircuitPumpRunning3 | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
+| supplyTemperatureHeating3 | object | optional  | Supply Temperature Heating, when not defined heating pipe is not displayed
+| refluxTemperatureHeating3 | object | optional | Reflux Temperature Heating
 | evaporatorPressure | object | optional | Evaporator Pressure
 | evaporatorTemperature | object | optional  | Evaporator Temperature
 | condenserPressure | object | optional | Condenser Pressure
@@ -78,6 +90,9 @@ additional binary_sensors I've created as helper to translate the heat pump mode
 ```yaml
 - type: custom:heat-pump-card
   title: Wärmepumpe
+  heatingPumpType: A2W
+  temperatureGroundWaterIn: ""
+  temperatureGroundWaterOut: ""
   heatingPumpStatusOnOff: binary_sensor.heating_pump_status_on_off
   heatingPumpHotWaterMode: binary_sensor.heating_pump_hot_water_mode
   heatingPumpHeatingMode: binary_sensor.heating_pump_heating_mode
@@ -95,7 +110,6 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   supplyTemperature: sensor.mosquitto_broker_anlagenvorlauftemperatur
   hpRunning: binary_sensor.mosquitto_broker_status_primaerquelle
   compressorRunning: binary_sensor.mosquitto_broker_status_verdichter
-  heatingCircuitPumpRunning: binary_sensor.mosquitto_broker_heizkreispumpe
   circulatingPumpRunning: binary_sensor.mosquitto_broker_warmwasser_zirkulationspumpe
   tankTempHPUp: sensor.mosquitto_broker_pufferspeichertemperatur
   tankTempHPMiddle: ""
@@ -103,8 +117,18 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   tankTempWWUp: sensor.mosquitto_broker_warmwassertemperatur_oben
   tankTempWWMiddle: ""
   tankTempWWDown: ""
+  heatingCircuitType1: underfloor
+  heatingCircuitPumpRunning: binary_sensor.mosquitto_broker_heizkreispumpe
   supplyTemperatureHeating: sensor.mosquitto_broker_vorlauftemperatur_heizkreis
   refluxTemperatureHeating: ""
+  heatingCircuitType2: "off"
+  heatingCircuitPumpRunning2: ""
+  supplyTemperatureHeating2: ""
+  refluxTemperatureHeating2: ""
+  heatingCircuitType3: "off"
+  heatingCircuitPumpRunning3: ""
+  supplyTemperatureHeating3: ""
+  refluxTemperatureHeating3: ""
   evaporatorPressure: sensor.mosquitto_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_broker_druck_im_kondensator

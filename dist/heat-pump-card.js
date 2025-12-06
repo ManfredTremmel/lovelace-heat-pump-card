@@ -13,6 +13,10 @@ class HeatPumpCard extends HTMLElement {
   }
 
   setValues(hass) {
+    this.changeHeatPumpType(this.content, this.config.heatingPumpType, this.config.hpRunning, hass);
+    this.content.querySelector("#textG2WWaterTempIn").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterIn);
+    this.content.querySelector("#textG2WWaterTempOut").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterOut);
+
     this.content.querySelector("#gHPStatusOff").style.display = this.formatBinary(hass, this.config.heatingPumpStatusOnOff) ? "none" : "inline";
     this.content.querySelector("#gHPStatusWW").style.display = this.formatBinary(hass, this.config.heatingPumpHotWaterMode) ? "inline" : "none";
     this.content.querySelector("#gHPStatusHeating").style.display = this.formatBinary(hass, this.config.heatingPumpHeatingMode) ? "inline" : "none";
@@ -45,7 +49,6 @@ class HeatPumpCard extends HTMLElement {
 
     this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass, this.config.supplyTemperature);
 
-    this.switchRotateAttribute("#animationHPFan", hass, this.config.hpRunning);
     this.switchRotateAttribute("#animationCompressor", hass, this.config.compressorRunning);
     if (this.config.heatingCircuitPumpRunning) {
       this.content.querySelector("#gHeatingCircuitPump").style.display = 'inline';
@@ -101,8 +104,9 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gPipe").style.display = 'inline';
       this.content.querySelector("#gHP").removeAttribute("transform");
       this.content.querySelector("#gSettings").removeAttribute("transform");
-      this.content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNum(hass, this.config.supplyTemperatureHeating);
-      this.content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNum(hass, this.config.refluxTemperatureHeating);
+      this.heatingCurcuit1(this.content, hass);
+      this.heatingCurcuit2(this.content, hass);
+      this.heatingCurcuit3(this.content, hass);
     }
 
     this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass, this.config.evaporatorPressure);
@@ -132,7 +136,6 @@ class HeatPumpCard extends HTMLElement {
           this.content.querySelector("#textCompressor").innerHTML = HeatPumpCard.localization.svgTexts['compressor'];
           this.content.querySelector("#textExpansionValve").innerHTML = HeatPumpCard.localization.svgTexts['expansionValve'];
           this.content.querySelector("#textCirculatingPump").innerHTML = HeatPumpCard.localization.svgTexts['circulatingPump'];
-          this.content.querySelector("#textHeatingCircuitPump").innerHTML = HeatPumpCard.localization.svgTexts['heatingCircuitPump'];
           this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
           this.querySelector("ha-card").setAttribute("header", this.config.title);
           this.setLinks();
@@ -254,6 +257,72 @@ class HeatPumpCard extends HTMLElement {
     window.dispatchEvent(new CustomEvent("location-changed"));
   }
 
+  changeHeatPumpType(content, selection, running, hass) {
+    content.querySelector('#gHPFan').style.display = (!selection || selection === 'A2W' ? 'inline' : 'none');
+    content.querySelector('#gHPW2W').style.display = (selection === 'W2W' ? 'inline' : 'none');
+    content.querySelector('#gHPG2W').style.display = (selection === 'G2W' ? 'inline' : 'none');
+    this.switchRotateAttribute("#animationHPFan", hass, !selection || selection === 'A2W' ? running : null);
+    this.switchRotateAttribute("#animationHPW2WPumpBladeWheel", hass, selection === 'W2W' ? running : null);
+    this.switchRotateAttribute("#animationHPG2WPumpBladeWheel", hass, selection === 'G2W' ? running : null);
+  }
+
+  heatingCurcuit1(content, hass) {
+    var type = this.config.heatingCircuitType1;
+    if (!type || type === 'off') {
+      content.querySelector('#gHeaterCircuit1').style.display = ('none');
+    } else {
+      var tempInState = this.readState(hass, this.config.supplyTemperatureHeating);
+      var tempIn = tempInState ? tempInState.state : 0;
+      var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating);
+      var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
+      content.querySelector('#gHeaterCircuit1').style.display = ('inline');
+      content.querySelector('#gHeaterCircuitFloor1').style.display = (type === 'underfloor' ? 'inline' : 'none');
+      content.querySelector('#radiator1').style.display = (type === 'radiator' ? 'inline' : 'none');
+      content.querySelector('#stopCircuit1').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
+      content.querySelector('#stopCircuit2').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
+      content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNumValue(tempInState);
+      content.querySelector("#textRefluxTemperatureHeating").innerHTML = this.formatNumValue(tempOutState);
+    }
+  }
+
+  heatingCurcuit2(content, hass) {
+    var type = this.config.heatingCircuitType2;
+    if (!type || type === 'off') {
+      content.querySelector('#gHeaterCircuit2').style.display = ('none');
+    } else {
+      var tempInState = this.readState(hass, this.config.supplyTemperatureHeating2);
+      var tempIn = tempInState ? tempInState.state : 0;
+      var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating2);
+      var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
+      content.querySelector('#gHeaterCircuit2').style.display = ('inline');
+      content.querySelector('#gHeaterCircuitFloor2').style.display = (type === 'underfloor' ? 'inline' : 'none');
+      content.querySelector('#radiator2').style.display = (type === 'radiator' ? 'inline' : 'none');
+      content.querySelector('#stopCircuit3').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
+      content.querySelector('#stopCircuit4').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
+      content.querySelector("#textSupplyTemperatureHeating2").innerHTML = this.formatNumValue(tempInState);
+      content.querySelector("#textRefluxTemperatureHeating2").innerHTML = this.formatNumValue(tempOutState);
+    }
+  }
+
+  heatingCurcuit3(content, hass) {
+    var type = this.config.heatingCircuitType3;
+    if (!type || type === 'off') {
+      content.querySelector('#gHeaterCircuit3').style.display = ('none');
+    } else {
+      var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating3);
+      var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
+      var tempIn = this.readState(hass, this.config.supplyTemperatureHeating3);
+      var tempOut = Math.max(0, this.readState(hass, this.config.refluxTemperatureHeating3) ? this.readState(hass, this.config.refluxTemperatureHeating3) : tempIn - 10);
+      content.querySelector('#gHeaterCircuit3').style.display = ('inline');
+      content.querySelector('#gHeaterCircuitFloor3').style.display = (type === 'underfloor' ? 'inline' : 'none');
+      content.querySelector('#radiator3').style.display = (type === 'radiator' ? 'inline' : 'none');
+      content.querySelector('#stopCircuit5').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
+      content.querySelector('#stopCircuit6').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
+      content.querySelector("#textSupplyTemperatureHeating3").innerHTML = this.formatNumValue(tempInState);
+      content.querySelector("#textRefluxTemperatureHeating3").innerHTML = this.formatNumValue(tempOutState);
+    }
+  }
+
   // The user supplied configuration. Throw an exception and Home Assistant
   // will render an error card.
   setConfig(config) {
@@ -294,6 +363,21 @@ class HeatPumpCard extends HTMLElement {
     // Define the form schema.
     const SCHEMA = [
       { name: "title", selector: { text: {} } },
+      {
+        name: "heatingPumpType",
+        default: "A2W",
+        selector: {
+          select: {
+            options: [
+              { value: "A2W", label: "Air to Water" },
+              { value: "W2W", label: "Water to Water"},
+              { value: "G2W", label: "Ground to Water"},
+            ],
+          },
+        },
+      },
+      { name: "temperatureGroundWaterIn", selector: { entity: {domain: ["sensor"]} } },
+      { name: "temperatureGroundWaterOut", selector: { entity: {domain: ["sensor"]} } },
       { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
@@ -311,7 +395,6 @@ class HeatPumpCard extends HTMLElement {
       { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
       { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
@@ -319,8 +402,54 @@ class HeatPumpCard extends HTMLElement {
       { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
       { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
+      {
+        name: "heatingCircuitType1",
+        default: "off",
+        selector: {
+          select: {
+            options: [
+              { value: "off", label: "Off" },
+              { value: "underfloor", label: "Underfloor"},
+              { value: "radiator", label: "Radiator"},
+            ],
+          },
+        },
+      },
+      { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
       { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
       { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
+      {
+        name: "heatingCircuitType2",
+        default: "off",
+        selector: {
+          select: {
+            options: [
+              { value: "off", label: "Off" },
+              { value: "underfloor", label: "Underfloor"},
+              { value: "radiator", label: "Radiator"},
+            ],
+          },
+        },
+      },
+      { name: "heatingCircuitPumpRunning2", selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "supplyTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } },
+      { name: "refluxTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } },
+      {
+        name: "heatingCircuitType3",
+        default: "off",
+        selector: {
+          select: {
+            options: [
+              { value: "off", label: "Off" },
+              { value: "underfloor", label: "Underfloor"},
+              { value: "radiator", label: "Radiator"},
+            ],
+          },
+        },
+      },
+      { name: "heatingCircuitPumpRunning3", selector: { entity: {domain: ["binary_sensor"]} } },
+      { name: "supplyTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } },
+      { name: "refluxTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } },
       { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
       { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
       { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
