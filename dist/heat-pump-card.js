@@ -90,7 +90,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
       this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
 
-      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 750, 357)');
+      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 600, 487)');
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     } else {
       this.content.querySelector("#gWW").style.display = 'none';
