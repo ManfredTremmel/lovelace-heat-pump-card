@@ -376,92 +376,158 @@ class HeatPumpCard extends HTMLElement {
           },
         },
       },
-      { name: "temperatureGroundWaterIn", selector: { entity: {domain: ["sensor"]} } },
-      { name: "temperatureGroundWaterOut", selector: { entity: {domain: ["sensor"]} } },
-      { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingPumpCoolingMode", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heatingPumpNightMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "warning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "outdoorTemperature", selector: { entity: {domain: ["sensor"]} } },
-      { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
-      { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
-      { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
-      { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } },
-      { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
-      { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
-      {
-        name: "heatingCircuitType1",
-        default: "off",
-        selector: {
-          select: {
-            options: [
-              { value: "off", label: "Off" },
-              { value: "underfloor", label: "Underfloor"},
-              { value: "radiator", label: "Radiator"},
-            ],
-          },
-        },
+      { type: "expandable",
+        name: "groundWaterInOut",
+        flatten: true,
+        schema: [
+          { name: "temperatureGroundWaterIn", selector: { entity: {domain: ["sensor"]} } },
+          { name: "temperatureGroundWaterOut", selector: { entity: {domain: ["sensor"]} } },
+        ],
       },
-      { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
-      { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
-      {
-        name: "heatingCircuitType2",
-        default: "off",
-        selector: {
-          select: {
-            options: [
-              { value: "off", label: "Off" },
-              { value: "underfloor", label: "Underfloor"},
-              { value: "radiator", label: "Radiator"},
-            ],
-          },
-        },
+      { type: "expandable",
+        name: "states",
+        flatten: true,
+        schema: [
+          { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpCoolingMode", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "heatingPumpNightMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "warning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
+        ],
       },
-      { name: "heatingCircuitPumpRunning2", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "supplyTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } },
-      { name: "refluxTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } },
-      {
-        name: "heatingCircuitType3",
-        default: "off",
-        selector: {
-          select: {
-            options: [
-              { value: "off", label: "Off" },
-              { value: "underfloor", label: "Underfloor"},
-              { value: "radiator", label: "Radiator"},
-            ],
-          },
-        },
+      { type: "expandable",
+        name: "temperatures",
+        flatten: true,
+        schema: [
+          { name: "outdoorTemperature", selector: { entity: {domain: ["sensor"]} } },
+          { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } }
+        ],
       },
-      { name: "heatingCircuitPumpRunning3", selector: { entity: {domain: ["binary_sensor"]} } },
-      { name: "supplyTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } },
-      { name: "refluxTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } },
-      { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
-      { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
-      { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
-      { name: "condenserTemperature", selector: { entity: {domain: ["sensor"]} } },
-      { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } },
-      { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heaterRodWW", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heaterRodLevel1", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "heaterRodLevel2", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-      { name: "linkDetails", required: true, selector: { navigation: {} } },
-      { name: "linkSettings", required: true, selector: { navigation: {} } },
+      { type: "expandable",
+        name: "bufferTank",
+        flatten: true,
+        schema: [
+          { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
+          { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
+          { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "hotWaterTank",
+        flatten: true,
+        schema: [
+          { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
+          { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
+          { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
+          { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+        ],
+      },
+      { type: "expandable",
+        name: "heatingCircuit1",
+        flatten: true,
+        schema: [
+          {
+            name: "heatingCircuitType1",
+            default: "off",
+            selector: {
+              select: {
+                options: [
+                  { value: "off", label: "Off" },
+                  { value: "underfloor", label: "Underfloor"},
+                  { value: "radiator", label: "Radiator"},
+                ],
+              },
+            },
+          },
+          { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
+          { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "heatingCircuit2",
+        flatten: true,
+        schema: [
+          {
+            name: "heatingCircuitType2",
+            default: "off",
+            selector: {
+              select: {
+                options: [
+                  { value: "off", label: "Off" },
+                  { value: "underfloor", label: "Underfloor"},
+                  { value: "radiator", label: "Radiator"},
+                ],
+              },
+            },
+          },
+          { name: "heatingCircuitPumpRunning2", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "supplyTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } },
+          { name: "refluxTemperatureHeating2", selector: { entity: {domain: ["sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "heatingCircuit3",
+        flatten: true,
+        schema: [
+          {
+            name: "heatingCircuitType3",
+            default: "off",
+            selector: {
+              select: {
+                options: [
+                  { value: "off", label: "Off" },
+                  { value: "underfloor", label: "Underfloor"},
+                  { value: "radiator", label: "Radiator"},
+                ],
+              },
+            },
+          },
+          { name: "heatingCircuitPumpRunning3", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "supplyTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } },
+          { name: "refluxTemperatureHeating3", selector: { entity: {domain: ["sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "heatPumpSensors",
+        flatten: true,
+        schema: [
+          { name: "evaporatorPressure", selector: { entity: {domain: ["sensor"]} } },
+          { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
+          { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
+          { name: "condenserTemperature", selector: { entity: {domain: ["sensor"]} } },
+          { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "heaterRod",
+        flatten: true,
+        schema: [
+          { name: "heaterRodWW", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "heaterRodLevel1", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "heaterRodLevel2", selector: { entity: {domain: ["binary_sensor", "switch"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "links",
+        flatten: true,
+        schema: [
+          { name: "linkDetails", required: true, selector: { navigation: {} } },
+          { name: "linkSettings", required: true, selector: { navigation: {} } }
+        ],
+      }
     ];
 
     // A simple assertion function to validate the configuration.
