@@ -399,8 +399,7 @@ class HeatPumpCard extends HTMLElement {
           { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-          { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
-          { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
+          { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
       { type: "expandable",
@@ -431,6 +430,7 @@ class HeatPumpCard extends HTMLElement {
           { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
           { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
       { type: "expandable",

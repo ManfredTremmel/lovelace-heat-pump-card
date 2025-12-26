@@ -1,0 +1,574 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>Wärmepumpenwidget Testseite</title>
+    <style type="text/css">
+      <!-- 
+      body {
+        background-color: white;
+        color: black;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: black;
+          color: white;
+        }
+      }
+      #settings {
+        width: 30%;
+        float: left;
+      }
+      #svgimage {
+        width: 70%;
+        float: left;
+      }
+      .toggle {
+        width: 99%;
+        border-style: solid;
+        border-width: thin;
+      }
+      .toggle > input[type="checkbox"],
+      .toggle > div {
+        display: none;
+      }
+      .toggle > input[type="checkbox"]:checked ~ div {
+        display: block;
+      }
+      .toggle > label:before {
+        content: "🠶";
+        margin-right: 1em;
+      }
+      .toggle > input[type="checkbox"]:checked ~ label:before {
+        content: "🠷";
+      }
+      -->
+    </style>
+    <meta charset="UTF-8"> 
+    <script>
+      function formatTemp(number) {
+         if (number) {
+            return new Intl.NumberFormat(undefined, {style: "unit", unit: "celsius", minimumFractionDigits: 1}).format(number);
+         }
+         return null;
+      }
+      function formatDruck(number) {
+         if (number) {
+            return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(number) + " bar";
+         }
+         return null;
+      }
+      function formatPercent(number) {
+         if (number) {
+            return new Intl.NumberFormat(undefined, {minimumFractionDigits: 0}).format(number) + " %";
+         }
+         return null;
+      }
+      function heizstabFarbe() {
+         var colorHS = "#ffffff";
+         if (document.getElementById('inputHeaterRodLevel1').checked) {
+           colorHS = tempFarbe(40);
+         } else if (document.getElementById('inputHeaterRodLevel2').checked) {
+           colorHS = tempFarbe(60);
+         }
+         if (document.getElementById('inputWwHeatingValve').checked) {
+            document.getElementById('pathHeaterRodWW').style.stroke = colorHS;
+            document.getElementById('pathHeaterRodHP').style.stroke = "#ffffff";
+         } else {
+            document.getElementById('pathHeaterRodHP').style.stroke = colorHS;
+            document.getElementById('pathHeaterRodWW').style.stroke = "#ffffff";
+         }
+      }
+      function tempFarbe(temp) {
+         if (temp > 60) {
+            return "#ff0000"
+         }
+         return "#" + ("0" + Math.round(255 * temp / 60).toString(16)).substr(-2) + "00" + ("0" + Math.round(255 * Math.abs(60 - temp) / 60).toString(16)).substr(-2);
+      }
+      function hpFarbe() {
+         var tempOben = document.getElementById('inputTankTempHPUp').value;
+         var tempMitte = Math.max(0, document.getElementById('inputTankTempHPMiddle').value ? document.getElementById('inputTankTempHPMiddle').value : tempOben - 5);
+         var tempUnten = Math.max(0, document.getElementById('inputTankTempHPDown').value ? document.getElementById('inputTankTempHPDown').value : tempMitte - 5);
+         document.getElementById('stop3020').setAttribute('style', "stop-color:" + tempFarbe(tempOben) + ";");
+         document.getElementById('stop3040').setAttribute('style', "stop-color:" + tempFarbe(tempMitte) + ";");
+         document.getElementById('stop3030').setAttribute('style', "stop-color:" + tempFarbe(tempUnten) + ";");
+      }
+      function wwFarbe() {
+         var tempOben = document.getElementById('inputTankTempWWUp').value;
+         var tempMitte = Math.max(0, document.getElementById('inputTankTempWWMiddle').value ? document.getElementById('inputTankTempWWMiddle').value : tempOben - 5);
+         var tempUnten = Math.max(0, document.getElementById('inputTankTempWWDown').value ? document.getElementById('inputTankTempWWDown').value : tempMitte - 5);
+         document.getElementById('stop3050').setAttribute('style', "stop-color:" + tempFarbe(tempOben) + ";");
+         document.getElementById('stop3070').setAttribute('style', "stop-color:" + tempFarbe(tempMitte) + ";");
+         document.getElementById('stop3060').setAttribute('style', "stop-color:" + tempFarbe(tempUnten) + ";");
+      }
+      function handleLocalization(localization) {
+        document.getElementById("textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
+        document.getElementById("textTankHPName").innerHTML = localization.svgTexts['tankHPName'];
+        document.getElementById("textEvaporator").innerHTML = localization.svgTexts['evaporator'];
+        document.getElementById("textCondenser").innerHTML = localization.svgTexts['condenser'];
+        document.getElementById("textCompressor").innerHTML = localization.svgTexts['compressor'];
+        document.getElementById("textExpansionValve").innerHTML = localization.svgTexts['expansionValve'];
+        document.getElementById("textCirculatingPump").innerHTML = localization.svgTexts['circulatingPump'];
+        document.getElementById("textSupplyTemperatureLabel").innerHTML = localization.svgTexts['supplyTemperatureLabel'];
+
+        document.getElementById("labelHeatingPumpType").innerHTML = localization.editor['heatingPumpType'];
+
+        document.getElementById("labelGroundWaterInOut").innerHTML = localization.editor['groundWaterInOut'];
+        document.getElementById("labelTemperatureGroundWaterIn").innerHTML = localization.editor['temperatureGroundWaterIn'];
+        document.getElementById("labelTemperatureGroundWaterOut").innerHTML = localization.editor['temperatureGroundWaterOut'];
+
+        document.getElementById("labelStates").innerHTML = localization.editor['states'];
+        document.getElementById("labelHeatingPumpStatusOnOff").innerHTML = localization.editor['heatingPumpStatusOnOff'];
+        document.getElementById("labelHeatingPumpHotWaterMode").innerHTML = localization.editor['heatingPumpHotWaterMode'];
+        document.getElementById("labelHeatingPumpHeatingMode").innerHTML = localization.editor['heatingPumpHeatingMode'];
+        document.getElementById("labelHeatingPumpCoolingMode").innerHTML = localization.editor['heatingPumpCoolingMode'];
+        document.getElementById("labelHeatingPumpPartyMode").innerHTML = localization.editor['heatingPumpPartyMode'];
+        document.getElementById("labelHeatingPumpEnergySaveMode").innerHTML = localization.editor['heatingPumpEnergySaveMode'];
+        document.getElementById("labelHeatingPumpNightMode").innerHTML = localization.editor['heatingPumpNightMode'];
+        document.getElementById("labelWarning").innerHTML = localization.editor['warning'];
+        document.getElementById("labelError").innerHTML = localization.editor['error'];
+        document.getElementById("labelDefrostMode").innerHTML = localization.editor['defrostMode'];
+        document.getElementById("labelHpRunning").innerHTML = localization.editor['hpRunning'];
+        document.getElementById("labelCompressorRunning").innerHTML = localization.editor['compressorRunning'];
+
+        document.getElementById("labelTemperatures").innerHTML = localization.editor['temperatures'];
+        document.getElementById("labelOutdoorTemperature").innerHTML = localization.editor['outdoorTemperature'];
+        document.getElementById("labelAmbientTemperatureNormal").innerHTML = localization.editor['ambientTemperatureNormal'];
+        document.getElementById("labelSupplyTemperature").innerHTML = localization.editor['supplyTemperature'];
+
+        document.getElementById("labelBufferTank").innerHTML = localization.editor['bufferTank'];
+        document.getElementById("labelTankTempHPUp").innerHTML = localization.editor['tankTempHPUp'];
+        document.getElementById("labelTankTempHPMiddle").innerHTML = localization.editor['tankTempHPMiddle'];
+        document.getElementById("labelTankTempHPDown").innerHTML = localization.editor['tankTempHPDown'];
+
+        document.getElementById("labelHotWaterTank").innerHTML = localization.editor['hotWaterTank'];
+        document.getElementById("labelTankTempWWUp").innerHTML = localization.editor['tankTempWWUp'];
+        document.getElementById("labelTankTempWWMiddle").innerHTML = localization.editor['tankTempWWMiddle'];
+        document.getElementById("labelTankTempWWDown").innerHTML = localization.editor['tankTempWWDown'];
+        document.getElementById("labelWwHeatingValve").innerHTML = localization.editor['wwHeatingValve'];
+        document.getElementById("labelCirculatingPumpRunning").innerHTML = localization.editor['circulatingPumpRunning'];
+
+        document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
+        document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
+        document.getElementById("labelHeatingCircuitPumpRunning").innerHTML = localization.editor['heatingCircuitPumpRunning'];
+        document.getElementById("labelSupplyTemperatureHeating").innerHTML = localization.editor['supplyTemperatureHeating'];
+        document.getElementById("labelRefluxTemperatureHeating").innerHTML = localization.editor['refluxTemperatureHeating'];
+
+        document.getElementById("labelHeatingCircuit2").innerHTML = localization.editor['heatingCircuit2'];
+        document.getElementById("labelHeatingCircuitType2").innerHTML = localization.editor['heatingCircuitType2'];
+        document.getElementById("labelHeatingCircuitPumpRunning2").innerHTML = localization.editor['heatingCircuitPumpRunning2'];
+        document.getElementById("labelSupplyTemperatureHeating2").innerHTML = localization.editor['supplyTemperatureHeating2'];
+        document.getElementById("labelRefluxTemperatureHeating2").innerHTML = localization.editor['refluxTemperatureHeating2'];
+
+        document.getElementById("labelHeatingCircuit3").innerHTML = localization.editor['heatingCircuit3'];
+        document.getElementById("labelHeatingCircuitType3").innerHTML = localization.editor['heatingCircuitType3'];
+        document.getElementById("labelHeatingCircuitPumpRunning3").innerHTML = localization.editor['heatingCircuitPumpRunning3'];
+        document.getElementById("labelSupplyTemperatureHeating3").innerHTML = localization.editor['supplyTemperatureHeating3'];
+        document.getElementById("labelRefluxTemperatureHeating3").innerHTML = localization.editor['refluxTemperatureHeating3'];
+
+        document.getElementById("labelHeatPumpSensors").innerHTML = localization.editor['heatPumpSensors'];
+        document.getElementById("labelEvaporatorPressure").innerHTML = localization.editor['evaporatorPressure'];
+        document.getElementById("labelEvaporatorTemperature").innerHTML = localization.editor['evaporatorTemperature'];
+        document.getElementById("labelCondenserPressure").innerHTML = localization.editor['condenserPressure'];
+        document.getElementById("labelCondenserTemperature").innerHTML = localization.editor['condenserTemperature'];
+        document.getElementById("labelExpansionValveOpening").innerHTML = localization.editor['expansionValveOpening'];
+
+        document.getElementById("labelHeaterRod").innerHTML = localization.editor['heaterRod'];
+        document.getElementById("labelHeaterRodWW").innerHTML = localization.editor['heaterRodWW'];
+        document.getElementById("labelHeaterRodHP").innerHTML = localization.editor['heaterRodHP'];
+        document.getElementById("labelHeaterRodLevel1").innerHTML = localization.editor['heaterRodLevel1'];
+        document.getElementById("labelHeaterRodLevel2").innerHTML = localization.editor['heaterRodLevel2'];
+
+        document.getElementById("labelLinks").innerHTML = localization.editor['links'];
+        document.getElementById("labelLinkDetails").innerHTML = localization.editor['linkDetails'];
+        document.getElementById("labelLinkSettings").innerHTML = localization.editor['linkSettings'];
+
+        document.getElementById("linkDetails").addEventListener("click", this.linkHandling);
+        document.getElementById("linkSettings").addEventListener("click", this.linkHandling);
+      }
+      function readLocalization() {
+        var lang = navigator.language.substring(0,2);
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType("application/json");
+        xhr.open("GET", "https://raw.githubusercontent.com/ManfredTremmel/lovelace-heat-pump-card/refs/heads/main/dist/heat-pump-card/" + lang + ".json", true);
+        xhr.onreadystatechange = function(e) {
+          if(e.target.readyState === XMLHttpRequest.DONE) {
+            if(e.target.status === 200) {
+              handleLocalization(JSON.parse(e.target.responseText));
+            } else {
+              alert("No localization available, fallback using english");
+            }
+          }
+        };
+        xhr.send(null);
+      }
+      function handleSvg(image) {
+        document.getElementById('svgimage').innerHTML = image;
+        readLocalization();
+      }
+      function readSvg(handleImage) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://raw.githubusercontent.com/ManfredTremmel/lovelace-heat-pump-card/refs/heads/main/dist/heat-pump-card/heat-pump.svg", true);
+        xhr.onreadystatechange = function(e) {
+          if(e.target.readyState === XMLHttpRequest.DONE) {
+            if(e.target.status === 200) {
+              handleImage(e.target.responseText);
+            } else {
+              alert("Fehler beim lesen " + e.target.statusText);
+            }
+          }
+        };
+        xhr.send(null);
+      }
+      function switchRotateAttribute(attributeName, isActive) {
+        if(isActive) {
+          document.getElementById(attributeName).setAttribute('type', 'rotate');
+        } else {
+          document.getElementById(attributeName).removeAttribute('type');
+        }
+      }
+      function switchHeatingPipes() {
+        if(!document.getElementById('inputSupplyTemperatureHeating').value && !document.getElementById('inputRefluxTemperatureHeating').value) {
+          document.getElementById('gPipe').style.display = 'none';
+          document.getElementById('gHeatingCircuitPump').style.display = 'none';
+          document.getElementById('gHP').setAttribute("transform", "translate(460 -300)");
+          document.getElementById('gSettings').setAttribute("transform", "translate(-25)");
+        } else {
+          document.getElementById('gPipe').style.display = 'inline';
+          document.getElementById('gHeatingCircuitPump').style.display = 'inline';
+          document.getElementById('gHP').removeAttribute("transform");
+          document.getElementById('gSettings').removeAttribute("transform");
+        }
+      }
+      function switchWarningError() {
+        if(document.getElementById('inputWarning').checked || document.getElementById('inputError').checked) {
+          document.getElementById('gWarning').style.display = 'inline';
+          document.getElementById('gError').style.display = document.getElementById('inputError').checked ? 'inline' : 'none';
+        } else {
+          document.getElementById('gWarning').style.display = 'none';
+        }
+      }
+      function changeHeatPumpType(selection) {
+        document.getElementById('gHPFan').style.display = (selection === 'A2W' ? 'inline' : 'none');
+        document.getElementById('gHPW2W').style.display = (selection === 'W2W' ? 'inline' : 'none');
+        document.getElementById('gHPG2W').style.display = (selection === 'G2W' ? 'inline' : 'none');
+      }
+      function changeHeatingCurcuit1(selection) {
+        document.getElementById('gHeaterCircuit1').style.display = (selection === 'off' ? 'none' : 'inline');
+        document.getElementById('gHeaterCircuitFloor1').style.display = (selection === 'underfloor' ? 'inline' : 'none');
+        document.getElementById('radiator1').style.display = (selection === 'radiator' ? 'inline' : 'none');
+      }
+      function changeHeatingCurcuit2(selection) {
+        document.getElementById('gHeaterCircuit2').style.display = (selection === 'off' ? 'none' : 'inline');
+        document.getElementById('gHeaterCircuitFloor2').style.display = (selection === 'underfloor' ? 'inline' : 'none');
+        document.getElementById('radiator2').style.display = (selection === 'radiator' ? 'inline' : 'none');
+      }
+      function changeHeatingCurcuit3(selection) {
+        document.getElementById('gHeaterCircuit3').style.display = (selection === 'off' ? 'none' : 'inline');
+        document.getElementById('gHeaterCircuitFloor3').style.display = (selection === 'underfloor' ? 'inline' : 'none');
+        document.getElementById('radiator3').style.display = (selection === 'radiator' ? 'inline' : 'none');
+      }
+      function colorHeatingCurcuit1() {
+         var tempIn = document.getElementById('inputSupplyTemperatureHeating').value;
+         var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureHeating').value ? document.getElementById('inputRefluxTemperatureHeating').value : tempIn - 5);
+         document.getElementById('stopCircuit1').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
+         document.getElementById('stopCircuit2').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
+      }
+      function colorHeatingCurcuit2() {
+         var tempIn = document.getElementById('inputSupplyTemperatureHeating2').value;
+         var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureHeating2').value ? document.getElementById('inputRefluxTemperatureHeating2').value : tempIn - 10);
+         document.getElementById('stopCircuit3').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
+         document.getElementById('stopCircuit4').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
+      }
+      function colorHeatingCurcuit3() {
+         var tempIn = document.getElementById('inputSupplyTemperatureHeating3').value;
+         var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureHeating3').value ? document.getElementById('inputRefluxTemperatureHeating3').value : tempIn - 10);
+         document.getElementById('stopCircuit5').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
+         document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
+      }
+    </script>
+  </head>
+<body onload="readSvg(handleSvg)">
+
+  <div id=settings>
+    <div>
+      <label for="inputheatingPumpType" id="labelHeatingPumpType">Wärmepumpentyp:</label>
+      <select id="inputheatingPumpType" onChange="changeHeatPumpType(this.options[this.selectedIndex].value);">
+        <option value="A2W" selected="selected">Luft/Wasser</option>
+        <option value="W2W">Wasser/Wasser</option>
+        <option value="G2W">Sole/Wasser</option>
+      </select>
+    </div>
+    <div class="toggle">
+      <input id="groundWaterInOut" type="checkbox"/>
+      <label for="groundWaterInOut" id="labelGroundWaterInOut">Sole/Wasser</label>
+      <div>
+        <div>
+          <label for="inputTemperatureGroundWaterIn" id="labelTemperatureGroundWaterIn">Eingangstemperatur Sole/Wasser:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterIn" onChange="document.getElementById('textW2WWaterTempIn').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempIn').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="14"></input>
+        </div>
+        <div>
+          <label for="inputTemperatureGroundWaterOut" id="labelTemperatureGroundWaterOut">Ausgangstemperatur Sole/Wasser:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterOut" onChange="document.getElementById('textW2WWaterTempOut').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempOut').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="10"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="states" type="checkbox"/>
+      <label for="states" id="labelStates">Stati</label>
+      <div>
+        <div>
+          <label for="inputHeatingPumpStatusOnOff" id="labelHeatingPumpStatusOnOff">W&auml;rmepumpe An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpStatusOnOff" onClick="document.getElementById('gHPStatusOff').style.display = this.checked ? 'none' : 'inline';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpHotWaterMode" id="labelHeatingPumpHotWaterMode">Warmwassermodus An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpHotWaterMode" checked="true" onClick="document.getElementById('gHPStatusWW').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpHeatingMode" id="labelHeatingPumpHeatingMode">Heizmodus An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpHeatingMode" checked="true" onClick="document.getElementById('gHPStatusHeating').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpCoolingMode" id="labelHeatingPumpCoolingMode">K&uuml;hlmodus An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpCoolingMode" checked="true" onClick="document.getElementById('gHPStatusCooling').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpPartyMode" id="labelHeatingPumpPartyMode">Partymodus An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpPartyMode" checked="true" onClick="document.getElementById('gHPStatusParty').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpEnergySaveMode" id="labelHeatingPumpEnergySaveMode">Energiesparmodus An/Aus:</label>
+          <input type="checkbox" id="inputHeatingPumpEnergySaveMode" checked="true" onClick="document.getElementById('gHPStatusSave').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHeatingPumpNightMode" id="labelHeatingPumpNightMode">Nachtmodus An/Aus:</label></td>
+          <input type="checkbox" id="inputHeatingPumpNightMode" onClick="document.getElementById('gTimeSymbolNight').style.display = this.checked ? 'inline' : 'none';document.getElementById('gTimeSymbolDay').style.display = this.checked ? 'none' : 'inline';"></input>
+        </div>
+        <div>
+          <label for="inputWarning" id="labelWarning">Warnung An/Aus:</label>
+          <input type="checkbox" id="inputWarning" onClick="switchWarningError();"></input>
+        </div>
+        <div>
+          <label for="inputError" id="labelError">Fehler An/Aus:</label>
+          <input type="checkbox" id="inputError" onClick="switchWarningError();"></input>
+        </div>
+        <div>
+          <label for="inputDefrostMode" id="labelDefrostMode">Abtaumodus An/Aus:</label>
+          <input type="checkbox" id="inputDefrostMode" onClick="document.getElementById('gDefrost').style.display = this.checked ? 'inline' : 'none';"></input>
+        </div>
+        <div>
+          <label for="inputHpRunning" id="labelHpRunning">W&auml;rmepumpe aktiv:</label>
+          <input type="checkbox" id="inputHpRunning" checked="true" onClick="switchRotateAttribute('animationHPFan', this.checked);switchRotateAttribute('animationHPW2WPumpBladeWheel', this.checked);switchRotateAttribute('animationHPG2WPumpBladeWheel', this.checked);"></input>
+        </div>
+        <div>
+          <label for="inputCompressorRunning" id="labelCompressorRunning">Verdichter aktiv:</label>
+          <input type="checkbox" id="inputCompressorRunning" checked="true" onClick="switchRotateAttribute('animationCompressor', this.checked);"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="temperatures" type="checkbox"/>
+      <label for="temperatures" id="labelTemperatures">Temperaturen</label>
+      <div>
+        <div>
+          <label for="inputOutdoorTemperature" id="labelOutdoorTemperature">Außentemperatur:</label>
+          <input type="number" min="-40" max="70" step="0.1" id="inputOutdoorTemperature" onChange="document.getElementById('textOutdoorTemperatureValue').innerHTML = formatTemp(this.value);" value="-1.3"></input>
+        </div>
+        <div>
+          <label for="inputAmbientTemperatureNormal" id="labelAmbientTemperatureNormal">Raumsolltemperatur:</label>
+          <input type="number" min="0" max="50" step="0.1" id="inputAmbientTemperatureNormal" onChange="document.getElementById('textIndoorTemperatureValue').innerHTML = formatTemp(this.value);" value="21"></input>
+        </div>
+        <div>
+          <label for="inputSupplyTemperature" id="labelSupplyTemperature">Vorlauftemperatur:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperature" onChange="document.getElementById('textSupplyTemperatureValue').innerHTML = formatTemp(this.value);" value="32"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="bufferTank" type="checkbox"/>
+      <label for="bufferTank" id="labelBufferTank">Heizpuffer</label>
+      <div>
+        <div>
+          <label for="inputTankTempHPUp" id="labelTankTempHPUp">Heizpuffertemperatur Oben:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPUp" onChange="document.getElementById('textTankTempHPUp').innerHTML = formatTemp(this.value);hpFarbe();document.getElementById('gTankHP').style.display = this.value ? 'inline' : 'none';" value="31.5"></input>
+        </div>
+        <div>
+          <label for="inputTankTempHPMiddle" id="labelTankTempHPMiddle">Heizpuffertemperatur Mitte:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPMiddle" onChange="document.getElementById('textTankTempHPMiddle').innerHTML = formatTemp(this.value);hpFarbe();" value="26.5"></input>
+        </div>
+        <div>
+          <label for="inputTankTempHPDown" id="labelTankTempHPDown">Heizpuffertemperatur Unten:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPDown" onChange="document.getElementById('textTankTempHPDown').innerHTML = formatTemp(this.value);hpFarbe();" value="21.5"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="hotWaterTank" type="checkbox"/>
+      <label for="hotWaterTank" id="labelHotWaterTank">Warmwassertank</label>
+      <div>
+        <div>
+          <label for="inputTankTempWWUp" id="labelTankTempWWUp">Warmwassertemperatur Oben:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWUp" onChange="document.getElementById('textTankTempWWUp').innerHTML = formatTemp(this.value);wwFarbe();document.getElementById('gWW').style.display = this.value ? 'inline' : 'none';" value="31.5">
+        </div>
+        <div>
+          <label for="inputTankTempWWMiddle" id="labelTankTempWWMiddle">Warmwassertemperatur Mitte:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWMiddle" onChange="document.getElementById('textTankTempWWMiddle').innerHTML = formatTemp(this.value);wwFarbe();" value=""></input>
+        </div>
+        <div>
+          <label for="inputTankTempWWDown" id="labelTankTempWWDown">Warmwassertemperatur Unten:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWDown" onChange="document.getElementById('textTankTempWWDown').innerHTML = formatTemp(this.value);wwFarbe()" value=""></input>
+        </div>
+        <div>
+          <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
+          <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 600, 487)' : 'rotate(0, 600, 487)');heizstabFarbe();"></input>
+        </div>
+        <div>
+          <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
+          <input type="checkbox" id="inputCirculatingPumpRunning" checked="true" onClick="switchRotateAttribute('animationCirculatingPumpBladeWheel', this.checked);"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="heatingCircuit1" type="checkbox"/>
+      <label for="heatingCircuit1" id="labelHeatingCircuit1">Heizkreis 1</label>
+      <div>
+        <div>
+          <label for="inputheatingCurcuit" id="labelHeatingCircuitType1">Heizkreis 1:</label>
+          <select id="inputheatingCurcuit" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
+            <option value="off">Aus</option>
+            <option value="radiator" selected="selected">Heizkörper</option>
+            <option value="underfloor">Fußbodenheizung</option>
+          </select>
+        </div>
+        <div>
+          <label for="inputHeizkreispumpe" id="labelHeatingCircuitPumpRunning">Heizkreispumpe aktiv:</label>
+          <input type="checkbox" id="inputHeizkreispumpe" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel', this.checked);"></input>
+        </div>
+        <div>
+          <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating" onChange="document.getElementById('textSupplyTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="30"></input>
+        </div>
+        <div>
+          <label for="inputRefluxTemperatureHeating" id="labelRefluxTemperatureHeating">R&uuml;cklauftemperatur Heizen:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating" onChange="document.getElementById('textRefluxTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="20"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="heatingCircuit2" type="checkbox"/>
+      <label for="heatingCircuit2" id="labelHeatingCircuit2">Heizkreis 2</label>
+      <div>
+        <div>
+          <label for="inputHeatingCircuitType2" id="labelHeatingCircuitType2">Heizkreis 2:</label>
+          <select id="inputHeatingCircuitType2" onChange="changeHeatingCurcuit2(this.options[this.selectedIndex].value);">
+            <option value="off">Aus</option>
+            <option value="radiator" selected="selected">Heizkörper</option>
+            <option value="underfloor">Fußbodenheizung</option>
+          </select>
+        </div>
+        <div>
+          <label for="inputHeizkreispumpe2" id="labelHeatingCircuitPumpRunning2">Heizkreispumpe 2 aktiv:</label>
+          <td><input type="checkbox" id="inputHeizkreispumpe2" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel2', this.checked);"></input>
+        </div>
+        <div>
+          <label for="inputSupplyTemperatureHeating2" id="labelSupplyTemperatureHeating2">Vorlauftemperatur Heizen 2:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating2" onChange="document.getElementById('textSupplyTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="30"></input>
+        </div>
+        <div>
+          <label for="inputRefluxTemperatureHeating2" id="labelRefluxTemperatureHeating2">R&uuml;cklauftemperatur Heizen 2:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating2" onChange="document.getElementById('textRefluxTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="20"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="heatingCircuit3" type="checkbox"/>
+      <label for="heatingCircuit3" id="labelHeatingCircuit3">Heizkreis 3</label>
+      <div>
+        <div><label for="inputHeatingCircuitType3" id="labelHeatingCircuitType3">Heizkreis 3:</label>
+          <select id="inputHeatingCircuitType3" onChange="changeHeatingCurcuit3(this.options[this.selectedIndex].value);">
+            <option value="off">Aus</option>
+            <option value="radiator" selected="selected">Heizkörper</option>
+            <option value="underfloor">Fußbodenheizung</option>
+          </select>
+        </div>
+        <div>
+          <label for="inputHeizkreispumpe3" id="labelHeatingCircuitPumpRunning3">Heizkreispumpe 3 aktiv:</label>
+          <input type="checkbox" id="inputHeizkreispumpe3" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel3', this.checked);"></input>
+        </div>
+        <div>
+          <label for="inputSupplyTemperatureHeating3" id="labelSupplyTemperatureHeating3">Vorlauftemperatur Heizen 3:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating3" onChange="document.getElementById('textSupplyTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="30"></input>
+        </div>
+        <div>
+          <label for="inputRefluxTemperatureHeating3" id="labelRefluxTemperatureHeating3">R&uuml;cklauftemperatur Heizen 3:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating3" onChange="document.getElementById('textRefluxTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="20"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="heatPumpSensors" type="checkbox"/>
+      <label for="heatPumpSensors" id="labelHeatPumpSensors">Wärmepumpensensoren</label>
+      <div>
+        <div>
+          <label for="inputEvaporatorPressure" id="labelEvaporatorPressure">Verdampfer Druck:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorPressure" onChange="document.getElementById('textEvaporatorPressure').innerHTML = formatDruck(this.value);" value="20"></input>
+        </div>
+        <div>
+          <label for="inputEvaporatorTemperature" id="labelEvaporatorTemperature">Verdampfer Temperatur:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorTemperature" onChange="document.getElementById('textEvaporatorTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
+        </div>
+        <div>
+          <label for="inputCondenserPressure" id="labelCondenserPressure">Verfl&uuml;ssiger Druck:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputCondenserPressure" onChange="document.getElementById('textCondenserPressure').innerHTML = formatDruck(this.value);" value="30"></input>
+        </div>
+        <div>
+          <label for="inputCondenserTemperature" id="labelCondenserTemperature">Verfl&uuml;ssiger Temperatur:</label>
+          <input type="number" min="0" max="95" step="0.1" id="inputCondenserTemperature" onChange="document.getElementById('textCondenserTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
+        </div>
+        <div>
+          <label for="inputExpansionValveOpening" id="labelExpansionValveOpening">&Ouml;ffnung Expansionsventil:</label>
+          <input type="number" min="0" max="100" step="1" id="inputExpansionValveOpening" onChange="document.getElementById('textExpansionValveOpening').innerHTML = formatPercent(this.value);" value="80"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="heaterRod" type="checkbox"/>
+      <label for="heaterRod" id="labelHeaterRod">Heizstab</label>
+      <div>
+        <div>
+          <label for="inputHeaterRodWW" id="labelHeaterRodWW">Heizstab Warmwasser aktiv:</label>
+          <input type="checkbox" id="inputHeaterRodWW" checked="true" onClick="document.getElementById('pathHeaterRodWW').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
+        </div>
+        <div>
+          <label for="inputHeaterRodHP" id="labelHeaterRodHP">Heizstab Heizen aktiv:</label></td>
+          <input type="checkbox" id="inputHeaterRodHP" checked="true" onClick="document.getElementById('pathHeaterRodHP').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
+        </div>
+        <div>
+          <label for="inputHeaterRodLevel1" id="labelHeaterRodLevel1">Heizstab Stufe 1:</label>
+          <input type="checkbox" id="inputHeaterRodLevel1" onClick="document.getElementById('inputHeaterRodLevel2').checked = false;heizstabFarbe();"></input>
+        </div>
+        <div>
+          <label for="inputHeaterRodLevel2" id="labelHeaterRodLevel2">Heizstab Stufe 2:</label>
+          <input type="checkbox" id="inputHeaterRodLevel2" onClick="document.getElementById('inputHeaterRodLevel1').checked = false;heizstabFarbe();"></input>
+        </div>
+      </div>
+    </div>
+    <div class="toggle">
+      <input id="links" type="checkbox"/>
+      <label for="links" id="labelLinks">Links</label>
+      <div>
+        <div>
+          <label for="inputLinkSettings" id="labelLinkSettings">Url Einstellungen:</label>
+          <input type="text" id="inputLinkSettings" onChange="document.getElementById('linkSettings').setAttribute('href', this.value);" value="./hp-settings"></input>
+        </div>
+        <div>
+          <label for="inputLinkDetails" id="labelLinkDetails">Url Details:</label>
+          <input type="text" id="inputLinkDetails" onChange="document.getElementById('linkDetails').setAttribute('href', this.value);" value="./hp-details"></input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="svgimage">
+  </div>
+</body>
+</html>  
