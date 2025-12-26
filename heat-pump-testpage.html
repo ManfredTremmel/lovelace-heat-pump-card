@@ -3,7 +3,7 @@
   <head>
     <title>Wärmepumpenwidget Testseite</title>
     <style type="text/css">
-      <!-- 
+      <!--
       body {
         background-color: white;
         color: black;
@@ -43,7 +43,7 @@
       }
       -->
     </style>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <script>
       function formatTemp(number) {
          if (number) {
@@ -287,288 +287,288 @@
       }
     </script>
   </head>
-<body onload="readSvg(handleSvg)">
+  <body onload="readSvg(handleSvg)">
 
-  <div id=settings>
-    <div>
-      <label for="inputheatingPumpType" id="labelHeatingPumpType">Wärmepumpentyp:</label>
-      <select id="inputheatingPumpType" onChange="changeHeatPumpType(this.options[this.selectedIndex].value);">
-        <option value="A2W" selected="selected">Luft/Wasser</option>
-        <option value="W2W">Wasser/Wasser</option>
-        <option value="G2W">Sole/Wasser</option>
-      </select>
-    </div>
-    <div class="toggle">
-      <input id="groundWaterInOut" type="checkbox"/>
-      <label for="groundWaterInOut" id="labelGroundWaterInOut">Sole/Wasser</label>
+    <div id=settings>
       <div>
+        <label for="inputheatingPumpType" id="labelHeatingPumpType">Wärmepumpentyp:</label>
+        <select id="inputheatingPumpType" onChange="changeHeatPumpType(this.options[this.selectedIndex].value);">
+          <option value="A2W" selected="selected">Luft/Wasser</option>
+          <option value="W2W">Wasser/Wasser</option>
+          <option value="G2W">Sole/Wasser</option>
+        </select>
+      </div>
+      <div class="toggle">
+        <input id="groundWaterInOut" type="checkbox"/>
+        <label for="groundWaterInOut" id="labelGroundWaterInOut">Sole/Wasser</label>
         <div>
-          <label for="inputTemperatureGroundWaterIn" id="labelTemperatureGroundWaterIn">Eingangstemperatur Sole/Wasser:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterIn" onChange="document.getElementById('textW2WWaterTempIn').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempIn').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="14"></input>
+          <div>
+            <label for="inputTemperatureGroundWaterIn" id="labelTemperatureGroundWaterIn">Eingangstemperatur Sole/Wasser:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterIn" onChange="document.getElementById('textW2WWaterTempIn').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempIn').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="14"></input>
+          </div>
+          <div>
+            <label for="inputTemperatureGroundWaterOut" id="labelTemperatureGroundWaterOut">Ausgangstemperatur Sole/Wasser:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterOut" onChange="document.getElementById('textW2WWaterTempOut').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempOut').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="10"></input>
+          </div>
         </div>
+      </div>
+      <div class="toggle">
+        <input id="states" type="checkbox"/>
+        <label for="states" id="labelStates">Stati</label>
         <div>
-          <label for="inputTemperatureGroundWaterOut" id="labelTemperatureGroundWaterOut">Ausgangstemperatur Sole/Wasser:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterOut" onChange="document.getElementById('textW2WWaterTempOut').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempOut').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="10"></input>
+          <div>
+            <label for="inputHeatingPumpStatusOnOff" id="labelHeatingPumpStatusOnOff">W&auml;rmepumpe An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpStatusOnOff" onClick="document.getElementById('gHPStatusOff').style.display = this.checked ? 'none' : 'inline';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpHotWaterMode" id="labelHeatingPumpHotWaterMode">Warmwassermodus An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpHotWaterMode" checked="true" onClick="document.getElementById('gHPStatusWW').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpHeatingMode" id="labelHeatingPumpHeatingMode">Heizmodus An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpHeatingMode" checked="true" onClick="document.getElementById('gHPStatusHeating').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpCoolingMode" id="labelHeatingPumpCoolingMode">K&uuml;hlmodus An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpCoolingMode" checked="true" onClick="document.getElementById('gHPStatusCooling').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpPartyMode" id="labelHeatingPumpPartyMode">Partymodus An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpPartyMode" checked="true" onClick="document.getElementById('gHPStatusParty').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpEnergySaveMode" id="labelHeatingPumpEnergySaveMode">Energiesparmodus An/Aus:</label>
+            <input type="checkbox" id="inputHeatingPumpEnergySaveMode" checked="true" onClick="document.getElementById('gHPStatusSave').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHeatingPumpNightMode" id="labelHeatingPumpNightMode">Nachtmodus An/Aus:</label></td>
+            <input type="checkbox" id="inputHeatingPumpNightMode" onClick="document.getElementById('gTimeSymbolNight').style.display = this.checked ? 'inline' : 'none';document.getElementById('gTimeSymbolDay').style.display = this.checked ? 'none' : 'inline';"></input>
+          </div>
+          <div>
+            <label for="inputWarning" id="labelWarning">Warnung An/Aus:</label>
+            <input type="checkbox" id="inputWarning" onClick="switchWarningError();"></input>
+          </div>
+          <div>
+            <label for="inputError" id="labelError">Fehler An/Aus:</label>
+            <input type="checkbox" id="inputError" onClick="switchWarningError();"></input>
+          </div>
+          <div>
+            <label for="inputDefrostMode" id="labelDefrostMode">Abtaumodus An/Aus:</label>
+            <input type="checkbox" id="inputDefrostMode" onClick="document.getElementById('gDefrost').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputHpRunning" id="labelHpRunning">W&auml;rmepumpe aktiv:</label>
+            <input type="checkbox" id="inputHpRunning" checked="true" onClick="switchRotateAttribute('animationHPFan', this.checked);switchRotateAttribute('animationHPW2WPumpBladeWheel', this.checked);switchRotateAttribute('animationHPG2WPumpBladeWheel', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputCompressorRunning" id="labelCompressorRunning">Verdichter aktiv:</label>
+            <input type="checkbox" id="inputCompressorRunning" checked="true" onClick="switchRotateAttribute('animationCompressor', this.checked);"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="temperatures" type="checkbox"/>
+        <label for="temperatures" id="labelTemperatures">Temperaturen</label>
+        <div>
+          <div>
+            <label for="inputOutdoorTemperature" id="labelOutdoorTemperature">Außentemperatur:</label>
+            <input type="number" min="-40" max="70" step="0.1" id="inputOutdoorTemperature" onChange="document.getElementById('textOutdoorTemperatureValue').innerHTML = formatTemp(this.value);" value="-1.3"></input>
+          </div>
+          <div>
+            <label for="inputAmbientTemperatureNormal" id="labelAmbientTemperatureNormal">Raumsolltemperatur:</label>
+            <input type="number" min="0" max="50" step="0.1" id="inputAmbientTemperatureNormal" onChange="document.getElementById('textIndoorTemperatureValue').innerHTML = formatTemp(this.value);" value="21"></input>
+          </div>
+          <div>
+            <label for="inputSupplyTemperature" id="labelSupplyTemperature">Vorlauftemperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperature" onChange="document.getElementById('textSupplyTemperatureValue').innerHTML = formatTemp(this.value);" value="32"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="bufferTank" type="checkbox"/>
+        <label for="bufferTank" id="labelBufferTank">Heizpuffer</label>
+        <div>
+          <div>
+            <label for="inputTankTempHPUp" id="labelTankTempHPUp">Heizpuffertemperatur Oben:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPUp" onChange="document.getElementById('textTankTempHPUp').innerHTML = formatTemp(this.value);hpFarbe();document.getElementById('gTankHP').style.display = this.value ? 'inline' : 'none';" value="31.5"></input>
+          </div>
+          <div>
+            <label for="inputTankTempHPMiddle" id="labelTankTempHPMiddle">Heizpuffertemperatur Mitte:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPMiddle" onChange="document.getElementById('textTankTempHPMiddle').innerHTML = formatTemp(this.value);hpFarbe();" value="26.5"></input>
+          </div>
+          <div>
+            <label for="inputTankTempHPDown" id="labelTankTempHPDown">Heizpuffertemperatur Unten:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPDown" onChange="document.getElementById('textTankTempHPDown').innerHTML = formatTemp(this.value);hpFarbe();" value="21.5"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="hotWaterTank" type="checkbox"/>
+        <label for="hotWaterTank" id="labelHotWaterTank">Warmwassertank</label>
+        <div>
+          <div>
+            <label for="inputTankTempWWUp" id="labelTankTempWWUp">Warmwassertemperatur Oben:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWUp" onChange="document.getElementById('textTankTempWWUp').innerHTML = formatTemp(this.value);wwFarbe();document.getElementById('gWW').style.display = this.value ? 'inline' : 'none';" value="31.5">
+          </div>
+          <div>
+            <label for="inputTankTempWWMiddle" id="labelTankTempWWMiddle">Warmwassertemperatur Mitte:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWMiddle" onChange="document.getElementById('textTankTempWWMiddle').innerHTML = formatTemp(this.value);wwFarbe();" value=""></input>
+          </div>
+          <div>
+            <label for="inputTankTempWWDown" id="labelTankTempWWDown">Warmwassertemperatur Unten:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWDown" onChange="document.getElementById('textTankTempWWDown').innerHTML = formatTemp(this.value);wwFarbe()" value=""></input>
+          </div>
+          <div>
+            <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
+            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 600, 487)' : 'rotate(0, 600, 487)');heizstabFarbe();"></input>
+          </div>
+          <div>
+            <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
+            <input type="checkbox" id="inputCirculatingPumpRunning" checked="true" onClick="switchRotateAttribute('animationCirculatingPumpBladeWheel', this.checked);"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="heatingCircuit1" type="checkbox"/>
+        <label for="heatingCircuit1" id="labelHeatingCircuit1">Heizkreis 1</label>
+        <div>
+          <div>
+            <label for="inputheatingCurcuit" id="labelHeatingCircuitType1">Heizkreis 1:</label>
+            <select id="inputheatingCurcuit" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
+              <option value="off">Aus</option>
+              <option value="radiator" selected="selected">Heizkörper</option>
+              <option value="underfloor">Fußbodenheizung</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputHeizkreispumpe" id="labelHeatingCircuitPumpRunning">Heizkreispumpe aktiv:</label>
+            <input type="checkbox" id="inputHeizkreispumpe" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating" onChange="document.getElementById('textSupplyTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="30"></input>
+          </div>
+          <div>
+            <label for="inputRefluxTemperatureHeating" id="labelRefluxTemperatureHeating">R&uuml;cklauftemperatur Heizen:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating" onChange="document.getElementById('textRefluxTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="20"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="heatingCircuit2" type="checkbox"/>
+        <label for="heatingCircuit2" id="labelHeatingCircuit2">Heizkreis 2</label>
+        <div>
+          <div>
+            <label for="inputHeatingCircuitType2" id="labelHeatingCircuitType2">Heizkreis 2:</label>
+            <select id="inputHeatingCircuitType2" onChange="changeHeatingCurcuit2(this.options[this.selectedIndex].value);">
+              <option value="off">Aus</option>
+              <option value="radiator" selected="selected">Heizkörper</option>
+              <option value="underfloor">Fußbodenheizung</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputHeizkreispumpe2" id="labelHeatingCircuitPumpRunning2">Heizkreispumpe 2 aktiv:</label>
+            <td><input type="checkbox" id="inputHeizkreispumpe2" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel2', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputSupplyTemperatureHeating2" id="labelSupplyTemperatureHeating2">Vorlauftemperatur Heizen 2:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating2" onChange="document.getElementById('textSupplyTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="30"></input>
+          </div>
+          <div>
+            <label for="inputRefluxTemperatureHeating2" id="labelRefluxTemperatureHeating2">R&uuml;cklauftemperatur Heizen 2:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating2" onChange="document.getElementById('textRefluxTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="20"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="heatingCircuit3" type="checkbox"/>
+        <label for="heatingCircuit3" id="labelHeatingCircuit3">Heizkreis 3</label>
+        <div>
+          <div><label for="inputHeatingCircuitType3" id="labelHeatingCircuitType3">Heizkreis 3:</label>
+            <select id="inputHeatingCircuitType3" onChange="changeHeatingCurcuit3(this.options[this.selectedIndex].value);">
+              <option value="off">Aus</option>
+              <option value="radiator" selected="selected">Heizkörper</option>
+              <option value="underfloor">Fußbodenheizung</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputHeizkreispumpe3" id="labelHeatingCircuitPumpRunning3">Heizkreispumpe 3 aktiv:</label>
+            <input type="checkbox" id="inputHeizkreispumpe3" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel3', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputSupplyTemperatureHeating3" id="labelSupplyTemperatureHeating3">Vorlauftemperatur Heizen 3:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating3" onChange="document.getElementById('textSupplyTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="30"></input>
+          </div>
+          <div>
+            <label for="inputRefluxTemperatureHeating3" id="labelRefluxTemperatureHeating3">R&uuml;cklauftemperatur Heizen 3:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating3" onChange="document.getElementById('textRefluxTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="20"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="heatPumpSensors" type="checkbox"/>
+        <label for="heatPumpSensors" id="labelHeatPumpSensors">Wärmepumpensensoren</label>
+        <div>
+          <div>
+            <label for="inputEvaporatorPressure" id="labelEvaporatorPressure">Verdampfer Druck:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorPressure" onChange="document.getElementById('textEvaporatorPressure').innerHTML = formatDruck(this.value);" value="20"></input>
+          </div>
+          <div>
+            <label for="inputEvaporatorTemperature" id="labelEvaporatorTemperature">Verdampfer Temperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorTemperature" onChange="document.getElementById('textEvaporatorTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
+          </div>
+          <div>
+            <label for="inputCondenserPressure" id="labelCondenserPressure">Verfl&uuml;ssiger Druck:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputCondenserPressure" onChange="document.getElementById('textCondenserPressure').innerHTML = formatDruck(this.value);" value="30"></input>
+          </div>
+          <div>
+            <label for="inputCondenserTemperature" id="labelCondenserTemperature">Verfl&uuml;ssiger Temperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputCondenserTemperature" onChange="document.getElementById('textCondenserTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
+          </div>
+          <div>
+            <label for="inputExpansionValveOpening" id="labelExpansionValveOpening">&Ouml;ffnung Expansionsventil:</label>
+            <input type="number" min="0" max="100" step="1" id="inputExpansionValveOpening" onChange="document.getElementById('textExpansionValveOpening').innerHTML = formatPercent(this.value);" value="80"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="heaterRod" type="checkbox"/>
+        <label for="heaterRod" id="labelHeaterRod">Heizstab</label>
+        <div>
+          <div>
+            <label for="inputHeaterRodWW" id="labelHeaterRodWW">Heizstab Warmwasser aktiv:</label>
+            <input type="checkbox" id="inputHeaterRodWW" checked="true" onClick="document.getElementById('pathHeaterRodWW').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
+          </div>
+          <div>
+            <label for="inputHeaterRodHP" id="labelHeaterRodHP">Heizstab Heizen aktiv:</label></td>
+            <input type="checkbox" id="inputHeaterRodHP" checked="true" onClick="document.getElementById('pathHeaterRodHP').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
+          </div>
+          <div>
+            <label for="inputHeaterRodLevel1" id="labelHeaterRodLevel1">Heizstab Stufe 1:</label>
+            <input type="checkbox" id="inputHeaterRodLevel1" onClick="document.getElementById('inputHeaterRodLevel2').checked = false;heizstabFarbe();"></input>
+          </div>
+          <div>
+            <label for="inputHeaterRodLevel2" id="labelHeaterRodLevel2">Heizstab Stufe 2:</label>
+            <input type="checkbox" id="inputHeaterRodLevel2" onClick="document.getElementById('inputHeaterRodLevel1').checked = false;heizstabFarbe();"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="links" type="checkbox"/>
+        <label for="links" id="labelLinks">Links</label>
+        <div>
+          <div>
+            <label for="inputLinkSettings" id="labelLinkSettings">Url Einstellungen:</label>
+            <input type="text" id="inputLinkSettings" onChange="document.getElementById('linkSettings').setAttribute('href', this.value);" value="./hp-settings"></input>
+          </div>
+          <div>
+            <label for="inputLinkDetails" id="labelLinkDetails">Url Details:</label>
+            <input type="text" id="inputLinkDetails" onChange="document.getElementById('linkDetails').setAttribute('href', this.value);" value="./hp-details"></input>
+          </div>
         </div>
       </div>
     </div>
-    <div class="toggle">
-      <input id="states" type="checkbox"/>
-      <label for="states" id="labelStates">Stati</label>
-      <div>
-        <div>
-          <label for="inputHeatingPumpStatusOnOff" id="labelHeatingPumpStatusOnOff">W&auml;rmepumpe An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpStatusOnOff" onClick="document.getElementById('gHPStatusOff').style.display = this.checked ? 'none' : 'inline';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpHotWaterMode" id="labelHeatingPumpHotWaterMode">Warmwassermodus An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpHotWaterMode" checked="true" onClick="document.getElementById('gHPStatusWW').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpHeatingMode" id="labelHeatingPumpHeatingMode">Heizmodus An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpHeatingMode" checked="true" onClick="document.getElementById('gHPStatusHeating').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpCoolingMode" id="labelHeatingPumpCoolingMode">K&uuml;hlmodus An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpCoolingMode" checked="true" onClick="document.getElementById('gHPStatusCooling').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpPartyMode" id="labelHeatingPumpPartyMode">Partymodus An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpPartyMode" checked="true" onClick="document.getElementById('gHPStatusParty').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpEnergySaveMode" id="labelHeatingPumpEnergySaveMode">Energiesparmodus An/Aus:</label>
-          <input type="checkbox" id="inputHeatingPumpEnergySaveMode" checked="true" onClick="document.getElementById('gHPStatusSave').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHeatingPumpNightMode" id="labelHeatingPumpNightMode">Nachtmodus An/Aus:</label></td>
-          <input type="checkbox" id="inputHeatingPumpNightMode" onClick="document.getElementById('gTimeSymbolNight').style.display = this.checked ? 'inline' : 'none';document.getElementById('gTimeSymbolDay').style.display = this.checked ? 'none' : 'inline';"></input>
-        </div>
-        <div>
-          <label for="inputWarning" id="labelWarning">Warnung An/Aus:</label>
-          <input type="checkbox" id="inputWarning" onClick="switchWarningError();"></input>
-        </div>
-        <div>
-          <label for="inputError" id="labelError">Fehler An/Aus:</label>
-          <input type="checkbox" id="inputError" onClick="switchWarningError();"></input>
-        </div>
-        <div>
-          <label for="inputDefrostMode" id="labelDefrostMode">Abtaumodus An/Aus:</label>
-          <input type="checkbox" id="inputDefrostMode" onClick="document.getElementById('gDefrost').style.display = this.checked ? 'inline' : 'none';"></input>
-        </div>
-        <div>
-          <label for="inputHpRunning" id="labelHpRunning">W&auml;rmepumpe aktiv:</label>
-          <input type="checkbox" id="inputHpRunning" checked="true" onClick="switchRotateAttribute('animationHPFan', this.checked);switchRotateAttribute('animationHPW2WPumpBladeWheel', this.checked);switchRotateAttribute('animationHPG2WPumpBladeWheel', this.checked);"></input>
-        </div>
-        <div>
-          <label for="inputCompressorRunning" id="labelCompressorRunning">Verdichter aktiv:</label>
-          <input type="checkbox" id="inputCompressorRunning" checked="true" onClick="switchRotateAttribute('animationCompressor', this.checked);"></input>
-        </div>
-      </div>
+    <div id="svgimage">
     </div>
-    <div class="toggle">
-      <input id="temperatures" type="checkbox"/>
-      <label for="temperatures" id="labelTemperatures">Temperaturen</label>
-      <div>
-        <div>
-          <label for="inputOutdoorTemperature" id="labelOutdoorTemperature">Außentemperatur:</label>
-          <input type="number" min="-40" max="70" step="0.1" id="inputOutdoorTemperature" onChange="document.getElementById('textOutdoorTemperatureValue').innerHTML = formatTemp(this.value);" value="-1.3"></input>
-        </div>
-        <div>
-          <label for="inputAmbientTemperatureNormal" id="labelAmbientTemperatureNormal">Raumsolltemperatur:</label>
-          <input type="number" min="0" max="50" step="0.1" id="inputAmbientTemperatureNormal" onChange="document.getElementById('textIndoorTemperatureValue').innerHTML = formatTemp(this.value);" value="21"></input>
-        </div>
-        <div>
-          <label for="inputSupplyTemperature" id="labelSupplyTemperature">Vorlauftemperatur:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperature" onChange="document.getElementById('textSupplyTemperatureValue').innerHTML = formatTemp(this.value);" value="32"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="bufferTank" type="checkbox"/>
-      <label for="bufferTank" id="labelBufferTank">Heizpuffer</label>
-      <div>
-        <div>
-          <label for="inputTankTempHPUp" id="labelTankTempHPUp">Heizpuffertemperatur Oben:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPUp" onChange="document.getElementById('textTankTempHPUp').innerHTML = formatTemp(this.value);hpFarbe();document.getElementById('gTankHP').style.display = this.value ? 'inline' : 'none';" value="31.5"></input>
-        </div>
-        <div>
-          <label for="inputTankTempHPMiddle" id="labelTankTempHPMiddle">Heizpuffertemperatur Mitte:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPMiddle" onChange="document.getElementById('textTankTempHPMiddle').innerHTML = formatTemp(this.value);hpFarbe();" value="26.5"></input>
-        </div>
-        <div>
-          <label for="inputTankTempHPDown" id="labelTankTempHPDown">Heizpuffertemperatur Unten:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPDown" onChange="document.getElementById('textTankTempHPDown').innerHTML = formatTemp(this.value);hpFarbe();" value="21.5"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="hotWaterTank" type="checkbox"/>
-      <label for="hotWaterTank" id="labelHotWaterTank">Warmwassertank</label>
-      <div>
-        <div>
-          <label for="inputTankTempWWUp" id="labelTankTempWWUp">Warmwassertemperatur Oben:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWUp" onChange="document.getElementById('textTankTempWWUp').innerHTML = formatTemp(this.value);wwFarbe();document.getElementById('gWW').style.display = this.value ? 'inline' : 'none';" value="31.5">
-        </div>
-        <div>
-          <label for="inputTankTempWWMiddle" id="labelTankTempWWMiddle">Warmwassertemperatur Mitte:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWMiddle" onChange="document.getElementById('textTankTempWWMiddle').innerHTML = formatTemp(this.value);wwFarbe();" value=""></input>
-        </div>
-        <div>
-          <label for="inputTankTempWWDown" id="labelTankTempWWDown">Warmwassertemperatur Unten:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWDown" onChange="document.getElementById('textTankTempWWDown').innerHTML = formatTemp(this.value);wwFarbe()" value=""></input>
-        </div>
-        <div>
-          <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
-          <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 600, 487)' : 'rotate(0, 600, 487)');heizstabFarbe();"></input>
-        </div>
-        <div>
-          <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
-          <input type="checkbox" id="inputCirculatingPumpRunning" checked="true" onClick="switchRotateAttribute('animationCirculatingPumpBladeWheel', this.checked);"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="heatingCircuit1" type="checkbox"/>
-      <label for="heatingCircuit1" id="labelHeatingCircuit1">Heizkreis 1</label>
-      <div>
-        <div>
-          <label for="inputheatingCurcuit" id="labelHeatingCircuitType1">Heizkreis 1:</label>
-          <select id="inputheatingCurcuit" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
-            <option value="off">Aus</option>
-            <option value="radiator" selected="selected">Heizkörper</option>
-            <option value="underfloor">Fußbodenheizung</option>
-          </select>
-        </div>
-        <div>
-          <label for="inputHeizkreispumpe" id="labelHeatingCircuitPumpRunning">Heizkreispumpe aktiv:</label>
-          <input type="checkbox" id="inputHeizkreispumpe" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel', this.checked);"></input>
-        </div>
-        <div>
-          <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating" onChange="document.getElementById('textSupplyTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="30"></input>
-        </div>
-        <div>
-          <label for="inputRefluxTemperatureHeating" id="labelRefluxTemperatureHeating">R&uuml;cklauftemperatur Heizen:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating" onChange="document.getElementById('textRefluxTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="20"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="heatingCircuit2" type="checkbox"/>
-      <label for="heatingCircuit2" id="labelHeatingCircuit2">Heizkreis 2</label>
-      <div>
-        <div>
-          <label for="inputHeatingCircuitType2" id="labelHeatingCircuitType2">Heizkreis 2:</label>
-          <select id="inputHeatingCircuitType2" onChange="changeHeatingCurcuit2(this.options[this.selectedIndex].value);">
-            <option value="off">Aus</option>
-            <option value="radiator" selected="selected">Heizkörper</option>
-            <option value="underfloor">Fußbodenheizung</option>
-          </select>
-        </div>
-        <div>
-          <label for="inputHeizkreispumpe2" id="labelHeatingCircuitPumpRunning2">Heizkreispumpe 2 aktiv:</label>
-          <td><input type="checkbox" id="inputHeizkreispumpe2" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel2', this.checked);"></input>
-        </div>
-        <div>
-          <label for="inputSupplyTemperatureHeating2" id="labelSupplyTemperatureHeating2">Vorlauftemperatur Heizen 2:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating2" onChange="document.getElementById('textSupplyTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="30"></input>
-        </div>
-        <div>
-          <label for="inputRefluxTemperatureHeating2" id="labelRefluxTemperatureHeating2">R&uuml;cklauftemperatur Heizen 2:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating2" onChange="document.getElementById('textRefluxTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="20"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="heatingCircuit3" type="checkbox"/>
-      <label for="heatingCircuit3" id="labelHeatingCircuit3">Heizkreis 3</label>
-      <div>
-        <div><label for="inputHeatingCircuitType3" id="labelHeatingCircuitType3">Heizkreis 3:</label>
-          <select id="inputHeatingCircuitType3" onChange="changeHeatingCurcuit3(this.options[this.selectedIndex].value);">
-            <option value="off">Aus</option>
-            <option value="radiator" selected="selected">Heizkörper</option>
-            <option value="underfloor">Fußbodenheizung</option>
-          </select>
-        </div>
-        <div>
-          <label for="inputHeizkreispumpe3" id="labelHeatingCircuitPumpRunning3">Heizkreispumpe 3 aktiv:</label>
-          <input type="checkbox" id="inputHeizkreispumpe3" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel3', this.checked);"></input>
-        </div>
-        <div>
-          <label for="inputSupplyTemperatureHeating3" id="labelSupplyTemperatureHeating3">Vorlauftemperatur Heizen 3:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating3" onChange="document.getElementById('textSupplyTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="30"></input>
-        </div>
-        <div>
-          <label for="inputRefluxTemperatureHeating3" id="labelRefluxTemperatureHeating3">R&uuml;cklauftemperatur Heizen 3:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating3" onChange="document.getElementById('textRefluxTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="20"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="heatPumpSensors" type="checkbox"/>
-      <label for="heatPumpSensors" id="labelHeatPumpSensors">Wärmepumpensensoren</label>
-      <div>
-        <div>
-          <label for="inputEvaporatorPressure" id="labelEvaporatorPressure">Verdampfer Druck:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorPressure" onChange="document.getElementById('textEvaporatorPressure').innerHTML = formatDruck(this.value);" value="20"></input>
-        </div>
-        <div>
-          <label for="inputEvaporatorTemperature" id="labelEvaporatorTemperature">Verdampfer Temperatur:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputEvaporatorTemperature" onChange="document.getElementById('textEvaporatorTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
-        </div>
-        <div>
-          <label for="inputCondenserPressure" id="labelCondenserPressure">Verfl&uuml;ssiger Druck:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputCondenserPressure" onChange="document.getElementById('textCondenserPressure').innerHTML = formatDruck(this.value);" value="30"></input>
-        </div>
-        <div>
-          <label for="inputCondenserTemperature" id="labelCondenserTemperature">Verfl&uuml;ssiger Temperatur:</label>
-          <input type="number" min="0" max="95" step="0.1" id="inputCondenserTemperature" onChange="document.getElementById('textCondenserTemperature').innerHTML = formatTemp(this.value);" value="30"></input>
-        </div>
-        <div>
-          <label for="inputExpansionValveOpening" id="labelExpansionValveOpening">&Ouml;ffnung Expansionsventil:</label>
-          <input type="number" min="0" max="100" step="1" id="inputExpansionValveOpening" onChange="document.getElementById('textExpansionValveOpening').innerHTML = formatPercent(this.value);" value="80"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="heaterRod" type="checkbox"/>
-      <label for="heaterRod" id="labelHeaterRod">Heizstab</label>
-      <div>
-        <div>
-          <label for="inputHeaterRodWW" id="labelHeaterRodWW">Heizstab Warmwasser aktiv:</label>
-          <input type="checkbox" id="inputHeaterRodWW" checked="true" onClick="document.getElementById('pathHeaterRodWW').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
-        </div>
-        <div>
-          <label for="inputHeaterRodHP" id="labelHeaterRodHP">Heizstab Heizen aktiv:</label></td>
-          <input type="checkbox" id="inputHeaterRodHP" checked="true" onClick="document.getElementById('pathHeaterRodHP').style.display = this.checked ? 'block' : 'none';heizstabFarbe();"></input>
-        </div>
-        <div>
-          <label for="inputHeaterRodLevel1" id="labelHeaterRodLevel1">Heizstab Stufe 1:</label>
-          <input type="checkbox" id="inputHeaterRodLevel1" onClick="document.getElementById('inputHeaterRodLevel2').checked = false;heizstabFarbe();"></input>
-        </div>
-        <div>
-          <label for="inputHeaterRodLevel2" id="labelHeaterRodLevel2">Heizstab Stufe 2:</label>
-          <input type="checkbox" id="inputHeaterRodLevel2" onClick="document.getElementById('inputHeaterRodLevel1').checked = false;heizstabFarbe();"></input>
-        </div>
-      </div>
-    </div>
-    <div class="toggle">
-      <input id="links" type="checkbox"/>
-      <label for="links" id="labelLinks">Links</label>
-      <div>
-        <div>
-          <label for="inputLinkSettings" id="labelLinkSettings">Url Einstellungen:</label>
-          <input type="text" id="inputLinkSettings" onChange="document.getElementById('linkSettings').setAttribute('href', this.value);" value="./hp-settings"></input>
-        </div>
-        <div>
-          <label for="inputLinkDetails" id="labelLinkDetails">Url Details:</label>
-          <input type="text" id="inputLinkDetails" onChange="document.getElementById('linkDetails').setAttribute('href', this.value);" value="./hp-details"></input>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="svgimage">
-  </div>
-</body>
-</html>  
+  </body>
+</html>
