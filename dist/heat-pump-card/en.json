@@ -49,6 +49,7 @@
     "heatingCircuit1": "Heating Circuit 1",
     "heatingCircuitType1": "Heating Circuit 1",
     "heatingCircuitPumpRunning": "Heating Circuit Pump On/Off",
+    "heatingCircuitPumpBeforeValve": "Heating circuit pump before valve",
     "supplyTemperatureHeating": "Supply Temperature Heating",
     "refluxTemperatureHeating": "Reflux Temperature Heating",
     "heatingCircuit2": "Heating Circuit 2",

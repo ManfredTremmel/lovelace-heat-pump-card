@@ -49,6 +49,7 @@
     "heatingCircuit1": "Verwarmingscircuit 1",
     "heatingCircuitType1": "Verwarmingscircuit 1",
     "heatingCircuitPumpRunning": "Status Verwarmingspomp Aan/Uit",
+    "heatingCircuitPumpBeforeValve": "Verwarmingspomp vóór de klep",
     "supplyTemperatureHeating": "Aanvoertemperatuur Verwarming",
     "refluxTemperatureHeating": "Retourtemperatuur Verwarming",
     "heatingCircuit2": "Verwarmingscircuit 2",

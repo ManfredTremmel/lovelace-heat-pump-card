@@ -49,6 +49,7 @@
     "heatingCircuit1": "Heizkreis 1",
     "heatingCircuitType1": "Heizkreis 1",
     "heatingCircuitPumpRunning": "Status Heizkreispumpe An/Aus",
+    "heatingCircuitPumpBeforeValve": "Heizkreispumpe vor Ventil",
     "supplyTemperatureHeating": "Heizvorlauftemperatur",
     "refluxTemperatureHeating": "Heizrücklauftemperatur",
     "heatingCircuit2": "Heizkreis 2",

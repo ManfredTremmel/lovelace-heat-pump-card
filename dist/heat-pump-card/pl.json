@@ -49,6 +49,7 @@
     "heatingCircuit1": "Obieg grzewczy 1",
     "heatingCircuitType1": "Obieg grzewczy 1",
     "heatingCircuitPumpRunning": "Wł./wył. pompy obiegu grzewczego",
+    "heatingCircuitPumpBeforeValve": "Pompa obiegu grzewczego przed zaworem",
     "supplyTemperatureHeating": "Temp. zasilania",
     "refluxTemperatureHeating": "Temp. powrotu",
     "heatingCircuit2": "Obieg grzewczy 2",

@@ -138,6 +138,7 @@ class HeatPumpCard extends HTMLElement {
           this.content.querySelector("#textCirculatingPump").innerHTML = HeatPumpCard.localization.svgTexts['circulatingPump'];
           this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
           this.querySelector("ha-card").setAttribute("header", this.config.title);
+          this.moveHeatingCircuitPump(this.content, this.config.heatingCircuitPumpBeforeValve);
           this.setLinks();
           this.setValues(hass);
         } else if (lang != "en") {
@@ -345,6 +346,16 @@ class HeatPumpCard extends HTMLElement {
     }
   }
 
+  moveHeatingCircuitPump(content, selection) {
+    var translation = selection ? 'translate(-220,-15)' : 'translate(0,-400)';
+    var animationFrom = selection ? '0 565 489' : '0 785 104';
+    var animationTo = selection ? '360 565 489' : '360 785 104';
+    content.querySelector('#useHeatingPumpChassis').setAttribute('transform', translation);
+    content.querySelector('#useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
+    content.querySelector('#animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);
+    content.querySelector('#animationHeatingCircuitPumpBladeWheel').setAttribute('to', animationTo);
+  }
+
   // The user supplied configuration. Throw an exception and Home Assistant
   // will render an error card.
   setConfig(config) {
@@ -377,6 +388,7 @@ class HeatPumpCard extends HTMLElement {
     this.config = config;
     if (this.content) {
       this.querySelector("ha-card").setAttribute("header", this.config.title);
+      this.moveHeatingCircuitPump(this.content, this.config.heatingCircuitPumpBeforeValve);
     }
     this.setLinks();
   }
@@ -475,6 +487,7 @@ class HeatPumpCard extends HTMLElement {
             },
           },
           { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingCircuitPumpBeforeValve", selector: { boolean: {} } },
           { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
           { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } }
         ],

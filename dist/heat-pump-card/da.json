@@ -49,6 +49,7 @@
     "heatingCircuit1": "Varmekredsløb 1",
     "heatingCircuitType1": "Varmekredsløb 1",
     "heatingCircuitPumpRunning": "Varmekredspumpe Kører (GP6)",
+    "heatingCircuitPumpBeforeValve": "Varmekredspumpe før ventil",
     "supplyTemperatureHeating": "Beregnet Fremløbstemperatur",
     "refluxTemperatureHeating": "Returløbstemperatur",
     "heatingCircuit2": "Varmekredsløb 2",

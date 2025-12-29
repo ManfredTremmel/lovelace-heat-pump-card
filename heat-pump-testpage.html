@@ -162,7 +162,7 @@
         document.getElementById("labelTankTempHPDown").innerHTML = localization.editor['tankTempHPDown'];
 
         document.getElementById("labelHotWaterTank").innerHTML = localization.editor['hotWaterTank'];
-        document.getElementById("labelTankWw").innerHTML = localization.editor['tankWW'];
+        document.getElementById("labelTankWW").innerHTML = localization.editor['tankWW'];
         document.getElementById("labelTankTempWWUp").innerHTML = localization.editor['tankTempWWUp'];
         document.getElementById("labelTankTempWWMiddle").innerHTML = localization.editor['tankTempWWMiddle'];
         document.getElementById("labelTankTempWWDown").innerHTML = localization.editor['tankTempWWDown'];
@@ -172,6 +172,7 @@
         document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
         document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
         document.getElementById("labelHeatingCircuitPumpRunning").innerHTML = localization.editor['heatingCircuitPumpRunning'];
+        document.getElementById("labelHeizkreispumpeVorVentil").innerHTML = localization.editor['heatingCircuitPumpBeforeValve'];
         document.getElementById("labelSupplyTemperatureHeating").innerHTML = localization.editor['supplyTemperatureHeating'];
         document.getElementById("labelRefluxTemperatureHeating").innerHTML = localization.editor['refluxTemperatureHeating'];
 
@@ -306,6 +307,15 @@
          var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureHeating3').value ? document.getElementById('inputRefluxTemperatureHeating3').value : tempIn - 10);
          document.getElementById('stopCircuit5').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
          document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
+      }
+      function moveHeatingCircuitPump(selection) {
+        var translation = selection ? 'translate(-220,-15)' : 'translate(0,-400)';
+        var animationFrom = selection ? '0 565 489' : '0 785 104';
+        var animationTo = selection ? '360 565 489' : '360 785 104';
+        document.getElementById('useHeatingPumpChassis').setAttribute('transform', translation);
+        document.getElementById('useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
+        document.getElementById('animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);
+        document.getElementById('animationHeatingCircuitPumpBladeWheel').setAttribute('to', animationTo);
       }
     </script>
   </head>
@@ -473,6 +483,10 @@
           <div>
             <label for="inputHeizkreispumpe" id="labelHeatingCircuitPumpRunning">Heizkreispumpe aktiv:</label>
             <input type="checkbox" id="inputHeizkreispumpe" checked="true" onClick="switchRotateAttribute('animationHeatingCircuitPumpBladeWheel', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputHeizkreispumpeVorVentil" id="labelHeizkreispumpeVorVentil">Heizkreispumpe vor Ventil:</label>
+            <input type="checkbox" id="inputHeizkreispumpeVorVentil" onClick="moveHeatingCircuitPump(this.checked);"></input>
           </div>
           <div>
             <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>

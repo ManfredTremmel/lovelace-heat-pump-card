@@ -49,6 +49,7 @@
     "heatingCircuit1": "Topný okruh 1",
     "heatingCircuitType1": "Topný okruh 1",
     "heatingCircuitPumpRunning": "Čerpadlo topného okruhu zapnuto/vypnuto",
+    "heatingCircuitPumpBeforeValve": "Čerpadlo topného okruhu před ventilem",
     "supplyTemperatureHeating": "Teplota přívodu topení",
     "refluxTemperatureHeating": "Teplota zpátečky topení",
     "heatingCircuit2": "Topný okruh 2",
