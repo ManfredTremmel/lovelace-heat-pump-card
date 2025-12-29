@@ -79,26 +79,46 @@
          }
       }
       function tempFarbe(temp) {
-         if (temp > 60) {
-            return "#ff0000"
-         }
-         return "#" + ("0" + Math.round(255 * temp / 60).toString(16)).substr(-2) + "00" + ("0" + Math.round(255 * Math.abs(60 - temp) / 60).toString(16)).substr(-2);
+        if (!temp) {
+          return "#ffffff00";
+        }
+        if (temp > 60) {
+          return "#ff0000";
+        }
+        return "#" + ("0" + Math.round(255 * temp / 60).toString(16)).substr(-2) + "00" + ("0" + Math.round(255 * Math.abs(60 - temp) / 60).toString(16)).substr(-2);
+      }
+      function tankColors(inputUp, inputMiddle, inputDown, idUp, idMiddle, idDown) {
+        var tempOben = Number(document.getElementById(inputUp).value);
+        var tempMitte = Number(document.getElementById(inputMiddle).value);
+        var tempUnten = Number(document.getElementById(inputDown).value);
+        if (tempOben) {
+          if (!tempMitte) {
+            if (tempUnten) {
+              tempMitte = (tempOben + tempUnten) / 2;
+            } else {
+              tempMitte = tempOben - 5;
+            }
+          }
+        } else {
+          if (tempMitte) {
+            tempOben = tempMitte + 5;
+          } else if (tempUnten) {
+            tempMitte = tempUnten + 5;
+            tempOben = tempUnten + 10;
+          }
+        }
+        if (tempMitte && !tempUnten) {
+          tempUnten = tempMitte - 5;
+        }
+        document.getElementById(idUp).setAttribute('style', "stop-color:" + tempFarbe(tempOben) + ";");
+        document.getElementById(idMiddle).setAttribute('style', "stop-color:" + tempFarbe(tempMitte) + ";");
+        document.getElementById(idDown).setAttribute('style', "stop-color:" + tempFarbe(tempUnten) + ";");
       }
       function hpFarbe() {
-         var tempOben = document.getElementById('inputTankTempHPUp').value;
-         var tempMitte = Math.max(0, document.getElementById('inputTankTempHPMiddle').value ? document.getElementById('inputTankTempHPMiddle').value : tempOben - 5);
-         var tempUnten = Math.max(0, document.getElementById('inputTankTempHPDown').value ? document.getElementById('inputTankTempHPDown').value : tempMitte - 5);
-         document.getElementById('stop3020').setAttribute('style', "stop-color:" + tempFarbe(tempOben) + ";");
-         document.getElementById('stop3040').setAttribute('style', "stop-color:" + tempFarbe(tempMitte) + ";");
-         document.getElementById('stop3030').setAttribute('style', "stop-color:" + tempFarbe(tempUnten) + ";");
+        tankColors('inputTankTempHPUp', 'inputTankTempHPMiddle', 'inputTankTempHPDown', 'stop3020', 'stop3040', 'stop3030');
       }
       function wwFarbe() {
-         var tempOben = document.getElementById('inputTankTempWWUp').value;
-         var tempMitte = Math.max(0, document.getElementById('inputTankTempWWMiddle').value ? document.getElementById('inputTankTempWWMiddle').value : tempOben - 5);
-         var tempUnten = Math.max(0, document.getElementById('inputTankTempWWDown').value ? document.getElementById('inputTankTempWWDown').value : tempMitte - 5);
-         document.getElementById('stop3050').setAttribute('style', "stop-color:" + tempFarbe(tempOben) + ";");
-         document.getElementById('stop3070').setAttribute('style', "stop-color:" + tempFarbe(tempMitte) + ";");
-         document.getElementById('stop3060').setAttribute('style', "stop-color:" + tempFarbe(tempUnten) + ";");
+        tankColors('inputTankTempWWUp', 'inputTankTempWWMiddle', 'inputTankTempWWDown', 'stop3050', 'stop3070', 'stop3060');
       }
       function handleLocalization(localization) {
         document.getElementById("textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
@@ -136,11 +156,13 @@
         document.getElementById("labelSupplyTemperature").innerHTML = localization.editor['supplyTemperature'];
 
         document.getElementById("labelBufferTank").innerHTML = localization.editor['bufferTank'];
+        document.getElementById("labelTankHP").innerHTML = localization.editor['tankHP'];
         document.getElementById("labelTankTempHPUp").innerHTML = localization.editor['tankTempHPUp'];
         document.getElementById("labelTankTempHPMiddle").innerHTML = localization.editor['tankTempHPMiddle'];
         document.getElementById("labelTankTempHPDown").innerHTML = localization.editor['tankTempHPDown'];
 
         document.getElementById("labelHotWaterTank").innerHTML = localization.editor['hotWaterTank'];
+        document.getElementById("labelTankWw").innerHTML = localization.editor['tankWW'];
         document.getElementById("labelTankTempWWUp").innerHTML = localization.editor['tankTempWWUp'];
         document.getElementById("labelTankTempWWMiddle").innerHTML = localization.editor['tankTempWWMiddle'];
         document.getElementById("labelTankTempWWDown").innerHTML = localization.editor['tankTempWWDown'];
@@ -389,8 +411,12 @@
         <label for="bufferTank" id="labelBufferTank">Heizpuffer</label>
         <div>
           <div>
+            <label for="inputTankHP" id="labelTankHP">Heizpuffer vorhanden:</label>
+            <input type="checkbox" id="inputTankHP" checked="true" onClick="document.getElementById('gTankHP').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
             <label for="inputTankTempHPUp" id="labelTankTempHPUp">Heizpuffertemperatur Oben:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPUp" onChange="document.getElementById('textTankTempHPUp').innerHTML = formatTemp(this.value);hpFarbe();document.getElementById('gTankHP').style.display = this.value ? 'inline' : 'none';" value="31.5"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempHPUp" onChange="document.getElementById('textTankTempHPUp').innerHTML = formatTemp(this.value);hpFarbe();" value="31.5"></input>
           </div>
           <div>
             <label for="inputTankTempHPMiddle" id="labelTankTempHPMiddle">Heizpuffertemperatur Mitte:</label>
@@ -407,8 +433,12 @@
         <label for="hotWaterTank" id="labelHotWaterTank">Warmwassertank</label>
         <div>
           <div>
+            <label for="inputTankWW" id="labelTankWW">Warmwassertank vorhanden:</label>
+            <input type="checkbox" id="inputTankWW" checked="true" onClick="document.getElementById('gWW').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
             <label for="inputTankTempWWUp" id="labelTankTempWWUp">Warmwassertemperatur Oben:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWUp" onChange="document.getElementById('textTankTempWWUp').innerHTML = formatTemp(this.value);wwFarbe();document.getElementById('gWW').style.display = this.value ? 'inline' : 'none';" value="31.5">
+            <input type="number" min="0" max="95" step="0.1" id="inputTankTempWWUp" onChange="document.getElementById('textTankTempWWUp').innerHTML = formatTemp(this.value);wwFarbe();" value="31.5">
           </div>
           <div>
             <label for="inputTankTempWWMiddle" id="labelTankTempWWMiddle">Warmwassertemperatur Mitte:</label>
@@ -420,7 +450,7 @@
           </div>
           <div>
             <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
-            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 600, 487)' : 'rotate(0, 600, 487)');heizstabFarbe();"></input>
+            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 620, 487)' : 'rotate(0, 620, 487)');heizstabFarbe();"></input>
           </div>
           <div>
             <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>

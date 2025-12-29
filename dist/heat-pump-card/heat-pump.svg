@@ -176,6 +176,17 @@
         fill: url(#linearGradientCircuit3);
         stroke: url(#linearGradientCircuit3);
       }
+      #pathUnderfloorHeating1,
+      #pathUnderfloorHeating2,
+      #pathUnderfloorHeating3,
+      #pathRadiatorPipeIn1,
+      #pathRadiatorPipeIn2,
+      #pathRadiatorPipeIn3,
+      #pathRadiatorPipeOut1,
+      #pathRadiatorPipeOut2,
+      #pathRadiatorPipeOut3 {
+        stroke-width: 4;
+      }
     ]]></style>
   <defs id="defs799">
     <marker style="overflow:visible" id="Triangle" refX="0" refY="0" orient="auto-start-reverse" markerWidth="1" markerHeight="1" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid">
@@ -186,22 +197,22 @@
       <stop id="stop3040" style="stop-color:#71008e" offset=".5" />
       <stop id="stop3030" style="stop-color:#5b00a4" offset="1" />
     </linearGradient>
-    <linearGradient id="linearGradientTankWW" x1="850" x2="850" y1="150" y2="300" gradientUnits="userSpaceOnUse">
+    <linearGradient id="linearGradientTankWW" x1="850" x2="850" y1="450" y2="600" gradientUnits="userSpaceOnUse">
       <stop id="stop3050" style="stop-color:#860079" offset="0" />
       <stop id="stop3070" style="stop-color:#71008e" offset=".5" />
       <stop id="stop3060" style="stop-color:#5b00a4" offset="1" />
     </linearGradient>
-    <linearGradient id="linearGradientCircuit1" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
-      <stop id="stopCircuit1" style="stop-color:#800080" offset="0" />
-      <stop id="stopCircuit2" style="stop-color:#5500aa" offset="1" />
+    <linearGradient id="linearGradientCircuit1" x1="883" y1="80" x2="883" y2="120" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit1" style="stop-color:#a00f0f" offset="0" />
+      <stop id="stopCircuit2" style="stop-color:#34109f" offset="1" />
     </linearGradient>
-    <linearGradient id="linearGradientCircuit2" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
-      <stop id="stopCircuit3" style="stop-color:#800080" offset="0" />
-      <stop id="stopCircuit4" style="stop-color:#5500aa" offset="1" />
+    <linearGradient id="linearGradientCircuit2" x1="883" y1="80" x2="883" y2="120" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit3" style="stop-color:#a00f0f" offset="0" />
+      <stop id="stopCircuit4" style="stop-color:#34109f" offset="1" />
     </linearGradient>
-    <linearGradient id="linearGradientCircuit3" x1="883" y1="15" x2="883" y2="182" gradientUnits="userSpaceOnUse">
-      <stop id="stopCircuit5" style="stop-color:#800080" offset="0" />
-      <stop id="stopCircuit6" style="stop-color:#5500aa" offset="1" />
+    <linearGradient id="linearGradientCircuit3" x1="883" y1="80" x2="883" y2="120" gradientUnits="userSpaceOnUse">
+      <stop id="stopCircuit5" style="stop-color:#a00f0f" offset="0" />
+      <stop id="stopCircuit6" style="stop-color:#34109f" offset="1" />
     </linearGradient>
   </defs>
   <g id="layer1">
@@ -262,20 +273,20 @@
       </g>
     </a>
     <g id="gPipe">
-      <path id="pathPipeToWWHeatingValve" d="m 540 487 h 30" />
+      <path id="pathPipeToWWHeatingValve" d="m 540 487 h 100" />
     </g>
     <g id="gHeaterCircuit1">
-      <path id="pathPipeToHP" d="m 620 488 v -193 h 377 v -179" />
+      <path id="pathPipeToHP" d="m 640 488 v -193 h 357 v -179" />
       <g id="gHeaterCircuitFloor1" style="display: none;">
         <path id="pathFloor1" d="m 850,75 75,0 15,50 -105,0 z" />
-        <path id="pathUnderfloorHeating1" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+        <path id="pathUnderfloorHeating1" d="m 785,82 125,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
       </g>
       <g id="radiator1">
-        <path id="pathRadiatorPipeIn1" d="m 795,82 h 43" />
+        <path id="pathRadiatorPipeIn1" d="m 785,82 h 53" />
         <path id="rectRadiator1" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
         <path id="pathRadiatorPipeOut1" d="m 937,115 h 61" />
       </g>
-      <path id="pathPipeToHeatingCircuitPump" d="m 745.5 295 v -155 h 39.5 v -20" />
+      <path id="pathPipeToHeatingCircuitPump" d="m 745.5 295 v -155 h 39.5 v -60" />
       <text id="textSupplyTemperatureHeating" x="800" y="73" xml:space="preserve">30,0 ℃</text>
       <text id="textRefluxTemperatureHeating" x="940" y="110" xml:space="preserve">20,0 ℃</text>
       <g id="gHeatingCircuitPump">
@@ -287,14 +298,14 @@
       </g>
     </g>
     <g id="gHeaterCircuit3">
-      <g id="gHeaterCircuitFloor3" style="display: none;">
-        <path id="pathFloor3" d="m 850,225 75,0 15,50 -105,0 z" />
-        <path id="pathUnderfloorHeating1" transform="translate(0,150)" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+      <g id="gHeaterCircuitFloor3" transform="translate(0,150)" style="display: none;">
+        <path id="pathFloor3" d="m 850,75 75,0 15,50 -105,0 z" />
+        <path id="pathUnderfloorHeating3" d="m 785,82 125,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
       </g>
-      <g id="radiator3">
-        <path id="pathRadiatorPipeIn3" d="m 795,232 h 43" />
-        <path id="rectRadiator3" transform="translate(0,150)" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
-        <path id="pathRadiatorPipeOut3" d="m 937,265 h 61" />
+      <g id="radiator3" transform="translate(0,150)">
+        <path id="pathRadiatorPipeIn3" d="m 785,82 h 53" />
+        <path id="rectRadiator3" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
+        <path id="pathRadiatorPipeOut3" d="m 937,115 h 61" />
       </g>
       <path id="pathPipeToHeatingCircuitPump3" d="m 785 140 v 95" />
       <text id="textSupplyTemperatureHeating3" x="800" y="223" xml:space="preserve">30,0 ℃</text>
@@ -308,14 +319,14 @@
       </g>
     </g>
     <g id="gHeaterCircuit2">
-      <g id="gHeaterCircuitFloor2" style="display: none;">
-        <path id="pathFloor2" d="m 850,150 75,0 15,50 -105,0 z" />
-        <path id="pathUnderfloorHeating2" transform="translate(0,75)" d="m 795,82 115,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
+      <g id="gHeaterCircuitFloor2" transform="translate(0,75)" style="display: none;">
+        <path id="pathFloor2" d="m 850,75 75,0 15,50 -105,0 z" />
+        <path id="pathUnderfloorHeating2" d="m 785,82 125,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
       </g>
-      <g id="radiator2">
-        <path id="pathRadiatorPipeIn2" d="m 795,157 h 43" />
-        <path id="rectRadiator2" transform="translate(0,75)" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
-        <path id="pathRadiatorPipeOut2" d="m 937,190 h 61" />
+      <g id="radiator2" transform="translate(0,75)">
+        <path id="pathRadiatorPipeIn2" d="m 785,82 h 53" />
+        <path id="rectRadiator2" d="M 842 75 A 5 5 0 0 0 837 80 L 837 120 A 5 5 0 0 0 842 125 L 932 125 A 5 5 0 0 0 937 120 L 937 80 A 5 5 0 0 0 932 75 L 842 75 z M 845 80 L 850 80 L 850 120 L 845 120 L 845 80 z M 855 80 L 860 80 L 860 120 L 855 120 L 855 80 z M 865 80 L 870 80 L 870 120 L 865 120 L 865 80 z M 875 80 L 880 80 L 880 120 L 875 120 L 875 80 z M 885 80 L 890 80 L 890 120 L 885 120 L 885 80 z M 895 80 L 900 80 L 900 120 L 895 120 L 895 80 z M 905 80 L 910 80 L 910 120 L 905 120 L 905 80 z M 915 80 L 920 80 L 920 120 L 915 120 L 915 80 z M 925 80 L 930 80 L 930 120 L 925 120 L 925 80 z " />
+        <path id="pathRadiatorPipeOut2" d="m 937,115 h 61" />
       </g>
       <path id="pathPipeToHeatingCircuitPump2" d="m 785 140 v 20" />
       <text id="textSupplyTemperatureHeating2" x="800" y="148" xml:space="preserve">30,0 ℃</text>
@@ -339,7 +350,7 @@
       <path id="pathHeaterRodHP" d="m 745 265 h -40 c -4.7507 0-5.0111-10 0-10 h 40" />
     </g>
     <g id="gWW">
-      <path id="pathTipeToWW" d="m 620 488 v 107 h 36" />
+      <path id="pathTipeToWW" d="m 640 488 v 107 h 16" />
       <path id="pathPipeRefluxWW" d="m 745 595 h 40 v -155" />
       <path id="pathPipeToCirculatingPump" d="m 745 440 h 145" />
       <g id="gWaterTap" transform="matrix(4 0 0 4 654.563 -1356.5)">
@@ -357,8 +368,8 @@
         <path id="pathHeaterRodWW" d="m 745 569 h -40 c -4.7507 0-5.0111-10 0-10 h 40" />
       </g>
       <g id="gWWHeatingValve">
-        <circle id="pathCircleWWHeatingValve" cx="600" cy="487" r="30" />
-        <path id="pathArrowCircleWWHeatingValve" d="m 583 470 h 34 v 34" />
+        <circle id="pathCircleWWHeatingValve" cx="620" cy="487" r="30" />
+        <path id="pathArrowCircleWWHeatingValve" d="m 603 470 h 34 v 34" />
       </g>
       <g id="gCirculatingPump">
         <text id="textCirculatingPump" x="785" y="475" text-anchor="middle" xml:space="preserve">C P</text>

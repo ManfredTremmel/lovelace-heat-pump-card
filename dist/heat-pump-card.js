@@ -65,7 +65,7 @@ class HeatPumpCard extends HTMLElement {
 
     const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
 
-    if (this.config.tankTempHPUp) {
+    if (this.config.tankHP) {
       const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
       this.content.querySelector("#gTankHP").style.display = 'inline';
       this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
@@ -80,7 +80,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gTankHP").style.display = 'none';
     }
 
-    if (this.config.tankTempWWUp) {
+    if (this.config.tankWW) {
       this.content.querySelector("#gWW").style.display = 'inline';
       const tankTempWWUp = this.readState(hass, this.config.tankTempWWUp);
       this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNumValue(tankTempWWUp);
@@ -90,7 +90,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
       this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
 
-      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 600, 487)');
+      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 487)');
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     } else {
       this.content.querySelector("#gWW").style.display = 'none';
@@ -236,6 +236,9 @@ class HeatPumpCard extends HTMLElement {
   }
 
   tempColor(temp) {
+    if (!temp) {
+      return "#ffffff00";
+    }
     if (temp > 60) {
       return "#ff0000"
     }
@@ -243,9 +246,28 @@ class HeatPumpCard extends HTMLElement {
   }
 
   tankColors(content, tankTempUp, tankTempMiddle, tankTempDown, idUp, idMiddle, idDown) {
-    var tempUp = tankTempUp ? tankTempUp.state : 0;
-    var tempMiddle = Math.max(0, tankTempMiddle ? tankTempMiddle.state : tempUp - 5);
-    var tempDown = Math.max(0, tankTempDown ? tankTempDown.state : tempMiddle - 5);
+    var tempUp = tankTempUp ? tankTempUp.state : null;
+    var tempMiddle = tankTempMiddle ? tankTempMiddle.state : null;
+    var tempDown = tankTempDown ? tankTempDown.state : null;
+    if (tempUp) {
+      if (!tempMiddle) {
+        if (tempDown) {
+          tempMiddle = (tempUp + tempDown) / 2;
+        } else {
+          tempMiddle = tempUp - 5;
+        }
+      }
+    } else {
+      if (tempMiddle) {
+        tempUp = tempMiddle + 5;
+      } else if (tempDown) {
+        tempMiddle = tempDown + 5;
+        tempUp = tempDown + 10;
+      }
+    }
+    if (tempMiddle && !tempDown) {
+      tempDown = tempMiddle - 5;
+    }
     content.querySelector(idUp).setAttribute('style', "stop-color:" + this.tempColor(tempUp));
     content.querySelector(idMiddle).setAttribute('style', "stop-color:" + this.tempColor(tempMiddle));
     content.querySelector(idDown).setAttribute('style', "stop-color:" + this.tempColor(tempDown));
@@ -417,6 +439,7 @@ class HeatPumpCard extends HTMLElement {
         name: "bufferTank",
         flatten: true,
         schema: [
+          { name: "tankHP", default: true, selector: { boolean: {} } },
           { name: "tankTempHPUp", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempHPMiddle", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempHPDown", selector: { entity: {domain: ["sensor"]} } }
@@ -426,6 +449,7 @@ class HeatPumpCard extends HTMLElement {
         name: "hotWaterTank",
         flatten: true,
         schema: [
+          { name: "tankWW", default: true, selector: { boolean: {} } },
           { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
