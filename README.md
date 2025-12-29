@@ -43,7 +43,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | error | object | optional | A error symbol is displayed, when result is on
 | defrostMode | object | optional | A defrost mode symbol is displayed, when result is on
 | outdoorTemperature | object | optional | Outdoor Temperature
-| ambientTemperatureNormal | object | **Required** | Ambient Temperature normal
+| ambientTemperatureNormal | object | optional | Ambient Temperature normal
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
 | ambientTemperatureParty | object | optional | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
 | supplyTemperature | object | optional | Supply Temperature

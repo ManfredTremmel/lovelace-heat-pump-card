@@ -366,10 +366,6 @@ class HeatPumpCard extends HTMLElement {
       throw new Error("You need to define heatingPumpHeatingMode");
     }
 
-    if (!config.ambientTemperatureNormal) {
-      throw new Error("You need to define ambientTemperatureNormal");
-    }
-
     if (!config.hpRunning) {
       throw new Error("You need to define hpRunning");
     }
@@ -441,7 +437,7 @@ class HeatPumpCard extends HTMLElement {
         flatten: true,
         schema: [
           { name: "outdoorTemperature", selector: { entity: {domain: ["sensor"]} } },
-          { name: "ambientTemperatureNormal", required: true, selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "ambientTemperatureNormal", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } }
@@ -574,9 +570,6 @@ class HeatPumpCard extends HTMLElement {
       }
       if (!config.heatingPumpHeatingMode || typeof config.heatingPumpHeatingMode !== "string") {
         throw new Error('Configuration error: "heatingPumpHeatingMode" must be a non-empty string.');
-      }
-      if (!config.ambientTemperatureNormal || typeof config.ambientTemperatureNormal !== "string") {
-        throw new Error('Configuration error: "ambientTemperatureNormal" must be a non-empty string.');
       }
       if (!config.hpRunning || typeof config.hpRunning !== "string") {
         throw new Error('Configuration error: "hpRunning" must be a non-empty string.');
