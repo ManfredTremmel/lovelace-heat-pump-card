@@ -13,7 +13,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   setValues(hass) {
-    this.changeHeatPumpType(this.content, this.config.heatingPumpType, this.config.hpRunning, hass);
+    this.changeHeatPumpRunning(this.content, this.config.heatingPumpType, this.config.hpRunning, hass);
     this.content.querySelector("#textG2WWaterTempIn").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterIn);
     this.content.querySelector("#textG2WWaterTempOut").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterOut);
 
@@ -51,23 +51,22 @@ class HeatPumpCard extends HTMLElement {
 
     this.switchRotateAttribute("#animationCompressor", hass, this.config.compressorRunning);
     if (this.config.heatingCircuitPumpRunning) {
-      this.content.querySelector("#gHeatingCircuitPump").style.display = 'inline';
       this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel", hass, this.config.heatingCircuitPumpRunning);
-    } else {
-      this.content.querySelector("#gHeatingCircuitPump").style.display = 'none';
+    }
+    if (this.config.heatingCircuitPumpRunning2) {
+      this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel2", hass, this.config.heatingCircuitPumpRunning2);
+    }
+    if (this.config.heatingCircuitPumpRunning3) {
+      this.switchRotateAttribute("#animationHeatingCircuitPumpBladeWheel3", hass, this.config.heatingCircuitPumpRunning3);
     }
     if (this.config.circulatingPumpRunning) {
-      this.content.querySelector("#gCirculatingPump").style.display = 'inline';
       this.switchRotateAttribute("#animationCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
-    } else {
-      this.content.querySelector("#gCirculatingPump").style.display = 'none';
     }
 
     const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
 
     if (this.config.tankHP) {
       const tankTempHPUp = this.readState(hass, this.config.tankTempHPUp);
-      this.content.querySelector("#gTankHP").style.display = 'inline';
       this.content.querySelector("#textTankTempHPUp").innerHTML = this.formatNumValue(tankTempHPUp);
       const tankTempHPMiddle = this.readState(hass, this.config.tankTempHPMiddle);
       this.content.querySelector("#textTankTempHPMiddle").innerHTML = this.formatNumValue(tankTempHPMiddle);
@@ -75,13 +74,10 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textTankTempHPDown").innerHTML = this.formatNumValue(tankTempHPDown);
       this.tankColors(this.content, tankTempHPUp, tankTempHPMiddle, tankTempHPDown, "#stop3020", "#stop3040", "#stop3030");
 
-        this.content.querySelector("#pathHeaterRodHP").style.display =  this.formatBinary(hass, this.config.heaterRodHP) ? 'block' : 'none';
-    } else {
-      this.content.querySelector("#gTankHP").style.display = 'none';
+      this.content.querySelector("#pathHeaterRodHP").style.display =  this.formatBinary(hass, this.config.heaterRodHP) ? 'block' : 'none';
     }
 
     if (this.config.tankWW) {
-      this.content.querySelector("#gWW").style.display = 'inline';
       const tankTempWWUp = this.readState(hass, this.config.tankTempWWUp);
       this.content.querySelector("#textTankTempWWUp").innerHTML = this.formatNumValue(tankTempWWUp);
       const tankTempWWMiddle = this.readState(hass, this.config.tankTempWWMiddle);
@@ -92,22 +88,11 @@ class HeatPumpCard extends HTMLElement {
 
       this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 487)');
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
-    } else {
-      this.content.querySelector("#gWW").style.display = 'none';
     }
 
-    if (!this.config.supplyTemperatureHeating && !this.config.refluxTemperatureHeating && !this.config.tankTempHPUp && !this.config.tankTempWWUp && !this.config.heatingCircuitPumpRunning && this.config.circulatingPumpRunning) {
-      this.content.querySelector("#gPipe").style.display = 'none';
-      this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
-      this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
-    } else {
-      this.content.querySelector("#gPipe").style.display = 'inline';
-      this.content.querySelector("#gHP").removeAttribute("transform");
-      this.content.querySelector("#gSettings").removeAttribute("transform");
-      this.heatingCurcuit1(this.content, hass);
-      this.heatingCurcuit2(this.content, hass);
-      this.heatingCurcuit3(this.content, hass);
-    }
+    this.heatingCurcuit1(this.content, hass);
+    this.heatingCurcuit2(this.content, hass);
+    this.heatingCurcuit3(this.content, hass);
 
     this.content.querySelector("#textEvaporatorPressure").innerHTML = this.formatNum(hass, this.config.evaporatorPressure);
     this.content.querySelector("#textEvaporatorTemperature").innerHTML = this.formatNum(hass, this.config.evaporatorTemperature);
@@ -137,9 +122,7 @@ class HeatPumpCard extends HTMLElement {
           this.content.querySelector("#textExpansionValve").innerHTML = HeatPumpCard.localization.svgTexts['expansionValve'];
           this.content.querySelector("#textCirculatingPump").innerHTML = HeatPumpCard.localization.svgTexts['circulatingPump'];
           this.content.querySelector("#textSupplyTemperatureLabel").innerHTML = HeatPumpCard.localization.svgTexts['supplyTemperatureLabel'];
-          this.querySelector("ha-card").setAttribute("header", this.config.title);
-          this.moveHeatingCircuitPump(this.content, this.config.heatingCircuitPumpBeforeValve);
-          this.setLinks();
+          this.setConfig(this.config);
           this.setValues(hass);
         } else if (lang != "en") {
           this.readLocalization("en", hass);
@@ -280,10 +263,7 @@ class HeatPumpCard extends HTMLElement {
     window.dispatchEvent(new CustomEvent("location-changed"));
   }
 
-  changeHeatPumpType(content, selection, running, hass) {
-    content.querySelector('#gHPFan').style.display = (!selection || selection === 'A2W' ? 'inline' : 'none');
-    content.querySelector('#gHPW2W').style.display = (selection === 'W2W' ? 'inline' : 'none');
-    content.querySelector('#gHPG2W').style.display = (selection === 'G2W' ? 'inline' : 'none');
+  changeHeatPumpRunning(content, selection, running, hass) {
     this.switchRotateAttribute("#animationHPFan", hass, !selection || selection === 'A2W' ? running : null);
     this.switchRotateAttribute("#animationHPW2WPumpBladeWheel", hass, selection === 'W2W' ? running : null);
     this.switchRotateAttribute("#animationHPG2WPumpBladeWheel", hass, selection === 'G2W' ? running : null);
@@ -291,16 +271,11 @@ class HeatPumpCard extends HTMLElement {
 
   heatingCurcuit1(content, hass) {
     var type = this.config.heatingCircuitType1;
-    if (!type || type === 'off') {
-      content.querySelector('#gHeaterCircuit1').style.display = ('none');
-    } else {
+    if (type && type != 'off') {
       var tempInState = this.readState(hass, this.config.supplyTemperatureHeating);
-      var tempIn = tempInState ? tempInState.state : 0;
+      var tempIn = tempInState ? tempInState.state : 30;
       var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating);
       var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
-      content.querySelector('#gHeaterCircuit1').style.display = ('inline');
-      content.querySelector('#gHeaterCircuitFloor1').style.display = (type === 'underfloor' ? 'inline' : 'none');
-      content.querySelector('#radiator1').style.display = (type === 'radiator' ? 'inline' : 'none');
       content.querySelector('#stopCircuit1').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
       content.querySelector('#stopCircuit2').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
       content.querySelector("#textSupplyTemperatureHeating").innerHTML = this.formatNumValue(tempInState);
@@ -310,16 +285,11 @@ class HeatPumpCard extends HTMLElement {
 
   heatingCurcuit2(content, hass) {
     var type = this.config.heatingCircuitType2;
-    if (!type || type === 'off') {
-      content.querySelector('#gHeaterCircuit2').style.display = ('none');
-    } else {
+    if (type && type != 'off') {
       var tempInState = this.readState(hass, this.config.supplyTemperatureHeating2);
-      var tempIn = tempInState ? tempInState.state : 0;
+      var tempIn = tempInState ? tempInState.state : 30;
       var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating2);
       var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
-      content.querySelector('#gHeaterCircuit2').style.display = ('inline');
-      content.querySelector('#gHeaterCircuitFloor2').style.display = (type === 'underfloor' ? 'inline' : 'none');
-      content.querySelector('#radiator2').style.display = (type === 'radiator' ? 'inline' : 'none');
       content.querySelector('#stopCircuit3').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
       content.querySelector('#stopCircuit4').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
       content.querySelector("#textSupplyTemperatureHeating2").innerHTML = this.formatNumValue(tempInState);
@@ -329,16 +299,11 @@ class HeatPumpCard extends HTMLElement {
 
   heatingCurcuit3(content, hass) {
     var type = this.config.heatingCircuitType3;
-    if (!type || type === 'off') {
-      content.querySelector('#gHeaterCircuit3').style.display = ('none');
-    } else {
+    if (type && type != 'off') {
+      var tempInState = this.readState(hass, this.config.supplyTemperatureHeating3);
+      var tempIn = tempInState ? tempInState.state : 30;
       var tempOutState = this.readState(hass, this.config.refluxTemperatureHeating3);
       var tempOut = Math.max(0, tempOutState ? tempOutState.state : tempIn - 10);
-      var tempIn = this.readState(hass, this.config.supplyTemperatureHeating3);
-      var tempOut = Math.max(0, this.readState(hass, this.config.refluxTemperatureHeating3) ? this.readState(hass, this.config.refluxTemperatureHeating3) : tempIn - 10);
-      content.querySelector('#gHeaterCircuit3').style.display = ('inline');
-      content.querySelector('#gHeaterCircuitFloor3').style.display = (type === 'underfloor' ? 'inline' : 'none');
-      content.querySelector('#radiator3').style.display = (type === 'radiator' ? 'inline' : 'none');
       content.querySelector('#stopCircuit5').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
       content.querySelector('#stopCircuit6').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
       content.querySelector("#textSupplyTemperatureHeating3").innerHTML = this.formatNumValue(tempInState);
@@ -383,10 +348,61 @@ class HeatPumpCard extends HTMLElement {
 
     this.config = config;
     if (this.content) {
-      this.querySelector("ha-card").setAttribute("header", this.config.title);
-      this.moveHeatingCircuitPump(this.content, this.config.heatingCircuitPumpBeforeValve);
+      this.querySelector("ha-card").setAttribute("header", config.title);
+      this.content.querySelector('#gHPFan').style.display = (!this.config.heatingPumpType || this.config.heatingPumpType === 'A2W' ? 'inline' : 'none');
+      this.content.querySelector('#gHPW2W').style.display = (this.config.heatingPumpType === 'W2W' ? 'inline' : 'none');
+      this.content.querySelector('#gHPG2W').style.display = (this.config.heatingPumpType === 'G2W' ? 'inline' : 'none');
+      this.moveHeatingCircuitPump(this.content, config.heatingCircuitPumpBeforeValve);
+      this.content.querySelector("#gCirculatingPump").style.display = config.circulatingPumpRunning ? 'inline' : 'none';
+      this.content.querySelector('#animationCirculatingPumpBladeWheel').removeAttribute('type');
+      this.content.querySelector("#gTankHP").style.display = config.tankHP ? 'inline' : 'none';
+      this.content.querySelector("#gWW").style.display = config.tankWW ? 'inline' : 'none';
+
+      if (!config.supplyTemperatureHeating && !config.refluxTemperatureHeating && !config.tankTempHPUp && !config.tankTempWWUp && !config.heatingCircuitPumpRunning && config.circulatingPumpRunning) {
+        this.content.querySelector("#gPipe").style.display = 'none';
+        this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
+        this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
+      } else {
+        this.content.querySelector("#gPipe").style.display = 'inline';
+        this.content.querySelector("#gHP").removeAttribute("transform");
+        this.content.querySelector("#gSettings").removeAttribute("transform");
+      }
+
+      var type1 = config.heatingCircuitType1;
+      if (!type1 || type1 === 'off') {
+        this.content.querySelector('#gHeaterCircuit1').style.display = 'none';
+      } else {
+        this.content.querySelector('#gHeaterCircuit1').style.display = 'inline';
+        this.content.querySelector('#gHeaterCircuitFloor1').style.display = (type1 === 'underfloor' ? 'inline' : 'none');
+        this.content.querySelector('#radiator1').style.display = (type1 === 'radiator' ? 'inline' : 'none');
+      }
+      this.content.querySelector('#animationHeatingCircuitPumpBladeWheel').removeAttribute('type');
+      this.content.querySelector("#gHeatingCircuitPump").style.display = config.heatingCircuitPumpRunning ? 'inline' : 'none';
+
+      var type2 = config.heatingCircuitType2;
+      if (!type2 || type2 === 'off') {
+        this.content.querySelector('#gHeaterCircuit2').style.display = 'none';
+      } else {
+        this.content.querySelector('#gHeaterCircuit2').style.display = 'inline';
+        this.content.querySelector('#gHeaterCircuitFloor2').style.display = (type2 === 'underfloor' ? 'inline' : 'none');
+        this.content.querySelector('#radiator2').style.display = (type2 === 'radiator' ? 'inline' : 'none');
+      }
+      this.content.querySelector('#animationHeatingCircuitPumpBladeWheel2').removeAttribute('type');
+      this.content.querySelector("#gHeatingCircuitPump2").style.display = config.heatingCircuitPumpRunning2 ? 'inline' : 'none';
+
+      var type3 = config.heatingCircuitType3;
+      if (!type3 || type3 === 'off') {
+        this.content.querySelector('#gHeaterCircuit3').style.display = 'none';
+      } else {
+        this.content.querySelector('#gHeaterCircuit3').style.display = 'inline';
+        this.content.querySelector('#gHeaterCircuitFloor3').style.display = (type3 === 'underfloor' ? 'inline' : 'none');
+        this.content.querySelector('#radiator3').style.display = (type3 === 'radiator' ? 'inline' : 'none');
+      }
+      this.content.querySelector('#animationHeatingCircuitPumpBladeWheel3').removeAttribute('type');
+      this.content.querySelector("#gHeatingCircuitPump3").style.display = config.heatingCircuitPumpRunning3 ? 'inline' : 'none';
+
+      this.setLinks();
     }
-    this.setLinks();
   }
 
   static getConfigForm() {
