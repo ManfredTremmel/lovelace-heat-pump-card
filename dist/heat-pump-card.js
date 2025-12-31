@@ -198,7 +198,7 @@ class HeatPumpCard extends HTMLElement {
 
   formatNumValue(stateValue) {
     if (stateValue) {
-      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(stateValue.state) + " " + stateValue.attributes.unit_of_measurement;
+      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(stateValue.state) + " " + stateValue.attributes.unit_of_measurement;
     }
     return null;
   }
