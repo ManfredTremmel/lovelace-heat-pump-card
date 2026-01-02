@@ -86,7 +86,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
       this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
 
-      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 487)');
+      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 362)');
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     }
 
@@ -312,9 +312,9 @@ class HeatPumpCard extends HTMLElement {
   }
 
   moveHeatingCircuitPump(content, selection) {
-    var translation = selection ? 'translate(-220,-15)' : 'translate(0,-400)';
-    var animationFrom = selection ? '0 565 489' : '0 785 104';
-    var animationTo = selection ? '360 565 489' : '360 785 104';
+    var translation = selection ? 'translate(-195,-15)' : 'translate(0,-400)';
+    var animationFrom = selection ? '0 590 489' : '0 785 104';
+    var animationTo = selection ? '360 590 489' : '360 785 104';
     content.querySelector('#useHeatingPumpChassis').setAttribute('transform', translation);
     content.querySelector('#useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
     content.querySelector('#animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);

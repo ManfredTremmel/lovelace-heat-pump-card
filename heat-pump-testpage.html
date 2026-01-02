@@ -309,9 +309,9 @@
          document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
       }
       function moveHeatingCircuitPump(selection) {
-        var translation = selection ? 'translate(-220,-15)' : 'translate(0,-400)';
-        var animationFrom = selection ? '0 565 489' : '0 785 104';
-        var animationTo = selection ? '360 565 489' : '360 785 104';
+        var translation = selection ? 'translate(-195,-15)' : 'translate(0,-400)';
+        var animationFrom = selection ? '0 590 489' : '0 785 104';
+        var animationTo = selection ? '360 590 489' : '360 785 104';
         document.getElementById('useHeatingPumpChassis').setAttribute('transform', translation);
         document.getElementById('useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
         document.getElementById('animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);
@@ -460,7 +460,7 @@
           </div>
           <div>
             <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
-            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 620, 487)' : 'rotate(0, 620, 487)');heizstabFarbe();"></input>
+            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 620, 362)' : 'rotate(0, 620, 362)');heizstabFarbe();"></input>
           </div>
           <div>
             <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
