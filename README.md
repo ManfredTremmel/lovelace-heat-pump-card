@@ -32,9 +32,9 @@ Home Assistant dashboard card displaying heat pump parameters
 | heatingPumpType | string | optional | Chose between three types of heat pump: "A2W" (Air to Water), "W2W" (Water to Water) and "G2W" (Ground to Water), if not set, A2W is used as default
 | temperatureGroundWaterIn | object | optional | Used for "W2W" and "G2W" heat pumps for input temerature
 | temperatureGroundWaterOut | object | optional | Used for "W2W" and "G2W" heat pumps for output temerature
-| heatingPumpStatusOnOff | object | **Required** | if heating pump is off, power symbol is displayed
+| heatingPumpStatusOnOff | object | optional | if heating pump is off, power symbol is displayed
 | heatingPumpHotWaterMode | object | optional | Hot Water Mode, when on, faucet symbol is displayed
-| heatingPumpHeatingMode | object | **Required** | if Heating Mode is on, radiator symbol is displayed
+| heatingPumpHeatingMode | object | optional | if Heating Mode is on, radiator symbol is displayed
 | heatingPumpCoolingMode | object | optional | in Cooling Mode, the cooling symbol is displayed
 | heatingPumpPartyMode | object | optional | in Party Mode the drinking glass symbol and `ambientTemperatureParty` (when set) is displayed
 | heatingPumpEnergySaveMode | object | optional | in Energy Saving Mode the piggybank symbol and `ambientTemperatureReduced` (when set) is displayed
@@ -47,8 +47,8 @@ Home Assistant dashboard card displaying heat pump parameters
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
 | ambientTemperatureParty | object | optional | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
 | supplyTemperature | object | optional | Supply Temperature
-| hpRunning | object | **Required** | when Primary Source is active, the fan animation is running
-| compressorRunning | object | **Required** | Binary sensor which detects if Compressor is running
+| hpRunning | object | optional | when Primary Source is active, the fan animation is running
+| compressorRunning | object | optional | Binary sensor which detects if Compressor is running
 | circulatingPumpRunning | object | optional | Binary sensor which detects if Circulating Pump is running, if not defined, circulating pump is not displayed
 | tankHP | boolean | optional | Binary setting to display buffer tank or not
 | tankTempHPUp | object | optional | Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, buffer tank is not displayed!
@@ -81,8 +81,8 @@ Home Assistant dashboard card displaying heat pump parameters
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
 | heaterRodLevel1 | object | optional | Heater Rod is using Level 1, color is set to orange
 | heaterRodLevel2 | object | optional | Heater Rod is using Level 2, color is set to red
-| linkDetails | string | **Required** | Link to details page
-| linkSettings | string | **Required** | Link to settings page
+| linkDetails | string | optional | Link to details page
+| linkSettings | string | optional | Link to settings page
 
 
 ### Example

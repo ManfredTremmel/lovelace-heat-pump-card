@@ -166,8 +166,12 @@ class HeatPumpCard extends HTMLElement {
 
   setLinks() {
     if (this.content && this.config) {
-      this.content.querySelector("#linkDetails").setAttribute('href', this.config.linkDetails);
-      this.content.querySelector("#linkSettings").setAttribute('href', this.config.linkSettings);
+      if (this.config.linkDetails) {
+        this.content.querySelector("#linkDetails").setAttribute('href', this.config.linkDetails);
+      }
+      if (this.config.linkSettings) {
+        this.content.querySelector("#linkSettings").setAttribute('href', this.config.linkSettings);
+      }
     }
   }
 
@@ -324,28 +328,6 @@ class HeatPumpCard extends HTMLElement {
   // The user supplied configuration. Throw an exception and Home Assistant
   // will render an error card.
   setConfig(config) {
-    if (!config.heatingPumpStatusOnOff) {
-      throw new Error("You need to define heatingPumpStatusOnOff");
-    }
-    if (!config.heatingPumpHeatingMode) {
-      throw new Error("You need to define heatingPumpHeatingMode");
-    }
-
-    if (!config.hpRunning) {
-      throw new Error("You need to define hpRunning");
-    }
-    if (!config.compressorRunning) {
-      throw new Error("You need to define compressorRunning");
-    }
-
-    if (!config.linkDetails) {
-      throw new Error("You need to define linkDetails");
-    }
-
-    if (!config.linkSettings) {
-      throw new Error("You need to define linkSettings");
-    }
-
     this.config = config;
     if (this.content) {
       this.querySelector("ha-card").setAttribute("header", config.title);
@@ -393,7 +375,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gHeatingCircuitPump3").style.display = config.heatingCircuitPumpRunning3 ? 'inline' : 'none';
 
       var noHeating = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') && (!type3 || type3 === 'off') && !config.tankHP;
-      var noHotWater = config.tankWW;
+      var noHotWater = !config.tankWW;
 
       if(noHeating && noHotWater) {
         this.content.querySelector("#gPipe").style.display = 'none';
@@ -440,9 +422,9 @@ class HeatPumpCard extends HTMLElement {
         name: "states",
         flatten: true,
         schema: [
-          { name: "heatingPumpStatusOnOff", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpStatusOnOff", selector: { entity: {domain: ["binary_sensor"]} } },
           { name: "heatingPumpHotWaterMode", selector: { entity: {domain: ["binary_sensor"]} } },
-          { name: "heatingPumpHeatingMode", required: true, selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "heatingPumpHeatingMode", selector: { entity: {domain: ["binary_sensor"]} } },
           { name: "heatingPumpCoolingMode", selector: { entity: {domain: ["binary_sensor"]} } },
           { name: "heatingPumpPartyMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "heatingPumpEnergySaveMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
@@ -450,8 +432,8 @@ class HeatPumpCard extends HTMLElement {
           { name: "warning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-          { name: "hpRunning", required: true, selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-          { name: "compressorRunning", required: true, selector: { entity: {domain: ["binary_sensor"]} } }
+          { name: "hpRunning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "compressorRunning", selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
       { type: "expandable",
@@ -579,32 +561,14 @@ class HeatPumpCard extends HTMLElement {
         name: "links",
         flatten: true,
         schema: [
-          { name: "linkDetails", required: true, selector: { navigation: {} } },
-          { name: "linkSettings", required: true, selector: { navigation: {} } }
+          { name: "linkDetails", selector: { navigation: {} } },
+          { name: "linkSettings", selector: { navigation: {} } }
         ],
       }
     ];
 
     // A simple assertion function to validate the configuration.
     const assertConfig = (config) => {
-      if (!config.heatingPumpStatusOnOff || typeof config.heatingPumpStatusOnOff !== "string") {
-        throw new Error('Configuration error: "heatingPumpStatusOnOff" must be a non-empty string.');
-      }
-      if (!config.heatingPumpHeatingMode || typeof config.heatingPumpHeatingMode !== "string") {
-        throw new Error('Configuration error: "heatingPumpHeatingMode" must be a non-empty string.');
-      }
-      if (!config.hpRunning || typeof config.hpRunning !== "string") {
-        throw new Error('Configuration error: "hpRunning" must be a non-empty string.');
-      }
-      if (!config.compressorRunning || typeof config.compressorRunning !== "string") {
-        throw new Error('Configuration error: "compressorRunning" must be a non-empty string.');
-      }
-      if (!config.linkDetails || typeof config.linkDetails !== "string") {
-        throw new Error('Configuration error: "linkDetails" must be a non-empty string.');
-      }
-      if (!config.linkSettings || typeof config.linkSettings !== "string") {
-        throw new Error('Configuration error: "linkSettings" must be a non-empty string.');
-      }
     };
 
     // computeLabel returns a localized label for a schema item.

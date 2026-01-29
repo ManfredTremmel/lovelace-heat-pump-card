@@ -63,12 +63,12 @@
       }
       #pathTankWWChassis {
         fill: url(#linearGradientTankWW);
-        fill-opacity: 1;
+        fill-opacity: 0.75;
         fill-rule: nonzero;
       }
       #pathTankHPChassis {
         fill: url(#linearGradientTankHP);
-        fill-opacity: 1;
+        fill-opacity: 0.75;
         fill-rule: nonzero;
       }
       #pathArrowCircleWWHeatingValve,
@@ -253,7 +253,7 @@
       <path id="pathPipeToBuffer" d="m 598,450 c 22,0 22,-15 22,-30 V 158 c 0,-12 5,-18 18,-18 H 750" />
       <path id="pathPipeFromBuffer" d="m 997,265 c 0,15 0,30 -22,30 H 650 c -15,0 -22,13 -22,30 v 170 c 0,18 -18,30 -30,30" />
     </g>
-    <a id="linkDetails" href="hp-details">
+    <a id="linkDetails" href="#">
       <g id="gHP">
         <g id="gHPFan">
           <circle id="pathHPChassisFanHole" cx="190" cy="485" r="100" />
@@ -426,7 +426,7 @@
         </g>
       </g>
     </g>
-    <a id="linkSettings" href="hp-settings">
+    <a id="linkSettings" href="#">
       <g id="gSettings">
         <rect id="rectSettings" x="65.353" y="50" width="474.29" height="274.29" />
         <g id="gHPStatusSave" transform="matrix(4 0 0 4 -777.26 -1088)">
