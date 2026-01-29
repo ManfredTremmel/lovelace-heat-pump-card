@@ -86,7 +86,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textTankTempWWDown").innerHTML = this.formatNumValue(tankTempWWDown);
       this.tankColors(this.content, tankTempWWUp, tankTempWWMiddle, tankTempWWDown, "#stop3050", "#stop3070", "#stop3060");
 
-      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 362)');
+      this.content.querySelector("#gWWHeatingValve").setAttribute('transform', 'rotate(' + (this.formatBinary(hass, this.config.wwHeatingValve) ? '90' : '0') + ', 620, 450)');
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     }
 
@@ -312,9 +312,9 @@ class HeatPumpCard extends HTMLElement {
   }
 
   moveHeatingCircuitPump(content, selection) {
-    var translation = selection ? 'translate(-195,-15)' : 'translate(0,-400)';
-    var animationFrom = selection ? '0 590 489' : '0 785 104';
-    var animationTo = selection ? '360 590 489' : '360 785 104';
+    var translation = selection ? 'translate(-215,-30)' : 'translate(0,-400)';
+    var animationFrom = selection ? '0 570 474' : '0 785 104';
+    var animationTo = selection ? '360 570 474' : '360 785 104';
     content.querySelector('#useHeatingPumpChassis').setAttribute('transform', translation);
     content.querySelector('#useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
     content.querySelector('#animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);
@@ -358,16 +358,6 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#gTankHP").style.display = config.tankHP ? 'inline' : 'none';
       this.content.querySelector("#gWW").style.display = config.tankWW ? 'inline' : 'none';
 
-      if (!config.supplyTemperatureHeating && !config.refluxTemperatureHeating && !config.tankTempHPUp && !config.tankTempWWUp && !config.heatingCircuitPumpRunning && config.circulatingPumpRunning) {
-        this.content.querySelector("#gPipe").style.display = 'none';
-        this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
-        this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
-      } else {
-        this.content.querySelector("#gPipe").style.display = 'inline';
-        this.content.querySelector("#gHP").removeAttribute("transform");
-        this.content.querySelector("#gSettings").removeAttribute("transform");
-      }
-
       var type1 = config.heatingCircuitType1;
       if (!type1 || type1 === 'off') {
         this.content.querySelector('#gHeaterCircuit1').style.display = 'none';
@@ -389,6 +379,7 @@ class HeatPumpCard extends HTMLElement {
       }
       this.content.querySelector('#animationHeatingCircuitPumpBladeWheel2').removeAttribute('type');
       this.content.querySelector("#gHeatingCircuitPump2").style.display = config.heatingCircuitPumpRunning2 ? 'inline' : 'none';
+      this.content.querySelector("#pathPipeToHP2").style.display = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') ? 'none' : 'inline';
 
       var type3 = config.heatingCircuitType3;
       if (!type3 || type3 === 'off') {
@@ -400,6 +391,21 @@ class HeatPumpCard extends HTMLElement {
       }
       this.content.querySelector('#animationHeatingCircuitPumpBladeWheel3').removeAttribute('type');
       this.content.querySelector("#gHeatingCircuitPump3").style.display = config.heatingCircuitPumpRunning3 ? 'inline' : 'none';
+
+      var noHeating = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') && (!type3 || type3 === 'off') && !config.tankHP;
+      var noHotWater = config.tankWW;
+
+      if(noHeating && noHotWater) {
+        this.content.querySelector("#gPipe").style.display = 'none';
+        this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
+        this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
+      } else {
+        this.content.querySelector("#pathPipeToBuffer").style.display = noHeating ? 'none' : 'inline';
+        this.content.querySelector("#pathPipeFromBuffer").style.display = noHeating ? 'none' : 'inline';
+        this.content.querySelector("#gPipe").style.display = 'inline';
+        this.content.querySelector("#gHP").removeAttribute("transform");
+        this.content.querySelector("#gSettings").removeAttribute("transform");
+      }
 
       this.setLinks();
     }

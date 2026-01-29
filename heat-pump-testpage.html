@@ -250,12 +250,19 @@
         }
       }
       function switchHeatingPipes() {
-        if(!document.getElementById('inputSupplyTemperatureHeating').value && !document.getElementById('inputRefluxTemperatureHeating').value) {
+        var noHeating = document.getElementById('inputHeatingCircuitType1').options[document.getElementById('inputHeatingCircuitType1').selectedIndex].value === 'off'
+                     && document.getElementById('inputHeatingCircuitType2').options[document.getElementById('inputHeatingCircuitType2').selectedIndex].value === 'off'
+                     && document.getElementById('inputHeatingCircuitType3').options[document.getElementById('inputHeatingCircuitType3').selectedIndex].value === 'off'
+                     && !document.getElementById('inputTankHP').checked;
+        var noHotWater = !document.getElementById('inputTankWW').checked;
+        if(noHeating && noHotWater) {
           document.getElementById('gPipe').style.display = 'none';
           document.getElementById('gHeatingCircuitPump').style.display = 'none';
           document.getElementById('gHP').setAttribute("transform", "translate(460 -300)");
           document.getElementById('gSettings').setAttribute("transform", "translate(-25)");
         } else {
+          document.getElementById('pathPipeToBuffer').style.display = noHeating ? 'none' : 'inline';
+          document.getElementById('pathPipeFromBuffer').style.display = noHeating ? 'none' : 'inline';
           document.getElementById('gPipe').style.display = 'inline';
           document.getElementById('gHeatingCircuitPump').style.display = 'inline';
           document.getElementById('gHP').removeAttribute("transform");
@@ -277,18 +284,23 @@
       }
       function changeHeatingCurcuit1(selection) {
         document.getElementById('gHeaterCircuit1').style.display = (selection === 'off' ? 'none' : 'inline');
+        document.getElementById('pathPipeToHP2').style.display = (selection === 'off' && document.getElementById('inputHeatingCircuitType2').options[document.getElementById('inputHeatingCircuitType2').selectedIndex].value === 'off' ? 'none' : 'inline');
         document.getElementById('gHeaterCircuitFloor1').style.display = (selection === 'underfloor' ? 'inline' : 'none');
         document.getElementById('radiator1').style.display = (selection === 'radiator' ? 'inline' : 'none');
+        switchHeatingPipes();
       }
       function changeHeatingCurcuit2(selection) {
         document.getElementById('gHeaterCircuit2').style.display = (selection === 'off' ? 'none' : 'inline');
+        document.getElementById('pathPipeToHP2').style.display = (selection === 'off' && document.getElementById('inputHeatingCircuitType1').options[document.getElementById('inputHeatingCircuitType1').selectedIndex].value === 'off' ? 'none' : 'inline');
         document.getElementById('gHeaterCircuitFloor2').style.display = (selection === 'underfloor' ? 'inline' : 'none');
         document.getElementById('radiator2').style.display = (selection === 'radiator' ? 'inline' : 'none');
+        switchHeatingPipes();
       }
       function changeHeatingCurcuit3(selection) {
         document.getElementById('gHeaterCircuit3').style.display = (selection === 'off' ? 'none' : 'inline');
         document.getElementById('gHeaterCircuitFloor3').style.display = (selection === 'underfloor' ? 'inline' : 'none');
         document.getElementById('radiator3').style.display = (selection === 'radiator' ? 'inline' : 'none');
+        switchHeatingPipes();
       }
       function colorHeatingCurcuit1() {
          var tempIn = document.getElementById('inputSupplyTemperatureHeating').value;
@@ -309,9 +321,9 @@
          document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
       }
       function moveHeatingCircuitPump(selection) {
-        var translation = selection ? 'translate(-195,-15)' : 'translate(0,-400)';
-        var animationFrom = selection ? '0 590 489' : '0 785 104';
-        var animationTo = selection ? '360 590 489' : '360 785 104';
+        var translation = selection ? 'translate(-215,-30)' : 'translate(0,-400)';
+        var animationFrom = selection ? '0 570 474' : '0 785 104';
+        var animationTo = selection ? '360 570 474' : '360 785 104';
         document.getElementById('useHeatingPumpChassis').setAttribute('transform', translation);
         document.getElementById('useHeatingPumpBladeWheelInner').setAttribute('transform', translation);
         document.getElementById('animationHeatingCircuitPumpBladeWheel').setAttribute('from', animationFrom);
@@ -336,11 +348,11 @@
         <div>
           <div>
             <label for="inputTemperatureGroundWaterIn" id="labelTemperatureGroundWaterIn">Eingangstemperatur Sole/Wasser:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterIn" onChange="document.getElementById('textW2WWaterTempIn').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempIn').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="14"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterIn" onChange="document.getElementById('textW2WWaterTempIn').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempIn').innerHTML = formatTemp(this.value);" value="14"></input>
           </div>
           <div>
             <label for="inputTemperatureGroundWaterOut" id="labelTemperatureGroundWaterOut">Ausgangstemperatur Sole/Wasser:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterOut" onChange="document.getElementById('textW2WWaterTempOut').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempOut').innerHTML = formatTemp(this.value);switchHeatingPipes();" value="10"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputTemperatureGroundWaterOut" onChange="document.getElementById('textW2WWaterTempOut').innerHTML = formatTemp(this.value);document.getElementById('textG2WWaterTempOut').innerHTML = formatTemp(this.value);" value="10"></input>
           </div>
         </div>
       </div>
@@ -422,7 +434,7 @@
         <div>
           <div>
             <label for="inputTankHP" id="labelTankHP">Heizpuffer vorhanden:</label>
-            <input type="checkbox" id="inputTankHP" checked="true" onClick="document.getElementById('gTankHP').style.display = this.checked ? 'inline' : 'none';"></input>
+            <input type="checkbox" id="inputTankHP" checked="true" onClick="document.getElementById('gTankHP').style.display = this.checked ? 'inline' : 'none';switchHeatingPipes();"></input>
           </div>
           <div>
             <label for="inputTankTempHPUp" id="labelTankTempHPUp">Heizpuffertemperatur Oben:</label>
@@ -444,7 +456,7 @@
         <div>
           <div>
             <label for="inputTankWW" id="labelTankWW">Warmwassertank vorhanden:</label>
-            <input type="checkbox" id="inputTankWW" checked="true" onClick="document.getElementById('gWW').style.display = this.checked ? 'inline' : 'none';"></input>
+            <input type="checkbox" id="inputTankWW" checked="true" onClick="document.getElementById('gWW').style.display = this.checked ? 'inline' : 'none';switchHeatingPipes();"></input>
           </div>
           <div>
             <label for="inputTankTempWWUp" id="labelTankTempWWUp">Warmwassertemperatur Oben:</label>
@@ -460,7 +472,7 @@
           </div>
           <div>
             <label for="inputWwHeatingValve" id="labelWwHeatingValve">Ventil Heizen/Warmwasser:</label>
-            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 620, 362)' : 'rotate(0, 620, 362)');heizstabFarbe();"></input>
+            <input type="checkbox" id="inputWwHeatingValve" onClick="document.getElementById('gWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(90, 620, 450)' : 'rotate(0, 620, 362)');heizstabFarbe();"></input>
           </div>
           <div>
             <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
@@ -473,8 +485,8 @@
         <label for="heatingCircuit1" id="labelHeatingCircuit1">Heizkreis 1</label>
         <div>
           <div>
-            <label for="inputheatingCurcuit" id="labelHeatingCircuitType1">Heizkreis 1:</label>
-            <select id="inputheatingCurcuit" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
+            <label for="inputHeatingCircuitType1" id="labelHeatingCircuitType1">Heizkreis 1:</label>
+            <select id="inputHeatingCircuitType1" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
               <option value="off">Aus</option>
               <option value="radiator" selected="selected">Heizkörper</option>
               <option value="underfloor">Fußbodenheizung</option>
@@ -490,11 +502,11 @@
           </div>
           <div>
             <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating" onChange="document.getElementById('textSupplyTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="30"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating" onChange="document.getElementById('textSupplyTemperatureHeating').innerHTML = formatTemp(this.value);colorHeatingCurcuit1();" value="30"></input>
           </div>
           <div>
             <label for="inputRefluxTemperatureHeating" id="labelRefluxTemperatureHeating">R&uuml;cklauftemperatur Heizen:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating" onChange="document.getElementById('textRefluxTemperatureHeating').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit1();" value="20"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating" onChange="document.getElementById('textRefluxTemperatureHeating').innerHTML = formatTemp(this.value);colorHeatingCurcuit1();" value="20"></input>
           </div>
         </div>
       </div>
@@ -516,11 +528,11 @@
           </div>
           <div>
             <label for="inputSupplyTemperatureHeating2" id="labelSupplyTemperatureHeating2">Vorlauftemperatur Heizen 2:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating2" onChange="document.getElementById('textSupplyTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="30"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating2" onChange="document.getElementById('textSupplyTemperatureHeating2').innerHTML = formatTemp(this.value);colorHeatingCurcuit2();" value="30"></input>
           </div>
           <div>
             <label for="inputRefluxTemperatureHeating2" id="labelRefluxTemperatureHeating2">R&uuml;cklauftemperatur Heizen 2:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating2" onChange="document.getElementById('textRefluxTemperatureHeating2').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit2();" value="20"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating2" onChange="document.getElementById('textRefluxTemperatureHeating2').innerHTML = formatTemp(this.value);colorHeatingCurcuit2();" value="20"></input>
           </div>
         </div>
       </div>
@@ -541,11 +553,11 @@
           </div>
           <div>
             <label for="inputSupplyTemperatureHeating3" id="labelSupplyTemperatureHeating3">Vorlauftemperatur Heizen 3:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating3" onChange="document.getElementById('textSupplyTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="30"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureHeating3" onChange="document.getElementById('textSupplyTemperatureHeating3').innerHTML = formatTemp(this.value);colorHeatingCurcuit3();" value="30"></input>
           </div>
           <div>
             <label for="inputRefluxTemperatureHeating3" id="labelRefluxTemperatureHeating3">R&uuml;cklauftemperatur Heizen 3:</label>
-            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating3" onChange="document.getElementById('textRefluxTemperatureHeating3').innerHTML = formatTemp(this.value);switchHeatingPipes();colorHeatingCurcuit3();" value="20"></input>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureHeating3" onChange="document.getElementById('textRefluxTemperatureHeating3').innerHTML = formatTemp(this.value);colorHeatingCurcuit3();" value="20"></input>
           </div>
         </div>
       </div>
