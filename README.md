@@ -84,6 +84,14 @@ Home Assistant dashboard card displaying heat pump parameters
 | linkDetails | string | optional | Link to details page
 | linkSettings | string | optional | Link to settings page
 
+### Alternate sensor types
+
+The sensor selectors are limited in the configuration UI to matching domains (e.g. binary sensor), this should reduce the long list of sensors to the relevant types.
+If you need a sensor which is not shown in the list and you know it fulfills the requirements (for binarys e.g. it must provide "on" as value), you have to switch to the YAML mode and
+configure it there.
+
+If you don't have matching sensors, but the information is available, you may define template sensors and convert this information into the required format.
+The template sensors, I've created, you can see in my [000_heatpump_mqtt_package.yaml](https://github.com/ManfredTremmel/home_assistant_config/blob/7fd0f860f5563e0ab104a041b8f921ebf3dbe424/packages/000_heatpump_mqtt_package.yaml#L832).
 
 ### Example
 
