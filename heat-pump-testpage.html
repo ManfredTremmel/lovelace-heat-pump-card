@@ -201,6 +201,13 @@
         document.getElementById("labelHeaterRodLevel1").innerHTML = localization.editor['heaterRodLevel1'];
         document.getElementById("labelHeaterRodLevel2").innerHTML = localization.editor['heaterRodLevel2'];
 
+        document.getElementById("labelThermalSolar").innerHTML = localization.editor['thermalSolar'];
+        document.getElementById("labelThermalSolarAvailable").innerHTML = localization.editor['thermalSolarAvailable'];
+        document.getElementById("labelThermalSolarPanelTemp").innerHTML = localization.editor['thermalSolarPanelTemp'];
+        document.getElementById("labelThermalSolarFluxTemp").innerHTML = localization.editor['thermalSolarFluxTemp'];
+        document.getElementById("labelThermalSolarPump").innerHTML = localization.editor['thermalSolarPump'];
+        document.getElementById("labelThermalSolarPumpSpeed").innerHTML = localization.editor['thermalSolarPumpSpeed'];
+
         document.getElementById("labelLinks").innerHTML = localization.editor['links'];
         document.getElementById("labelLinkDetails").innerHTML = localization.editor['linkDetails'];
         document.getElementById("labelLinkSettings").innerHTML = localization.editor['linkSettings'];
@@ -321,7 +328,7 @@
          document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
       }
       function moveHeatingCircuitPump(selection) {
-        var translation = selection ? 'translate(-215,-30)' : 'translate(0,-400)';
+        var translation = selection ? 'translate(-215,-20)' : 'translate(0,-390)';
         var animationFrom = selection ? '0 570 474' : '0 785 104';
         var animationTo = selection ? '360 570 474' : '360 785 104';
         document.getElementById('useHeatingPumpChassis').setAttribute('transform', translation);
@@ -606,6 +613,32 @@
           <div>
             <label for="inputHeaterRodLevel2" id="labelHeaterRodLevel2">Heizstab Stufe 2:</label>
             <input type="checkbox" id="inputHeaterRodLevel2" onClick="document.getElementById('inputHeaterRodLevel1').checked = false;heizstabFarbe();"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="thermalSolar" type="checkbox"/>
+        <label for="thermalSolar" id="labelThermalSolar">Solarthermie</label>
+        <div>
+          <div>
+            <label for="inputThermalSolarAvailable" id="labelThermalSolarAvailable">Solarthermie vorhanden:</label>
+            <input type="checkbox" id="inputThermalSolarAvailable" checked="true" onClick="document.getElementById('gThermalSolar').style.display = this.checked ? 'block' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarPanelTemp" id="labelThermalSolarPanelTemp">Solarpanel Temperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputThermalSolarPanelTemp" onChange="document.getElementById('textThermalSolarPanelTemp').innerHTML = formatTemp(this.value);" value="70"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarFluxTemp" id="labelThermalSolarFluxTemp">Solarvorlauf Temperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputThermalSolarFluxTemp" onChange="document.getElementById('textThermalSolarFluxTemp').innerHTML = formatTemp(this.value);" value="63.5"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarPump" id="labelThermalSolarPump">Pumpe aktiv:</label>
+            <input type="checkbox" id="inputThermalSolarPump" checked="true" onClick="switchRotateAttribute('animationThermalSolarPumpBladeWheel', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarPumpSpeed" id="labelThermalSolarPumpSpeed">Pumpengeschwindigkeit:</label>
+            <input type="number" min="0" max="100" step="1" id="inputThermalSolarPumpSpeed" onChange="document.getElementById('textThermalSolarPumpSpeed').innerHTML = formatPercent(this.value);" value="100"></input>
           </div>
         </div>
       </div>

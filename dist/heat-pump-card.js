@@ -101,6 +101,13 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass, this.config.expansionValveOpening);
 
     this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
+
+    if (this.config.thermalSolarAvailable) {
+      this.switchRotateAttribute("#animationThermalSolarPumpBladeWheel", hass, this.config.thermalSolarPump);
+      this.content.querySelector("#textThermalSolarPanelTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarPanelTemp);
+      this.content.querySelector("#textThermalSolarFluxTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarFluxTemp);
+      this.content.querySelector("#textThermalSolarPumpSpeed").innerHTML = this.formatNum(hass, this.config.thermalSolarPumpSpeed);
+    }
   }
 
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
@@ -316,7 +323,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   moveHeatingCircuitPump(content, selection) {
-    var translation = selection ? 'translate(-215,-30)' : 'translate(0,-400)';
+    var translation = selection ? 'translate(-215,-20)' : 'translate(0,-390)';
     var animationFrom = selection ? '0 570 474' : '0 785 104';
     var animationTo = selection ? '360 570 474' : '360 785 104';
     content.querySelector('#useHeatingPumpChassis').setAttribute('transform', translation);
@@ -331,9 +338,9 @@ class HeatPumpCard extends HTMLElement {
     this.config = config;
     if (this.content) {
       this.querySelector("ha-card").setAttribute("header", config.title);
-      this.content.querySelector('#gHPFan').style.display = (!this.config.heatingPumpType || this.config.heatingPumpType === 'A2W' ? 'inline' : 'none');
-      this.content.querySelector('#gHPW2W').style.display = (this.config.heatingPumpType === 'W2W' ? 'inline' : 'none');
-      this.content.querySelector('#gHPG2W').style.display = (this.config.heatingPumpType === 'G2W' ? 'inline' : 'none');
+      this.content.querySelector('#gHPFan').style.display = (!config.heatingPumpType || config.heatingPumpType === 'A2W' ? 'inline' : 'none');
+      this.content.querySelector('#gHPW2W').style.display = (config.heatingPumpType === 'W2W' ? 'inline' : 'none');
+      this.content.querySelector('#gHPG2W').style.display = (config.heatingPumpType === 'G2W' ? 'inline' : 'none');
       this.moveHeatingCircuitPump(this.content, config.heatingCircuitPumpBeforeValve);
       this.content.querySelector("#gCirculatingPump").style.display = config.circulatingPumpRunning ? 'inline' : 'none';
       this.content.querySelector('#animationCirculatingPumpBladeWheel').removeAttribute('type');
@@ -388,6 +395,13 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector("#gHP").removeAttribute("transform");
         this.content.querySelector("#gSettings").removeAttribute("transform");
       }
+
+      if (!config.thermalSolarAvailable || config.thermalSolarAvailable === 'off') {
+        this.content.querySelector('#gThermalSolar').style.display = 'none';
+      } else {
+        this.content.querySelector('#gThermalSolar').style.display = 'inline';
+      }
+      this.content.querySelector('#animationThermalSolarPumpBladeWheel').removeAttribute('type');
 
       this.setLinks();
     }
@@ -555,6 +569,17 @@ class HeatPumpCard extends HTMLElement {
           { name: "heaterRodHP", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "heaterRodLevel1", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "heaterRodLevel2", selector: { entity: {domain: ["binary_sensor", "switch"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "thermalSolar",
+        flatten: true,
+        schema: [
+          { name: "thermalSolarAvailable", default: false, selector: { boolean: {} } },
+          { name: "thermalSolarPanelTemp", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "thermalSolarFluxTemp", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "thermalSolarPump", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "thermalSolarPumpSpeed", selector: { entity: {domain: ["sensor", "number"]} } }
         ],
       },
       { type: "expandable",

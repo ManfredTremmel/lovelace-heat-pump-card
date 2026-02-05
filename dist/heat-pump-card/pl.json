@@ -74,6 +74,12 @@
     "heaterRodHP": "Grzałka ogrzewania Wł./wył.",
     "heaterRodLevel1": "Grzałka 1 stopień Wł./wył.",
     "heaterRodLevel2": "Grzałka 2 stopień Wł./wył.",
+    "thermalSolar": "Energia słoneczna termiczna",
+    "thermalSolarAvailable": "Dostępna energia słoneczna termiczna",
+    "thermalSolarPanelTemp": "Temperatura panelu",
+    "thermalSolarFluxTemp": "Temperatura strumienia",
+    "thermalSolarPump": "Włączanie/wyłączanie pompy",
+    "thermalSolarPumpSpeed": "Prędkość pompy",
     "links": "łącze",
     "linkDetails": "łącze do szczegółów",
     "linkSettings": "łącze do ustawień"

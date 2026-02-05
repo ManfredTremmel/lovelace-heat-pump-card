@@ -74,6 +74,12 @@
     "heaterRodHP": "Heizstab heizen An/Aus",
     "heaterRodLevel1": "Heizstab Stufe 1 An/Aus",
     "heaterRodLevel2": "Heizstab Stufe 2 An/Aus",
+    "thermalSolar": "Solarthermie",
+    "thermalSolarAvailable": "Solarthermie vorhanden",
+    "thermalSolarPanelTemp": "Solarpanel Temperatur",
+    "thermalSolarFluxTemp": "Solarvorlauf Temperatur",
+    "thermalSolarPump": "Pumpe An/Aus",
+    "thermalSolarPumpSpeed": "Pumpengeschwindigkeit",
     "links": "Links",
     "linkDetails": "Link Details",
     "linkSettings": "Link Einstellungen"

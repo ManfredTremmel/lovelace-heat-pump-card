@@ -74,6 +74,12 @@
     "heaterRodHP": "Verwarmingsselement verwarming Aan/Uit",
     "heaterRodLevel1": "Verwarmingselement niveau 1 Aan/Uit",
     "heaterRodLevel2": "Verwarmingselement niveau 2 Aan/Uit",
+    "thermalSolar": "Thermische zonne-energie",
+    "thermalSolarAvailable": "Thermische zonne-energie beschikbaar",
+    "thermalSolarPanelTemp": "Paneeltemperatuur",
+    "thermalSolarFluxTemp": "Fluxtemperatuur",
+    "thermalSolarPump": "Pomp aan/uit",
+    "thermalSolarPumpSpeed": "Pompsnelheid",
     "links": "Links",
     "linkDetails": "Link Details",
     "linkSettings": "Link Settings"

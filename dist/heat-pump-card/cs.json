@@ -74,6 +74,12 @@
     "heaterRodHP": "Topná patrona – vytápění zapnuto/vypnuto",
     "heaterRodLevel1": "Topná patrona – stupeň 1 zapnuto/vypnuto",
     "heaterRodLevel2": "Topná patrona – stupeň 2 zapnuto/vypnuto",
+    "thermalSolar": "Tepelný solární panel",
+    "thermalSolarAvailable": "K dispozici je termální solární panely",
+    "thermalSolarPanelTemp": "Teplota panelu",
+    "thermalSolarFluxTemp": "Teplota toku",
+    "thermalSolarPump": "Zapnutí/vypnutí čerpadla",
+    "thermalSolarPumpSpeed": "Otáčky čerpadla",
     "links": "Odkaz",
     "linkDetails": "Odkaz na detaily",
     "linkSettings": "Odkaz na nastavení"

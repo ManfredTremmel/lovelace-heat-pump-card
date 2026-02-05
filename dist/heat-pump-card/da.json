@@ -74,6 +74,12 @@
     "heaterRodHP": "El-patron Varme (Aktiv)",
     "heaterRodLevel1": "El-patron Trin 1",
     "heaterRodLevel2": "El-patron Trin 2",
+    "thermalSolar": "Termisk solenergi",
+    "thermalSolarAvailable": "Termisk solenergi tilgængelig",
+    "thermalSolarPanelTemp": "Paneltemperatur",
+    "thermalSolarFluxTemp": "Fluxtemperatur",
+    "thermalSolarPump": "Pumpe til/fra",
+    "thermalSolarPumpSpeed": "Pumpehastighed",
     "links": "Links",
     "linkDetails": "Link til detaljer",
     "linkSettings": "Link til indstillinger"

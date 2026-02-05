@@ -74,6 +74,12 @@
     "heaterRodHP": "Heater Rod Heating On/Off",
     "heaterRodLevel1": "Heater Rod Level 1 On/Off",
     "heaterRodLevel2": "Heater Rod Level 2 On/Off",
+    "thermalSolar": "Thermal Solar",
+    "thermalSolarAvailable": "Thermal Solar available",
+    "thermalSolarPanelTemp": "Panel Temperature",
+    "thermalSolarFluxTemp": "Flux Temperature",
+    "thermalSolarPump": "Pump On/Off",
+    "thermalSolarPumpSpeed": "Pump speed",
     "links": "Links",
     "linkDetails": "Link Details",
     "linkSettings": "Link Settings"
