@@ -223,6 +223,42 @@
         fill:url(#linearGradient3);
         fill-rule:evenodd;
       }
+      #pathHPFan {
+        transform-origin: 190px 485px;
+      }
+      #pathCompressor {
+        transform-origin: 389px 378px;
+      }
+      #gCirculatingPumpBladeWheel {
+        transform-origin: 785px 494px;
+      }
+      #gHPW2WPumpBladeWheel,
+      #gHPG2WPumpBladeWheel {
+        transform-origin: 165px 435px;
+      }
+      #gHeatingCircuitPump {
+        transform-origin: 785px 104px;
+      }
+      .moved {
+        transform-origin: 570px 474px !important;
+      }
+      #gHeatingCircuitPumpBladeWheel3 {
+        transform-origin: 785px 254px;
+      }
+      #gHeatingCircuitPumpBladeWheel2 {
+        transform-origin: 785px 179px;
+      }
+      #gThermalSolarPumpBladeWheel {
+        transform-origin: 965px 564px;
+      }
+      .rotate {
+        animation:spin 1s linear infinite;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     ]]></style>
   <defs id="defs799">
     <marker style="overflow:visible" id="Triangle" refX="0" refY="0" orient="auto-start-reverse" markerWidth="1" markerHeight="1" viewBox="0 0 1 1" preserveAspectRatio="xMidYMid">
@@ -269,9 +305,7 @@
       <g id="gHP">
         <g id="gHPFan">
           <circle id="pathHPChassisFanHole" cx="190" cy="485" r="100" />
-          <path id="pathHPFan" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z">
-            <animateTransform id="animationHPFan" attributeName="transform" attributeType="XML" dur="1s" from="0 190 485" repeatCount="indefinite" to="360 190 485" type="rotate" />
-          </path>
+          <path id="pathHPFan" class="rotate" style="" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z" />
         </g>
         <g id="gHPW2W" style="display: none;">
           <text id="textW2WWaterTempIn" x="100" y="480" xml:space="preserve">14,0 ℃</text>
@@ -282,9 +316,8 @@
           <rect id="rectSuckWell" width="20" height="90" x="90" y="510" />
           <rect id="rectInjectionWell" width="20" height="90" x="220" y="510" />
           <use transform="translate(-620,-59)" xlink:href="#pathCirculatingPumpChassis" id="useHPW2WPumpChassis" />
-          <g id="gHPW2WPumpBladeWheel">
+          <g id="gHPW2WPumpBladeWheel" class="rotate">
             <use id="useHPW2WPumpBladeWheelInner" transform="translate(-620,-59)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-            <animateTransform id="animationHPW2WPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 165 435" repeatCount="indefinite" to="360 165 435" type="rotate" />
           </g>
         </g>
         <g id="gHPG2W" style="display: none;">
@@ -293,15 +326,13 @@
           <path id="pathG2WFlow" style="marker-end:url(#Triangle)" d="m 160,610 v -175 h 10 v 175" />
           <path id="pathGround" d="m 74,560 h 200" />
           <use id="useHPG2WPumpChassis" transform="translate(-620,-59)" xlink:href="#pathCirculatingPumpChassis" />
-          <g id="gHPG2WPumpBladeWheel">
+          <g id="gHPG2WPumpBladeWheel" class="rotate">
             <use id="useHPG2WPumpBladeWheelInner" transform="translate(-620,-59)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-            <animateTransform id="animationHPG2WPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 165 435" repeatCount="indefinite" to="360 165 435" type="rotate" />
           </g>
         </g>
         <g id="gHPModel">
           <g id="gCompressor">
-            <path id="pathCompressor" d="m389 378c0.80221 0.80221-0.68559 1.4772-1.3333 1.3333-1.7554-0.38974-2.0376-2.6381-1.3333-4 1.2597-2.436 4.5308-2.7214 6.6667-1.3333 3.1346 2.0371 3.4256 6.449 1.3333 9.3333-2.7886 3.8443-8.3764 4.1384-12 1.3333-4.5599-3.5299-4.8556-10.308-1.3333-14.667 4.266-5.2787 12.242-5.5755 17.333-1.3333 5.9995 4.9992 6.297 14.178 1.3333 20-5.7307 6.7216-16.115 7.0195-22.667 1.3333-7.4446-6.461-7.7428-18.052-1.3333-25.333 7.1905-8.1683 19.99-8.4667 28-1.3333 8.8924 7.9194 9.191 21.929 1.3333 30.667" />
-            <animateTransform id="animationCompressor" attributeName="transform" attributeType="XML" dur="1s" from="0 389 378" repeatCount="indefinite" to="360 389 378" type="rotate" />
+            <path id="pathCompressor" class="rotate" d="m389 378c0.80221 0.80221-0.68559 1.4772-1.3333 1.3333-1.7554-0.38974-2.0376-2.6381-1.3333-4 1.2597-2.436 4.5308-2.7214 6.6667-1.3333 3.1346 2.0371 3.4256 6.449 1.3333 9.3333-2.7886 3.8443-8.3764 4.1384-12 1.3333-4.5599-3.5299-4.8556-10.308-1.3333-14.667 4.266-5.2787 12.242-5.5755 17.333-1.3333 5.9995 4.9992 6.297 14.178 1.3333 20-5.7307 6.7216-16.115 7.0195-22.667 1.3333-7.4446-6.461-7.7428-18.052-1.3333-25.333 7.1905-8.1683 19.99-8.4667 28-1.3333 8.8924 7.9194 9.191 21.929 1.3333 30.667" />
           </g>
           <path id="pathHPModelOuterCircle" d="m388.78 352.44a25 25 0 0 0-24.789 22.047 128 114.5 0 0 0-99.705 87.564 25 25 0 0 0-0.23047-6e-3 25 25 0 0 0-25 25 25 25 0 0 0 25 25 25 25 0 0 0 0.49023-0.0352 128 114.5 0 0 0 104.9 87.562v20.975l19.549-19.549a128 114.5 0 0 0 2e-3 0 128 114.5 0 0 0 0.8457-0.0547l19.602 19.604v-21.148a128 114.5 0 0 0 104.03-87.486 25 25 0 0 0 23.135-24.867 25 25 0 0 0-22.574-24.881 128 114.5 0 0 0-100.49-88.033 25 25 0 0 0-24.773-21.691z" />
           <path id="pathHPModelInnerCircle" d="m413.76 377.72a25 25 0 0 1-0.23438 3.2793 25 25 0 0 1-0.75977 3.4863 25 25 0 0 1-1.2461 3.3418 25 25 0 0 1-1.709 3.1309 25 25 0 0 1-2.1387 2.8555 25 25 0 0 1-2.5215 2.5215 25 25 0 0 1-2.8555 2.1387 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.2461 25 25 0 0 1-3.4844 0.75782 25 25 0 0 1-3.5586 0.25586 25 25 0 0 1-3.5586-0.25586 25 25 0 0 1-3.4844-0.75782 25 25 0 0 1-3.3418-1.2461 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1387 25 25 0 0 1-2.5234-2.5215 25 25 0 0 1-2.1367-2.8555 25 25 0 0 1-1.709-3.1309 25 25 0 0 1-1.2461-3.3418 25 25 0 0 1-0.75977-3.4863 25 25 0 0 1-0.20703-2.9062 125 111 0 0 0-96.488 84.18 25 25 0 0 1 0.38477 0.0469 25 25 0 0 1 1.209 0.20898 25 25 0 0 1 1.1973 0.26954 25 25 0 0 1 1.1836 0.32617 25 25 0 0 1 1.1641 0.38476 25 25 0 0 1 1.1445 0.44336 25 25 0 0 1 1.123 0.4961 25 25 0 0 1 1.0957 0.55273 25 25 0 0 1 1.0664 0.60352 25 25 0 0 1 1.0371 0.65625 25 25 0 0 1 1.0039 0.70703 25 25 0 0 1 0.96679 0.75586 25 25 0 0 1 0.92969 0.80078 25 25 0 0 1 0.88867 0.8457 25 25 0 0 1 0.8457 0.88867 25 25 0 0 1 0.80079 0.92969 25 25 0 0 1 0.75586 0.9668 25 25 0 0 1 0.70703 1.0039 25 25 0 0 1 0.65625 1.0371 25 25 0 0 1 0.60547 1.0664 25 25 0 0 1 0.55078 1.0957 25 25 0 0 1 0.49804 1.123 25 25 0 0 1 0.44141 1.1445 25 25 0 0 1 0.38477 1.166 25 25 0 0 1 0.32617 1.1816 25 25 0 0 1 0.26953 1.1973 25 25 0 0 1 0.20898 1.209 25 25 0 0 1 0.15039 1.2188 25 25 0 0 1 0.0899 1.2226 25 25 0 0 1 0.0312 1.2266 25 25 0 0 1-0.25391 3.5586 25 25 0 0 1-0.75976 3.4844 25 25 0 0 1-1.2461 3.3438 25 25 0 0 1-1.709 3.1289 25 25 0 0 1-2.1367 2.8555 25 25 0 0 1-2.5234 2.5234 25 25 0 0 1-2.8555 2.1367 25 25 0 0 1-3.1309 1.709 25 25 0 0 1-3.3418 1.248 25 25 0 0 1-3.4844 0.75781 25 25 0 0 1-0.0156 2e-3 125 111 0 0 0 101.85 84.15v-15.396l16.779 16.779a125 111 0 0 0 2.7715 0.17181 125 111 0 0 0 3.7285-0.23047l16.719-16.721v15.232a125 111 0 0 0 100.91-83.824 25 25 0 0 1-2.3047-0.16406 25 25 0 0 1-3.4863-0.75781 25 25 0 0 1-3.3418-1.248 25 25 0 0 1-3.1309-1.709 25 25 0 0 1-2.8555-2.1367 25 25 0 0 1-2.5215-2.5234 25 25 0 0 1-2.1387-2.8555 25 25 0 0 1-1.709-3.1289 25 25 0 0 1-1.2461-3.3438 25 25 0 0 1-0.75781-3.4844 25 25 0 0 1-0.25586-3.5586 25 25 0 0 1 0.25586-3.5566 25 25 0 0 1 0.75781-3.4863 25 25 0 0 1 1.2461-3.3418 25 25 0 0 1 1.709-3.1309 25 25 0 0 1 2.1387-2.8555 25 25 0 0 1 2.5215-2.5215 25 25 0 0 1 2.8555-2.1387 25 25 0 0 1 3.1309-1.709 25 25 0 0 1 3.3418-1.2461 25 25 0 0 1 3.4863-0.75977 25 25 0 0 1 2.6016-0.18555 125 111 0 0 0-96.898-84.396z" />
@@ -335,12 +366,9 @@
       <path id="pathPipeToHeatingCircuitPump" d="m 750,140 c 22,0 41,-20 37,-56" />
       <text id="textSupplyTemperatureHeating" x="800" y="73" xml:space="preserve">30,0 ℃</text>
       <text id="textRefluxTemperatureHeating" x="940" y="110" xml:space="preserve">20,0 ℃</text>
-      <g id="gHeatingCircuitPump">
+      <g id="gHeatingCircuitPump" class="rotate">
         <use id="useHeatingPumpChassis" transform="translate(0,-390)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHeatingCircuitPumpBladeWheel">
-          <use id="useHeatingPumpBladeWheelInner" transform="translate(0,-390)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-          <animateTransform id="animationHeatingCircuitPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 785 104" repeatCount="indefinite" to="360 785 104" type="rotate" />
-        </g>
+        <use id="useHeatingPumpBladeWheel" transform="translate(0,-390)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
     </g>
     <g id="gHeaterCircuit3">
@@ -358,9 +386,8 @@
       <text id="textRefluxTemperatureHeating3" x="940" y="260" xml:space="preserve">20,0 ℃</text>
       <g id="gHeatingCircuitPump3">
         <use id="useHeatingPumpChassis3" transform="translate(0,-240)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHeatingCircuitPumpBladeWheel3">
+        <g id="gHeatingCircuitPumpBladeWheel3" class="rotate">
           <use id="useHeatingPumpBladeWheelInner3" transform="translate(0,-240)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
-          <animateTransform id="animationHeatingCircuitPumpBladeWheel3" attributeName="transform" attributeType="XML" dur="1s" from="0 785 254" repeatCount="indefinite" to="360 785 254" type="rotate" />
         </g>
       </g>
     </g>
@@ -380,9 +407,8 @@
       <text id="textRefluxTemperatureHeating2" x="940" y="185" xml:space="preserve">20,0 ℃</text>
       <g id="gHeatingCircuitPump2">
         <use id="useHeatingPumpChassis2" transform="translate(0,-315)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHeatingCircuitPumpBladeWheel2">
+        <g id="gHeatingCircuitPumpBladeWheel2" class="rotate">
           <use id="useHeatingPumpBladeWheelInner2" transform="translate(0,-315)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-          <animateTransform id="animationHeatingCircuitPumpBladeWheel2" attributeName="transform" attributeType="XML" dur="1s" from="0 785 179" repeatCount="indefinite" to="360 785 179" type="rotate" />
         </g>
       </g>
     </g>
@@ -403,9 +429,8 @@
       <rect id="rectThermalSolarPanel" width="198" height="10" x="875" y="-110" transform="rotate(30)" />
       <g id="gThermalSolarPump">
         <use id="useThermalSolarPumpChassis" transform="translate(180,70)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gThermalSolarPumpBladeWheel">
+        <g id="gThermalSolarPumpBladeWheel" class="rotate">
           <use id="useThermalSolarPumpBladeWheelInner" transform="translate(180,70)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-          <animateTransform id="animationThermalSolarPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 965 564" repeatCount="indefinite" to="360 965 564" type="rotate" />
         </g>
       </g>
       <text id="textThermalSolarPanelTemp" x="990" y="400" text-anchor="end" xml:space="preserve">70,0 ℃</text>
@@ -437,7 +462,7 @@
       <g id="gCirculatingPump">
         <text id="textCirculatingPump" x="785" y="465" text-anchor="middle" xml:space="preserve">C P</text>
         <circle id="pathCirculatingPumpChassis" cx="785" cy="494" r="24" />
-        <g id="gCirculatingPumpBladeWheel">
+        <g id="gCirculatingPumpBladeWheel" class="rotate">
           <g id="gCirculatingPumpBladeWheelInner">
             <circle id="pathCirculatingPumpBladeWheelAxis" cx="785" cy="494" r="4" />
             <path id="pathCirculatingPumpBladeWheel" d="m 785 490 c -0.91667-7.5 3.6667-15.5 7-15" />
@@ -450,7 +475,6 @@
             <use id="use7" transform="rotate(-80,785,494)" xlink:href="#pathCirculatingPumpBladeWheel" />
             <use id="use8" transform="rotate(-40,785,494)" xlink:href="#pathCirculatingPumpBladeWheel" />
           </g>
-          <animateTransform id="animationCirculatingPumpBladeWheel" attributeName="transform" attributeType="XML" dur="1s" from="0 785 494" repeatCount="indefinite" to="360 785 494" type="rotate" />
         </g>
       </g>
     </g>
