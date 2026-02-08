@@ -242,13 +242,13 @@
       .moved {
         transform-origin: 570px 474px !important;
       }
-      #gHeatingCircuitPumpBladeWheel3 {
+      #gHeatingCircuitPump3 {
         transform-origin: 785px 254px;
       }
-      #gHeatingCircuitPumpBladeWheel2 {
+      #gHeatingCircuitPump2 {
         transform-origin: 785px 179px;
       }
-      #gThermalSolarPumpBladeWheel {
+      #gThermalSolarPump {
         transform-origin: 965px 564px;
       }
       .rotate {
@@ -384,11 +384,9 @@
       <path id="pathPipeToHeatingCircuitPump3" d="m 750,140 c 22,0 40,5 40,91" />
       <text id="textSupplyTemperatureHeating3" x="800" y="223" xml:space="preserve">30,0 ℃</text>
       <text id="textRefluxTemperatureHeating3" x="940" y="260" xml:space="preserve">20,0 ℃</text>
-      <g id="gHeatingCircuitPump3">
+      <g id="gHeatingCircuitPump3" class="rotate">
         <use id="useHeatingPumpChassis3" transform="translate(0,-240)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHeatingCircuitPumpBladeWheel3" class="rotate">
-          <use id="useHeatingPumpBladeWheelInner3" transform="translate(0,-240)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
-        </g>
+        <use id="useHeatingPumpBladeWheelInner3" transform="translate(0,-240)" xlink:href="#gCirculatingPumpBladeWheelInner"/>
       </g>
     </g>
     <path id="pathPipeToHP2" d="m 997,190 v 75" />
@@ -405,11 +403,9 @@
       <path id="pathPipeToHeatingCircuitPump2" d="m 750,140 c 22,0 34,3 37,16" />
       <text id="textSupplyTemperatureHeating2" x="800" y="148" xml:space="preserve">30,0 ℃</text>
       <text id="textRefluxTemperatureHeating2" x="940" y="185" xml:space="preserve">20,0 ℃</text>
-      <g id="gHeatingCircuitPump2">
+      <g id="gHeatingCircuitPump2" class="rotate">
         <use id="useHeatingPumpChassis2" transform="translate(0,-315)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHeatingCircuitPumpBladeWheel2" class="rotate">
-          <use id="useHeatingPumpBladeWheelInner2" transform="translate(0,-315)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-        </g>
+        <use id="useHeatingPumpBladeWheelInner2" transform="translate(0,-315)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
     </g>
     <g id="gTankHP">
@@ -427,11 +423,9 @@
       <path id="pathPipeThermalSolarColdWater" d="m 791,615 h 150 c 15,0 25,-15 25,-25 V 431" />
       <path id="pathPipeThermalSolarHotWater" d="m 791,540 h 105 c 13,0 21,-10 21,-21 v -75 c 0,-30 -30,-39.6 -50,-50 -18.4,-10.4 -38.8,-21.2 -42.4,-36.8" />
       <rect id="rectThermalSolarPanel" width="198" height="10" x="875" y="-110" transform="rotate(30)" />
-      <g id="gThermalSolarPump">
+      <g id="gThermalSolarPump" class="rotate">
         <use id="useThermalSolarPumpChassis" transform="translate(180,70)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gThermalSolarPumpBladeWheel" class="rotate">
-          <use id="useThermalSolarPumpBladeWheelInner" transform="translate(180,70)" xlink:href="#gCirculatingPumpBladeWheelInner" />
-        </g>
+        <use id="useThermalSolarPumpBladeWheelInner" transform="translate(180,70)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
       <text id="textThermalSolarPanelTemp" x="990" y="400" text-anchor="end" xml:space="preserve">70,0 ℃</text>
       <text id="textThermalSolarFluxTemp" x="850" y="557" text-anchor="end" xml:space="preserve">63,5 ℃</text>

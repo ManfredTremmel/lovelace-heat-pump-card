@@ -51,13 +51,13 @@ class HeatPumpCard extends HTMLElement {
 
     this.switchRotateAttribute("#pathCompressor", hass, this.config.compressorRunning);
     if (this.config.heatingCircuitPumpRunning) {
-      this.switchRotateAttribute("#gHeatingCircuitPumpBladeWheel", hass, this.config.heatingCircuitPumpRunning);
+      this.switchRotateAttribute("#gHeatingCircuitPump", hass, this.config.heatingCircuitPumpRunning);
     }
     if (this.config.heatingCircuitPumpRunning2) {
-      this.switchRotateAttribute("#gHeatingCircuitPumpBladeWheel2", hass, this.config.heatingCircuitPumpRunning2);
+      this.switchRotateAttribute("#gHeatingCircuitPump2", hass, this.config.heatingCircuitPumpRunning2);
     }
     if (this.config.heatingCircuitPumpRunning3) {
-      this.switchRotateAttribute("#gHeatingCircuitPumpBladeWheel3", hass, this.config.heatingCircuitPumpRunning3);
+      this.switchRotateAttribute("#gHeatingCircuitPump3", hass, this.config.heatingCircuitPumpRunning3);
     }
     if (this.config.circulatingPumpRunning) {
       this.switchRotateAttribute("#gCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
@@ -103,7 +103,7 @@ class HeatPumpCard extends HTMLElement {
     this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
 
     if (this.config.thermalSolarAvailable) {
-      this.switchRotateAttribute("#gThermalSolarPumpBladeWheel", hass, this.config.thermalSolarPump);
+      this.switchRotateAttribute("#gThermalSolarPump", hass, this.config.thermalSolarPump);
       this.content.querySelector("#textThermalSolarPanelTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarPanelTemp);
       this.content.querySelector("#textThermalSolarFluxTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarFluxTemp);
       this.content.querySelector("#textThermalSolarPumpSpeed").innerHTML = this.formatNum(hass, this.config.thermalSolarPumpSpeed);
@@ -367,7 +367,7 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector('#gHeaterCircuitFloor2').style.display = (type2 === 'underfloor' ? 'inline' : 'none');
         this.content.querySelector('#radiator2').style.display = (type2 === 'radiator' ? 'inline' : 'none');
       }
-      this.content.querySelector('#gHeatingCircuitPumpBladeWheel2').classList.remove("rotate");
+      this.content.querySelector('#gHeatingCircuitPump2').classList.remove("rotate");
       this.content.querySelector("#gHeatingCircuitPump2").style.display = config.heatingCircuitPumpRunning2 ? 'inline' : 'none';
       this.content.querySelector("#pathPipeToHP2").style.display = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') ? 'none' : 'inline';
 
@@ -379,7 +379,7 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector('#gHeaterCircuitFloor3').style.display = (type3 === 'underfloor' ? 'inline' : 'none');
         this.content.querySelector('#radiator3').style.display = (type3 === 'radiator' ? 'inline' : 'none');
       }
-      this.content.querySelector('#gHeatingCircuitPumpBladeWheel3').classList.remove("rotate");
+      this.content.querySelector('#gHeatingCircuitPump3').classList.remove("rotate");
       this.content.querySelector("#gHeatingCircuitPump3").style.display = config.heatingCircuitPumpRunning3 ? 'inline' : 'none';
 
       var noHeating = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') && (!type3 || type3 === 'off') && !config.tankHP;
@@ -402,7 +402,7 @@ class HeatPumpCard extends HTMLElement {
       } else {
         this.content.querySelector('#gThermalSolar').style.display = 'inline';
       }
-      this.content.querySelector('#gThermalSolarPumpBladeWheel').classList.remove("rotate");
+      this.content.querySelector('#gThermalSolarPump').classList.remove("rotate");
 
       this.setLinks();
     }
