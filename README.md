@@ -81,6 +81,11 @@ Home Assistant dashboard card displaying heat pump parameters
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
 | heaterRodLevel1 | object | optional | Heater Rod is using Level 1, color is set to orange
 | heaterRodLevel2 | object | optional | Heater Rod is using Level 2, color is set to red
+| thermalSolarAvailable | boolean | optional | Enable/Disable thermal solar part, when not defined, it's not displayed
+| thermalSolarPump | object | optional | Binary sensor which detects if Solar Pump is active or not
+| thermalSolarPumpSpeed | object | optional | Sensor containing solar pump speed which is displayed
+| thermalSolarPanelTemp | object | optional | Sensor containing panel temperature
+| thermalSolarFluxTemp | object | optional | Sensor containing flux temperature
 | linkDetails | string | optional | Link to details page
 | linkSettings | string | optional | Link to settings page
 
@@ -153,6 +158,11 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heaterRodHP: switch.mosquitto_broker_freigabe_heizen_mit_elektro
   heaterRodLevel1: binary_sensor.mosquitto_broker_status_heizstab_stufe_1
   heaterRodLevel2: binary_sensor.mosquitto_broker_status_heizstab_stufe_2
+  thermalSolarAvailable: false
+  thermalSolarPump: ""
+  thermalSolarPumpSpeed: ""
+  thermalSolarPanelTemp: ""
+  thermalSolarFluxTemp: ""
   linkDetails: /lovelace/hp-details
   linkSettings: /lovelace/hp-settings
 
