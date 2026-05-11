@@ -151,7 +151,7 @@ class HeatPumpCard extends HTMLElement {
     rawFile.onload = (e) => {
       if (rawFile.readyState === 4) {
         if (rawFile.status == 200) {
-          this.innerHTML = '<ha-card>\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "") + '</ha-card>';
+          this.innerHTML = '<ha-card>\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "").replace(/ class="rotate"/g, "").replace(/display: inline;/g, "display: none;") + '</ha-card>';
           this.content = this.querySelector("svg");
           this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
           this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);
@@ -208,7 +208,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   formatNumValue(stateValue) {
-    if (stateValue) {
+    if (stateValue && !isNaN(Number(stateValue.state))) {
       return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(stateValue.state) + " " + stateValue.attributes.unit_of_measurement;
     }
     return null;
@@ -241,9 +241,9 @@ class HeatPumpCard extends HTMLElement {
   }
 
   tankColors(content, tankTempUp, tankTempMiddle, tankTempDown, idUp, idMiddle, idDown) {
-    var tempUp = tankTempUp ? tankTempUp.state : null;
-    var tempMiddle = tankTempMiddle ? tankTempMiddle.state : null;
-    var tempDown = tankTempDown ? tankTempDown.state : null;
+    var tempUp = tankTempUp && !isNaN(Number(tankTempUp.state)) ? tankTempUp.state : null;
+    var tempMiddle = tankTempMiddle && !isNaN(Number(tankTempMiddle.state)) ? tankTempMiddle.state : null;
+    var tempDown = tankTempDown && !isNaN(Number(tankTempDown.state)) ? tankTempDown.state : null;
     if (tempUp) {
       if (!tempMiddle) {
         if (tempDown) {

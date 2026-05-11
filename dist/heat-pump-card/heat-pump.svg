@@ -296,14 +296,14 @@
     </linearGradient>
   </defs>
   <g id="layer1">
-    <g id="gPipe">
+    <g id="gPipe" style="display: inline;">
       <path id="pathPipeHotColdHeatpump" d="m 598,525 h -85 c -15,0 -30,0 -35,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 h 90" />
       <path id="pathPipeToBuffer" d="m 598,450 c 22,0 22,-15 22,-30 V 158 c 0,-12 5,-18 18,-18 H 750" />
       <path id="pathPipeFromBuffer" d="m 997,265 c 0,15 0,30 -22,30 H 650 c -15,0 -22,13 -22,30 v 170 c 0,18 -18,30 -30,30" />
     </g>
     <a id="linkDetails" href="#">
       <g id="gHP">
-        <g id="gHPFan">
+        <g id="gHPFan" style="display: inline;">
           <circle id="pathHPChassisFanHole" cx="190" cy="485" r="100" />
           <path id="pathHPFan" class="rotate" style="" d="m182 392.62c-36.24-0.2204-64.678 28.093-73.344 46.965 42.555-5.2407 48.625 10.583 64.488 26.588a25 25 0 0 0-8.5566 18.822 25 25 0 0 0 1.3535 7.9551c-21.956 11.625-40.297 28.447-50.283 45.92 17.929 31.495 56.668 41.968 77.344 40.037-26.005-34.484-14.992-47.6-9.0918-69.627a25 25 0 0 0 5.6777 0.71484 25 25 0 0 0 16.518-6.252c21.668 14.23 46.532 22.344 67.482 22.252 18.311-31.275 8.0104-70.06-4-87-16.732 39.458-33.466 36.821-55.244 42.547a25 25 0 0 0-17.82-20.559c1.2556-25.468-4.1323-50.546-14.523-68.363z" />
         </g>
@@ -352,7 +352,7 @@
         <rect id="rectHPChassis" x="65.353" y="350.35" width="474.29" height="274.29" />
       </g>
     </a>
-    <g id="gHeaterCircuit1">
+    <g id="gHeaterCircuit1" style="display: inline;">
       <path id="pathPipeToHP" d="m 997,115 v 75" />
       <g id="gHeaterCircuitFloor1" style="display: none;">
         <path id="pathFloor1" d="m 850,75 75,0 15,50 -105,0 z" />
@@ -371,7 +371,7 @@
         <use id="useHeatingPumpBladeWheel" transform="translate(0,-390)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
     </g>
-    <g id="gHeaterCircuit3">
+    <g id="gHeaterCircuit3" style="display: inline;">
       <g id="gHeaterCircuitFloor3" transform="translate(0,150)" style="display: none;">
         <path id="pathFloor3" d="m 850,75 75,0 15,50 -105,0 z" />
         <path id="pathUnderfloorHeating3" d="m 785,82 125,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
@@ -390,7 +390,7 @@
       </g>
     </g>
     <path id="pathPipeToHP2" d="m 997,190 v 75" />
-    <g id="gHeaterCircuit2">
+    <g id="gHeaterCircuit2" style="display: inline;">
       <g id="gHeaterCircuitFloor2" transform="translate(0,75)" style="display: none;">
         <path id="pathFloor2" d="m 850,75 75,0 15,50 -105,0 z" />
         <path id="pathUnderfloorHeating2" d="m 785,82 125,0 c 12,0 15,8 1.5,8 h -50 c -12,0 -15,8.5 -1.5,8.5 h 54 c 12,0 15,9 1.5,9 h -57 c -12,0 -15,9 -1.5,9 h 140" />
@@ -408,7 +408,7 @@
         <use id="useHeatingPumpBladeWheelInner2" transform="translate(0,-315)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
     </g>
-    <g id="gTankHP">
+    <g id="gTankHP" style="display: inline;">
       <text id="textTankHPName" x="700" y="113" text-anchor="middle" xml:space="preserve">Buffer</text>
       <path id="pathTankHPHat" d="m 655 120 h -5 v -20 c 4.8894-4.1274 97.176-5.3285 100 0 v 20 h -5 c -4.2274-3.9461-87.404-2.7745-90 0 z" />
       <rect id="rectBlackBack" x="655" y="120" width="90" height="200" />
@@ -418,7 +418,7 @@
       <text id="textTankTempHPUp" x="735" y="155" text-anchor="end" xml:space="preserve">31,5 ℃</text>
       <path id="pathHeaterRodHP" d="m 745 265 h -40 c -4.7507 0-5.0111-10 0-10 h 40" />
     </g>
-    <g id="gThermalSolar">
+    <g id="gThermalSolar" style="display: inline;">
       <use id="usePathPipeThermalSolarTank" transform="translate(193,90)" xlink:href="#pathPipeHotColdHeatpump"/>
       <path id="pathPipeThermalSolarColdWater" d="m 791,615 h 150 c 15,0 25,-15 25,-25 V 431" />
       <path id="pathPipeThermalSolarHotWater" d="m 791,540 h 105 c 13,0 21,-10 21,-21 v -75 c 0,-30 -30,-39.6 -50,-50 -18.4,-10.4 -38.8,-21.2 -42.4,-36.8" />
@@ -431,8 +431,7 @@
       <text id="textThermalSolarFluxTemp" x="850" y="557" text-anchor="end" xml:space="preserve">63,5 ℃</text>
       <text id="textThermalSolarPumpSpeed" x="940" y="570" text-anchor="end" xml:space="preserve">100 %</text>
     </g>
-    <g id="gWW">
-      <path id="pathPipeRefluxWW" d="m 745,525 h 20 c 10,0 20,-10 20,-20 V 442.5" />
+    <g id="gWW" style="display: inline;">
       <path id="pathPipeToCirculatingPump" d="m 745 440 h 71" />
       <g id="gWaterTap" transform="matrix(4 0 0 4 600 -1356.5)">
         <path id="path10250" d="m61.078 452.73h2.0859v0.58985h-2.0859z" />
@@ -453,7 +452,8 @@
         <circle id="pathCircleWWHeatingValve" cx="620" cy="450" r="30" />
         <path id="pathArrowCircleWWHeatingValve" d="m 603 433 h 34 v 34" />
       </g>
-      <g id="gCirculatingPump">
+      <g id="gCirculatingPump" style="display: inline;">
+        <path id="pathPipeRefluxWW" d="m 745,525 h 20 c 10,0 20,-10 20,-20 V 442.5" />
         <text id="textCirculatingPump" x="785" y="465" text-anchor="middle" xml:space="preserve">C P</text>
         <circle id="pathCirculatingPumpChassis" cx="785" cy="494" r="24" />
         <g id="gCirculatingPumpBladeWheel" class="rotate">
