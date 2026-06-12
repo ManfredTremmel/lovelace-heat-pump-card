@@ -196,14 +196,17 @@
       #pathPipeToHP,
       #pathPipeToHP2,
       #pathPipeThermalSolarColdWater,
-      #pathPipeThermalSolarHotWater {
+      #pathPipeThermalSolarHotWater,
+      #pathPipeBufferToHeating,
+      #pathPipeHeatingToBuffer {
         stroke-width:5px;
         stroke-opacity:0.5;
       }
       #pathPipeFromBuffer,
       #pathPipeToHP,
       #pathPipeToHP2,
-      #pathPipeThermalSolarColdWater {
+      #pathPipeThermalSolarColdWater,
+      #pathPipeHeatingToBuffer {
         stroke:#0000ff;
       }
       #pathPipeRefluxWW,
@@ -212,7 +215,8 @@
       #pathPipeToHeatingCircuitPump,
       #pathPipeToHeatingCircuitPump2,
       #pathPipeToHeatingCircuitPump3,
-      #pathPipeThermalSolarHotWater {
+      #pathPipeThermalSolarHotWater,
+      #pathPipeBufferToHeating {
         stroke:#ff0000;
       }
       #pathPipeHotColdHeatpump,
@@ -298,8 +302,14 @@
   <g id="layer1">
     <g id="gPipe" style="display: inline;">
       <path id="pathPipeHotColdHeatpump" d="m 598,525 h -85 c -15,0 -30,0 -35,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 h 90" />
+    </g>
+    <g id="gPipeBuffer" style="display: inline;">
       <path id="pathPipeToBuffer" d="m 598,450 c 22,0 22,-15 22,-30 V 158 c 0,-12 5,-18 18,-18 H 750" />
       <path id="pathPipeFromBuffer" d="m 997,265 c 0,15 0,30 -22,30 H 650 c -15,0 -22,13 -22,30 v 170 c 0,18 -18,30 -30,30" />
+    </g>
+    <g id="gPipeLayeredChargeStorage" style="display: none;">
+      <path id="pathPipeHeatingToBuffer" d="m 997,265 v 317 c 0,17 -3,33.33 -21,33.33 H 745" />
+      <path id="pathPipeBufferToHeating" d="m 745,532 h 98 c 12,0 30,-10 30,-23 v -61 c 0,-58 -140,-42 -140,-104 V 160 c 0,-21 17,-20 17,-20" />
     </g>
     <a id="linkDetails" href="#">
       <g id="gHP">

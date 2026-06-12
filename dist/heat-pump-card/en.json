@@ -43,6 +43,7 @@
     "tankTempHPDown": "Buffer Temperature down",
     "hotWaterTank": "Hot Water Buffer",
     "tankWW": "Hot Water Buffer available",
+    "layeredChargeStorage": "Combined Layered Charge Storage",
     "tankTempWWUp": "Hot Water Buffer Temperature up",
     "tankTempWWMiddle": "Hot Water Buffer Temperature middle",
     "tankTempWWDown": "Hot Water Buffer Temperature down",

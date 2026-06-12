@@ -387,12 +387,17 @@ class HeatPumpCard extends HTMLElement {
 
       if(noHeating && noHotWater) {
         this.content.querySelector("#gPipe").style.display = 'none';
+        this.content.querySelector("#gPipeBuffer").style.display = 'none';
+        this.content.querySelector("#gPipeLayeredChargeStorage").style.display = 'none';
         this.content.querySelector("#gHP").setAttribute("transform", "translate(460 -300)");
         this.content.querySelector("#gSettings").setAttribute("transform", "translate(-25)");
       } else {
         this.content.querySelector("#pathPipeToBuffer").style.display = noHeating ? 'none' : 'inline';
         this.content.querySelector("#pathPipeFromBuffer").style.display = noHeating ? 'none' : 'inline';
         this.content.querySelector("#gPipe").style.display = 'inline';
+        this.content.querySelector("#gPipeBuffer").style.display = config.layeredChargeStorage ? 'none' : 'inline';
+        this.content.querySelector("#gPipeLayeredChargeStorage").style.display = config.layeredChargeStorage ? 'inline' : 'none';
+        this.content.querySelector("#gWWHeatingValve").style.display = config.layeredChargeStorage ? 'none' : 'inline';
         this.content.querySelector("#gHP").removeAttribute("transform");
         this.content.querySelector("#gSettings").removeAttribute("transform");
       }
@@ -477,6 +482,7 @@ class HeatPumpCard extends HTMLElement {
         flatten: true,
         schema: [
           { name: "tankWW", default: true, selector: { boolean: {} } },
+          { name: "layeredChargeStorage", default: false, selector: { boolean: {} } },
           { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },

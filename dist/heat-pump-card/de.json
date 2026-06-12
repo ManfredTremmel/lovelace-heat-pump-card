@@ -43,6 +43,7 @@
     "tankTempHPDown": "Pufferspeichertemperatur unten",
     "hotWaterTank": "Warmwasserspeicher",
     "tankWW": "Warmwasserspeicher vorhanden",
+    "layeredChargeStorage": "Kombinierter Schichtspeicher",
     "tankTempWWUp": "Warmwasserspeichertemperatur oben",
     "tankTempWWMiddle": "Warmwasserspeichertemperatur mitte",
     "tankTempWWDown": "Warmwasserspeichertemperatur unten",
