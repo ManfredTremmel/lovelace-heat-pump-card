@@ -62,6 +62,9 @@ class HeatPumpCard extends HTMLElement {
     if (this.config.circulatingPumpRunning) {
       this.switchRotateAttribute("#gCirculatingPumpBladeWheel", hass, this.config.circulatingPumpRunning);
     }
+    if (this.config.storageChargingPumpRunning) {
+      this.switchRotateAttribute("#gStorageChargingPump", hass, this.config.storageChargingPumpRunning);
+    }
 
     const heaterRodWW = this.formatBinary(hass, this.config.heaterRodWW);
 
@@ -322,17 +325,6 @@ class HeatPumpCard extends HTMLElement {
     }
   }
 
-  moveHeatingCircuitPump(content, selection) {
-    var translation = selection ? 'translate(-215,-20)' : 'translate(0,-390)';
-    content.querySelector('#useHeatingPumpChassis').setAttribute('transform', translation);
-    content.querySelector('#useHeatingPumpBladeWheel').setAttribute('transform', translation);
-    if(selection) {
-      content.querySelector('#gHeatingCircuitPump').classList.add("moved");
-    } else {
-      content.querySelector('#gHeatingCircuitPump').classList.remove("moved");
-    }
-  }
-
   // The user supplied configuration. Throw an exception and Home Assistant
   // will render an error card.
   setConfig(config) {
@@ -342,9 +334,10 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector('#gHPFan').style.display = (!config.heatingPumpType || config.heatingPumpType === 'A2W' ? 'inline' : 'none');
       this.content.querySelector('#gHPW2W').style.display = (config.heatingPumpType === 'W2W' ? 'inline' : 'none');
       this.content.querySelector('#gHPG2W').style.display = (config.heatingPumpType === 'G2W' ? 'inline' : 'none');
-      this.moveHeatingCircuitPump(this.content, config.heatingCircuitPumpBeforeValve);
       this.content.querySelector("#gCirculatingPump").style.display = config.circulatingPumpRunning ? 'inline' : 'none';
       this.content.querySelector('#gCirculatingPumpBladeWheel').classList.remove("rotate");
+      this.content.querySelector("#gStorageChargingPump").style.display = config.storageChargingPumpRunning ? 'inline' : 'none';
+      this.content.querySelector('#gStorageChargingPump').classList.remove("rotate");
       this.content.querySelector("#gTankHP").style.display = config.tankHP ? 'inline' : 'none';
       this.content.querySelector("#gWW").style.display = config.tankWW ? 'inline' : 'none';
 
@@ -487,7 +480,8 @@ class HeatPumpCard extends HTMLElement {
           { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWDown", selector: { entity: {domain: ["sensor"]} } },
           { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
-          { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
+          { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
+          { name: "storageChargingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
       { type: "expandable",
@@ -508,7 +502,6 @@ class HeatPumpCard extends HTMLElement {
             },
           },
           { name: "heatingCircuitPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
-          { name: "heatingCircuitPumpBeforeValve", selector: { boolean: {} } },
           { name: "supplyTemperatureHeating", selector: { entity: {domain: ["sensor"]} } },
           { name: "refluxTemperatureHeating", selector: { entity: {domain: ["sensor"]} } }
         ],

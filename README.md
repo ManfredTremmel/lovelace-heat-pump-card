@@ -50,6 +50,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | hpRunning | object | optional | when Primary Source is active, the fan animation is running
 | compressorRunning | object | optional | Binary sensor which detects if Compressor is running
 | circulatingPumpRunning | object | optional | Binary sensor which detects if Circulating Pump is running, if not defined, circulating pump is not displayed
+| storageChargingPumpRunning | object | optional | Binary sensor which detects if Storage Charging Pump is running, if not defined, pump is not displayed
 | tankHP | boolean | optional | Binary setting to display buffer tank or not
 | tankTempHPUp | object | optional | Buffer Temperature up, displayed in buffer tank and fill upper color is set between blue (≦ 20 ℃) and red (≧ 60 ℃). If not set, buffer tank is not displayed!
 | tankTempHPMiddle | object | optional | Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
@@ -60,7 +61,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | tankTempWWMiddle | object | optional | Hot Water Buffer Temperature middle, displayed in buffer tank and middle fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | tankTempWWDown | object | optional | Hot Water Buffer Temperature down, displayed in buffer tank and lower fill color is set between blue (≦ 20 ℃) and red (≧ 60 ℃), if not set, for calculating fill color above temperature - 5 ℃ is used
 | heatingCircuitType1 | string | optional | Type of first Heating Circuit, "off", "underfloor" or "radiator" default is "off" the circuit is hidden in this case
-| heatingCircuitPumpBeforeValve | boolean | optional | Binary setting, when true, display the circuit pump before the valve
+| heatingCircuitPumpBeforeValve | boolean | optional | With version 0.9.0 this has no effect, use storageChargingPumpRunning when you want to display pump before valve
 | heatingCircuitPumpRunning | object | optional | Binary sensor which detects if Heating Circuit Pump is running, if not defined, heating circuite pump is not displayed
 | supplyTemperatureHeating | object | optional  | Supply Temperature Heating, when not defined heating pipe is not displayed
 | refluxTemperatureHeating | object | optional | Reflux Temperature Heating
@@ -128,6 +129,7 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   hpRunning: binary_sensor.mosquitto_broker_status_primaerquelle
   compressorRunning: binary_sensor.mosquitto_broker_status_verdichter
   circulatingPumpRunning: binary_sensor.mosquitto_broker_warmwasser_zirkulationspumpe
+  storageChargingPumpRunning: binary_sensor.mosquitto_broker_status_speicherladepumpe
   tankHP: true
   tankTempHPUp: sensor.mosquitto_broker_pufferspeichertemperatur
   tankTempHPMiddle: ""
@@ -137,7 +139,6 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   tankTempWWMiddle: ""
   tankTempWWDown: ""
   heatingCircuitType1: underfloor
-  heatingCircuitPumpBeforeValve: false
   heatingCircuitPumpRunning: binary_sensor.mosquitto_broker_heizkreispumpe
   supplyTemperatureHeating: sensor.mosquitto_broker_vorlauftemperatur_heizkreis
   refluxTemperatureHeating: ""

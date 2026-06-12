@@ -36,6 +36,7 @@
     "hpRunning": "Status Primärquelle An/Aus",
     "compressorRunning": "Status Verdichter An/Aus",
     "circulatingPumpRunning": "Status Zirkulationspumpe An/Aus",
+    "storageChargingPumpRunning": "Status Speicherladepumpe An/Aus",
     "bufferTank": "Pufferspeicher",
     "tankHP": "Pufferspeicher vorhanden",
     "tankTempHPUp": "Pufferspeichertemperatur oben",

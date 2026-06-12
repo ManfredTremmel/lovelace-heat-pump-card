@@ -36,6 +36,7 @@
     "hpRunning": "Primary Source On/Off",
     "compressorRunning": "Compressor running On/Off",
     "circulatingPumpRunning": "Circulating Pump On/Off",
+    "storageChargingPumpRunning": "Storage Charging Pump On/Off",
     "bufferTank": "Buffer",
     "tankHP": "Buffer available",
     "tankTempHPUp": "Buffer Temperature up",

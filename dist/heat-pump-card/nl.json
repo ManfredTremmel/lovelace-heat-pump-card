@@ -36,6 +36,7 @@
     "hpRunning": "Primaire bron Aan/Uit",
     "compressorRunning": " Status Compressor Aan/Uit",
     "circulatingPumpRunning": "Status Circulatiepump Aan/Uit",
+    "storageChargingPumpRunning": "Opslaglaadpomp Aan/Uit",
     "bufferTank": "Buffer",
     "tankHP": "Buffer beschikbaar",
     "tankTempHPUp": "Buffertemperatuur boven",

@@ -169,11 +169,11 @@
         document.getElementById("labelTankTempWWDown").innerHTML = localization.editor['tankTempWWDown'];
         document.getElementById("labelWwHeatingValve").innerHTML = localization.editor['wwHeatingValve'];
         document.getElementById("labelCirculatingPumpRunning").innerHTML = localization.editor['circulatingPumpRunning'];
+        document.getElementById("labelStorageChargingPump").innerHTML = localization.editor['storageChargingPumpRunning'];
 
         document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
         document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
         document.getElementById("labelHeatingCircuitPumpRunning").innerHTML = localization.editor['heatingCircuitPumpRunning'];
-        document.getElementById("labelHeizkreispumpeVorVentil").innerHTML = localization.editor['heatingCircuitPumpBeforeValve'];
         document.getElementById("labelSupplyTemperatureHeating").innerHTML = localization.editor['supplyTemperatureHeating'];
         document.getElementById("labelRefluxTemperatureHeating").innerHTML = localization.editor['refluxTemperatureHeating'];
 
@@ -333,16 +333,6 @@
          document.getElementById('stopCircuit5').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
          document.getElementById('stopCircuit6').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
       }
-      function moveHeatingCircuitPump(selection) {
-        var translation = selection ? 'translate(-215,-20)' : 'translate(0,-390)';
-        document.getElementById('useHeatingPumpChassis').setAttribute('transform', translation);
-        document.getElementById('useHeatingPumpBladeWheel').setAttribute('transform', translation);
-        if(selection) {
-          document.getElementById('gHeatingCircuitPump').classList.add("moved");
-        } else {
-          document.getElementById('gHeatingCircuitPump').classList.remove("moved");
-        }
-      }
     </script>
   </head>
   <body onload="readSvg(handleSvg)">
@@ -496,6 +486,10 @@
             <label for="inputCirculatingPumpRunning" id="labelCirculatingPumpRunning">Zirkulationspumpe aktiv:</label>
             <input type="checkbox" id="inputCirculatingPumpRunning" checked="true" onClick="switchRotateAttribute('gCirculatingPumpBladeWheel', this.checked);"></input>
           </div>
+          <div>
+            <label for="inputStorageChargingPump" id="labelStorageChargingPump">Speicherladepumpe aktiv:</label>
+            <input type="checkbox" id="inputStorageChargingPump" checked="true" onClick="switchRotateAttribute('gStorageChargingPump', this.checked);"></input>
+          </div>
         </div>
       </div>
       <div class="toggle">
@@ -513,10 +507,6 @@
           <div>
             <label for="inputHeizkreispumpe" id="labelHeatingCircuitPumpRunning">Heizkreispumpe aktiv:</label>
             <input type="checkbox" id="inputHeizkreispumpe" checked="true" onClick="switchRotateAttribute('gHeatingCircuitPump', this.checked);"></input>
-          </div>
-          <div>
-            <label for="inputHeizkreispumpeVorVentil" id="labelHeizkreispumpeVorVentil">Heizkreispumpe vor Ventil:</label>
-            <input type="checkbox" id="inputHeizkreispumpeVorVentil" onClick="moveHeatingCircuitPump(this.checked);"></input>
           </div>
           <div>
             <label for="inputSupplyTemperatureHeating" id="labelSupplyTemperatureHeating">Vorlauftemperatur Heizen:</label>

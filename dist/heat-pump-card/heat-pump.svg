@@ -243,8 +243,8 @@
       #gHeatingCircuitPump {
         transform-origin: 785px 104px;
       }
-      .moved {
-        transform-origin: 570px 474px !important;
+      #gStorageChargingPump {
+        transform-origin: 570px 474px;
       }
       #gHeatingCircuitPump3 {
         transform-origin: 785px 254px;
@@ -302,6 +302,10 @@
   <g id="layer1">
     <g id="gPipe" style="display: inline;">
       <path id="pathPipeHotColdHeatpump" d="m 598,525 h -85 c -15,0 -30,0 -35,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 15,0 30,0 30,10 0,5 -15,5 -30,5 -15,0 -30,0 -30,-15 0,-15 15,-15 30,-15 h 90" />
+      <g id="gStorageChargingPump" class="rotate">
+        <use id="useStorageChargingPumpChassis" transform="translate(-215,-20)" xlink:href="#pathCirculatingPumpChassis" />
+        <use id="useStorageChargingPumpBladeWheel" transform="translate(-215,-20)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+      </g>
     </g>
     <g id="gPipeBuffer" style="display: inline;">
       <path id="pathPipeToBuffer" d="m 598,450 c 22,0 22,-15 22,-30 V 158 c 0,-12 5,-18 18,-18 H 750" />

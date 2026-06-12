@@ -36,6 +36,7 @@
     "hpRunning": "Primární zdroj zapnuto/vypnuto",
     "compressorRunning": "Kompresor v chodu zapnuto/vypnuto",
     "circulatingPumpRunning": "Oběhové čerpadlo zapnuto/vypnuto",
+    "storageChargingPumpRunning": "Zap/Vyp nabíjecí čerpadlo zásobníku",
     "bufferTank": "Akumulační nádrže",
     "tankHP": "K dispozici akumulační nádrže",
     "tankTempHPUp": "Teplota akumulační nádrže – horní",

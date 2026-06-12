@@ -36,6 +36,7 @@
     "hpRunning": "Udedel Kører (Blæser animation)",
     "compressorRunning": "Kompressor Kører (Status)",
     "circulatingPumpRunning": "Ladepumpe Kører (GP1)",
+    "storageChargingPumpRunning": "Opladningspumpe til/fra",
     "bufferTank": "Buffertank",
     "tankHP": "Buffertank forhånden",
     "tankTempHPUp": "Buffertank Top (Varme)",
