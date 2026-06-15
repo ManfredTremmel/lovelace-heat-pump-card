@@ -111,6 +111,20 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#textThermalSolarFluxTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarFluxTemp);
       this.content.querySelector("#textThermalSolarPumpSpeed").innerHTML = this.formatNum(hass, this.config.thermalSolarPumpSpeed);
     }
+
+    this.content.querySelector("#textValue000").innerHTML = this.readStateValue(hass, this.config.additionalValue000);
+    this.content.querySelector("#textValue001").innerHTML = this.readStateValue(hass, this.config.additionalValue001);
+    this.content.querySelector("#textValue002").innerHTML = this.readStateValue(hass, this.config.additionalValue002);
+    this.content.querySelector("#textValue003").innerHTML = this.readStateValue(hass, this.config.additionalValue003);
+    this.content.querySelector("#textValue004").innerHTML = this.readStateValue(hass, this.config.additionalValue004);
+    this.content.querySelector("#textValue005").innerHTML = this.readStateValue(hass, this.config.additionalValue005);
+    this.content.querySelector("#textValue006").innerHTML = this.readStateValue(hass, this.config.additionalValue006);
+    this.content.querySelector("#textValue007").innerHTML = this.readStateValue(hass, this.config.additionalValue007);
+    this.content.querySelector("#textValue008").innerHTML = this.readStateValue(hass, this.config.additionalValue008);
+    this.content.querySelector("#textValue009").innerHTML = this.readStateValue(hass, this.config.additionalValue009);
+    this.content.querySelector("#textValue010").innerHTML = this.readStateValue(hass, this.config.additionalValue010);
+    this.content.querySelector("#textValue011").innerHTML = this.readStateValue(hass, this.config.additionalValue011);
+    this.content.querySelector("#textValue012").innerHTML = this.readStateValue(hass, this.config.additionalValue012);
   }
 
   static cardFolder = "/hacsfiles/lovelace-heat-pump-card/heat-pump-card/";
@@ -198,6 +212,11 @@ class HeatPumpCard extends HTMLElement {
       return hass.states[config];
     }
     return null;
+  }
+
+  readStateValue(hass, config) {
+    const stateValue = this.readState(hass, config);
+    return stateValue ? stateValue.state : '';
   }
 
   formatBinary(hass, state) {
@@ -378,7 +397,7 @@ class HeatPumpCard extends HTMLElement {
       var noHeating = (!type1 || type1 === 'off') && (!type2 || type2 === 'off') && (!type3 || type3 === 'off') && !config.tankHP;
       var noHotWater = !config.tankWW;
 
-      if(noHeating && noHotWater) {
+      if (noHeating && noHotWater) {
         this.content.querySelector("#gPipe").style.display = 'none';
         this.content.querySelector("#gPipeBuffer").style.display = 'none';
         this.content.querySelector("#gPipeLayeredChargeStorage").style.display = 'none';
@@ -401,6 +420,20 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector('#gThermalSolar').style.display = 'inline';
       }
       this.content.querySelector('#gThermalSolarPump').classList.remove("rotate");
+
+      this.content.querySelector("#textLabel000").innerHTML = config.additionalLabel000 ? config.additionalLabel000 : '';
+      this.content.querySelector("#textLabel001").innerHTML = config.additionalLabel001 ? config.additionalLabel001 : '';
+      this.content.querySelector("#textLabel002").innerHTML = config.additionalLabel002 ? config.additionalLabel002 : '';
+      this.content.querySelector("#textLabel003").innerHTML = config.additionalLabel003 ? config.additionalLabel003 : '';
+      this.content.querySelector("#textLabel004").innerHTML = config.additionalLabel004 ? config.additionalLabel004 : '';
+      this.content.querySelector("#textLabel005").innerHTML = config.additionalLabel005 ? config.additionalLabel005 : '';
+      this.content.querySelector("#textLabel006").innerHTML = config.additionalLabel006 ? config.additionalLabel006 : '';
+      this.content.querySelector("#textLabel007").innerHTML = config.additionalLabel007 ? config.additionalLabel007 : '';
+      this.content.querySelector("#textLabel008").innerHTML = config.additionalLabel008 ? config.additionalLabel008 : '';
+      this.content.querySelector("#textLabel009").innerHTML = config.additionalLabel009 ? config.additionalLabel009 : '';
+      this.content.querySelector("#textLabel010").innerHTML = config.additionalLabel010 ? config.additionalLabel010 : '';
+      this.content.querySelector("#textLabel011").innerHTML = config.additionalLabel011 ? config.additionalLabel011 : '';
+      this.content.querySelector("#textLabel012").innerHTML = config.additionalLabel012 ? config.additionalLabel012 : '';
 
       this.setLinks();
     }
@@ -588,6 +621,38 @@ class HeatPumpCard extends HTMLElement {
         schema: [
           { name: "linkDetails", selector: { navigation: {} } },
           { name: "linkSettings", selector: { navigation: {} } }
+        ],
+      },
+      { type: "expandable",
+        name: "additionalValues",
+        flatten: true,
+        schema: [
+          { name: "additionalLabel000", selector: { text: {} } },
+          { name: "additionalValue000", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel001", selector: { text: {} } },
+          { name: "additionalValue001", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel002", selector: { text: {} } },
+          { name: "additionalValue002", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel003", selector: { text: {} } },
+          { name: "additionalValue003", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel004", selector: { text: {} } },
+          { name: "additionalValue004", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel005", selector: { text: {} } },
+          { name: "additionalValue005", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel006", selector: { text: {} } },
+          { name: "additionalValue006", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel007", selector: { text: {} } },
+          { name: "additionalValue007", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel008", selector: { text: {} } },
+          { name: "additionalValue008", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel009", selector: { text: {} } },
+          { name: "additionalValue009", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel010", selector: { text: {} } },
+          { name: "additionalValue010", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel011", selector: { text: {} } },
+          { name: "additionalValue011", selector: { entity: {domain: ["sensor"]} } },
+          { name: "additionalLabel012", selector: { text: {} } },
+          { name: "additionalValue012", selector: { entity: {domain: ["sensor"]} } }
         ],
       }
     ];

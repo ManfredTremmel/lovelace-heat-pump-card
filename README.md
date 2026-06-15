@@ -90,6 +90,8 @@ Home Assistant dashboard card displaying heat pump parameters
 | thermalSolarFluxTemp | object | optional | Sensor containing flux temperature
 | linkDetails | string | optional | Link to details page
 | linkSettings | string | optional | Link to settings page
+| additionalLabel000 ... additionalLabel012 | string | optional | Label(s) for additional value(s) to display
+| additionalValue000 ... additionalValue012 | object | optional | Sensor(s) containing additional value(s) to display
 
 ### Alternate sensor types
 
@@ -109,8 +111,6 @@ additional binary_sensors I've created as helper to translate the heat pump mode
 - type: custom:heat-pump-card
   title: Wärmepumpe
   heatingPumpType: A2W
-  temperatureGroundWaterIn: ""
-  temperatureGroundWaterOut: ""
   heatingPumpStatusOnOff: binary_sensor.heating_pump_status_on_off
   heatingPumpHotWaterMode: binary_sensor.heating_pump_hot_water_mode
   heatingPumpHeatingMode: binary_sensor.heating_pump_heating_mode
@@ -118,9 +118,7 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heatingPumpPartyMode: binary_sensor.heating_pump_party_mode
   heatingPumpEnergySaveMode: binary_sensor.heating_pump_energy_save_mode
   heatingPumpNightMode: binary_sensor.heating_pump_night_mode
-  warning: ""
-  error: ""
-  defrostMode: ""
+  warning: binary_sensor.mosquitto_broker_status_sammelmeldung
   outdoorTemperature: sensor.mosquitto_broker_aussentemperatur
   ambientTemperatureNormal: number.mosquitto_broker_raumsolltemperatur_normal
   ambientTemperatureReduced: number.mosquitto_broker_raumsolltemperatur_reduziert
@@ -132,39 +130,22 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   storageChargingPumpRunning: binary_sensor.mosquitto_broker_status_speicherladepumpe
   tankHP: true
   tankTempHPUp: sensor.mosquitto_broker_pufferspeichertemperatur
-  tankTempHPMiddle: ""
-  tankTempHPDown: ""
   tankWW: true
   tankTempWWUp: sensor.mosquitto_broker_warmwassertemperatur_oben
-  tankTempWWMiddle: ""
-  tankTempWWDown: ""
   heatingCircuitType1: underfloor
   heatingCircuitPumpRunning: binary_sensor.mosquitto_broker_heizkreispumpe
   supplyTemperatureHeating: sensor.mosquitto_broker_vorlauftemperatur_heizkreis
-  refluxTemperatureHeating: ""
   heatingCircuitType2: "off"
-  heatingCircuitPumpRunning2: ""
-  supplyTemperatureHeating2: ""
-  refluxTemperatureHeating2: ""
   heatingCircuitType3: "off"
-  heatingCircuitPumpRunning3: ""
-  supplyTemperatureHeating3: ""
-  refluxTemperatureHeating3: ""
   evaporatorPressure: sensor.mosquitto_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_broker_druck_im_kondensator
-  condenserTemperature: ""
-  expansionValveOpening: ""
   wwHeatingValve: binary_sensor.mosquitto_broker_status_warmwasserventil
   heaterRodWW: switch.mosquitto_broker_freigabe_elektroheizung_fuer_ww_bereitung
   heaterRodHP: switch.mosquitto_broker_freigabe_heizen_mit_elektro
   heaterRodLevel1: binary_sensor.mosquitto_broker_status_heizstab_stufe_1
   heaterRodLevel2: binary_sensor.mosquitto_broker_status_heizstab_stufe_2
   thermalSolarAvailable: false
-  thermalSolarPump: ""
-  thermalSolarPumpSpeed: ""
-  thermalSolarPanelTemp: ""
-  thermalSolarFluxTemp: ""
   linkDetails: /lovelace/hp-details
   linkSettings: /lovelace/hp-settings
 

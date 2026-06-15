@@ -362,6 +362,32 @@
           <text id="textCompressor" x="390" y="423" text-anchor="middle" xml:space="preserve">Compressor</text>
           <text id="textExpansionValve" x="390" y="555" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
           <text id="textExpansionValveOpening" x="390" y="575" text-anchor="middle" xml:space="preserve">80 %</text>
+          <text id="textLabel000" x="70" y="375" xml:space="preserve"></text>
+          <text id="textValue000" x="235" y="375" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel001" x="70" y="395" xml:space="preserve"></text>
+          <text id="textValue001" x="235" y="395" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel002" x="70" y="415" xml:space="preserve"></text>
+          <text id="textValue002" x="235" y="415" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel003" x="70" y="435" xml:space="preserve"></text>
+          <text id="textValue003" x="235" y="435" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel004" x="70" y="455" xml:space="preserve"></text>
+          <text id="textValue004" x="235" y="455" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel005" x="70" y="475" xml:space="preserve"></text>
+          <text id="textValue005" x="235" y="475" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel006" x="70" y="495" xml:space="preserve"></text>
+          <text id="textValue006" x="235" y="495" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel007" x="70" y="515" xml:space="preserve"></text>
+          <text id="textValue007" x="235" y="515" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel008" x="70" y="535" xml:space="preserve"></text>
+          <text id="textValue008" x="235" y="535" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel009" x="70" y="555" xml:space="preserve"></text>
+          <text id="textValue009" x="235" y="555" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel010" x="70" y="575" xml:space="preserve"></text>
+          <text id="textValue010" x="235" y="575" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel011" x="70" y="595" xml:space="preserve"></text>
+          <text id="textValue011" x="235" y="595" text-anchor="end" xml:space="preserve"></text>
+          <text id="textLabel012" x="70" y="615" xml:space="preserve"></text>
+          <text id="textValue012" x="235" y="615" text-anchor="end" xml:space="preserve"></text>
         </g>
         <rect id="rectHPChassis" x="65.353" y="350.35" width="474.29" height="274.29" />
       </g>

@@ -213,6 +213,34 @@
         document.getElementById("labelLinkDetails").innerHTML = localization.editor['linkDetails'];
         document.getElementById("labelLinkSettings").innerHTML = localization.editor['linkSettings'];
 
+        document.getElementById("labelAdditionalValues").innerHTML = localization.editor['additionalValues'];
+        document.getElementById("labelAdditionalLabel000").innerHTML = localization.editor['additionalLabel000'];
+        document.getElementById("labelAdditionalValue000").innerHTML = localization.editor['additionalValue000'];
+        document.getElementById("labelAdditionalLabel001").innerHTML = localization.editor['additionalLabel001'];
+        document.getElementById("labelAdditionalValue001").innerHTML = localization.editor['additionalValue001'];
+        document.getElementById("labelAdditionalLabel002").innerHTML = localization.editor['additionalLabel002'];
+        document.getElementById("labelAdditionalValue002").innerHTML = localization.editor['additionalValue002'];
+        document.getElementById("labelAdditionalLabel003").innerHTML = localization.editor['additionalLabel003'];
+        document.getElementById("labelAdditionalValue003").innerHTML = localization.editor['additionalValue003'];
+        document.getElementById("labelAdditionalLabel004").innerHTML = localization.editor['additionalLabel004'];
+        document.getElementById("labelAdditionalValue004").innerHTML = localization.editor['additionalValue004'];
+        document.getElementById("labelAdditionalLabel005").innerHTML = localization.editor['additionalLabel005'];
+        document.getElementById("labelAdditionalValue005").innerHTML = localization.editor['additionalValue005'];
+        document.getElementById("labelAdditionalLabel006").innerHTML = localization.editor['additionalLabel006'];
+        document.getElementById("labelAdditionalValue006").innerHTML = localization.editor['additionalValue006'];
+        document.getElementById("labelAdditionalLabel007").innerHTML = localization.editor['additionalLabel007'];
+        document.getElementById("labelAdditionalValue007").innerHTML = localization.editor['additionalValue007'];
+        document.getElementById("labelAdditionalLabel008").innerHTML = localization.editor['additionalLabel008'];
+        document.getElementById("labelAdditionalValue008").innerHTML = localization.editor['additionalValue008'];
+        document.getElementById("labelAdditionalLabel009").innerHTML = localization.editor['additionalLabel009'];
+        document.getElementById("labelAdditionalValue009").innerHTML = localization.editor['additionalValue009'];
+        document.getElementById("labelAdditionalLabel010").innerHTML = localization.editor['additionalLabel010'];
+        document.getElementById("labelAdditionalValue010").innerHTML = localization.editor['additionalValue010'];
+        document.getElementById("labelAdditionalLabel011").innerHTML = localization.editor['additionalLabel011'];
+        document.getElementById("labelAdditionalValue011").innerHTML = localization.editor['additionalValue011'];
+        document.getElementById("labelAdditionalLabel012").innerHTML = localization.editor['additionalLabel012'];
+        document.getElementById("labelAdditionalValue012").innerHTML = localization.editor['additionalValue012'];
+
         document.getElementById("linkDetails").addEventListener("click", this.linkHandling);
         document.getElementById("linkSettings").addEventListener("click", this.linkHandling);
       }
@@ -654,6 +682,116 @@
           <div>
             <label for="inputLinkDetails" id="labelLinkDetails">Url Details:</label>
             <input type="text" id="inputLinkDetails" onChange="document.getElementById('linkDetails').setAttribute('href', this.value);" value="#"></input>
+          </div>
+        </div>
+      </div>
+      <div class="toggle">
+        <input id="additionalValue" type="checkbox"/>
+        <label for="additionalValue" id="labelAdditionalValues">Zusätzliche Werte</label>
+        <div>
+          <div>
+            <label for="inputAdditionalLabel000" id="labelAdditionalLabel000">Zusätzliches Etikett 000:</label>
+            <input type="text" id="inputAdditionalLabel000" onChange="document.getElementById('textLabel000').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue000" id="labelAdditionalValue000">Zusätzlicher Wert 000:</label>
+            <input type="text" id="inputAdditionalValue000" onChange="document.getElementById('textValue000').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel001" id="labelAdditionalLabel001">Zusätzliches Etikett 001:</label>
+            <input type="text" id="inputAdditionalLabel001" onChange="document.getElementById('textLabel001').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue001" id="labelAdditionalValue001">Zusätzlicher Wert 001:</label>
+            <input type="text" id="inputAdditionalValue001" onChange="document.getElementById('textValue001').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel002" id="labelAdditionalLabel002">Zusätzliches Etikett 002:</label>
+            <input type="text" id="inputAdditionalLabel002" onChange="document.getElementById('textLabel002').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue002" id="labelAdditionalValue002">Zusätzlicher Wert 002:</label>
+            <input type="text" id="inputAdditionalValue002" onChange="document.getElementById('textValue002').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel003" id="labelAdditionalLabel003">Zusätzliches Etikett 003:</label>
+            <input type="text" id="inputAdditionalLabel003" onChange="document.getElementById('textLabel003').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue003" id="labelAdditionalValue003">Zusätzlicher Wert 003:</label>
+            <input type="text" id="inputAdditionalValue003" onChange="document.getElementById('textValue003').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel004" id="labelAdditionalLabel004">Zusätzliches Etikett 004:</label>
+            <input type="text" id="inputAdditionalLabel004" onChange="document.getElementById('textLabel004').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue004" id="labelAdditionalValue004">Zusätzlicher Wert 004:</label>
+            <input type="text" id="inputAdditionalValue004" onChange="document.getElementById('textValue004').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel005" id="labelAdditionalLabel005">Zusätzliches Etikett 005:</label>
+            <input type="text" id="inputAdditionalLabel005" onChange="document.getElementById('textLabel005').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue005" id="labelAdditionalValue005">Zusätzlicher Wert 005:</label>
+            <input type="text" id="inputAdditionalValue005" onChange="document.getElementById('textValue005').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel006" id="labelAdditionalLabel006">Zusätzliches Etikett 006:</label>
+            <input type="text" id="inputAdditionalLabel006" onChange="document.getElementById('textLabel006').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue006" id="labelAdditionalValue006">Zusätzlicher Wert 006:</label>
+            <input type="text" id="inputAdditionalValue006" onChange="document.getElementById('textValue006').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel007" id="labelAdditionalLabel007">Zusätzliches Etikett 007:</label>
+            <input type="text" id="inputAdditionalLabel007" onChange="document.getElementById('textLabel007').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue007" id="labelAdditionalValue007">Zusätzlicher Wert 007:</label>
+            <input type="text" id="inputAdditionalValue007" onChange="document.getElementById('textValue007').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel008" id="labelAdditionalLabel008">Zusätzliches Etikett 008:</label>
+            <input type="text" id="inputAdditionalLabel008" onChange="document.getElementById('textLabel008').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue008" id="labelAdditionalValue008">Zusätzlicher Wert 008:</label>
+            <input type="text" id="inputAdditionalValue008" onChange="document.getElementById('textValue008').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel009" id="labelAdditionalLabel009">Zusätzliches Etikett 009:</label>
+            <input type="text" id="inputAdditionalLabel009" onChange="document.getElementById('textLabel009').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue009" id="labelAdditionalValue009">Zusätzlicher Wert 009:</label>
+            <input type="text" id="inputAdditionalValue009" onChange="document.getElementById('textValue009').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel010" id="labelAdditionalLabel010">Zusätzliches Etikett 010:</label>
+            <input type="text" id="inputAdditionalLabel010" onChange="document.getElementById('textLabel010').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue010" id="labelAdditionalValue010">Zusätzlicher Wert 010:</label>
+            <input type="text" id="inputAdditionalValue010" onChange="document.getElementById('textValue010').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel011" id="labelAdditionalLabel011">Zusätzliches Etikett 011:</label>
+            <input type="text" id="inputAdditionalLabel011" onChange="document.getElementById('textLabel011').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue011" id="labelAdditionalValue011">Zusätzlicher Wert 011:</label>
+            <input type="text" id="inputAdditionalValue011" onChange="document.getElementById('textValue011').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalLabel012" id="labelAdditionalLabel012">Zusätzliches Etikett 012:</label>
+            <input type="text" id="inputAdditionalLabel012" onChange="document.getElementById('textLabel012').innerHTML = this.value;"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalValue012" id="labelAdditionalValue012">Zusätzlicher Wert 012:</label>
+            <input type="text" id="inputAdditionalValue012" onChange="document.getElementById('textValue012').innerHTML = this.value;"></input>
           </div>
         </div>
       </div>
