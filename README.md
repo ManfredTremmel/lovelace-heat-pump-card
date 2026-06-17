@@ -157,4 +157,4 @@ additional binary_sensors I've created as helper to translate the heat pump mode
 ## Contribution
 
 Contributions are welcome! Submit pull requests or open issues for bugs, enhancements, or feature requests.
-For translations to unsupported languages, you can use [en.json](./blob/main/dist/heat-pump-card/en.json) as template.
+For translations to unsupported languages, you can use [en.json](./dist/heat-pump-card/en.json) as template.
