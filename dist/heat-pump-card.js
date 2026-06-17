@@ -34,6 +34,7 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#gWarning").style.display = this.formatBinary(hass, this.config.warning) ? "inline" : "none";
     this.content.querySelector("#gError").style.display = (this.formatBinary(hass, this.config.error) || this.formatBinary(hass, this.config.warning)) ? "inline" : "none";
     this.content.querySelector("#gDefrost").style.display = this.formatBinary(hass, this.config.defrostMode) ? "inline" : "none";
+    this.content.querySelector("#gAdditionalHeating").style.display = this.formatBinary(hass, this.config.additionalHeating) ? "inline" : "none";
 
     this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.outdoorTemperature);
 
@@ -481,6 +482,7 @@ class HeatPumpCard extends HTMLElement {
           { name: "warning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "error", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "defrostMode", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "additionalHeating", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "hpRunning", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "compressorRunning", selector: { entity: {domain: ["binary_sensor"]} } }
         ],

@@ -147,6 +147,7 @@
         document.getElementById("labelWarning").innerHTML = localization.editor['warning'];
         document.getElementById("labelError").innerHTML = localization.editor['error'];
         document.getElementById("labelDefrostMode").innerHTML = localization.editor['defrostMode'];
+        document.getElementById("labelAdditionalHeating").innerHTML = localization.editor['additionalHeating'];
         document.getElementById("labelHpRunning").innerHTML = localization.editor['hpRunning'];
         document.getElementById("labelCompressorRunning").innerHTML = localization.editor['compressorRunning'];
 
@@ -432,6 +433,10 @@
           <div>
             <label for="inputDefrostMode" id="labelDefrostMode">Abtaumodus An/Aus:</label>
             <input type="checkbox" id="inputDefrostMode" onClick="document.getElementById('gDefrost').style.display = this.checked ? 'inline' : 'none';"></input>
+          </div>
+          <div>
+            <label for="inputAdditionalHeating" id="labelAdditionalHeating">Zusatzheizung An/Aus:</label>
+            <input type="checkbox" id="inputAdditionalHeating" onClick="document.getElementById('gAdditionalHeating').style.display = this.checked ? 'inline' : 'none';"></input>
           </div>
           <div>
             <label for="inputHpRunning" id="labelHpRunning">W&auml;rmepumpe aktiv:</label>

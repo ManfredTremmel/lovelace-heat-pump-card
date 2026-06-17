@@ -96,11 +96,17 @@
       #path11096,
       #path11098,
       #path160-0,
-      #path160-1 {
+      #path160-1,
+      #pathAdditionalHeatingInnerFlame,
+      #pathAdditionalHeatingOuterFlame,
+      #pathAdditionalHeatingPlate {
         fill: var(--primary-text-color);
         fill-opacity: 1;
         fill-rule: evenodd;
         stroke: none;
+      }
+      #pathAdditionalHeatingCircle {
+        stroke-width: 0.5;
       }
       #path159-6,
       #path157-0,
@@ -140,7 +146,8 @@
       }
       #gError,
       #gWarning,
-      #gDefrost {
+      #gDefrost,
+      #gAdditionalHeating {
         display: none;
       }
       #pathUnderfloorHeating1,
@@ -553,6 +560,12 @@
           <path id="path153-3" d="M 1057.1249,914.25 546.375,46.875" />
           <path id="path151-9" d="M 46.875,914.25 H 1057.1249" />
           <path id="path149-0" d="M 546.375,46.875 46.875,914.25" />
+        </g>
+        <g id="gAdditionalHeating" transform="matrix(4,0,0,4,110,-1107)">
+          <circle id="pathAdditionalHeatingCircle" cx="59" cy="297.5" r="4.5" />
+          <path id="pathAdditionalHeatingInnerFlame" d="m 57.146,297.467 c 0.539,-0.255 1.078,-0.369 1.616,-0.369 0.624,0 1.219,0.142 1.786,0.482 -0.567,0.34 -1.162,0.511 -1.786,0.511 -0.538,0 -1.077,-0.114 -1.616,-0.426 z" />
+          <path id="pathAdditionalHeatingOuterFlame" d="m 57.146,296.985 c 0.454,-0.198 0.964,-0.312 1.531,-0.312 0.992,0 1.843,0.312 2.608,0.907 -0.765,0.596 -1.616,0.907 -2.579,0.907 -0.596,0 -1.106,-0.113 -1.56,-0.34 v 1.021 c 0.567,0.17 1.134,0.255 1.701,0.255 1.446,0 2.722,-0.624 3.77,-1.843 -1.048,-1.219 -2.324,-1.842 -3.77,-1.842 -0.567,0 -1.134,0.085 -1.701,0.283 z" />
+          <path id="pathAdditionalHeatingPlate" d="m 56.041,300.132 h 0.935 v -5.074 h -0.935 z" />
         </g>
         <path id="pathSettingsSeperator" d="m65 110h474" />
         <g id="gTimeSymbolDay" transform="matrix(3 0 0 3 -204.7 -332)">

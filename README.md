@@ -42,6 +42,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | warning | object | optional | A warning symbol is displayed, when result is on
 | error | object | optional | A error symbol is displayed, when result is on
 | defrostMode | object | optional | A defrost mode symbol is displayed, when result is on
+| additionalHeating | object | optional | A flame symbol is displayed to show additional heating is running, when result is on
 | outdoorTemperature | object | optional | Outdoor Temperature
 | ambientTemperatureNormal | object | optional | Ambient Temperature normal
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
@@ -120,6 +121,7 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heatingPumpEnergySaveMode: binary_sensor.heating_pump_energy_save_mode
   heatingPumpNightMode: binary_sensor.heating_pump_night_mode
   warning: binary_sensor.mosquitto_broker_status_sammelmeldung
+  additionalHeating: switch.mosquitto_broker_freigabe_zusatzheizung_fuer_ww_bereitung
   outdoorTemperature: sensor.mosquitto_broker_aussentemperatur
   ambientTemperatureNormal: number.mosquitto_broker_raumsolltemperatur_normal
   ambientTemperatureReduced: number.mosquitto_broker_raumsolltemperatur_reduziert

@@ -27,6 +27,7 @@
     "warning": "Warnung An/Aus",
     "error": "Fehler An/Aus",
     "defrostMode": "Abtaumodus An/Aus",
+    "additionalHeating": "Zusatzheizung An/Aus",
     "temperatures": "Temperaturen",
     "outdoorTemperature": "Außentemperatur",
     "ambientTemperatureNormal": "Raumsolltemperatur normal",

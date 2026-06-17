@@ -27,6 +27,7 @@
     "warning": "Warning On/Off",
     "error": "Error On/Off",
     "defrostMode": "Defrost Mode On/Off",
+    "additionalHeating": "Additional Heating On/Off",
     "temperatures": "Temperatures",
     "outdoorTemperature": "Outdoor Temperature",
     "ambientTemperatureNormal": "Ambient Temperature normal",

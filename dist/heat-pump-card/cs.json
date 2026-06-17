@@ -27,6 +27,7 @@
     "warning": "Varování zapnuto/vypnuto",
     "error": "Chyba zapnuto/vypnuto",
     "defrostMode": "Režim odmrazování zapnuto/vypnuto",
+    "additionalHeating": "Přídavné vytápění zapnuto/vypnuto",
     "temperatures": "Teploty",
     "outdoorTemperature": "Venkovní teplota",
     "ambientTemperatureNormal": "Prostorová teplota – normální",
