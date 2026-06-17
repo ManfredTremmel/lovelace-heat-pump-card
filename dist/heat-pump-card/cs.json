@@ -69,6 +69,7 @@
     "evaporatorTemperature": "Teplota výparníku",
     "condenserPressure": "Tlak kondenzátoru",
     "condenserTemperature": "Teplota kondenzátoru",
+    "compressorValue": "Hodnota kompresoru",
     "expansionValveOpening": "Otevření expanzního ventilu",
     "wwHeatingValve": "Ventil vytápění / teplé vody",
     "heaterRod": "Topná patrona",

@@ -70,6 +70,7 @@
     "condenserPressure": "Kondensatortryk",
     "condenserTemperature": "Kondensatortemperatur",
     "expansionValveOpening": "Ekspansionsventil Åbning",
+    "compressorValue": "Kompressorværdi",
     "wwHeatingValve": "Vexelventil (Varme/Vand)",
     "heaterRod": "El-patron Varme",
     "heaterRodWW": "El-patron Varmt Vand (Aktiv)",

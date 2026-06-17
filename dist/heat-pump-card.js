@@ -102,6 +102,7 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#textCondenserPressure").innerHTML = this.formatNum(hass, this.config.condenserPressure);
     this.content.querySelector("#textCondenserTemperature").innerHTML = this.formatNum(hass, this.config.condenserTemperature);
     this.content.querySelector("#textExpansionValveOpening").innerHTML = this.formatNum(hass, this.config.expansionValveOpening);
+    this.content.querySelector("#textCompressorValue").innerHTML = this.readStateValue(hass, this.config.compressorValue);
 
     this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
 
@@ -216,7 +217,8 @@ class HeatPumpCard extends HTMLElement {
 
   readStateValue(hass, config) {
     const stateValue = this.readState(hass, config);
-    return stateValue ? stateValue.state : '';
+    const valueNumeric = this.formatNumValue(stateValue);
+    return valueNumeric ? valueNumeric : (stateValue ? stateValue.state : '');
   }
 
   formatBinary(hass, state) {
@@ -231,7 +233,8 @@ class HeatPumpCard extends HTMLElement {
 
   formatNumValue(stateValue) {
     if (stateValue && !isNaN(Number(stateValue.state))) {
-      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(stateValue.state) + " " + stateValue.attributes.unit_of_measurement;
+      const unit = stateValue.attributes.unit_of_measurement ? stateValue.attributes.unit_of_measurement :  "";
+      return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(stateValue.state) + " " + unit;
     }
     return null;
   }
@@ -591,7 +594,8 @@ class HeatPumpCard extends HTMLElement {
           { name: "evaporatorTemperature", selector: { entity: {domain: ["sensor"]} } },
           { name: "condenserPressure", selector: { entity: {domain: ["sensor"]} } },
           { name: "condenserTemperature", selector: { entity: {domain: ["sensor"]} } },
-          { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } }
+          { name: "expansionValveOpening", selector: { entity: {domain: ["sensor"]} } },
+          { name: "compressorValue", selector: { entity: {domain: ["sensor"]} } }
         ],
       },
       { type: "expandable",

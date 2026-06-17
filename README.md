@@ -78,6 +78,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | condenserPressure | object | optional | Condenser Pressure
 | condenserTemperature | object | optional | Condenser Temperature
 | expansionValveOpening | object | optional | Opening Expansion Valve
+| compressorValue | object | optional | Compressor value to display
 | wwHeatingValve | object | optional  | Heating/Hot Water Valve
 | heaterRodWW | object | optional | Heater Rod Hot Water is active and displayed in the buffer tank
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank

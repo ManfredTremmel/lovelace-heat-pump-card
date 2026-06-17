@@ -70,6 +70,7 @@
     "condenserPressure": "Druck im Kondensator/Verflüssiger",
     "condenserTemperature": "Temperatur im Kondensator/Verflüssiger",
     "expansionValveOpening": "Öffnung Entspannungsventil",
+    "compressorValue": "Verdichter Wert",
     "wwHeatingValve": "Ventil Heizen/Warmwasser",
     "heaterRod": "Heizstab",
     "heaterRodWW": "Heizstab Warmwasser An/Aus",

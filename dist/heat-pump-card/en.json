@@ -70,6 +70,7 @@
     "condenserPressure": "Condenser Pressure",
     "condenserTemperature": "Condenser Temperature",
     "expansionValveOpening": "Opening Expansion Valve",
+    "compressorValue": "Compressor Value",
     "wwHeatingValve": "Heating/Hot Water Valve",
     "heaterRod": "Heater Rod",
     "heaterRodWW": "Heater Rod Hot Water On/Off",

@@ -360,6 +360,7 @@
           <text id="textCondenserPressure" x="480" y="495" text-anchor="end" xml:space="preserve">30,0 bar</text>
           <text id="textCondenserTemperature" x="485" y="515" text-anchor="end" xml:space="preserve">30,0 ℃</text>
           <text id="textCompressor" x="390" y="423" text-anchor="middle" xml:space="preserve">Compressor</text>
+          <text id="textCompressorValue" x="390" y="443" text-anchor="middle" xml:space="preserve"></text>
           <text id="textExpansionValve" x="390" y="555" text-anchor="middle" xml:space="preserve">Expansion Valve</text>
           <text id="textExpansionValveOpening" x="390" y="575" text-anchor="middle" xml:space="preserve">80 %</text>
           <text id="textLabel000" x="70" y="375" xml:space="preserve"></text>

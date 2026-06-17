@@ -195,6 +195,7 @@
         document.getElementById("labelCondenserPressure").innerHTML = localization.editor['condenserPressure'];
         document.getElementById("labelCondenserTemperature").innerHTML = localization.editor['condenserTemperature'];
         document.getElementById("labelExpansionValveOpening").innerHTML = localization.editor['expansionValveOpening'];
+        document.getElementById("labelCompressorValue").innerHTML = localization.editor['compressorValue'];
 
         document.getElementById("labelHeaterRod").innerHTML = localization.editor['heaterRod'];
         document.getElementById("labelHeaterRodWW").innerHTML = localization.editor['heaterRodWW'];
@@ -621,7 +622,11 @@
             <label for="inputExpansionValveOpening" id="labelExpansionValveOpening">&Ouml;ffnung Expansionsventil:</label>
             <input type="number" min="0" max="100" step="1" id="inputExpansionValveOpening" onChange="document.getElementById('textExpansionValveOpening').innerHTML = formatPercent(this.value);" value="80"></input>
           </div>
-        </div>
+           <div>
+            <label for="inputCompressorValue" id="labelCompressorValue">Verdichter Wert:</label>
+            <input type="text" id="inputCompressorValue" onChange="document.getElementById('textCompressorValue').innerHTML = this.value;"></input>
+          </div>
+       </div>
       </div>
       <div class="toggle">
         <input id="heaterRod" type="checkbox"/>
