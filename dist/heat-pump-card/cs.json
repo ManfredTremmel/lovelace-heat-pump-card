@@ -34,6 +34,8 @@
     "ambientTemperatureReduced": "Prostorová teplota – snížená",
     "ambientTemperatureParty": "Prostorová teplota – párty",
     "supplyTemperature": "Teplota přívodu",
+    "supplyTemperatureMain": "Teplota přívodu hlavního potrubí",
+    "refluxTemperatureMain": "Teplota zpátečky hlavního potrubí",
     "hpRunning": "Primární zdroj zapnuto/vypnuto",
     "compressorRunning": "Kompresor v chodu zapnuto/vypnuto",
     "circulatingPumpRunning": "Oběhové čerpadlo zapnuto/vypnuto",

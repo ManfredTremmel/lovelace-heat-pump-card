@@ -302,8 +302,8 @@
       <stop id="stopPipe2" style="stop-color:#0000ff" offset="1" />
     </linearGradient>
     <linearGradient id="linearGradient3" x1="900" y1="345" x2="1012" y2="345" gradientUnits="userSpaceOnUse">
-      <stop id="stopPipe1" style="stop-color:#ff0000" offset="0" />
-      <stop id="stopPipe2" style="stop-color:#0000ff" offset="1" />
+      <stop id="stopSolarPanel1" style="stop-color:#ff0000" offset="0" />
+      <stop id="stopSolarPanel2" style="stop-color:#0000ff" offset="1" />
     </linearGradient>
   </defs>
   <g id="layer1">
@@ -313,6 +313,8 @@
         <use id="useStorageChargingPumpChassis" transform="translate(-215,-20)" xlink:href="#pathCirculatingPumpChassis" />
         <use id="useStorageChargingPumpBladeWheel" transform="translate(-215,-20)" xlink:href="#gCirculatingPumpBladeWheelInner" />
       </g>
+      <text id="textSupplyTemperatureMain" x="594" y="432" text-anchor="end" xml:space="preserve">30,0 &#8451;</text>
+      <text id="textRefluxTemperatureMain" x="594" y="548" text-anchor="end" xml:space="preserve">20,0 &#8451;</text>
     </g>
     <g id="gPipeBuffer" style="display: inline;">
       <path id="pathPipeToBuffer" d="m 598,450 c 22,0 22,-15 22,-30 V 158 c 0,-12 5,-18 18,-18 H 750" />
