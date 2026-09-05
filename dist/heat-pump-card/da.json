@@ -34,6 +34,8 @@
     "ambientTemperatureReduced": "Rumtemperatur (Reduceret)",
     "ambientTemperatureParty": "Rumtemperatur (Party)",
     "supplyTemperature": "Fremløbstemperatur (Faktisk/Målt)",
+    "supplyTemperatureMain": "Fremløbstemperatur Hovedledning",
+    "refluxTemperatureMain": "Returløbstemperatur Hovedledning",
     "hpRunning": "Udedel Kører (Blæser animation)",
     "compressorRunning": "Kompressor Kører (Status)",
     "circulatingPumpRunning": "Ladepumpe Kører (GP1)",

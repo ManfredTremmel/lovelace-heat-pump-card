@@ -48,6 +48,8 @@ Home Assistant dashboard card displaying heat pump parameters
 | ambientTemperatureReduced | object | optional | Ambient Temperature reduced (used when `heatingPumpEnergySaveMode` is on)
 | ambientTemperatureParty | object | optional | Ambient Temperature Party (used when `heatingPumpPartyMode` is on)
 | supplyTemperature | object | optional | Supply Temperature
+| supplyTemperatureMain | object | optional | Supply Temperature of the main line, displayed at the pipe between heat pump and heating/hot water valve. Use this when your sensors sit in front of the diverter valve and therefore belong to the main line instead of a single heating circuit
+| refluxTemperatureMain | object | optional | Reflux Temperature of the main line, displayed at the pipe between heat pump and heating/hot water valve
 | hpRunning | object | optional | when Primary Source is active, the fan animation is running
 | compressorRunning | object | optional | Binary sensor which detects if Compressor is running
 | circulatingPumpRunning | object | optional | Binary sensor which detects if Circulating Pump is running, if not defined, circulating pump is not displayed
@@ -127,6 +129,8 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   ambientTemperatureReduced: number.mosquitto_broker_raumsolltemperatur_reduziert
   ambientTemperatureParty: number.mosquitto_broker_raumsolltemperatur_party
   supplyTemperature: sensor.mosquitto_broker_anlagenvorlauftemperatur
+  supplyTemperatureMain: sensor.mosquitto_broker_vorlauftemperatur
+  refluxTemperatureMain: sensor.mosquitto_broker_ruecklauftemperatur
   hpRunning: binary_sensor.mosquitto_broker_status_primaerquelle
   compressorRunning: binary_sensor.mosquitto_broker_status_verdichter
   circulatingPumpRunning: binary_sensor.mosquitto_broker_warmwasser_zirkulationspumpe

@@ -34,6 +34,8 @@
     "ambientTemperatureReduced": "Ruimtetemperatuur gereduceerd",
     "ambientTemperatureParty": "Ruimtetemperatuur Party",
     "supplyTemperature": "Aanvoertemperatuur",
+    "supplyTemperatureMain": "Aanvoertemperatuur Hoofdleiding",
+    "refluxTemperatureMain": "Retourtemperatuur Hoofdleiding",
     "hpRunning": "Primaire bron Aan/Uit",
     "compressorRunning": " Status Compressor Aan/Uit",
     "circulatingPumpRunning": "Status Circulatiepump Aan/Uit",

@@ -34,6 +34,8 @@
     "ambientTemperatureReduced": "Ambient Temperature reduced",
     "ambientTemperatureParty": "Ambient Temperature Party",
     "supplyTemperature": "Supply Temperature",
+    "supplyTemperatureMain": "Supply Temperature Main Line",
+    "refluxTemperatureMain": "Reflux Temperature Main Line",
     "hpRunning": "Primary Source On/Off",
     "compressorRunning": "Compressor running On/Off",
     "circulatingPumpRunning": "Circulating Pump On/Off",

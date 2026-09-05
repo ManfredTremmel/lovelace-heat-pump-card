@@ -155,6 +155,8 @@
         document.getElementById("labelOutdoorTemperature").innerHTML = localization.editor['outdoorTemperature'];
         document.getElementById("labelAmbientTemperatureNormal").innerHTML = localization.editor['ambientTemperatureNormal'];
         document.getElementById("labelSupplyTemperature").innerHTML = localization.editor['supplyTemperature'];
+        document.getElementById("labelSupplyTemperatureMain").innerHTML = localization.editor['supplyTemperatureMain'];
+        document.getElementById("labelRefluxTemperatureMain").innerHTML = localization.editor['refluxTemperatureMain'];
 
         document.getElementById("labelBufferTank").innerHTML = localization.editor['bufferTank'];
         document.getElementById("labelTankHP").innerHTML = localization.editor['tankHP'];
@@ -345,6 +347,12 @@
         document.getElementById('radiator3').style.display = (selection === 'radiator' ? 'inline' : 'none');
         switchHeatingPipes();
       }
+      function colorMainLine() {
+         var tempIn = document.getElementById('inputSupplyTemperatureMain').value;
+         var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureMain').value ? document.getElementById('inputRefluxTemperatureMain').value : tempIn - 5);
+         document.getElementById('stopPipe1').setAttribute('style', "stop-color:" + tempFarbe(tempIn) + ";");
+         document.getElementById('stopPipe2').setAttribute('style', "stop-color:" + tempFarbe(tempOut) + ";");
+      }
       function colorHeatingCurcuit1() {
          var tempIn = document.getElementById('inputSupplyTemperatureHeating').value;
          var tempOut = Math.max(0, document.getElementById('inputRefluxTemperatureHeating').value ? document.getElementById('inputRefluxTemperatureHeating').value : tempIn - 5);
@@ -463,6 +471,14 @@
           <div>
             <label for="inputSupplyTemperature" id="labelSupplyTemperature">Vorlauftemperatur:</label>
             <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperature" onChange="document.getElementById('textSupplyTemperatureValue').innerHTML = formatTemp(this.value);" value="32"></input>
+          </div>
+          <div>
+            <label for="inputSupplyTemperatureMain" id="labelSupplyTemperatureMain">Vorlauftemperatur Hauptleitung:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputSupplyTemperatureMain" onChange="document.getElementById('textSupplyTemperatureMain').innerHTML = formatTemp(this.value);colorMainLine();" value="30"></input>
+          </div>
+          <div>
+            <label for="inputRefluxTemperatureMain" id="labelRefluxTemperatureMain">R&uuml;cklauftemperatur Hauptleitung:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputRefluxTemperatureMain" onChange="document.getElementById('textRefluxTemperatureMain').innerHTML = formatTemp(this.value);colorMainLine();" value="20"></input>
           </div>
         </div>
       </div>

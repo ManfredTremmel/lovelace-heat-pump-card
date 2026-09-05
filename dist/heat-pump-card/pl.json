@@ -34,6 +34,8 @@
     "ambientTemperatureReduced": "Temp. pokojowa zredukowana",
     "ambientTemperatureParty": "Temp. pokojowa trybu wakacje",
     "supplyTemperature": "Temperatura przepływu w układzie",
+    "supplyTemperatureMain": "Temp. zasilania magistrali",
+    "refluxTemperatureMain": "Temp. powrotu magistrali",
     "hpRunning": "Wł./wył. źródła podstawowego",
     "compressorRunning": "Praca prężari w trybie wł./wył.",
     "circulatingPumpRunning": "Wł./wył. pompy cyrkulacji",

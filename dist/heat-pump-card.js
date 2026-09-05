@@ -94,6 +94,7 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     }
 
+    this.mainLine(this.content, hass);
     this.heatingCurcuit1(this.content, hass);
     this.heatingCurcuit2(this.content, hass);
     this.heatingCurcuit3(this.content, hass);
@@ -232,6 +233,10 @@ class HeatPumpCard extends HTMLElement {
     return this.formatNumValue(stateValue);
   }
 
+  numericState(stateValue) {
+    return stateValue && !isNaN(Number(stateValue.state)) ? Number(stateValue.state) : null;
+  }
+
   formatNumValue(stateValue) {
     if (stateValue && !isNaN(Number(stateValue.state))) {
       const unit = stateValue.attributes.unit_of_measurement ? stateValue.attributes.unit_of_measurement :  "";
@@ -304,6 +309,21 @@ class HeatPumpCard extends HTMLElement {
     this.switchRotateAttribute("#pathHPFan", hass, !selection || selection === 'A2W' ? running : null);
     this.switchRotateAttribute("#gHPW2WPumpBladeWheel", hass, selection === 'W2W' ? running : null);
     this.switchRotateAttribute("#gHPG2WPumpBladeWheel", hass, selection === 'G2W' ? running : null);
+  }
+
+  mainLine(content, hass) {
+    const tempInState = this.readState(hass, this.config.supplyTemperatureMain);
+    const tempOutState = this.readState(hass, this.config.refluxTemperatureMain);
+    content.querySelector("#textSupplyTemperatureMain").innerHTML = this.formatNumValue(tempInState);
+    content.querySelector("#textRefluxTemperatureMain").innerHTML = this.formatNumValue(tempOutState);
+    var tempIn = this.numericState(tempInState);
+    var tempOut = this.numericState(tempOutState);
+    if (tempIn || tempOut) {
+      tempIn = tempIn ? tempIn : tempOut + 5;
+      tempOut = tempOut ? tempOut : Math.max(0, tempIn - 5);
+      content.querySelector('#stopPipe1').setAttribute('style', "stop-color:" + this.tempColor(tempIn));
+      content.querySelector('#stopPipe2').setAttribute('style', "stop-color:" + this.tempColor(tempOut));
+    }
   }
 
   heatingCurcuit1(content, hass) {
@@ -495,7 +515,9 @@ class HeatPumpCard extends HTMLElement {
           { name: "ambientTemperatureNormal", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "ambientTemperatureReduced", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "ambientTemperatureParty", selector: { entity: {domain: ["sensor", "number"]} } },
-          { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } }
+          { name: "supplyTemperature", selector: { entity: {domain: ["sensor"]} } },
+          { name: "supplyTemperatureMain", selector: { entity: {domain: ["sensor"]} } },
+          { name: "refluxTemperatureMain", selector: { entity: {domain: ["sensor"]} } }
         ],
       },
       { type: "expandable",
