@@ -94,12 +94,12 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     }
 
-    if (this.config.heatPumpWaterHeater) {
-      this.content.querySelector("#textHPWHValue").innerHTML = this.readStateValue(hass, this.config.heatPumpWaterHeaterValue);
+    if (this.config.tankWWSource === 'waterHeaterReturn' || this.config.tankWWSource === 'waterHeaterAir') {
+      this.content.querySelector("#textHPWHValue").innerHTML = this.readStateValue(hass, this.config.waterHeaterValue);
       // With air as the source there is no pump to the heating system, so
       // there is nothing to spin either.
-      if (this.config.heatPumpWaterHeaterSource !== 'air') {
-        this.switchRotateAttribute("#gHPWHPumpBladeWheel", hass, this.config.heatPumpWaterHeaterPump);
+      if (this.config.tankWWSource === 'waterHeaterReturn') {
+        this.switchRotateAttribute("#gHPWHPumpBladeWheel", hass, this.config.waterHeaterPump);
       }
     }
 
@@ -152,6 +152,7 @@ class HeatPumpCard extends HTMLElement {
           HeatPumpCard.localization = JSON.parse(rawFile.responseText);
           this.content.querySelector("#textTankWWName").innerHTML = HeatPumpCard.localization.svgTexts['tankWWName'];
           this.content.querySelector("#textTankHPName").innerHTML = HeatPumpCard.localization.svgTexts['tankHPName'];
+          this.content.querySelector("#textTankHPWHName").innerHTML = HeatPumpCard.localization.svgTexts['tankHPWHName'];
           this.content.querySelector("#textEvaporator").innerHTML = HeatPumpCard.localization.svgTexts['evaporator'];
           this.content.querySelector("#textCondenser").innerHTML = HeatPumpCard.localization.svgTexts['condenser'];
           this.content.querySelector("#textCompressor").innerHTML = HeatPumpCard.localization.svgTexts['compressor'];
@@ -392,16 +393,24 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector('#gStorageChargingPump').classList.remove("rotate");
       this.content.querySelector("#gTankHP").style.display = config.tankHP ? 'inline' : 'none';
       this.content.querySelector("#gWW").style.display = config.tankWW ? 'inline' : 'none';
-      const hpWaterHeater = config.heatPumpWaterHeater;
-      const hpWaterHeaterAir = config.heatPumpWaterHeaterSource === 'air';
-      this.content.querySelector("#gHeatPumpWaterHeater").style.display = hpWaterHeater ? 'inline' : 'none';
-      this.content.querySelector("#gHPWHSourceReturn").style.display = hpWaterHeaterAir ? 'none' : 'inline';
-      this.content.querySelector("#gHPWHSourceAir").style.display = hpWaterHeaterAir ? 'inline' : 'none';
+      // Where the hot water tank takes its heat from. Unset means the main heat
+      // pump through the diverter valve, which is how the card always behaved.
+      const waterHeater = config.tankWWSource === 'waterHeaterReturn' || config.tankWWSource === 'waterHeaterAir';
+      const waterHeaterAir = config.tankWWSource === 'waterHeaterAir';
+      this.content.querySelector("#gHeatPumpWaterHeater").style.display = waterHeater ? 'inline' : 'none';
+      this.content.querySelector("#gHPWHSourceReturn").style.display = waterHeaterAir ? 'none' : 'inline';
+      this.content.querySelector("#gHPWHSourceAir").style.display = waterHeaterAir ? 'inline' : 'none';
       this.content.querySelector('#gHPWHPumpBladeWheel').classList.remove("rotate");
-      // The tank is now heated by an appliance of its own, so the diverter
-      // valve and the pipe from the condenser do not belong to it any more.
-      this.content.querySelector("#gWWHeatingValve").style.display = hpWaterHeater ? 'none' : 'inline';
-      this.content.querySelector("#pathPipeHotWaterToTank").style.display = hpWaterHeater ? 'none' : 'inline';
+      // An appliance of its own brings its own heat, so the pipe from the
+      // condenser does not belong to the tank any more. The diverter valve is
+      // switched further down, together with the layered charge storage, so
+      // that only one line decides whether it is visible.
+      this.content.querySelector("#pathPipeHotWaterToTank").style.display = waterHeater ? 'none' : 'inline';
+      // The appliance takes the place of the tank's hat, name and all, so the
+      // hat is hidden rather than covered: a plate over it leaves the corners
+      // of the old one sticking out.
+      this.content.querySelector("#pathTankWWHat").style.display = waterHeater ? 'none' : 'inline';
+      this.content.querySelector("#textTankWWName").style.display = waterHeater ? 'none' : 'inline';
 
       var type1 = config.heatingCircuitType1;
       if (!type1 || type1 === 'off') {
@@ -452,7 +461,7 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector("#gPipe").style.display = 'inline';
         this.content.querySelector("#gPipeBuffer").style.display = config.layeredChargeStorage ? 'none' : 'inline';
         this.content.querySelector("#gPipeLayeredChargeStorage").style.display = config.layeredChargeStorage ? 'inline' : 'none';
-        this.content.querySelector("#gWWHeatingValve").style.display = config.layeredChargeStorage ? 'none' : 'inline';
+        this.content.querySelector("#gWWHeatingValve").style.display = (config.layeredChargeStorage || waterHeater) ? 'none' : 'inline';
         this.content.querySelector("#gHP").removeAttribute("transform");
         this.content.querySelector("#gSettings").removeAttribute("transform");
       }
@@ -554,6 +563,21 @@ class HeatPumpCard extends HTMLElement {
         flatten: true,
         schema: [
           { name: "tankWW", default: true, selector: { boolean: {} } },
+          {
+            name: "tankWWSource",
+            default: "heatPump",
+            selector: {
+              select: {
+                options: [
+                  { value: "heatPump", label: "Heat pump" },
+                  { value: "waterHeaterReturn", label: "Water heater on heating return" },
+                  { value: "waterHeaterAir", label: "Water heater on air" },
+                ],
+              },
+            },
+          },
+          { name: "waterHeaterValue", selector: { entity: {domain: ["sensor"]} } },
+          { name: "waterHeaterPump", selector: { entity: {domain: ["binary_sensor"]} } },
           { name: "layeredChargeStorage", default: false, selector: { boolean: {} } },
           { name: "tankTempWWUp", selector: { entity: {domain: ["sensor"]} } },
           { name: "tankTempWWMiddle", selector: { entity: {domain: ["sensor"]} } },
@@ -563,27 +587,7 @@ class HeatPumpCard extends HTMLElement {
           { name: "storageChargingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
-      { type: "expandable",
-        name: "hpWaterHeater",
-        flatten: true,
-        schema: [
-          { name: "heatPumpWaterHeater", default: false, selector: { boolean: {} } },
-          {
-            name: "heatPumpWaterHeaterSource",
-            default: "return",
-            selector: {
-              select: {
-                options: [
-                  { value: "return", label: "Heating return" },
-                  { value: "air", label: "Air" },
-                ],
-              },
-            },
-          },
-          { name: "heatPumpWaterHeaterValue", selector: { entity: {domain: ["sensor"]} } },
-          { name: "heatPumpWaterHeaterPump", selector: { entity: {domain: ["binary_sensor"]} } }
-        ],
-      },
+
       { type: "expandable",
         name: "heatingCircuit1",
         flatten: true,

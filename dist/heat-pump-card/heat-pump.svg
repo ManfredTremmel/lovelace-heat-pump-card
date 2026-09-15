@@ -66,6 +66,10 @@
         fill-opacity: 0.5;
         fill-rule: nonzero;
       }
+      #pathHPWHUnit {
+        fill: var(--card-background-color);
+        fill-opacity: 1;
+      }
       #pathHPWHAirIn,
       #pathHPWHAirOut {
         stroke-width: 3px;
@@ -83,7 +87,7 @@
         stroke: #0000ff;
       }
       #gHPWHPumpBladeWheel {
-        transform-origin: 680px 295px;
+        transform-origin: 785px 494px;
       }
       #pathTankHPChassis {
         fill: url(#linearGradientTankHP);
@@ -613,19 +617,22 @@
     </a>
     <g id="gHeatPumpWaterHeater" style="display: none;">
       <g id="gHPWHSourceReturn">
-        <path id="pathPipeHPWHIn" d="m 680 325 v -60" />
-        <path id="pathPipeHPWHOut" d="m 730 265 v 60" />
-        <use id="useHPWHPumpChassis" transform="translate(-105,-199)" xlink:href="#pathCirculatingPumpChassis" />
-        <g id="gHPWHPumpBladeWheel">
-          <use id="useHPWHPumpBladeWheel" transform="translate(-105,-199)" xlink:href="#gCirculatingPumpBladeWheelInner" />
+        <path id="pathPipeHPWHIn" d="m 628 340 h 142 v 40 h -20" />
+        <path id="pathPipeHPWHOut" d="m 650 400 h -22" />
+        <g id="gHPWHPump" transform="translate(346.75,117.70) scale(0.45)">
+          <use id="useHPWHPumpChassis" xlink:href="#pathCirculatingPumpChassis" />
+          <g id="gHPWHPumpBladeWheel">
+            <use id="useHPWHPumpBladeWheel" xlink:href="#gCirculatingPumpBladeWheelInner" />
+          </g>
         </g>
       </g>
       <g id="gHPWHSourceAir" style="display: none;">
-        <path id="pathHPWHAirIn" style="marker-end:url(#Triangle)" d="m 815 345 h -45" />
-        <path id="pathHPWHAirOut" style="marker-end:url(#Triangle)" d="m 770 375 h 45" />
+        <path id="pathHPWHAirIn" style="marker-end:url(#Triangle)" d="m 780 380 h -30" />
+        <path id="pathHPWHAirOut" style="marker-end:url(#Triangle)" d="m 750 405 h 30" />
       </g>
-      <rect id="rectHPWHUnit" x="645" y="325" width="120" height="70" rx="6" />
-      <text id="textHPWHValue" x="705" y="367" text-anchor="middle" xml:space="preserve" />
+      <path id="pathHPWHUnit" d="m 655 424 h -5 v -64 c 4.8894-4.1274 97.176-5.3285 100 0 v 64 h -5 c -4.2274-3.9461-87.404-2.7745-90 0 z" />
+      <text id="textTankHPWHName" x="700" y="386" text-anchor="middle" xml:space="preserve">HP Boiler</text>
+      <text id="textHPWHValue" x="700" y="410" text-anchor="middle" xml:space="preserve" />
     </g>
   </g>
 </svg>
