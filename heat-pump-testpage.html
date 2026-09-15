@@ -173,6 +173,10 @@
         document.getElementById("labelWwHeatingValve").innerHTML = localization.editor['wwHeatingValve'];
         document.getElementById("labelCirculatingPumpRunning").innerHTML = localization.editor['circulatingPumpRunning'];
         document.getElementById("labelStorageChargingPump").innerHTML = localization.editor['storageChargingPumpRunning'];
+        document.getElementById("labelHeatPumpWaterHeater").innerHTML = localization.editor['heatPumpWaterHeater'];
+        document.getElementById("labelHeatPumpWaterHeaterSource").innerHTML = localization.editor['heatPumpWaterHeaterSource'];
+        document.getElementById("labelHeatPumpWaterHeaterValue").innerHTML = localization.editor['heatPumpWaterHeaterValue'];
+        document.getElementById("labelHeatPumpWaterHeaterPump").innerHTML = localization.editor['heatPumpWaterHeaterPump'];
 
         document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
         document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
@@ -539,6 +543,25 @@
           <div>
             <label for="inputStorageChargingPump" id="labelStorageChargingPump">Speicherladepumpe aktiv:</label>
             <input type="checkbox" id="inputStorageChargingPump" checked="true" onClick="switchRotateAttribute('gStorageChargingPump', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputHeatPumpWaterHeater" id="labelHeatPumpWaterHeater">W&auml;rmepumpen-Warmwasserbereiter vorhanden:</label>
+            <input type="checkbox" id="inputHeatPumpWaterHeater" onClick="document.getElementById('gHeatPumpWaterHeater').style.display = this.checked ? 'inline' : 'none';document.getElementById('gWWHeatingValve').style.display = this.checked ? 'none' : 'inline';document.getElementById('pathPipeHotWaterToTank').style.display = this.checked ? 'none' : 'inline';"></input>
+          </div>
+          <div>
+            <label for="inputHeatPumpWaterHeaterSource" id="labelHeatPumpWaterHeaterSource">Quelle:</label>
+            <select id="inputHeatPumpWaterHeaterSource" onChange="document.getElementById('gHPWHSourceReturn').style.display = this.value === 'air' ? 'none' : 'inline';document.getElementById('gHPWHSourceAir').style.display = this.value === 'air' ? 'inline' : 'none';">
+              <option value="return">Heating return</option>
+              <option value="air">Air</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputHeatPumpWaterHeaterValue" id="labelHeatPumpWaterHeaterValue">Anzuzeigender Wert:</label>
+            <input type="text" id="inputHeatPumpWaterHeaterValue" onChange="document.getElementById('textHPWHValue').innerHTML = this.value;" value="343 W"></input>
+          </div>
+          <div>
+            <label for="inputHeatPumpWaterHeaterPump" id="labelHeatPumpWaterHeaterPump">Pumpe An/Aus:</label>
+            <input type="checkbox" id="inputHeatPumpWaterHeaterPump" onClick="document.getElementById('gHPWHPumpBladeWheel').classList.toggle('rotate', this.checked);"></input>
           </div>
         </div>
       </div>

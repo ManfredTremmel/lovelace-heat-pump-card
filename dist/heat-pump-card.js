@@ -94,6 +94,15 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector("#pathHeaterRodWW").style.display = heaterRodWW ? 'block' : 'none';
     }
 
+    if (this.config.heatPumpWaterHeater) {
+      this.content.querySelector("#textHPWHValue").innerHTML = this.readStateValue(hass, this.config.heatPumpWaterHeaterValue);
+      // With air as the source there is no pump to the heating system, so
+      // there is nothing to spin either.
+      if (this.config.heatPumpWaterHeaterSource !== 'air') {
+        this.switchRotateAttribute("#gHPWHPumpBladeWheel", hass, this.config.heatPumpWaterHeaterPump);
+      }
+    }
+
     this.mainLine(this.content, hass);
     this.heatingCurcuit1(this.content, hass);
     this.heatingCurcuit2(this.content, hass);
@@ -383,6 +392,16 @@ class HeatPumpCard extends HTMLElement {
       this.content.querySelector('#gStorageChargingPump').classList.remove("rotate");
       this.content.querySelector("#gTankHP").style.display = config.tankHP ? 'inline' : 'none';
       this.content.querySelector("#gWW").style.display = config.tankWW ? 'inline' : 'none';
+      const hpWaterHeater = config.heatPumpWaterHeater;
+      const hpWaterHeaterAir = config.heatPumpWaterHeaterSource === 'air';
+      this.content.querySelector("#gHeatPumpWaterHeater").style.display = hpWaterHeater ? 'inline' : 'none';
+      this.content.querySelector("#gHPWHSourceReturn").style.display = hpWaterHeaterAir ? 'none' : 'inline';
+      this.content.querySelector("#gHPWHSourceAir").style.display = hpWaterHeaterAir ? 'inline' : 'none';
+      this.content.querySelector('#gHPWHPumpBladeWheel').classList.remove("rotate");
+      // The tank is now heated by an appliance of its own, so the diverter
+      // valve and the pipe from the condenser do not belong to it any more.
+      this.content.querySelector("#gWWHeatingValve").style.display = hpWaterHeater ? 'none' : 'inline';
+      this.content.querySelector("#pathPipeHotWaterToTank").style.display = hpWaterHeater ? 'none' : 'inline';
 
       var type1 = config.heatingCircuitType1;
       if (!type1 || type1 === 'off') {
@@ -542,6 +561,27 @@ class HeatPumpCard extends HTMLElement {
           { name: "wwHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
           { name: "circulatingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } },
           { name: "storageChargingPumpRunning", selector: { entity: {domain: ["binary_sensor"]} } }
+        ],
+      },
+      { type: "expandable",
+        name: "hpWaterHeater",
+        flatten: true,
+        schema: [
+          { name: "heatPumpWaterHeater", default: false, selector: { boolean: {} } },
+          {
+            name: "heatPumpWaterHeaterSource",
+            default: "return",
+            selector: {
+              select: {
+                options: [
+                  { value: "return", label: "Heating return" },
+                  { value: "air", label: "Air" },
+                ],
+              },
+            },
+          },
+          { name: "heatPumpWaterHeaterValue", selector: { entity: {domain: ["sensor"]} } },
+          { name: "heatPumpWaterHeaterPump", selector: { entity: {domain: ["binary_sensor"]} } }
         ],
       },
       { type: "expandable",
