@@ -2,6 +2,7 @@
   "header": "Wärmepumpe",
   "svgTexts": {
     "tankWWName": "Warmwasser",
+    "tankHPWHName": "WW-Wärmepumpe",
     "tankHPName": "Heizpuffer",
     "evaporator": "Verdampfer",
     "condenser": "Verflüssiger",
@@ -47,6 +48,9 @@
     "tankTempHPDown": "Pufferspeichertemperatur unten",
     "hotWaterTank": "Warmwasserspeicher",
     "tankWW": "Warmwasserspeicher vorhanden",
+        "tankWWSource": "Warmwasserquelle",
+        "waterHeaterValue": "Anzuzeigender Wert",
+        "waterHeaterPump": "Pumpe An/Aus",
     "layeredChargeStorage": "Kombinierter Schichtspeicher",
     "tankTempWWUp": "Warmwasserspeichertemperatur oben",
     "tankTempWWMiddle": "Warmwasserspeichertemperatur mitte",

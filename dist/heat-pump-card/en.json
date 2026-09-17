@@ -2,6 +2,7 @@
   "header": "Heating Pump",
   "svgTexts": {
     "tankWWName": "Hot Water",
+    "tankHPWHName": "HP Boiler",
     "tankHPName": "Buffer",
     "evaporator": "Evaporator",
     "condenser": "Condenser",
@@ -47,6 +48,9 @@
     "tankTempHPDown": "Buffer Temperature down",
     "hotWaterTank": "Hot Water Buffer",
     "tankWW": "Hot Water Buffer available",
+        "tankWWSource": "Hot water source",
+        "waterHeaterValue": "Value to display",
+        "waterHeaterPump": "Pump On/Off",
     "layeredChargeStorage": "Combined Layered Charge Storage",
     "tankTempWWUp": "Hot Water Buffer Temperature up",
     "tankTempWWMiddle": "Hot Water Buffer Temperature middle",

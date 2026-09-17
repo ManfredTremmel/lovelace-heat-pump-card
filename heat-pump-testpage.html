@@ -117,11 +117,22 @@
       function hpFarbe() {
         tankColors('inputTankTempHPUp', 'inputTankTempHPMiddle', 'inputTankTempHPDown', 'stop3020', 'stop3040', 'stop3030');
       }
+      function switchWaterHeater(bron) {
+        var waterHeater = bron === 'waterHeaterReturn' || bron === 'waterHeaterAir';
+        document.getElementById('gHeatPumpWaterHeater').style.display = waterHeater ? 'inline' : 'none';
+        document.getElementById('gHPWHSourceReturn').style.display = bron === 'waterHeaterReturn' ? 'inline' : 'none';
+        document.getElementById('gHPWHSourceAir').style.display = bron === 'waterHeaterAir' ? 'inline' : 'none';
+        document.getElementById('gWWHeatingValve').style.display = waterHeater ? 'none' : 'inline';
+        document.getElementById('pathPipeHotWaterToTank').style.display = waterHeater ? 'none' : 'inline';
+        document.getElementById('pathTankWWHat').style.display = waterHeater ? 'none' : 'inline';
+        document.getElementById('textTankWWName').style.display = waterHeater ? 'none' : 'inline';
+      }
       function wwFarbe() {
         tankColors('inputTankTempWWUp', 'inputTankTempWWMiddle', 'inputTankTempWWDown', 'stop3050', 'stop3070', 'stop3060');
       }
       function handleLocalization(localization) {
         document.getElementById("textTankWWName").innerHTML = localization.svgTexts['tankWWName'];
+        document.getElementById("textTankHPWHName").innerHTML = localization.svgTexts['tankHPWHName'];
         document.getElementById("textTankHPName").innerHTML = localization.svgTexts['tankHPName'];
         document.getElementById("textEvaporator").innerHTML = localization.svgTexts['evaporator'];
         document.getElementById("textCondenser").innerHTML = localization.svgTexts['condenser'];
@@ -173,6 +184,9 @@
         document.getElementById("labelWwHeatingValve").innerHTML = localization.editor['wwHeatingValve'];
         document.getElementById("labelCirculatingPumpRunning").innerHTML = localization.editor['circulatingPumpRunning'];
         document.getElementById("labelStorageChargingPump").innerHTML = localization.editor['storageChargingPumpRunning'];
+        document.getElementById("labelTankWWSource").innerHTML = localization.editor['tankWWSource'];
+        document.getElementById("labelWaterHeaterValue").innerHTML = localization.editor['waterHeaterValue'];
+        document.getElementById("labelWaterHeaterPump").innerHTML = localization.editor['waterHeaterPump'];
 
         document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
         document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
@@ -539,6 +553,22 @@
           <div>
             <label for="inputStorageChargingPump" id="labelStorageChargingPump">Speicherladepumpe aktiv:</label>
             <input type="checkbox" id="inputStorageChargingPump" checked="true" onClick="switchRotateAttribute('gStorageChargingPump', this.checked);"></input>
+          </div>
+          <div>
+            <label for="inputTankWWSource" id="labelTankWWSource">Warmwasserquelle:</label>
+            <select id="inputTankWWSource" onChange="switchWaterHeater(this.value);">
+              <option value="heatPump">Heat pump</option>
+              <option value="waterHeaterReturn">Water heater on heating return</option>
+              <option value="waterHeaterAir">Water heater on air</option>
+            </select>
+          </div>
+          <div>
+            <label for="inputWaterHeaterValue" id="labelWaterHeaterValue">Anzuzeigender Wert:</label>
+            <input type="text" id="inputWaterHeaterValue" onChange="document.getElementById('textHPWHValue').innerHTML = this.value;" value="343 W"></input>
+          </div>
+          <div>
+            <label for="inputWaterHeaterPump" id="labelWaterHeaterPump">Pumpe An/Aus:</label>
+            <input type="checkbox" id="inputWaterHeaterPump" onClick="document.getElementById('gHPWHPumpBladeWheel').classList.toggle('rotate', this.checked);"></input>
           </div>
         </div>
       </div>

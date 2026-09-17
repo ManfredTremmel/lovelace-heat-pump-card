@@ -2,6 +2,7 @@
   "header": "Warmtepomp",
   "svgTexts": {
     "tankWWName": "Boiler",
+    "tankHPWHName": "WP-boiler",
     "tankHPName": "Buffer",
     "evaporator": "Verdamper",
     "condenser": "Condensor",
@@ -47,6 +48,9 @@
     "tankTempHPDown": "Buffertemperatuur onder",
     "hotWaterTank": "Boiler",
     "tankWW": "Boiler beschikbaar",
+        "tankWWSource": "Warmtebron boiler",
+        "waterHeaterValue": "Weer te geven waarde",
+        "waterHeaterPump": "Pomp aan/uit",
     "layeredChargeStorage": "Gecombineerde gelaagde ladingsopslag",
     "tankTempWWUp": "Boilertemperatuur boven",
     "tankTempWWMiddle": "Boileremperatuur midden",

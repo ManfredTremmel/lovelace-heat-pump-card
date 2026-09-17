@@ -2,6 +2,7 @@
   "header": "Pompa ciepła",
   "svgTexts": {
     "tankWWName": "Ciepła woda",
+    "tankHPWHName": "PC ciepła woda",
     "tankHPName": "Bufor",
     "evaporator": "Parownik",
     "condenser": "Skraplacz",
@@ -47,6 +48,9 @@
     "tankTempHPDown": "Temp. bufora dół",
     "hotWaterTank": "CWU",
     "tankWW": "CWU dostępny",
+        "tankWWSource": "Źródło CWU",
+        "waterHeaterValue": "Wartość do wyświetlenia",
+        "waterHeaterPump": "Włączanie/wyłączanie pompy",
     "layeredChargeStorage": "Złożone warstwowe magazynowanie ładunku",
     "tankTempWWUp": "Temp. CWU góra",
     "tankTempWWMiddle": "Temp. CWU środek",

@@ -2,6 +2,7 @@
   "header": "Tepelné čerpadlo",
   "svgTexts": {
     "tankWWName": "Teplá voda",
+    "tankHPWHName": "TČ teplá voda",
     "tankHPName": "Akumulační nádrž",
     "evaporator": "Výparník",
     "condenser": "Kondenzátor",
@@ -47,6 +48,9 @@
     "tankTempHPDown": "Teplota akumulační nádrže – spodní",
     "hotWaterTank": "Zásobníku teplé vody",
     "tankWW": "K dispozici zásobníku teplé vody",
+        "tankWWSource": "Zdroj teplé vody",
+        "waterHeaterValue": "Hodnota k zobrazení",
+        "waterHeaterPump": "Zapnutí/vypnutí čerpadla",
     "layeredChargeStorage": "Kombinované vrstvené ukládání náboje",
     "tankTempWWUp": "Teplota zásobníku teplé vody – horní",
     "tankTempWWMiddle": "Teplota zásobníku teplé vody – střední",
