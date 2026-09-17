@@ -51,6 +51,12 @@
          }
          return null;
       }
+      function formatWatt(number) {
+         if (number) {
+            return new Intl.NumberFormat(undefined, {minimumFractionDigits: 0}).format(number) + " W";
+         }
+         return null;
+      }
       function formatDruck(number) {
          if (number) {
             return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1}).format(number) + " bar";
@@ -564,7 +570,7 @@
           </div>
           <div>
             <label for="inputWaterHeaterValue" id="labelWaterHeaterValue">Anzuzeigender Wert:</label>
-            <input type="text" id="inputWaterHeaterValue" onChange="document.getElementById('textHPWHValue').innerHTML = this.value;" value="343 W"></input>
+            <input type="number" min="0" max="1000" step="1" id="inputWaterHeaterValue" onChange="document.getElementById('textHPWHValue').innerHTML = formatWatt(this.value);"></input>
           </div>
           <div>
             <label for="inputWaterHeaterPump" id="labelWaterHeaterPump">Pumpe An/Aus:</label>
