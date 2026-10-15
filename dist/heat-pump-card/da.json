@@ -14,6 +14,11 @@
   "editor": {
     "title": "Titel",
     "heatingPumpType": "Varmepumpetype",
+    "heatingPumpTypeValues": {
+      "A2W": "Luft/Vand",
+      "W2W": "Vand/Vand",
+      "G2W": "Brine/Vand"
+    },
     "groundWaterInOut": "Brine/vand",
     "temperatureGroundWaterIn": "Indløbstemperatur brine/vand",
     "temperatureGroundWaterOut": "Udløbstemperatur brine/vand",
@@ -49,6 +54,11 @@
     "hotWaterTank": "Varmtvand",
     "tankWW": "Varmtvand forhånden",
     "tankWWSource": "Varmtvandskilde",
+    "tankWWSourceValues": {
+      "heatPump": "Varmepumpe",
+      "waterHeaterReturn": "Vandvarmer på varmens returløb",
+      "waterHeaterAir": "Vandvarmer til luft"
+    },
     "waterHeaterValue": "Værdi der vises",
     "waterHeaterPump": "Pumpe til/fra",
     "layeredChargeStorage": "Kombineret lagdelt ladningslagring",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Varmtvand Bund",
     "heatingCircuit1": "Varmekredsløb 1",
     "heatingCircuitType1": "Varmekredsløb 1",
+    "heatingCircuitTypeValues": {
+      "off": "Slukket",
+      "radiator": "Varmeapparat",
+      "underfloor": "Gulvvarme"
+    },
     "heatingCircuitPumpRunning": "Varmekredspumpe Kører (GP6)",
     "heatingCircuitPumpBeforeValve": "Varmekredspumpe før ventil",
     "supplyTemperatureHeating": "Beregnet Fremløbstemperatur",

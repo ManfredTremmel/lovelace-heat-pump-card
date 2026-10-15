@@ -14,6 +14,11 @@
   "editor": {
     "title": "Title",
     "heatingPumpType": "Heating Pump Type",
+    "heatingPumpTypeValues": {
+      "A2W": "Air/Water",
+      "W2W": "Water/Water",
+      "G2W": "Ground/Water"
+    },
     "groundWaterInOut": "Ground/Water",
     "temperatureGroundWaterIn": "Temperature Ground/Water in",
     "temperatureGroundWaterOut": "Temperature Ground/Water out",
@@ -49,6 +54,11 @@
     "hotWaterTank": "Hot Water Buffer",
     "tankWW": "Hot Water Buffer available",
     "tankWWSource": "Hot water source",
+    "tankWWSourceValues": {
+      "heatPump": "Heat pump",
+      "waterHeaterReturn": "Water heater on heating return",
+      "waterHeaterAir": "Water heater on air"
+    },
     "waterHeaterValue": "Value to display",
     "waterHeaterPump": "Pump On/Off",
     "layeredChargeStorage": "Combined Layered Charge Storage",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Hot Water Buffer Temperature down",
     "heatingCircuit1": "Heating Circuit 1",
     "heatingCircuitType1": "Heating Circuit 1",
+    "heatingCircuitTypeValues": {
+      "off": "Off",
+      "radiator": "Radiator",
+      "underfloor": "Underfloor"
+    },
     "heatingCircuitPumpRunning": "Heating Circuit Pump On/Off",
     "heatingCircuitPumpBeforeValve": "Heating circuit pump before valve",
     "supplyTemperatureHeating": "Supply Temperature Heating",

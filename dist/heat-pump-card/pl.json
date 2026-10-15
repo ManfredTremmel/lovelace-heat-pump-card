@@ -14,6 +14,11 @@
   "editor": {
     "title": "Tytuł",
     "heatingPumpType": "Typ pompy ciepła",
+    "heatingPumpTypeValues": {
+      "A2W": "Powietrze/Woda",
+      "W2W": "Woda/Woda",
+      "G2W": "Solanki/Woda"
+    },
     "groundWaterInOut": "Solanki/wody",
     "temperatureGroundWaterIn": "Temperatura wlotowa solanki/wody",
     "temperatureGroundWaterOut": "Temperatura wylotowa solanki/wody",
@@ -49,6 +54,11 @@
     "hotWaterTank": "CWU",
     "tankWW": "CWU dostępny",
     "tankWWSource": "Źródło CWU",
+    "tankWWSourceValues": {
+      "heatPump": "Pompa ciepła",
+      "waterHeaterReturn": "Podgrzewacz wody na powrocie instalacji grzewczej",
+      "waterHeaterAir": "Podgrzewacz wody zasilany powietrzem"
+    },
     "waterHeaterValue": "Wartość do wyświetlenia",
     "waterHeaterPump": "Włączanie/wyłączanie pompy",
     "layeredChargeStorage": "Złożone warstwowe magazynowanie ładunku",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Temp. CWU dół",
     "heatingCircuit1": "Obieg grzewczy 1",
     "heatingCircuitType1": "Obieg grzewczy 1",
+    "heatingCircuitTypeValues": {
+      "off": "Wyłączony",
+      "radiator": "Kaloryfer",
+      "underfloor": "Podpodłogowy"
+    },
     "heatingCircuitPumpRunning": "Wł./wył. pompy obiegu grzewczego",
     "heatingCircuitPumpBeforeValve": "Pompa obiegu grzewczego przed zaworem",
     "supplyTemperatureHeating": "Temp. zasilania",

@@ -501,9 +501,9 @@ class HeatPumpCard extends HTMLElement {
         selector: {
           select: {
             options: [
-              { value: "A2W", label: "Air to Water" },
-              { value: "W2W", label: "Water to Water"},
-              { value: "G2W", label: "Ground to Water"},
+              { value: "A2W", label: HeatPumpCard.localization.editor.heatingPumpTypeValues['A2W'] },
+              { value: "W2W", label: HeatPumpCard.localization.editor.heatingPumpTypeValues['W2W'] },
+              { value: "G2W", label: HeatPumpCard.localization.editor.heatingPumpTypeValues['G2W'] }
             ],
           },
         },
@@ -569,9 +569,9 @@ class HeatPumpCard extends HTMLElement {
             selector: {
               select: {
                 options: [
-                  { value: "heatPump", label: "Heat pump" },
-                  { value: "waterHeaterReturn", label: "Water heater on heating return" },
-                  { value: "waterHeaterAir", label: "Water heater on air" },
+                  { value: "heatPump", label: HeatPumpCard.localization.editor.tankWWSourceValues['heatPump'] },
+                  { value: "waterHeaterReturn", label: HeatPumpCard.localization.editor.tankWWSourceValues['waterHeaterReturn'] },
+                  { value: "waterHeaterAir", label: HeatPumpCard.localization.editor.tankWWSourceValues['waterHeaterAir'] },
                 ],
               },
             },
@@ -598,9 +598,9 @@ class HeatPumpCard extends HTMLElement {
             selector: {
               select: {
                 options: [
-                  { value: "off", label: "Off" },
-                  { value: "underfloor", label: "Underfloor"},
-                  { value: "radiator", label: "Radiator"},
+                  { value: "off", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['off'] },
+                  { value: "underfloor", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['underfloor']},
+                  { value: "radiator", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['radiator']},
                 ],
               },
             },
@@ -620,9 +620,9 @@ class HeatPumpCard extends HTMLElement {
             selector: {
               select: {
                 options: [
-                  { value: "off", label: "Off" },
-                  { value: "underfloor", label: "Underfloor"},
-                  { value: "radiator", label: "Radiator"},
+                  { value: "off", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['off'] },
+                  { value: "underfloor", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['underfloor']},
+                  { value: "radiator", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['radiator']},
                 ],
               },
             },
@@ -642,9 +642,9 @@ class HeatPumpCard extends HTMLElement {
             selector: {
               select: {
                 options: [
-                  { value: "off", label: "Off" },
-                  { value: "underfloor", label: "Underfloor"},
-                  { value: "radiator", label: "Radiator"},
+                  { value: "off", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['off'] },
+                  { value: "underfloor", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['underfloor']},
+                  { value: "radiator", label: HeatPumpCard.localization.editor.heatingCircuitTypeValues['radiator']},
                 ],
               },
             },

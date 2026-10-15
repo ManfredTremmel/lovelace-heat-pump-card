@@ -14,6 +14,11 @@
   "editor": {
     "title": "Titel",
     "heatingPumpType": "Wärmepumpentyp",
+    "heatingPumpTypeValues": {
+      "A2W": "Luft/Wasser",
+      "W2W": "Wasser/Wasser",
+      "G2W": "Sole/Wasser"
+    },
     "groundWaterInOut": "Sole/Wasser",
     "temperatureGroundWaterIn": "Eingangstemperatur Sole/Wasser",
     "temperatureGroundWaterOut": "Austrittstemperatur Sole/Wasser",
@@ -49,6 +54,11 @@
     "hotWaterTank": "Warmwasserspeicher",
     "tankWW": "Warmwasserspeicher vorhanden",
     "tankWWSource": "Warmwasserquelle",
+    "tankWWSourceValues": {
+      "heatPump": "Wärmepumpe",
+      "waterHeaterReturn": "Wassererhitzer gegen Heizungsrücklauf",
+      "waterHeaterAir": "Wassererhitzer gegen Luft"
+    },
     "waterHeaterValue": "Anzuzeigender Wert",
     "waterHeaterPump": "Pumpe An/Aus",
     "layeredChargeStorage": "Kombinierter Schichtspeicher",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Warmwasserspeichertemperatur unten",
     "heatingCircuit1": "Heizkreis 1",
     "heatingCircuitType1": "Heizkreis 1",
+    "heatingCircuitTypeValues": {
+      "off": "Aus",
+      "radiator": "Heizkörper",
+      "underfloor": "Fußbodenheizung"
+    },
     "heatingCircuitPumpRunning": "Status Heizkreispumpe An/Aus",
     "heatingCircuitPumpBeforeValve": "Heizkreispumpe vor Ventil",
     "supplyTemperatureHeating": "Heizvorlauftemperatur",

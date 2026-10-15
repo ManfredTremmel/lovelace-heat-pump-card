@@ -148,6 +148,9 @@
         document.getElementById("textSupplyTemperatureLabel").innerHTML = localization.svgTexts['supplyTemperatureLabel'];
 
         document.getElementById("labelHeatingPumpType").innerHTML = localization.editor['heatingPumpType'];
+        document.getElementById("inputheatingPumpTypeA2W").innerHTML = localization.editor.heatingPumpTypeValues['A2W'];
+        document.getElementById("inputheatingPumpTypeW2W").innerHTML = localization.editor.heatingPumpTypeValues['W2W'];
+        document.getElementById("inputheatingPumpTypeG2W").innerHTML = localization.editor.heatingPumpTypeValues['G2W'];
 
         document.getElementById("labelGroundWaterInOut").innerHTML = localization.editor['groundWaterInOut'];
         document.getElementById("labelTemperatureGroundWaterIn").innerHTML = localization.editor['temperatureGroundWaterIn'];
@@ -191,23 +194,35 @@
         document.getElementById("labelCirculatingPumpRunning").innerHTML = localization.editor['circulatingPumpRunning'];
         document.getElementById("labelStorageChargingPump").innerHTML = localization.editor['storageChargingPumpRunning'];
         document.getElementById("labelTankWWSource").innerHTML = localization.editor['tankWWSource'];
+        document.getElementById("inputTankWWSourceHeatPump").innerHTML = localization.editor.tankWWSourceValues['heatPump'];
+        document.getElementById("inputTankWWSourceWaterHeaterReturn").innerHTML = localization.editor.tankWWSourceValues['waterHeaterReturn'];
+        document.getElementById("inputTankWWSourceWaterHeaterAir").innerHTML = localization.editor.tankWWSourceValues['waterHeaterAir'];
         document.getElementById("labelWaterHeaterValue").innerHTML = localization.editor['waterHeaterValue'];
         document.getElementById("labelWaterHeaterPump").innerHTML = localization.editor['waterHeaterPump'];
 
         document.getElementById("labelHeatingCircuit1").innerHTML = localization.editor['heatingCircuit1'];
         document.getElementById("labelHeatingCircuitType1").innerHTML = localization.editor['heatingCircuitType1'];
+        document.getElementById("inputHeatingCircuitType1off").innerHTML = localization.editor.heatingCircuitTypeValues['off'];
+        document.getElementById("inputHeatingCircuitType1radiator").innerHTML = localization.editor.heatingCircuitTypeValues['radiator'];
+        document.getElementById("inputHeatingCircuitType1underfloor").innerHTML = localization.editor.heatingCircuitTypeValues['underfloor'];
         document.getElementById("labelHeatingCircuitPumpRunning").innerHTML = localization.editor['heatingCircuitPumpRunning'];
         document.getElementById("labelSupplyTemperatureHeating").innerHTML = localization.editor['supplyTemperatureHeating'];
         document.getElementById("labelRefluxTemperatureHeating").innerHTML = localization.editor['refluxTemperatureHeating'];
 
         document.getElementById("labelHeatingCircuit2").innerHTML = localization.editor['heatingCircuit2'];
         document.getElementById("labelHeatingCircuitType2").innerHTML = localization.editor['heatingCircuitType2'];
+        document.getElementById("inputHeatingCircuitType2off").innerHTML = localization.editor.heatingCircuitTypeValues['off'];
+        document.getElementById("inputHeatingCircuitType2radiator").innerHTML = localization.editor.heatingCircuitTypeValues['radiator'];
+        document.getElementById("inputHeatingCircuitType2underfloor").innerHTML = localization.editor.heatingCircuitTypeValues['underfloor'];
         document.getElementById("labelHeatingCircuitPumpRunning2").innerHTML = localization.editor['heatingCircuitPumpRunning2'];
         document.getElementById("labelSupplyTemperatureHeating2").innerHTML = localization.editor['supplyTemperatureHeating2'];
         document.getElementById("labelRefluxTemperatureHeating2").innerHTML = localization.editor['refluxTemperatureHeating2'];
 
         document.getElementById("labelHeatingCircuit3").innerHTML = localization.editor['heatingCircuit3'];
         document.getElementById("labelHeatingCircuitType3").innerHTML = localization.editor['heatingCircuitType3'];
+        document.getElementById("inputHeatingCircuitType3off").innerHTML = localization.editor.heatingCircuitTypeValues['off'];
+        document.getElementById("inputHeatingCircuitType3radiator").innerHTML = localization.editor.heatingCircuitTypeValues['radiator'];
+        document.getElementById("inputHeatingCircuitType3underfloor").innerHTML = localization.editor.heatingCircuitTypeValues['underfloor'];
         document.getElementById("labelHeatingCircuitPumpRunning3").innerHTML = localization.editor['heatingCircuitPumpRunning3'];
         document.getElementById("labelSupplyTemperatureHeating3").innerHTML = localization.editor['supplyTemperatureHeating3'];
         document.getElementById("labelRefluxTemperatureHeating3").innerHTML = localization.editor['refluxTemperatureHeating3'];
@@ -399,9 +414,9 @@
       <div>
         <label for="inputheatingPumpType" id="labelHeatingPumpType">Wärmepumpentyp:</label>
         <select id="inputheatingPumpType" onChange="changeHeatPumpType(this.options[this.selectedIndex].value);">
-          <option value="A2W" selected="selected">Luft/Wasser</option>
-          <option value="W2W">Wasser/Wasser</option>
-          <option value="G2W">Sole/Wasser</option>
+          <option id="inputheatingPumpTypeA2W" value="A2W" selected="selected">Luft/Wasserx</option>
+          <option id="inputheatingPumpTypeW2W" value="W2W">Wasser/Wasserx</option>
+          <option id="inputheatingPumpTypeG2W" value="G2W">Sole/Wasserx</option>
         </select>
       </div>
       <div class="toggle">
@@ -563,9 +578,9 @@
           <div>
             <label for="inputTankWWSource" id="labelTankWWSource">Warmwasserquelle:</label>
             <select id="inputTankWWSource" onChange="switchWaterHeater(this.value);">
-              <option value="heatPump">Heat pump</option>
-              <option value="waterHeaterReturn">Water heater on heating return</option>
-              <option value="waterHeaterAir">Water heater on air</option>
+              <option id="inputTankWWSourceHeatPump" value="heatPump">Heat pump</option>
+              <option id="inputTankWWSourceWaterHeaterReturn" value="waterHeaterReturn">Water heater on heating return</option>
+              <option id="inputTankWWSourceWaterHeaterAir" value="waterHeaterAir">Water heater on air</option>
             </select>
           </div>
           <div>
@@ -585,9 +600,9 @@
           <div>
             <label for="inputHeatingCircuitType1" id="labelHeatingCircuitType1">Heizkreis 1:</label>
             <select id="inputHeatingCircuitType1" onChange="changeHeatingCurcuit1(this.options[this.selectedIndex].value);">
-              <option value="off">Aus</option>
-              <option value="radiator" selected="selected">Heizkörper</option>
-              <option value="underfloor">Fußbodenheizung</option>
+              <option id="inputHeatingCircuitType1off" value="off">Aus</option>
+              <option id="inputHeatingCircuitType1radiator" value="radiator" selected="selected">Heizkörper</option>
+              <option id="inputHeatingCircuitType1underfloor" value="underfloor">Fußbodenheizung</option>
             </select>
           </div>
           <div>
@@ -611,9 +626,9 @@
           <div>
             <label for="inputHeatingCircuitType2" id="labelHeatingCircuitType2">Heizkreis 2:</label>
             <select id="inputHeatingCircuitType2" onChange="changeHeatingCurcuit2(this.options[this.selectedIndex].value);">
-              <option value="off">Aus</option>
-              <option value="radiator" selected="selected">Heizkörper</option>
-              <option value="underfloor">Fußbodenheizung</option>
+              <option id="inputHeatingCircuitType2off" value="off">Aus</option>
+              <option id="inputHeatingCircuitType2radiator" value="radiator" selected="selected">Heizkörper</option>
+              <option id="inputHeatingCircuitType2underfloor" value="underfloor">Fußbodenheizung</option>
             </select>
           </div>
           <div>
@@ -636,9 +651,9 @@
         <div>
           <div><label for="inputHeatingCircuitType3" id="labelHeatingCircuitType3">Heizkreis 3:</label>
             <select id="inputHeatingCircuitType3" onChange="changeHeatingCurcuit3(this.options[this.selectedIndex].value);">
-              <option value="off">Aus</option>
-              <option value="radiator" selected="selected">Heizkörper</option>
-              <option value="underfloor">Fußbodenheizung</option>
+              <option id="inputHeatingCircuitType3off" value="off">Aus</option>
+              <option id="inputHeatingCircuitType3radiator" value="radiator" selected="selected">Heizkörper</option>
+              <option id="inputHeatingCircuitType3underfloor" value="underfloor">Fußbodenheizung</option>
             </select>
           </div>
           <div>

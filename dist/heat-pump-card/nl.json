@@ -14,6 +14,11 @@
   "editor": {
     "title": "Titel",
     "heatingPumpType": "Warmtepomp type",
+    "heatingPumpTypeValues": {
+      "A2W": "Lucht/Water",
+      "W2W": "Water/Water",
+      "G2W": "Pekel/Water"
+    },
     "groundWaterInOut": "Pekel/water",
     "temperatureGroundWaterIn": "Inlaattemperatuur pekel/water",
     "temperatureGroundWaterOut": "Uitlaattemperatuur pekel/water",
@@ -49,6 +54,11 @@
     "hotWaterTank": "Boiler",
     "tankWW": "Boiler beschikbaar",
     "tankWWSource": "Warmtebron boiler",
+    "tankWWSourceValues": {
+      "heatPump": "Warmtepomp",
+      "waterHeaterReturn": "Warmwatertoestel op de retourleiding van de verwarming",
+      "waterHeaterAir": "Warmwaterbereider op basis van lucht"
+    },
     "waterHeaterValue": "Weer te geven waarde",
     "waterHeaterPump": "Pomp aan/uit",
     "layeredChargeStorage": "Gecombineerde gelaagde ladingsopslag",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Boilertemperatuur onder",
     "heatingCircuit1": "Verwarmingscircuit 1",
     "heatingCircuitType1": "Verwarmingscircuit 1",
+    "heatingCircuitTypeValues": {
+      "off": "Uit",
+      "radiator": "Radiator",
+      "underfloor": "Vloer"
+    },
     "heatingCircuitPumpRunning": "Status Verwarmingspomp Aan/Uit",
     "heatingCircuitPumpBeforeValve": "Verwarmingspomp vóór de klep",
     "supplyTemperatureHeating": "Aanvoertemperatuur Verwarming",

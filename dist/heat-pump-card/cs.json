@@ -14,6 +14,11 @@
   "editor": {
     "title": "Název",
     "heatingPumpType": "Typ tepelného čerpadla",
+    "heatingPumpTypeValues": {
+      "A2W": "Tepelné čerpadlo vzduch-voda",
+      "W2W": "Tepelné čerpadlo voda-voda",
+      "G2W": "Tepelné čerpadlo země–voda"
+    },
     "groundWaterInOut": "Země/vody",
     "temperatureGroundWaterIn": "Teplota země/vody – vstup",
     "temperatureGroundWaterOut": "Teplota země/vody – výstup",
@@ -49,6 +54,11 @@
     "hotWaterTank": "Zásobníku teplé vody",
     "tankWW": "K dispozici zásobníku teplé vody",
     "tankWWSource": "Zdroj teplé vody",
+    "tankWWSourceValues": {
+      "heatPump": "Tepelné čerpadlo",
+      "waterHeaterReturn": "Ohřívač vody na vratném potrubí topení",
+      "waterHeaterAir": "Ohřívač vody na vzduchu"
+    },
     "waterHeaterValue": "Hodnota k zobrazení",
     "waterHeaterPump": "Zapnutí/vypnutí čerpadla",
     "layeredChargeStorage": "Kombinované vrstvené ukládání náboje",
@@ -57,6 +67,11 @@
     "tankTempWWDown": "Teplota zásobníku teplé vody – spodní",
     "heatingCircuit1": "Topný okruh 1",
     "heatingCircuitType1": "Topný okruh 1",
+    "heatingCircuitTypeValues": {
+      "off": "Vypnuto",
+      "radiator": "Chladič",
+      "underfloor": "Podlahové"
+    },
     "heatingCircuitPumpRunning": "Čerpadlo topného okruhu zapnuto/vypnuto",
     "heatingCircuitPumpBeforeValve": "Čerpadlo topného okruhu před ventilem",
     "supplyTemperatureHeating": "Teplota přívodu topení",
