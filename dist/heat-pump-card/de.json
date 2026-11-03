@@ -13,6 +13,7 @@
   },
   "editor": {
     "title": "Titel",
+    "climate": "Klimasensor",
     "heatingPumpType": "Wärmepumpentyp",
     "heatingPumpTypeValues": {
       "A2W": "Luft/Wasser",

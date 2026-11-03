@@ -13,6 +13,7 @@
   },
   "editor": {
     "title": "Tytuł",
+    "climate": "Czujnik klimatyczny",
     "heatingPumpType": "Typ pompy ciepła",
     "heatingPumpTypeValues": {
       "A2W": "Powietrze/Woda",

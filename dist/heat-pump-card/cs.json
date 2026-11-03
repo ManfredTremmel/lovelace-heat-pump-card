@@ -13,6 +13,7 @@
   },
   "editor": {
     "title": "Název",
+    "climate": "Senzor klimatu",
     "heatingPumpType": "Typ tepelného čerpadla",
     "heatingPumpTypeValues": {
       "A2W": "Tepelné čerpadlo vzduch-voda",

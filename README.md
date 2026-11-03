@@ -29,6 +29,7 @@ Home Assistant dashboard card displaying heat pump parameters
 | Name | Type | Requirement | Description
 | ---- | ---- | ----------- | -----------
 | title | string | optional | Title of the card, if empty no title is displayed
+| climate | climate | optional | A climate sensor representing the heat pump. Modes, ambient temperatures and running state are read from the containing attributes and needn't be defined separate (if you do, this separte sensors have higher priority!)
 | heatingPumpType | string | optional | Chose between three types of heat pump: "A2W" (Air to Water), "W2W" (Water to Water) and "G2W" (Ground to Water), if not set, A2W is used as default
 | temperatureGroundWaterIn | object | optional | Used for "W2W" and "G2W" heat pumps for input temerature
 | temperatureGroundWaterOut | object | optional | Used for "W2W" and "G2W" heat pumps for output temerature
@@ -116,37 +117,26 @@ additional binary_sensors I've created as helper to translate the heat pump mode
 
 ```yaml
 - type: custom:heat-pump-card
-  title: Wärmepumpe
+  climate: climate.ug_technikraum_mosquitto_broker_climate_heat_pump
   heatingPumpType: A2W
-  heatingPumpStatusOnOff: binary_sensor.heating_pump_status_on_off
-  heatingPumpHotWaterMode: binary_sensor.heating_pump_hot_water_mode
-  heatingPumpHeatingMode: binary_sensor.heating_pump_heating_mode
-  heatingPumpCoolingMode: binary_sensor.heating_pump_cooling_mode
-  heatingPumpPartyMode: binary_sensor.heating_pump_party_mode
-  heatingPumpEnergySaveMode: binary_sensor.heating_pump_energy_save_mode
-  heatingPumpNightMode: binary_sensor.heating_pump_night_mode
   warning: binary_sensor.mosquitto_broker_status_sammelmeldung
   additionalHeating: switch.mosquitto_broker_freigabe_zusatzheizung_fuer_ww_bereitung
   outdoorTemperature: sensor.mosquitto_broker_aussentemperatur
-  ambientTemperatureNormal: number.mosquitto_broker_raumsolltemperatur_normal
-  ambientTemperatureReduced: number.mosquitto_broker_raumsolltemperatur_reduziert
-  ambientTemperatureParty: number.mosquitto_broker_raumsolltemperatur_party
   supplyTemperature: sensor.mosquitto_broker_anlagenvorlauftemperatur
-  supplyTemperatureMain: sensor.mosquitto_broker_vorlauftemperatur
-  refluxTemperatureMain: sensor.mosquitto_broker_ruecklauftemperatur
-  hpRunning: binary_sensor.mosquitto_broker_status_primaerquelle
   compressorRunning: binary_sensor.mosquitto_broker_status_verdichter
   circulatingPumpRunning: binary_sensor.mosquitto_broker_warmwasser_zirkulationspumpe
   storageChargingPumpRunning: binary_sensor.mosquitto_broker_status_speicherladepumpe
   tankHP: true
   tankTempHPUp: sensor.mosquitto_broker_pufferspeichertemperatur
   tankWW: true
+  tankWWSource: heatPump
   tankTempWWUp: sensor.mosquitto_broker_warmwassertemperatur_oben
-  heatingCircuitType1: underfloor
-  heatingCircuitPumpRunning: binary_sensor.mosquitto_broker_heizkreispumpe
-  supplyTemperatureHeating: sensor.mosquitto_broker_vorlauftemperatur_heizkreis
-  heatingCircuitType2: "off"
-  heatingCircuitType3: "off"
+  heatingCircuitType1: 'off'
+  heatingCircuitPumpBeforeValve: false
+  heatingCircuitType2: underfloor
+  heatingCircuitPumpRunning2: binary_sensor.mosquitto_broker_heizkreispumpe
+  supplyTemperatureHeating2: sensor.mosquitto_broker_vorlauftemperatur_heizkreis
+  heatingCircuitType3: 'off'
   evaporatorPressure: sensor.mosquitto_broker_druck_im_verdampfer
   evaporatorTemperature: sensor.mosquitto_broker_temperatur_verdampfer
   condenserPressure: sensor.mosquitto_broker_druck_im_kondensator
@@ -156,6 +146,8 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heaterRodLevel1: binary_sensor.mosquitto_broker_status_heizstab_stufe_1
   heaterRodLevel2: binary_sensor.mosquitto_broker_status_heizstab_stufe_2
   thermalSolarAvailable: false
+  additionalLabel000: JAZ
+  additionalValue000: sensor.heating_pump_jaz
   linkDetails: /lovelace/hp-details
   linkSettings: /lovelace/hp-settings
 

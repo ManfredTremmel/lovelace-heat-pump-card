@@ -13,23 +13,79 @@ class HeatPumpCard extends HTMLElement {
   }
 
   setValues(hass) {
-    this.changeHeatPumpRunning(this.content, this.config.heatingPumpType, this.config.hpRunning, hass);
     this.content.querySelector("#textG2WWaterTempIn").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterIn);
     this.content.querySelector("#textG2WWaterTempOut").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterOut);
 
-    this.content.querySelector("#gHPStatusOff").style.display = this.formatBinary(hass, this.config.heatingPumpStatusOnOff) ? "none" : "inline";
-    this.content.querySelector("#gHPStatusWW").style.display = this.formatBinary(hass, this.config.heatingPumpHotWaterMode) ? "inline" : "none";
-    this.content.querySelector("#gHPStatusHeating").style.display = this.formatBinary(hass, this.config.heatingPumpHeatingMode) ? "inline" : "none";
-    this.content.querySelector("#gHPStatusCooling").style.display = this.formatBinary(hass, this.config.heatingPumpCoolingMode) ? "inline" : "none";
+    var heatingPumpOff;
+    var heatingPumpWW;
+    var heatingPumpHeating;
+    var heatingPumpCooling;
+    var heatingPumpPartyMode;
+    var heatingPumpEcoMode;
+    var heatingPumpNightMode;
+    var hpRunning;
+    var ambientTemperatureDefault;
+    var ambientTemperatureReduced;
+    var ambientTemperatureParty;
+    if (this.config.climate) {
+      heatingPumpOff = this.readStateValue(hass, this.config.climate) == "off";
+      heatingPumpWW = this.readStateValue(hass, this.config.climate) != "off";
+      heatingPumpHeating = this.readStateValue(hass, this.config.climate) == "heat";
+      heatingPumpCooling = this.readStateValue(hass, this.config.climate) == "cool";
+      heatingPumpPartyMode = this.readStateAttr(hass, this.config.climate, "preset_mode") == "boost";
+      heatingPumpEcoMode = this.readStateAttr(hass, this.config.climate, "preset_mode") == "eco";
+      heatingPumpNightMode = this.readStateAttr(hass, this.config.climate, "preset_mode") == "sleep";
+      hpRunning = this.readStateAttr(hass, this.config.climate, "fan_mode") != "auto";
+      ambientTemperatureDefault = this.formatTemp(this.readStateAttr(hass, this.config.climate, "temperature"));
+      ambientTemperatureReduced = this.formatTemp(this.readStateAttr(hass, this.config.climate, "target_temp_low"));
+      ambientTemperatureParty = this.formatTemp(this.readStateAttr(hass, this.config.climate, "target_temp_high"));
+    }
+    if (this.config.heatingPumpStatusOnOff) {
+      heatingPumpOff = !this.formatBinary(hass, this.config.heatingPumpStatusOnOff);
+    }
+    if (this.config.heatingPumpHotWaterMode) {
+      heatingPumpWW = this.formatBinary(hass, this.config.heatingPumpHotWaterMode);
+    }
+    if (this.config.heatingPumpHeatingMode) {
+      heatingPumpHeating = this.formatBinary(hass, this.config.heatingPumpHeatingMode);
+    }
+    if (this.config.heatingPumpCoolingMode) {
+      heatingPumpCooling = this.formatBinary(hass, this.config.heatingPumpCoolingMode);
+    }
+    if (this.config.heatingPumpPartyMode) {
+      heatingPumpPartyMode = this.formatBinary(hass, this.config.heatingPumpPartyMode);
+    }
+    if (this.config.heatingPumpEnergySaveMode) {
+      heatingPumpEcoMode = this.formatBinary(hass, this.config.heatingPumpEnergySaveMode);
+    }
+    if (this.config.heatingPumpNightMode) {
+      heatingPumpNightMode = this.formatBinary(hass, this.config.heatingPumpNightMode);
+    }
+    if (this.config.hpRunning) {
+      hpRunning = this.formatBinary(hass, this.config.hpRunning);
+    }
+    if (this.config.ambientTemperatureNormal) {
+      ambientTemperatureDefault = this.formatNum(hass, this.config.ambientTemperatureNormal);
+    }
+    if (this.config.ambientTemperatureReduced) {
+      ambientTemperatureReduced = this.formatNum(hass, this.config.ambientTemperatureReduced);
+    }
+    if (this.config.ambientTemperatureParty) {
+      ambientTemperatureParty = this.formatNum(hass, this.config.ambientTemperatureParty);
+    }
 
-    const heatingPumpPartyMode = this.formatBinary(hass, this.config.heatingPumpPartyMode);
+    this.content.querySelector("#gHPStatusOff").style.display = heatingPumpOff ? "inline" : "none";
+    this.content.querySelector("#gHPStatusWW").style.display = heatingPumpWW ? "inline" : "none";
+    this.content.querySelector("#gHPStatusHeating").style.display = heatingPumpHeating ? "inline" : "none";
+    this.content.querySelector("#gHPStatusCooling").style.display = heatingPumpCooling ? "inline" : "none";
+
     this.content.querySelector("#gHPStatusParty").style.display = heatingPumpPartyMode ? "inline" : "none";
+    this.content.querySelector("#gHPStatusSave").style.display = heatingPumpEcoMode ? "inline" : "none";
 
-    this.content.querySelector("#gHPStatusSave").style.display = this.formatBinary(hass, this.config.heatingPumpEnergySaveMode) ? "inline" : "none";
-
-    const heatingPumpNightMode = this.formatBinary(hass, this.config.heatingPumpNightMode);
     this.content.querySelector("#gTimeSymbolNight").style.display = heatingPumpNightMode ? "inline" : "none";
     this.content.querySelector("#gTimeSymbolDay").style.display = heatingPumpNightMode ? "none" : "inline";
+
+    this.changeHeatPumpRunning(this.content, this.config.heatingPumpType, hpRunning);
 
     this.content.querySelector("#gWarning").style.display = this.formatBinary(hass, this.config.warning) ? "inline" : "none";
     this.content.querySelector("#gError").style.display = (this.formatBinary(hass, this.config.error) || this.formatBinary(hass, this.config.warning)) ? "inline" : "none";
@@ -38,14 +94,12 @@ class HeatPumpCard extends HTMLElement {
 
     this.content.querySelector("#textOutdoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.outdoorTemperature);
 
-    const ambientTemperatureReduced = this.formatNum(hass, this.config.ambientTemperatureReduced);
-    const ambientTemperatureParty = this.formatNum(hass, this.config.ambientTemperatureParty);
     if (heatingPumpPartyMode && ambientTemperatureParty) {
       this.content.querySelector("#textIndoorTemperatureValue").innerHTML = ambientTemperatureParty;
     } else if (heatingPumpNightMode && ambientTemperatureReduced) {
       this.content.querySelector("#textIndoorTemperatureValue").innerHTML = ambientTemperatureReduced;
     } else {
-      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = this.formatNum(hass, this.config.ambientTemperatureNormal);
+      this.content.querySelector("#textIndoorTemperatureValue").innerHTML = ambientTemperatureDefault;
     }
 
     this.content.querySelector("#textSupplyTemperatureValue").innerHTML = this.formatNum(hass, this.config.supplyTemperature);
@@ -213,7 +267,11 @@ class HeatPumpCard extends HTMLElement {
   }
 
   switchRotateAttribute(attributeName, hass, state) {
-    if (this.formatBinary(hass, state)) {
+    this.switchRotateAttributeBinary(attributeName, this.formatBinary(hass, state));
+  }
+
+  switchRotateAttributeBinary(attributeName, stateBinary) {
+    if (stateBinary) {
       this.content.querySelector(attributeName).classList.add("rotate");
     } else {
       this.content.querySelector(attributeName).classList.remove("rotate");
@@ -225,6 +283,11 @@ class HeatPumpCard extends HTMLElement {
       return hass.states[config];
     }
     return null;
+  }
+
+  readStateAttr(hass, config, attr) {
+    const stateValue = this.readState(hass, config);
+    return stateValue.attributes[attr];
   }
 
   readStateValue(hass, config) {
@@ -251,6 +314,13 @@ class HeatPumpCard extends HTMLElement {
     if (stateValue && !isNaN(Number(stateValue.state))) {
       const unit = stateValue.attributes.unit_of_measurement ? stateValue.attributes.unit_of_measurement :  "";
       return new Intl.NumberFormat(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(stateValue.state) + " " + unit;
+    }
+    return null;
+  }
+
+  formatTemp(number) {
+    if (number) {
+      return new Intl.NumberFormat(undefined, {style: "unit", unit: "celsius", minimumFractionDigits: 1}).format(number);
     }
     return null;
   }
@@ -315,10 +385,10 @@ class HeatPumpCard extends HTMLElement {
     window.dispatchEvent(new CustomEvent("location-changed"));
   }
 
-  changeHeatPumpRunning(content, selection, running, hass) {
-    this.switchRotateAttribute("#pathHPFan", hass, !selection || selection === 'A2W' ? running : null);
-    this.switchRotateAttribute("#gHPW2WPumpBladeWheel", hass, selection === 'W2W' ? running : null);
-    this.switchRotateAttribute("#gHPG2WPumpBladeWheel", hass, selection === 'G2W' ? running : null);
+  changeHeatPumpRunning(content, selection, running) {
+    this.switchRotateAttributeBinary("#pathHPFan", !selection || selection === 'A2W' ? running : false);
+    this.switchRotateAttributeBinary("#gHPW2WPumpBladeWheel", selection === 'W2W' ? running : false);
+    this.switchRotateAttributeBinary("#gHPG2WPumpBladeWheel", selection === 'G2W' ? running : false);
   }
 
   mainLine(content, hass) {
@@ -495,6 +565,7 @@ class HeatPumpCard extends HTMLElement {
     // Define the form schema.
     const SCHEMA = [
       { name: "title", selector: { text: {} } },
+      { name: "climate", selector: { entity: {domain: ["climate"]} } },
       {
         name: "heatingPumpType",
         default: "A2W",
