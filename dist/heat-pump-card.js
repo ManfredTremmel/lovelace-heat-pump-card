@@ -16,17 +16,17 @@ class HeatPumpCard extends HTMLElement {
     this.content.querySelector("#textG2WWaterTempIn").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterIn);
     this.content.querySelector("#textG2WWaterTempOut").innerHTML = this.formatNum(hass, this.config.temperatureGroundWaterOut);
 
-    var heatingPumpOff;
-    var heatingPumpWW;
-    var heatingPumpHeating;
-    var heatingPumpCooling;
-    var heatingPumpPartyMode;
-    var heatingPumpEcoMode;
-    var heatingPumpNightMode;
-    var hpRunning;
-    var ambientTemperatureDefault;
-    var ambientTemperatureReduced;
-    var ambientTemperatureParty;
+    var heatingPumpOff = false;
+    var heatingPumpWW = false;
+    var heatingPumpHeating = false;
+    var heatingPumpCooling = false;
+    var heatingPumpPartyMode = false;
+    var heatingPumpEcoMode = false;
+    var heatingPumpNightMode = false;
+    var hpRunning = false;
+    var ambientTemperatureDefault = null;
+    var ambientTemperatureReduced = null;
+    var ambientTemperatureParty = null;
     if (this.config.climate) {
       heatingPumpOff = this.readStateValue(hass, this.config.climate) == "off";
       heatingPumpWW = this.readStateValue(hass, this.config.climate) != "off";
@@ -561,6 +561,21 @@ class HeatPumpCard extends HTMLElement {
     }
   }
 
+  static getStubConfig(hass, entities, entitiesFallback) {
+    const climateId = entities.find((id) => id.startsWith("climate."));
+    const climateIdFallback = entitiesFallback.find((id) => id.startsWith("climate."));
+    return {
+      climate: climateId ?? climateIdFallback,
+      heatingPumpType: "A2W",
+      tankHP: true,
+      tankWW: true,
+      tankWWSource: "heatPump",
+      heatingCircuitType1: "radiator",
+      heatingCircuitType2: "off",
+      heatingCircuitType3: "off"
+    };
+  }
+
   static getConfigForm() {
     // Define the form schema.
     const SCHEMA = [
@@ -839,5 +854,24 @@ window.customCards = window.customCards || [];
 window.customCards.push({
   type: "heat-pump-card",
   name: "Heat Pump Card",
-  description: "A custom card displaying heat pump state"
+  preview: true,
+  description: "A custom card displaying heat pump state",
+  getEntitySuggestion: (hass, entityId) => {
+    if (!entityId.startsWith("climate.")) {
+      return null;
+    }
+    return {
+      config: {
+        type: "custom:heat-pump-card",
+        climate: entityId,
+        heatingPumpType: "A2W",
+        tankHP: true,
+        tankWW: true,
+        tankWWSource: "heatPump",
+        heatingCircuitType1: "radiator",
+        heatingCircuitType2: "off",
+        heatingCircuitType3: "off"
+      }
+    };
+  }
 });
