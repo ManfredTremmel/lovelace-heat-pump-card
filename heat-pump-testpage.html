@@ -133,6 +133,12 @@
         document.getElementById('pathTankWWHat').style.display = waterHeater ? 'none' : 'inline';
         document.getElementById('textTankWWName').style.display = waterHeater ? 'none' : 'inline';
       }
+      function switchThermalSolarState(state) {
+        document.getElementById('gThermalSolar').style.display = state == 'off' ? 'none' : 'inline';
+        document.getElementById('gThermalSolarToHotWater').style.display = (state == 'hotwater' || state == 'hotwaterAndHeating') ? 'inline' : 'none';
+        document.getElementById('gThermalSolarToHeatbuffer').style.display = (state == 'heating' || state == 'hotwaterAndHeating') ? 'inline' : 'none';
+        document.getElementById('groupThermalSolarWWHeatingValve').style.display = state == 'hotwaterAndHeating' ? 'inline' : 'none';
+      }
       function wwFarbe() {
         tankColors('inputTankTempWWUp', 'inputTankTempWWMiddle', 'inputTankTempWWDown', 'stop3050', 'stop3070', 'stop3060');
       }
@@ -243,10 +249,17 @@
 
         document.getElementById("labelThermalSolar").innerHTML = localization.editor['thermalSolar'];
         document.getElementById("labelThermalSolarAvailable").innerHTML = localization.editor['thermalSolarAvailable'];
+        document.getElementById("labelThermalSolarAvailableoff").innerHTML = localization.editor.thermalSolarAvailableValues['off'];
+        document.getElementById("labelThermalSolarAvailablehotwater").innerHTML = localization.editor.thermalSolarAvailableValues['hotwater'];
+        document.getElementById("labelThermalSolarAvailableheating").innerHTML = localization.editor.thermalSolarAvailableValues['heating'];
+        document.getElementById("labelThermalSolarAvailablehotwaterAndHeating").innerHTML = localization.editor.thermalSolarAvailableValues['hotwaterAndHeating'];
         document.getElementById("labelThermalSolarPanelTemp").innerHTML = localization.editor['thermalSolarPanelTemp'];
         document.getElementById("labelThermalSolarFluxTemp").innerHTML = localization.editor['thermalSolarFluxTemp'];
+        document.getElementById("labelThermalSolarRefluxTemp").innerHTML = localization.editor['thermalSolarRefluxTemp'];
         document.getElementById("labelThermalSolarPump").innerHTML = localization.editor['thermalSolarPump'];
         document.getElementById("labelThermalSolarPumpSpeed").innerHTML = localization.editor['thermalSolarPumpSpeed'];
+        document.getElementById("labelThermalSolarWWHeatingValve").innerHTML = localization.editor['thermalSolarWWHeatingValve'];
+        document.getElementById("labelThermalSolarWWHeatingValveState").innerHTML = localization.editor['thermalSolarWWHeatingValveState'];
 
         document.getElementById("labelLinks").innerHTML = localization.editor['links'];
         document.getElementById("labelLinkDetails").innerHTML = localization.editor['linkDetails'];
@@ -728,7 +741,12 @@
         <div>
           <div>
             <label for="inputThermalSolarAvailable" id="labelThermalSolarAvailable">Solarthermie vorhanden:</label>
-            <input type="checkbox" id="inputThermalSolarAvailable" checked="true" onClick="document.getElementById('gThermalSolar').style.display = this.checked ? 'block' : 'none';"></input>
+            <select id="inputThermalSolarAvailable" onChange="switchThermalSolarState(this.options[this.selectedIndex].value);">
+              <option id="labelThermalSolarAvailableoff" value="off">Aus</option>
+              <option id="labelThermalSolarAvailablehotwater" value="hotwater">Warmwasserspeicher</option>
+              <option id="labelThermalSolarAvailableheating" value="heating">Pufferspeicher</option>
+              <option id="labelThermalSolarAvailablehotwaterAndHeating" value="hotwaterAndHeating" selected="selected">Warmwasser- und Pufferspeicher</option>
+            </select>
           </div>
           <div>
             <label for="inputThermalSolarPanelTemp" id="labelThermalSolarPanelTemp">Solarpanel Temperatur:</label>
@@ -739,12 +757,24 @@
             <input type="number" min="0" max="95" step="0.1" id="inputThermalSolarFluxTemp" onChange="document.getElementById('textThermalSolarFluxTemp').innerHTML = formatTemp(this.value);" value="63.5"></input>
           </div>
           <div>
+            <label for="inputThermalSolarRefluxTemp" id="labelThermalSolarRefluxTemp">Solarvorlauf Temperatur:</label>
+            <input type="number" min="0" max="95" step="0.1" id="inputThermalSolarRefluxTemp" onChange="document.getElementById('textThermalSolarRefluxTemp').innerHTML = formatTemp(this.value);" value=""></input>
+          </div>
+          <div>
             <label for="inputThermalSolarPump" id="labelThermalSolarPump">Pumpe aktiv:</label>
             <input type="checkbox" id="inputThermalSolarPump" checked="true" onClick="switchRotateAttribute('gThermalSolarPump', this.checked);"></input>
           </div>
           <div>
             <label for="inputThermalSolarPumpSpeed" id="labelThermalSolarPumpSpeed">Pumpengeschwindigkeit:</label>
             <input type="number" min="0" max="100" step="1" id="inputThermalSolarPumpSpeed" onChange="document.getElementById('textThermalSolarPumpSpeed').innerHTML = formatPercent(this.value);" value="100"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarWWHeatingValve" id="labelThermalSolarWWHeatingValve">Ventil Heizen/Warmwasser:</label>
+            <input type="checkbox" id="inputThermalSolarWWHeatingValve" onClick="document.getElementById('gThermalSolarWWHeatingValve').setAttribute('transform', this.checked ? 'rotate(270, 947, 590)' : 'rotate(0, 947, 590)');"></input>
+          </div>
+          <div>
+            <label for="inputThermalSolarWWHeatingValveState" id="labelThermalSolarWWHeatingValveState">Ventilstatus:</label>
+            <input type="text" id="inputThermalSolarWWHeatingValveState" onChange="document.getElementById('textThermalSolarWWHeatingValveState').innerHTML = this.value;" value=""></input>
           </div>
         </div>
       </div>

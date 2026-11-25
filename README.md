@@ -91,11 +91,14 @@ Home Assistant dashboard card displaying heat pump parameters
 | heaterRodHP | object | optional | Heater Rod Heating is active and displayed in the buffer tank
 | heaterRodLevel1 | object | optional | Heater Rod is using Level 1, color is set to orange
 | heaterRodLevel2 | object | optional | Heater Rod is using Level 2, color is set to red
-| thermalSolarAvailable | boolean | optional | Enable/Disable thermal solar part, when not defined, it's not displayed
+| thermalSolarAvailable | string | optional | Type of thermal solar, "off" without solar thermal, "hotwater" when connected to hot water tank, "heating" when connected to heating buffer, "hotwaterAndHeating" when connected to both
 | thermalSolarPump | object | optional | Binary sensor which detects if Solar Pump is active or not
 | thermalSolarPumpSpeed | object | optional | Sensor containing solar pump speed which is displayed
 | thermalSolarPanelTemp | object | optional | Sensor containing panel temperature
 | thermalSolarFluxTemp | object | optional | Sensor containing flux temperature
+| thermalSolarRefluxTemp | object | optional | Sensor containing reflux temperature
+| thermalSolarWWHeatingValve | boolean | optional | Heating/Hot Water Valve
+| thermalSolarWWHeatingValveState | object | optional | Sensor which's value is displayed near by the Heating/Hot Water Valve
 | linkDetails | string | optional | Link to details page
 | linkSettings | string | optional | Link to settings page
 | additionalLabel000 ... additionalLabel012 | string | optional | Label(s) for additional value(s) to display
@@ -145,7 +148,7 @@ additional binary_sensors I've created as helper to translate the heat pump mode
   heaterRodHP: switch.mosquitto_broker_freigabe_heizen_mit_elektro
   heaterRodLevel1: binary_sensor.mosquitto_broker_status_heizstab_stufe_1
   heaterRodLevel2: binary_sensor.mosquitto_broker_status_heizstab_stufe_2
-  thermalSolarAvailable: false
+  thermalSolarAvailable: 'off'
   additionalLabel000: JAZ
   additionalValue000: sensor.heating_pump_jaz
   linkDetails: /lovelace/hp-details

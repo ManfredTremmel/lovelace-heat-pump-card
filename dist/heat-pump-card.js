@@ -171,11 +171,15 @@ class HeatPumpCard extends HTMLElement {
 
     this.heaterRodColor(this.content, heaterRodWW, this.formatBinary(hass, this.config.heaterRodLevel1), this.formatBinary(hass, this.config.heaterRodLevel2));
 
-    if (this.config.thermalSolarAvailable) {
+    if (this.config.thermalSolarAvailable && this.config.thermalSolarAvailable != 'off') {
       this.switchRotateAttribute("#gThermalSolarPump", hass, this.config.thermalSolarPump);
       this.content.querySelector("#textThermalSolarPanelTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarPanelTemp);
       this.content.querySelector("#textThermalSolarFluxTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarFluxTemp);
+      this.content.querySelector("#textThermalSolarRefluxTemp").innerHTML = this.formatNum(hass, this.config.thermalSolarRefluxTemp);
       this.content.querySelector("#textThermalSolarPumpSpeed").innerHTML = this.formatNum(hass, this.config.thermalSolarPumpSpeed);
+      this.content.querySelector("#gThermalSolarWWHeatingValve").setAttribute('transform',
+                                                                              'rotate(' + (this.formatBinary(hass, this.config.thermalSolarWWHeatingValve) ? '270' : '0') + ', 947, 590)');
+      this.content.querySelector("#textThermalSolarWWHeatingValveState").innerHTML = this.readStateValue(hass, this.config.thermalSolarWWHeatingValveState);
     }
 
     this.content.querySelector("#textValue000").innerHTML = this.readStateValue(hass, this.config.additionalValue000);
@@ -235,7 +239,7 @@ class HeatPumpCard extends HTMLElement {
     rawFile.onload = (e) => {
       if (rawFile.readyState === 4) {
         if (rawFile.status == 200) {
-          this.innerHTML = '<ha-card>\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "").replace(/ class="rotate"/g, "").replace(/display: inline;/g, "display: none;") + '</ha-card>';
+          this.innerHTML = '<ha-card>\n' + rawFile.responseText.replace(/.*--primary-text-color:.*/g, "").replace(/ class="rotate"/g, "").replace(/display: inline;/g, "display: none;").replace(/>[^<]*<\/text>/g, "/>") + '</ha-card>';
           this.content = this.querySelector("svg");
           this.content.querySelector("#linkDetails").addEventListener("click", this.linkHandling);
           this.content.querySelector("#linkSettings").addEventListener("click", this.linkHandling);
@@ -536,10 +540,18 @@ class HeatPumpCard extends HTMLElement {
         this.content.querySelector("#gSettings").removeAttribute("transform");
       }
 
-      if (!config.thermalSolarAvailable || config.thermalSolarAvailable === 'off') {
+      if (!config.thermalSolarAvailable || config.thermalSolarAvailable === 'off' || config.thermalSolarAvailable === 'false') {
         this.content.querySelector('#gThermalSolar').style.display = 'none';
       } else {
         this.content.querySelector('#gThermalSolar').style.display = 'inline';
+        this.content.querySelector('#gThermalSolarToHotWater').style.display =
+          (config.thermalSolarAvailable === 'hotwater'
+          || config.thermalSolarAvailable === 'hotwaterAndHeating'
+          || config.thermalSolarAvailable === 'true') ? 'inline' : 'none';
+        this.content.querySelector('#gThermalSolarToHeatbuffer').style.display =
+          (config.thermalSolarAvailable === 'heating'
+          || config.thermalSolarAvailable === 'hotwaterAndHeating') ? 'inline' : 'none';
+        this.content.querySelector('#groupThermalSolarWWHeatingValve').style.display = config.thermalSolarAvailable === 'hotwaterAndHeating' ? 'inline' : 'none';
       }
       this.content.querySelector('#gThermalSolarPump').classList.remove("rotate");
 
@@ -572,7 +584,8 @@ class HeatPumpCard extends HTMLElement {
       tankWWSource: "heatPump",
       heatingCircuitType1: "radiator",
       heatingCircuitType2: "off",
-      heatingCircuitType3: "off"
+      heatingCircuitType3: "off",
+      thermalSolarAvailable: "off"
     };
   }
 
@@ -766,11 +779,27 @@ class HeatPumpCard extends HTMLElement {
         name: "thermalSolar",
         flatten: true,
         schema: [
-          { name: "thermalSolarAvailable", default: false, selector: { boolean: {} } },
+          {
+            name: "thermalSolarAvailable",
+            default: "off",
+            selector: {
+              select: {
+                options: [
+                  { value: "off", label: HeatPumpCard.localization.editor.thermalSolarAvailableValues['off'] },
+                  { value: "hotwater", label: HeatPumpCard.localization.editor.thermalSolarAvailableValues['hotwater'] },
+                  { value: "heating", label: HeatPumpCard.localization.editor.thermalSolarAvailableValues['heating'] },
+                  { value: "hotwaterAndHeating", label: HeatPumpCard.localization.editor.thermalSolarAvailableValues['hotwaterAndHeating'] },
+                ],
+              },
+            },
+          },
           { name: "thermalSolarPanelTemp", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "thermalSolarFluxTemp", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "thermalSolarRefluxTemp", selector: { entity: {domain: ["sensor", "number"]} } },
           { name: "thermalSolarPump", selector: { entity: {domain: ["binary_sensor"]} } },
-          { name: "thermalSolarPumpSpeed", selector: { entity: {domain: ["sensor", "number"]} } }
+          { name: "thermalSolarPumpSpeed", selector: { entity: {domain: ["sensor", "number"]} } },
+          { name: "thermalSolarWWHeatingValve", selector: { entity: {domain: ["binary_sensor", "switch"]} } },
+          { name: "thermalSolarWWHeatingValveState", selector: { entity: {domain: ["sensor"]} } }
         ],
       },
       { type: "expandable",
