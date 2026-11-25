@@ -899,7 +899,8 @@ window.customCards.push({
         tankWWSource: "heatPump",
         heatingCircuitType1: "radiator",
         heatingCircuitType2: "off",
-        heatingCircuitType3: "off"
+        heatingCircuitType3: "off",
+        thermalSolarAvailable: "off"
       }
     };
   }
