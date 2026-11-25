@@ -479,7 +479,7 @@ class HeatPumpCard extends HTMLElement {
       // condenser does not belong to the tank any more. The diverter valve is
       // switched further down, together with the layered charge storage, so
       // that only one line decides whether it is visible.
-      this.content.querySelector("#pathPipeHotWaterToTank").style.display = waterHeater ? 'none' : 'inline';
+      this.content.querySelector("gPipeHotWaterToTank").style.display = waterHeater ? 'none' : 'inline';
       // The appliance takes the place of the tank's hat, name and all, so the
       // hat is hidden rather than covered: a plate over it leaves the corners
       // of the old one sticking out.
